@@ -12,6 +12,7 @@ export interface Message {
   type: 'text' | 'analysis' | 'agent_result'; 
   status?: 'processing' | 'completed' | 'failed';
   metadata?: {
+    title?: string;  
     agents?: string[];
     progress?: number;
     data?: any;

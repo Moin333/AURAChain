@@ -83,7 +83,8 @@ const ChatInterface: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
+    <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg"
+     style={{ marginRight: isRightPanelOpen ? rightPanelWidth : 0 }}>
 
       {analysisMessages.length > 0 && (
         <div
