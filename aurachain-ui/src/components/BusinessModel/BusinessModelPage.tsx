@@ -1,5 +1,5 @@
 // aurachain-ui/src/components/BusinessModel/BusinessModelPage.tsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowLeft, 

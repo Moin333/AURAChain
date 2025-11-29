@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from 'recharts';
-import { CheckCircle2, AlertTriangle, Package, TrendingUp, DollarSign } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, TrendingUp, DollarSign } from 'lucide-react';
 import { api } from '../../services/api'; 
 import { useUIStore } from '../../store/uiStore';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import AgentCard, { type Agent } from './AgentCard';
+import AgentCard from './AgentCard';
 import ArtifactRenderer from './ArtifactRenderer'; // Import the new renderer
 import { useUIStore } from '../../store/uiStore'; 
 import { X, ArrowLeft } from 'lucide-react'; 

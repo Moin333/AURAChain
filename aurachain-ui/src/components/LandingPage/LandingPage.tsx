@@ -12,12 +12,9 @@ import {
   Layers, 
   BrainCircuit, 
   ArrowRight, 
-  Activity,
-  Cpu,
   Github, 
   InfinityIcon,
   Briefcase,
-  Zap,
   Network
 } from "lucide-react";
 
