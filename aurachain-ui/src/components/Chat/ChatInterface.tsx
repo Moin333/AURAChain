@@ -59,7 +59,6 @@ const ChatInterface: React.FC = () => {
 
   const leftOffset = isSidebarOpen ? 280 : 72;
 
-  const rightOffset = isRightPanelOpen ? rightPanelWidth : 0;
 
   if (messages.length === 0) {
     return (
