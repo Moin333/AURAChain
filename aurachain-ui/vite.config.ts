@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    allowedHosts: ['aurachain.up.railway.app']
+    allowedHosts: true
   }
 })
