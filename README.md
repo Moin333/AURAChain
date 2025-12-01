@@ -7,7 +7,7 @@ AURAChain is a production-grade platform designed to democratize advanced busine
 ## 🔗 Live Demo (Vercel)
 
 Experience the live platform here:  
-👉 **https://aurachainai.vercel.app/**
+👉 **https://aurachain.up.railway.app/**
 
 ---
 
