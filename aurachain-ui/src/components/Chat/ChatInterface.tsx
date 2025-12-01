@@ -11,9 +11,7 @@ const ChatInterface: React.FC = () => {
     isThinking,
     processingStep,
     setRightPanelOpen,
-    isSidebarOpen,
-    isRightPanelOpen,
-    rightPanelWidth
+    isSidebarOpen
   } = useUIStore();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -82,8 +80,7 @@ const ChatInterface: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg"
-     style={{ marginRight: isRightPanelOpen ? rightPanelWidth : 0 }}>
+    <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
 
       {analysisMessages.length > 0 && (
         <div
