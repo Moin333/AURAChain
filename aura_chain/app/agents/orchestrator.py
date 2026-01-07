@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Any, Optional
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 from loguru import logger
 import json
@@ -29,7 +29,7 @@ class OrchestratorAgent(BaseAgent):
         super().__init__(
             name="Orchestrator",
             model=settings.ORCHESTRATOR_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
     
     def get_system_prompt(self) -> str:

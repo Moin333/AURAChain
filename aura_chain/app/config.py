@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: str
     GOOGLE_API_KEY: str
     OPENAI_API_KEY: str
+    GROQ_API_KEY: str
     
     # Database
     DATABASE_URL: str = "postgresql+asyncpg://user:pass@localhost/msme_db"
@@ -30,15 +31,41 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE: int = 50 * 1024 * 1024  # 50MB
     
-    # Agent Configuration
-    ORCHESTRATOR_MODEL: str = "claude-sonnet-4-5-20250929"
-    DATA_HARVESTER_MODEL: str = "gemini-1.5-flash"
-    VISUALIZER_MODEL: str = "claude-sonnet-4-20250514"
-    TREND_ANALYST_MODEL: str = "gemini-2.0-flash-exp"
-    FORECASTER_MODEL: str = "claude-sonnet-4-20250514"
-    MCTS_OPTIMIZER_MODEL: str = "claude-sonnet-4-20250514"
-    ORDER_MANAGER_MODEL: str = "gpt-4o"
-    NOTIFIER_MODEL: str = "gpt-4o-mini"
+    # # Agent Configuration
+    # ORCHESTRATOR_MODEL: str = "claude-sonnet-4-5-20250929"
+    # DATA_HARVESTER_MODEL: str = "gemini-1.5-flash"
+    # VISUALIZER_MODEL: str = "claude-sonnet-4-20250514"
+    # TREND_ANALYST_MODEL: str = "gemini-2.0-flash-exp"
+    # FORECASTER_MODEL: str = "claude-sonnet-4-20250514"
+    # MCTS_OPTIMIZER_MODEL: str = "claude-sonnet-4-20250514"
+    # ORDER_MANAGER_MODEL: str = "gpt-4o"
+    # NOTIFIER_MODEL: str = "gpt-4o-mini"
+    
+    # Agent Configuration (UPDATED FOR GROQ FREE TIER)
+    
+    # Orchestrator: Logic-heavy, low token count. 
+    # Using Llama-3.3-70b (12k TPM) for best reasoning.
+    ORCHESTRATOR_MODEL: str = "llama-3.3-70b-versatile"
+    
+    # Data Harvester: Heavy text processing. 
+    # Using Llama-4-Scout (30k TPM) because 12k TPM (70b) or 6k TPM (8b) is too low for data files.
+    DATA_HARVESTER_MODEL: str = "meta-llama/llama-4-scout-17b-16e-instruct"
+    
+    # Visualizer: Code generation. 
+    # Llama-3.3-70b is best for coding tasks.
+    VISUALIZER_MODEL: str = "llama-3.3-70b-versatile"
+    
+    # Trend Analyst: Analysis. 
+    # Using Scout (30k TPM) to handle larger context/search results.
+    TREND_ANALYST_MODEL: str = "meta-llama/llama-4-scout-17b-16e-instruct"
+    
+    # Forecaster & Optimizer: Complex Math/Reasoning.
+    FORECASTER_MODEL: str = "llama-3.3-70b-versatile"
+    MCTS_OPTIMIZER_MODEL: str = "llama-3.3-70b-versatile"
+    
+    # Simple Tasks: Low TPM models are fine.
+    ORDER_MANAGER_MODEL: str = "llama-3.1-8b-instant"
+    NOTIFIER_MODEL: str = "llama-3.1-8b-instant"
     
     # Timeouts & Limits
     API_TIMEOUT: int = 60

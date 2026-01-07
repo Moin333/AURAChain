@@ -1,5 +1,5 @@
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 import pandas as pd
 import numpy as np
@@ -23,7 +23,7 @@ class DataHarvesterAgent(BaseAgent):
         super().__init__(
             name="DataHarvester",
             model=settings.DATA_HARVESTER_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
     
     def get_system_prompt(self) -> str:

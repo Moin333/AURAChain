@@ -2,6 +2,7 @@
 from anthropic import AsyncAnthropic
 import google.generativeai as genai
 from openai import AsyncOpenAI
+from groq import AsyncGroq
 from typing import Dict, List, Optional, Any
 import asyncio
 from loguru import logger
@@ -155,7 +156,79 @@ class OpenAIClient:
         except Exception as e:
             logger.error(f"OpenAI streaming error: {str(e)}")
             raise
+        
+class GroqClient:
+    """Wrapper for Groq API"""
+    
+    def __init__(self):
+        # Initialize Groq client
+        self.client = AsyncGroq(api_key=settings.GROQ_API_KEY)
+        self.timeout = settings.API_TIMEOUT
 
+    async def create_completion(self, model, messages, temperature=0.7, max_tokens=4000, tools=None, tool_choice=None):
+        try:
+            kwargs = {
+                "model": model,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens
+            }
+            if tools: kwargs["tools"] = tools
+            if tool_choice: kwargs["tool_choice"] = tool_choice
+            
+            response = await self.client.chat.completions.create(**kwargs)
+            
+            return {
+                "content": response.choices[0].message.content,
+                "role": response.choices[0].message.role,
+                "finish_reason": response.choices[0].finish_reason,
+                "tool_calls": response.choices[0].message.tool_calls,
+                "usage": {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens
+                }
+            }
+        except Exception as e:
+            logger.error(f"Groq API error: {str(e)}")
+            raise
+
+    async def generate_content(
+        self,
+        model_name: str,
+        prompt: str,
+        temperature: float = 0.7,
+        max_tokens: int = 4000,
+        tools: Optional[List] = None
+    ) -> Dict[str, Any]:
+        """Compatibility wrapper to match GoogleAIClient.generate_content signature"""
+        try:
+            messages = [{"role": "user", "content": prompt}]
+            
+            # Note: Groq doesn't support Google-style 'tools' format directly in this wrapper
+            # You would need to convert Google tools to OpenAI/Groq format if used here.
+            # For now, we assume this is used for text generation primarily.
+            
+            response = await self.client.chat.completions.create(
+                model=model_name,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens
+            )
+            
+            text_content = response.choices[0].message.content
+            
+            return {
+                "text": text_content,
+                "candidates": response.choices, # Returning choices as candidates
+                "usage": response.usage
+            }
+        except Exception as e:
+            logger.error(f"Groq API content generation error: {str(e)}")
+            # Return safe fallback
+            return {"text": "Analysis temporarily unavailable due to API constraints.", "error": str(e)}
+        
 anthropic_client = AnthropicClient()
 google_client = GoogleAIClient()
 openai_client = OpenAIClient()
+groq_client = GroqClient()

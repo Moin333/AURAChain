@@ -1,6 +1,6 @@
 # app/agents/visualizer.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 from typing import Dict
 import pandas as pd
@@ -17,7 +17,7 @@ class VisualizerAgent(BaseAgent):
         super().__init__(
             name="Visualizer",
             model=settings.VISUALIZER_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
     
     def get_system_prompt(self) -> str:

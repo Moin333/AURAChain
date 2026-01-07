@@ -1,6 +1,6 @@
 # app/agents/order_manager.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 import json
 
@@ -13,7 +13,7 @@ class OrderManagerAgent(BaseAgent):
         super().__init__(
             name="OrderManager",
             model=settings.ORDER_MANAGER_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
     
     async def process(self, request: AgentRequest) -> AgentResponse:

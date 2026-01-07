@@ -1,7 +1,6 @@
 # app/agents/notifier.py
-
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 import requests
 import json
@@ -20,26 +19,25 @@ class NotifierAgent(BaseAgent):
         super().__init__(
             name="Notifier",
             model=settings.NOTIFIER_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
         self.webhook_url = settings.DISCORD_WEBHOOK_URL
     
     async def process(self, request: AgentRequest) -> AgentResponse:
         try:
             # --- GUARDRAIL: Check Prerequisites ---
-            # The Orchestrator should prevent this, but the Agent acts as a second line of defense.
             if "order_manager_output" not in request.context:
                 logger.warning("Notifier Triggered without Order Output. Skipping execution.")
                 return AgentResponse(
                     agent_name=self.name,
-                    success=False, # Mark false so UI knows it didn't send
+                    success=False,
                     error="Skipped: No order generated to notify about."
                 )
 
             # Get notification type
             notification_type = request.parameters.get("type", "info")
             
-            # Generate message content
+            # Generate message content using Groq
             message_content = await self._generate_message(request.query, notification_type)
             
             # Create embed data if context provided
@@ -74,21 +72,68 @@ class NotifierAgent(BaseAgent):
             )
     
     async def _generate_message(self, query: str, notification_type: str) -> str:
-        # ... (Keep existing implementation) ...
-        # For brevity, reusing previous logic here
-        return f"📢 Update: {query}"
+        """Use LLM to draft a professional notification"""
+        prompt = f"""You are a Supply Chain Notification Bot.
+        
+        Draft a short, professional {notification_type} notification regarding: "{query}"
+        
+        Rules:
+        - Keep it under 280 characters if possible.
+        - Use urgency appropriate to the type ({notification_type}).
+        - No markdown formatting in the text body.
+        """
+        
+        try:
+            response = await self.api_client.generate_content(
+                model_name=self.model,
+                prompt=prompt,
+                max_tokens=150
+            )
+            return response.get("text", f"Update: {query}")
+        except Exception:
+            return f"Update: {query}"
 
     def _create_embed(self, notification_type: str, context: dict) -> dict:
-        # ... (Keep existing implementation) ...
-        return {}
+        """Create Discord embed structure"""
+        color_map = {
+            "info": 3447003,    # Blue
+            "warning": 16776960, # Yellow
+            "alert": 15158332,   # Red
+            "success": 3066993   # Green
+        }
+        
+        embed = {
+            "title": f"Supply Chain {notification_type.title()}",
+            "color": color_map.get(notification_type, 3447003),
+            "timestamp": datetime.utcnow().isoformat(),
+            "fields": []
+        }
+        
+        # Add order details if available
+        if "order_manager_output" in context:
+            order = context["order_manager_output"].get("order_details", {})
+            if order:
+                embed["fields"].append({
+                    "name": "Order Details",
+                    "value": str(order)[:1024],
+                    "inline": False
+                })
+                
+        return embed
 
     def _send_discord_notification(self, message: str, embed: dict = None) -> bool:
-        # ... (Keep existing implementation) ...
-        if not self.webhook_url: return False
+        """Post to Discord Webhook"""
+        if not self.webhook_url:
+            logger.warning("No Discord Webhook URL configured")
+            return False
+            
         try:
             payload = {"content": message}
-            if embed: payload["embeds"] = [embed]
-            requests.post(self.webhook_url, json=payload)
-            return True
-        except:
+            if embed:
+                payload["embeds"] = [embed]
+            
+            response = requests.post(self.webhook_url, json=payload)
+            return response.status_code in [200, 204]
+        except Exception as e:
+            logger.error(f"Failed to send Discord webhook: {e}")
             return False

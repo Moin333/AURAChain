@@ -1,6 +1,6 @@
 # app/agents/forecaster.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
-from app.core.api_clients import google_client
+from app.core.api_clients import groq_client
 from app.config import get_settings
 import pandas as pd
 import numpy as np
@@ -24,7 +24,7 @@ class ForecasterAgent(BaseAgent):
         super().__init__(
             name="Forecaster",
             model=settings.FORECASTER_MODEL,
-            api_client=google_client
+            api_client=groq_client
         )
         self.indian_holidays = holidays.India(years=range(2020, 2030))
     
