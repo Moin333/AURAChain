@@ -49,11 +49,38 @@ export default {
       },
       animation: {
         'slide-in': 'slideIn 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'rotate-alternate': 'rotateAlternate 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        'fade-in': 'fadeIn 0.3s ease-out',
       },
       keyframes: {
         slideIn: {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0)' },
+        },
+        rotateAlternate: {
+          '0%': { 
+            transform: 'rotate(0deg) scale(1)',
+          },
+          '25%': { 
+            transform: 'rotate(180deg) scale(1.05)',
+          },
+          '50%': { 
+            transform: 'rotate(180deg) scale(1)',
+          },
+          '75%': { 
+            transform: 'rotate(0deg) scale(1.05)',
+          },
+          '100%': { 
+            transform: 'rotate(0deg) scale(1)',
+          },
+        },
+        fadeIn: {
+          '0%': { 
+            opacity: '0',
+          },
+          '100%': { 
+            opacity: '1',
+          }
         }
       }
     },

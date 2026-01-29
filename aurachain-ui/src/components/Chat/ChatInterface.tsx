@@ -1,8 +1,10 @@
+// aurachain-ui/src/components/Chat/ChatInterface.tsx
 import React, { useEffect, useRef } from 'react';
 import { clsx } from 'clsx';
-import { Infinity as InfinityIcon, Sparkles } from 'lucide-react';
+import { Infinity as InfinityIcon } from 'lucide-react';
 import MessageBubble, { type Message } from './MessageBubble';
 import InputPanel from './InputPanel';
+import ThinkingIndicator from './ThinkingIndicator';
 import { useUIStore } from '../../store/uiStore';
 
 const ChatInterface: React.FC = () => {
@@ -62,7 +64,7 @@ const ChatInterface: React.FC = () => {
     return (
       <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg transition-colors duration-500">
         <div className="flex-1 flex flex-col items-center justify-center p-4">
-          <div className="mb-8 text-center animate-fade-in-up">
+          <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-heading font-medium text-slate-800 dark:text-slate-100 mb-3 flex items-center justify-center gap-4">
               <InfinityIcon size={48} className="text-primary-500" strokeWidth={2.5} />
               Good Afternoon
@@ -71,7 +73,7 @@ const ChatInterface: React.FC = () => {
               Ready to orchestrate your supply chain agents?
             </p>
           </div>
-          <div className="w-full max-w-2xl animate-fade-in-up delay-100">
+          <div className="w-full max-w-2xl">
             <InputPanel isZeroState={true} />
           </div>
         </div>
@@ -150,7 +152,7 @@ const ChatInterface: React.FC = () => {
                   messageRefs.current.delete(msg.id);
                 }
               }}
-              className="relative fade-in mb-6 transition-all duration-300 rounded-lg"
+              className="relative mb-6 transition-all duration-300 rounded-lg"
             >
               <MessageBubble
                 message={msg}
@@ -160,14 +162,7 @@ const ChatInterface: React.FC = () => {
           ))}
 
           {isThinking && (
-            <div className="flex items-center gap-3 mb-6 animate-pulse ml-2">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary-400 to-accent-teal flex items-center justify-center shadow-lg shadow-primary-500/20">
-                <Sparkles size={16} className="text-white animate-spin-slow" />
-              </div>
-              <div className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-teal">
-                {processingStep || "Orchestrator is thinking..."}
-              </div>
-            </div>
+            <ThinkingIndicator />
           )}
 
           <div ref={messagesEndRef} className="h-4" />
