@@ -1,6 +1,7 @@
+// aurachain-ui/src/components/Chat/MessageBubble.tsx
 import React from 'react';
 import { clsx } from 'clsx';
-import { BrainCircuit, Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { BrainCircuit, Clock, CheckCircle2 } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
 // 👇 UPDATED INTERFACE
@@ -20,7 +21,12 @@ export interface Message {
     summary?: string;
     success?: boolean; 
     error?: string; 
-    displayText?: string; // <--- ADDED THIS PROPERTY
+    displayText?: string;
+    agentResults?: Record<string, {  // 🔑 NEW: Stores all agent results
+      success: boolean;
+      data: any;
+      error?: string;
+    }>;
   };
 }
 
@@ -33,33 +39,27 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.sender === 'user';
   const { setSelectedAgent, setRightPanelOpen } = useUIStore();
 
-  // --- ARTIFACT CARD RENDERER ---
-  if (message.type === 'analysis' || message.type === 'agent_result') {
-    const isPlan = !!message.metadata?.agents; 
-    const isResult = !!message.metadata?.data;
+  // --- ARTIFACT CARD RENDERER (ONLY FOR ORCHESTRATOR PLAN NOW) ---
+  if (message.type === 'analysis') {
+    const isPlan = !!message.metadata?.agents;
 
     return (
       <div className="mb-8 max-w-[85%] animate-fade-in-up">
         <div className="flex items-center text-xs font-bold text-slate-500 mb-2 ml-1 uppercase tracking-wider">
           <BrainCircuit size={14} className="mr-2" />
-          {isPlan ? "Orchestrator Plan" : message.metadata?.agent || "Agent Artifact"}
+          Orchestrator Plan
         </div>
         
         <div 
           onClick={() => {
-             if (isResult) {
-                 setSelectedAgent(message.metadata?.agent || null); 
-                 setRightPanelOpen(true);
-             } else if (isPlan) {
-                 setSelectedAgent(null); 
-                 setRightPanelOpen(true);
-             }
+            if (isPlan) {
+              setSelectedAgent(null); 
+              setRightPanelOpen(true);
+            }
           }}
           className={clsx(
             "group relative bg-white dark:bg-[#212121] border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all overflow-hidden",
-            (isResult || isPlan) 
-              ? "hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer" 
-              : ""
+            isPlan && "hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer"
           )}
         >
           <div className={clsx(
@@ -93,7 +93,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                 {message.status === 'processing' ? (
                     <Clock size={18} className="animate-spin" />
                 ) : (
-                    isResult ? <ArrowRight size={18} /> : <CheckCircle2 size={18} />
+                    <CheckCircle2 size={18} />
                 )}
               </div>
             </div>
@@ -155,7 +155,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm" 
             : "bg-white dark:bg-[#212121] border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl rounded-tl-sm"
         )}>
-          {/* Support custom display text via metadata (e.g. for system messages) */}
           {message.metadata?.displayText || message.text}
         </div>
         

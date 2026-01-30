@@ -1,3 +1,4 @@
+// aurachain-ui/src/store/uiStore.ts
 import { create } from 'zustand';
 import { api, type OrchestrationPlan } from '../services/api';
 import { type Message } from '../components/Chat/MessageBubble';
@@ -157,7 +158,7 @@ export const useUIStore = create<UIState>((set, get) => ({
       };
       set(state => ({ messages: [...state.messages, reasoningMsg] }));
 
-      // 2. Add the "Plan Artifact"
+      // 2. Add the "Plan Artifact" (ONLY Orchestrator Plan in Main Chat)
       const planMsg: Message = {
         id: (Date.now() + 2).toString(),
         sender: 'ai',
@@ -167,7 +168,9 @@ export const useUIStore = create<UIState>((set, get) => ({
         status: 'processing',
         metadata: {
           progress: 0,
-          agents: response.orchestration_plan.agents
+          agents: response.orchestration_plan.agents,
+          // 🔑 CRITICAL: Store agent results here for right panel access
+          agentResults: {} // Will be populated as agents complete
         }
       };
 
@@ -191,35 +194,33 @@ export const useUIStore = create<UIState>((set, get) => ({
 
         await new Promise(r => setTimeout(r, 800));
 
-        // 3. Add the Agent Result Artifact
-        const resultMsg: Message = {
-          id: `${Date.now()}_${agentRes.agent}`,
-          sender: 'ai',
-          text: agentRes.agent, 
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          type: 'analysis', 
-          status: agentRes.success ? 'completed' : 'failed',
-          metadata: {
-            data: agentRes.data, 
-            summary: "Click to view detailed report",
-            agent: agentRes.agent, // <--- 🚨 THIS WAS MISSING 🚨
-            success: agentRes.success,
-            error: agentRes.error
-          }
-        };
-
+        // 🚨 KEY CHANGE: DO NOT create individual agent message cards
+        // Instead, store agent results in the Plan message metadata
         set(state => ({
           agentStatuses: new Map(state.agentStatuses).set(agentRes.agent, agentRes.success ? 'completed' : 'failed'),
           selectedAgentId: agentRes.agent,
           
-          messages: [
-            ...state.messages.map(m => 
-                m.id === planMsg.id 
-                  ? { ...m, metadata: { ...m.metadata, progress: Math.round(((completedCount + 1) / totalAgents) * 100) } } 
-                  : m
-            ),
-            resultMsg
-          ]
+          // Update the PLAN message with agent results (not create new messages)
+          messages: state.messages.map(m => 
+            m.id === planMsg.id 
+              ? { 
+                  ...m, 
+                  metadata: { 
+                    ...m.metadata, 
+                    progress: Math.round(((completedCount + 1) / totalAgents) * 100),
+                    // 🔑 Store agent result for right panel
+                    agentResults: {
+                      ...m.metadata?.agentResults,
+                      [agentRes.agent]: {
+                        success: agentRes.success,
+                        data: agentRes.data,
+                        error: agentRes.error
+                      }
+                    }
+                  } 
+                } 
+              : m
+          )
         }));
 
         completedCount++;

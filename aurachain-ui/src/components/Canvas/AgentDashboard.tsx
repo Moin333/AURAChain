@@ -1,6 +1,7 @@
+// aurachain-ui/src/components/Canvas/AgentDashboard.tsx
 import React from 'react';
 import AgentCard from './AgentCard';
-import ArtifactRenderer from './ArtifactRenderer'; // Import the new renderer
+import ArtifactRenderer from './ArtifactRenderer';
 import { useUIStore } from '../../store/uiStore'; 
 import { X, ArrowLeft } from 'lucide-react'; 
 
@@ -11,18 +12,16 @@ const AgentDashboard: React.FC = () => {
     setRightPanelOpen, 
     currentPlan, 
     agentStatuses,
-    messages // We need messages to find the data for the selected agent
+    messages
   } = useUIStore();
 
-  // 1. DETAIL VIEW: If an agent is selected, find its data and render the Artifact
-  if (selectedAgentId) {
-    // Find the message in history that corresponds to this agent's result
-    // Note: In Part 1, we saved result messages with metadata.agent = 'AgentName'
-    const agentResultMsg = messages.find(m => 
-        m.metadata?.agent === selectedAgentId && m.metadata?.data
-    );
+  // 🔑 CRITICAL FIX: Get agent results from the Plan message metadata
+  const planMessage = messages.find(m => m.type === 'analysis' && m.metadata?.agents);
+  const agentResults = planMessage?.metadata?.agentResults || {};
 
-    const data = agentResultMsg?.metadata?.data || {};
+  // 1. DETAIL VIEW: If an agent is selected, show its artifact
+  if (selectedAgentId) {
+    const agentData = agentResults[selectedAgentId];
 
     return (
         <div className="h-full flex flex-col bg-white dark:bg-dark-elevated animate-slide-in">
@@ -45,14 +44,16 @@ const AgentDashboard: React.FC = () => {
                 </div>
                 
                 {/* THE RENDERER */}
-                <ArtifactRenderer agentType={selectedAgentId} data={data} />
+                <ArtifactRenderer 
+                  agentType={selectedAgentId} 
+                  data={agentData?.data || {}} 
+                />
             </div>
         </div>
     );
   }
 
   // 2. OVERVIEW VIEW: Show the list of agents from the Plan
-  // If we have a real plan from backend, use it. Otherwise fallback to empty.
   const agentsList = currentPlan?.agents || [];
 
   return (
