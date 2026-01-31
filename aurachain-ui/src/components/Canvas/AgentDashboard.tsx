@@ -15,9 +15,15 @@ const AgentDashboard: React.FC = () => {
     messages
   } = useUIStore();
 
-  // 🔑 CRITICAL FIX: Get agent results from the Plan message metadata
+  // 🔑 Get agent results from the Plan message metadata
   const planMessage = messages.find(m => m.type === 'analysis' && m.metadata?.agents);
   const agentResults = planMessage?.metadata?.agentResults || {};
+
+  // Handler for back button - ONLY clears selected agent, keeps panel open
+  const handleBackToWorkflow = () => {
+    setSelectedAgent(null); // ✅ Navigate back to agent list
+    // 🚫 Do NOT call setRightPanelOpen(false) - panel should stay open
+  };
 
   // 1. DETAIL VIEW: If an agent is selected, show its artifact
   if (selectedAgentId) {
@@ -25,14 +31,23 @@ const AgentDashboard: React.FC = () => {
 
     return (
         <div className="h-full flex flex-col bg-white dark:bg-dark-elevated animate-slide-in">
-            {/* Header */}
+            {/* Header with Back Button */}
             <div className="h-16 px-6 border-b border-light-border dark:border-dark-border flex items-center justify-between flex-shrink-0">
                 <button 
-                    onClick={() => setSelectedAgent(null)}
-                    className="flex items-center text-sm text-slate-500 hover:text-primary-500 transition-colors"
+                    onClick={handleBackToWorkflow}
+                    className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                 >
-                    <ArrowLeft size={16} className="mr-2" />
+                    <ArrowLeft size={16} />
                     Back to Workflow
+                </button>
+
+                {/* Close Button (X) - Closes entire panel */}
+                <button 
+                    onClick={() => setRightPanelOpen(false)}
+                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                    aria-label="Close panel"
+                >
+                    <X size={20} />
                 </button>
             </div>
 
@@ -67,9 +82,11 @@ const AgentDashboard: React.FC = () => {
           </p>
         </div>
         
+        {/* Close Button (X) - Only visible in overview */}
         <button 
           onClick={() => setRightPanelOpen(false)}
           className="p-2 -mr-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+          aria-label="Close panel"
         >
           <X size={20} />
         </button>

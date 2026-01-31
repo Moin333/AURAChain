@@ -72,7 +72,7 @@ export const useUIStore = create<UIState>((set, get) => ({
   toggleRightPanel: () => set((state) => ({ isRightPanelOpen: !state.isRightPanelOpen })),
   setRightPanelOpen: (isOpen) => set({ isRightPanelOpen: isOpen }),
   setRightPanelWidth: (width) => set({ rightPanelWidth: width }),
-  setSelectedAgent: (id) => set({ selectedAgentId: id, isRightPanelOpen: !!id }),
+  setSelectedAgent: (id) => set({ selectedAgentId: id }),
   
   toggleTheme: () => set((state) => {
     const newMode = !state.isDarkMode;
