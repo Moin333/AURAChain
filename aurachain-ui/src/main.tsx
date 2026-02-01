@@ -5,8 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Import Pages
 import LandingPage from './components/LandingPage/LandingPage';
-import AboutPage from './components/About/AboutPage'; 
-import BusinessModelPage from './components/BusinessModel/BusinessModelPage';
+import AboutPage from './components/About/AboutPage';
 import Dashboard from './Dashboard';
 
 // Import Scroll Helper
@@ -21,8 +20,6 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/business-model" element={<BusinessModelPage />} />
-        <Route path="/details" element={<BusinessModelPage />} /> 
         <Route path="/app" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

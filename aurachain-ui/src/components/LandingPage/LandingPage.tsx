@@ -15,7 +15,9 @@ import {
   Github, 
   InfinityIcon,
   Briefcase,
-  Network
+  TrendingUp,
+  BarChart3,
+  Bell
 } from "lucide-react";
 
 // --- Integrations ---
@@ -35,34 +37,66 @@ const AGENTS = [
   {
     id: "01",
     title: "Orchestrator",
-    model: "Claude 3.5 Sonnet",
+    model: "Llama 3.3 70B",
     role: "CONTROLLER",
-    desc: "Central intelligence unit. Interprets NL queries, decomposes tasks, and manages the execution plan.",
+    desc: "Central intelligence unit. Interprets natural language queries, decomposes tasks into agent workflows, and manages execution strategy.",
     icon: <BrainCircuit className="w-5 h-5" />,
   },
   {
     id: "02",
-    title: "Trend Analyst",
-    model: "Gemini 2.0 Flash",
-    role: "ANALYTICS",
-    desc: "High-speed pattern recognition engine. Detects seasonality and hidden correlations in milliseconds.",
-    icon: <LineChart className="w-5 h-5" />,
-  },
-  {
-    id: "03",
     title: "Data Harvester",
-    model: "Gemini 1.5 Flash",
-    role: "INGESTION",
-    desc: "ETL pipeline specialist. Sanitizes and normalizes incoming CSV/JSON streams for processing.",
+    model: "Llama 4 Scout 17B",
+    role: "ETL PIPELINE",
+    desc: "Data quality specialist. Sanitizes CSV/Excel/JSON streams, imputes missing values, detects outliers, and validates schemas.",
     icon: <Database className="w-5 h-5" />,
   },
   {
+    id: "03",
+    title: "Trend Analyst",
+    model: "Llama 4 Scout 17B",
+    role: "MARKET INTEL",
+    desc: "Pattern recognition engine. Analyzes Google Trends, detects seasonality, identifies correlations, and flags market anomalies.",
+    icon: <TrendingUp className="w-5 h-5" />,
+  },
+  {
     id: "04",
+    title: "Forecaster",
+    model: "Llama 3.3 70B + Prophet",
+    role: "TIME SERIES",
+    desc: "Demand prediction specialist. Enhanced Facebook Prophet with Indian holidays, regional trends, and custom seasonality patterns.",
+    icon: <LineChart className="w-5 h-5" />,
+  },
+  {
+    id: "05",
     title: "MCTS Optimizer",
-    model: "Claude 3.5 Sonnet",
+    model: "Llama 3.3 70B",
     role: "STRATEGY",
-    desc: "Decision tree search engine. Simulates thousands of future scenarios to find optimal business paths.",
+    desc: "Inventory optimization engine. Monte Carlo Tree Search explores thousands of scenarios to minimize costs and bullwhip effect.",
     icon: <Layers className="w-5 h-5" />,
+  },
+  {
+    id: "06",
+    title: "Visualizer",
+    model: "Llama 3.3 70B",
+    role: "ANALYTICS",
+    desc: "Chart generation engine. Creates Plotly visualizations (line, bar, scatter, heatmap, pie) with automatic insight annotations.",
+    icon: <BarChart3 className="w-5 h-5" />,
+  },
+  {
+    id: "07",
+    title: "Order Manager",
+    model: "Llama 3.1 8B",
+    role: "PROCUREMENT",
+    desc: "Purchase order automation. Drafts vendor orders with approval workflow (human-in-the-loop) and tracks order lifecycle.",
+    icon: <Briefcase className="w-5 h-5" />,
+  },
+  {
+    id: "08",
+    title: "Notifier",
+    model: "Llama 3.1 8B",
+    role: "ALERTS",
+    desc: "Communication hub. Sends critical alerts via Discord webhooks for stockouts, order confirmations, and anomaly detection.",
+    icon: <Bell className="w-5 h-5" />,
   }
 ];
 
@@ -144,6 +178,9 @@ export default function LandingPage() {
     return () => ctx.revert();
   }, []);
 
+  // Filter out the Orchestrator for the "Spokes" view
+  const workerAgents = AGENTS.filter(agent => agent.id !== "01");
+
   return (
     <div 
       ref={containerRef} 
@@ -165,7 +202,7 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full z-50 border-b border-light-border dark:border-zinc-800 bg-light-bg/90 dark:bg-black/90 backdrop-blur-sm transition-colors duration-300">
         <div className="flex justify-between items-center h-16 px-6">
           
-          {/* Logo Section - ANIMATION FIXED HERE */}
+          {/* Logo Section */}
           <div className="flex items-center gap-3 group cursor-pointer">
             <InfinityIcon 
               size={30} 
@@ -180,13 +217,6 @@ export default function LandingPage() {
           
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-6 mr-2 border-r border-light-border dark:border-zinc-800 pr-6 h-6">
-              <Link 
-                to="/business-model" 
-                className="text-[13px] font-mono font-bold text-slate-600 dark:text-zinc-400 hover:text-primary dark:hover:text-primary transition-colors uppercase tracking-widest flex items-center gap-2 group"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-transparent group-hover:bg-primary border border-slate-400 dark:border-zinc-600 transition-colors"></span>
-                Business Model
-              </Link>
               <Link 
                 to="/about" 
                 className="text-[13px] font-mono font-bold text-slate-600 dark:text-zinc-400 hover:text-primary dark:hover:text-primary transition-colors uppercase tracking-widest flex items-center gap-2 group"
@@ -238,7 +268,7 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row items-end justify-between gap-12 max-w-6xl">
             <p className="text-lg md:text-xl max-w-xl leading-relaxed text-accent-slate dark:text-zinc-400 font-sans">
               A production-grade orchestration layer for MSME analytics. 
-              Deploys 8 specialized autonomous agents using the <span className="text-slate-900 dark:text-white font-semibold underline decoration-light-border dark:decoration-zinc-700 underline-offset-4">Model Context Protocol</span> to forecast revenue and optimize operations.
+              Deploys 8 specialized autonomous agents using the <span className="text-slate-900 dark:text-white font-semibold underline decoration-light-border dark:decoration-zinc-700 underline-offset-4">Model Context Protocol</span> to forecast revenue, optimize inventory, and automate procurement.
             </p>
             
             <div className="flex gap-4 w-full md:w-auto">
@@ -262,18 +292,18 @@ export default function LandingPage() {
       {/* --- Marquee --- */}
       <div className="relative z-20 border-b border-light-border dark:border-zinc-800 overflow-hidden bg-light-surface dark:bg-zinc-900 py-3">
         <div ref={marqueeRef} className="flex whitespace-nowrap text-3xl md:text-5xl font-heading font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-tight select-none">
-          <span>Production Ready /// FastAPI + Docker + Redis /// Multi-Model /// </span>
-          <span>Production Ready /// FastAPI + Docker + Redis /// Multi-Model /// </span>
-          <span>Production Ready /// FastAPI + Docker + Redis /// Multi-Model /// </span>
+          <span>Production Ready /// 8 Autonomous Agents /// FastAPI + Redis /// Multi-Model /// </span>
+          <span>Production Ready /// 8 Autonomous Agents /// FastAPI + Redis /// Multi-Model /// </span>
+          <span>Production Ready /// 8 Autonomous Agents /// FastAPI + Redis /// Multi-Model /// </span>
         </div>
       </div>
 
-      {/* --- Agents Grid --- */}
+      {/* --- Agents Grid (ALL 8 AGENTS) --- */}
       <section className="bg-light-bg dark:bg-black">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div className="col-span-1 md:col-span-2 lg:col-span-4 p-8 border-b border-light-border dark:border-zinc-800">
             <h2 className="text-xs font-mono text-primary mb-2">01 // AGENT_ECOSYSTEM</h2>
-            <h3 className="text-3xl font-heading font-bold text-slate-900 dark:text-white">Autonomous Worker Nodes</h3>
+            <h3 className="text-3xl font-heading font-bold text-slate-900 dark:text-white">8 Autonomous Worker Nodes</h3>
           </div>
 
           {AGENTS.map((agent, i) => (
@@ -312,13 +342,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- Technical Specs & Architecture --- */}
-      <section className="flex flex-col lg:flex-row border-b border-light-border dark:border-zinc-800">
-        <div className="lg:w-1/3 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-light-border dark:border-zinc-800 bg-light-bg dark:bg-black">
+      {/* --- Technical Specs & Enhanced Architecture --- */}
+      <section className="flex flex-col xl:flex-row border-b border-light-border dark:border-zinc-800 min-h-[800px]">
+        <div className="xl:w-1/4 p-8 lg:p-12 border-b xl:border-b-0 xl:border-r border-light-border dark:border-zinc-800 bg-light-bg dark:bg-black flex flex-col">
           <h2 className="text-xs font-mono text-primary mb-2">02 // ARCHITECTURE</h2>
           <h3 className="text-4xl font-heading font-bold mb-10 text-slate-900 dark:text-white">Hub & Spoke<br/>Intelligence</h3>
           
-          <div className="space-y-0">
+          <div className="space-y-0 mb-10">
             {METRICS.map((m, i) => (
                <div key={i} className="flex justify-between items-end border-b border-light-border dark:border-zinc-800 py-4">
                  <span className="text-sm text-accent-slate dark:text-zinc-500 font-mono uppercase tracking-wide">{m.label}</span>
@@ -326,81 +356,84 @@ export default function LandingPage() {
                </div>
             ))}
           </div>
+          
+          <div className="mt-auto p-4 bg-light-surface dark:bg-zinc-900 border border-light-border dark:border-zinc-800 text-xs text-accent-slate dark:text-zinc-400 font-mono leading-relaxed">
+            <span className="text-primary font-bold">NOTE:</span> The Orchestrator uses a dedicated message bus to maintain context across all agent interactions, ensuring zero-hallucination handoffs.
+          </div>
         </div>
 
-        {/* --- Visual Architecture (Updated Diagram) --- */}
-        <div className="lg:w-2/3 bg-light-surface dark:bg-zinc-950 p-8 lg:p-12 flex items-center justify-center overflow-hidden relative">
+        {/* --- Enhanced Visual Architecture (SINGLE ROW) --- */}
+        <div className="xl:w-3/4 bg-light-surface dark:bg-zinc-950 p-6 lg:p-12 flex flex-col justify-center overflow-hidden relative">
           
-          <div className="relative w-full max-w-4xl min-h-[450px] border border-light-border dark:border-zinc-700 bg-light-bg dark:bg-black p-8 shadow-sm flex flex-col items-center">
+          <div className="relative w-full border border-light-border dark:border-zinc-700 bg-light-bg dark:bg-black p-8 shadow-2xl flex flex-col items-center rounded-sm">
             <div className="absolute top-2 left-2 text-[10px] font-mono text-accent-slate dark:text-zinc-600">FIG 1.1 ORCHESTRATION FLOW</div>
             
             {/* The Hub (Orchestrator) */}
-            <div className="relative z-20 mb-10 w-full flex flex-col items-center">
-               <div className="relative group">
-                  {/* Lines radiating from Orchestrator to Agent Layer */}
-                  <div className="absolute left-1/2 top-full w-[1px] h-10 bg-gradient-to-b from-primary/50 to-transparent"></div>
-                  
-                  <div className="px-8 py-4 border-2 border-primary bg-primary/5 text-primary font-mono text-sm font-bold tracking-widest rounded shadow-[0_0_20px_rgba(74,144,226,0.2)] flex items-center gap-3">
-                    <BrainCircuit className="w-5 h-5 animate-pulse" />
-                    AI ORCHESTRATOR
-                  </div>
+            <div className="relative z-20 mb-12 w-full flex flex-col items-center">
+               <div className="relative group cursor-default">
+                 {/* Glowing Effect (CHANGED: Now just Blue/Primary, no purple) */}
+                 <div className="absolute -inset-1 bg-primary rounded blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                 
+                 <div className="relative px-10 py-5 border border-primary bg-light-elevated dark:bg-zinc-900 text-slate-900 dark:text-white font-mono text-sm font-bold tracking-widest rounded shadow-xl flex items-center gap-4 z-10">
+                   <div className="p-1.5 bg-primary/10 rounded-full text-primary">
+                     <BrainCircuit className="w-6 h-6" />
+                   </div>
+                   <span>AI ORCHESTRATOR</span>
+                   <span className="flex h-2 w-2 relative ml-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                   </span>
+                 </div>
+
+                 {/* Central Spine Line */}
+                 <div className="absolute left-1/2 top-full w-[2px] h-12 bg-gradient-to-b from-primary to-transparent -translate-x-1/2"></div>
                </div>
             </div>
 
-            {/* The Spoke Layer (Agents) */}
-            <div className="relative w-full">
-               {/* Horizontal Connector Line */}
-               <div className="absolute top-0 left-[12%] right-[12%] h-[1px] border-t-2 border-dashed border-light-border dark:border-zinc-700"></div>
-
-               {/* Agents Grid */}
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
-                  
-                  {/* Spoke 1: Harvester */}
-                  <div className="flex flex-col items-center group relative">
-                     {/* Vertical Connector */}
-                     <div className="absolute -top-8 left-1/2 w-[1px] h-8 border-l border-light-border dark:border-zinc-700"></div>
-                     
-                     <div className="w-full aspect-[4/3] border border-light-border dark:border-zinc-800 bg-light-elevated dark:bg-zinc-900 p-4 flex flex-col items-center justify-center gap-3 transition-all hover:border-primary hover:-translate-y-1">
-                        <Database className="w-6 h-6 text-slate-400 group-hover:text-primary transition-colors" />
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Harvester</span>
-                     </div>
-                  </div>
-
-                  {/* Spoke 2: Trend */}
-                  <div className="flex flex-col items-center group relative">
-                     <div className="absolute -top-8 left-1/2 w-[1px] h-8 border-l border-light-border dark:border-zinc-700"></div>
-                     <div className="w-full aspect-[4/3] border border-light-border dark:border-zinc-800 bg-light-elevated dark:bg-zinc-900 p-4 flex flex-col items-center justify-center gap-3 transition-all hover:border-primary hover:-translate-y-1">
-                        <LineChart className="w-6 h-6 text-slate-400 group-hover:text-primary transition-colors" />
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Trend</span>
-                     </div>
-                  </div>
-
-                  {/* Spoke 3: MCTS */}
-                  <div className="flex flex-col items-center group relative">
-                     <div className="absolute -top-8 left-1/2 w-[1px] h-8 border-l border-light-border dark:border-zinc-700"></div>
-                     <div className="w-full aspect-[4/3] border border-light-border dark:border-zinc-800 bg-light-elevated dark:bg-zinc-900 p-4 flex flex-col items-center justify-center gap-3 transition-all hover:border-primary hover:-translate-y-1">
-                        <Network className="w-6 h-6 text-slate-400 group-hover:text-primary transition-colors" />
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">MCTS</span>
-                     </div>
-                  </div>
-
-                  {/* Spoke 4: Order Mgr */}
-                  <div className="flex flex-col items-center group relative">
-                     <div className="absolute -top-8 left-1/2 w-[1px] h-8 border-l border-light-border dark:border-zinc-700"></div>
-                     <div className="w-full aspect-[4/3] border border-light-border dark:border-zinc-800 bg-light-elevated dark:bg-zinc-900 p-4 flex flex-col items-center justify-center gap-3 transition-all hover:border-primary hover:-translate-y-1">
-                        <Briefcase className="w-6 h-6 text-slate-400 group-hover:text-primary transition-colors" />
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Order Mgr</span>
-                     </div>
-                  </div>
+            {/* The Spoke Layer Container */}
+            <div className="relative w-full mt-4">
+               {/* 1. The Horizontal Bus Line (Connects all agents) */}
+               {/* Adjusted for 7 columns: 100% / 7 = ~14.28%. Center is 7.14% */}
+               <div className="hidden lg:block absolute top-0 left-[7.14%] right-[7.14%] h-[1px] border-t border-dashed border-slate-300 dark:border-zinc-600"></div>
+               
+               {/* 2. Grid Container for Agents (7 Columns) */}
+               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[repeat(7,minmax(0,1fr))] gap-4 lg:gap-2 pt-8 lg:pt-8 w-full">
+                 
+                 {/* Map through Worker Agents */}
+                 {workerAgents.map((agent, index) => (
+                   <div key={index} className="flex flex-col items-center group relative">
+                      
+                      {/* Connection Line to Bus (Desktop) */}
+                      <div className="hidden lg:block absolute -top-8 left-1/2 w-[1px] h-8 border-l border-dashed border-slate-300 dark:border-zinc-700 group-hover:border-primary group-hover:border-solid transition-colors duration-300 origin-top"></div>
+                      
+                      {/* Agent Card */}
+                      <div className="w-full aspect-[4/5] lg:aspect-auto lg:h-32 border border-light-border dark:border-zinc-800 bg-light-elevated dark:bg-zinc-900 hover:bg-light-surface dark:hover:bg-zinc-800 p-3 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-lg rounded-sm cursor-default">
+                         <div className="text-slate-400 dark:text-zinc-500 group-hover:text-primary transition-colors duration-300 transform group-hover:scale-110">
+                           {agent.icon}
+                         </div>
+                         <div className="text-center">
+                           <span className="block text-[9px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-1 leading-tight">{agent.title}</span>
+                           <span className="block text-[8px] text-accent-slate dark:text-zinc-600 font-mono">{agent.id}</span>
+                         </div>
+                      </div>
+                   </div>
+                 ))}
 
                </div>
             </div>
 
-            {/* Bottom Legend */}
-            <div className="mt-auto pt-10">
-               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-light-border dark:border-zinc-800 bg-light-surface dark:bg-zinc-900/50">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                  <span className="text-[10px] font-mono text-accent-slate dark:text-zinc-500 uppercase tracking-widest">Secure Execution Environment</span>
+            {/* Bottom Status Bar */}
+            <div className="mt-12 flex items-center justify-between w-full px-4 py-2 border-t border-light-border dark:border-zinc-800 bg-light-surface/50 dark:bg-zinc-900/30">
+               <div className="flex items-center gap-2">
+                  <div className="flex gap-1">
+                    <div className="w-1 h-1 bg-primary rounded-full animate-pulse"></div>
+                    <div className="w-1 h-1 bg-primary rounded-full animate-pulse delay-75"></div>
+                    <div className="w-1 h-1 bg-primary rounded-full animate-pulse delay-150"></div>
+                  </div>
+                  <span className="text-[9px] font-mono text-primary uppercase tracking-widest">Data Stream Active</span>
+               </div>
+               <div className="text-[9px] font-mono text-slate-400 dark:text-zinc-600">
+                  LATENCY: 42ms
                </div>
             </div>
 
@@ -412,7 +445,6 @@ export default function LandingPage() {
       <footer className="bg-light-bg dark:bg-black py-12 px-6 border-t border-light-border dark:border-zinc-800">
         <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
            <div>
-             {/* Footer Logo Animation */}
              <div className="flex items-center gap-2 mb-4 group cursor-pointer">
                <InfinityIcon 
                  size={30} 
@@ -422,12 +454,11 @@ export default function LandingPage() {
                <span className="font-heading font-bold tracking-tight text-slate-900 dark:text-white">AURACHAIN</span>
              </div>
              <p className="text-sm text-accent-slate dark:text-zinc-500 max-w-xs font-sans">
-               Open-source multi-agent intelligence platform for the modern enterprise.
+               AI-Native Multi-Agent System for Micro, Small, and Medium Enterprises.
              </p>
            </div>
            
            <div className="text-right">
-              {/* Smooth Footer Button */}
               <Link 
                 to="/app" 
                 className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-mono font-bold tracking-tighter text-slate-900 dark:text-white border border-slate-900 dark:border-zinc-100 rounded-sm transition-all duration-300 hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
