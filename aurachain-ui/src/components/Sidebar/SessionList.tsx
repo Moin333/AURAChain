@@ -21,13 +21,11 @@ interface SessionListProps {
 }
 
 const SessionList: React.FC<SessionListProps> = ({ isOpen }) => {
-  // UX Decision: If sidebar is collapsed, text-only lists are unreadable.
-  // We hide the list entirely to keep the "Icon Only" rail clean.
   if (!isOpen) return <div className="flex-1" />; 
 
   return (
     <div className="flex-1 overflow-y-auto py-4 space-y-1 custom-scrollbar animate-fade-in">
-      <h3 className="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 whitespace-nowrap">
+      <h3 className="px-4 text-xs font-semibold text-slate-400 dark:text-zinc-600 uppercase tracking-wider mb-2 whitespace-nowrap">
         Recent Sessions
       </h3>
       
@@ -37,8 +35,8 @@ const SessionList: React.FC<SessionListProps> = ({ isOpen }) => {
           className={clsx(
             "w-[calc(100%-16px)] mx-2 flex items-center rounded-lg transition-all duration-200 group px-3 py-2.5 text-left",
             session.active 
-              ? "bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300 border-l-4 border-primary-500" 
-              : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 border-l-4 border-transparent"
+              ? "bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 border-l-4 border-primary-500" 
+              : "hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400 border-l-4 border-transparent"
           )}
         >
           <div className="overflow-hidden w-full">

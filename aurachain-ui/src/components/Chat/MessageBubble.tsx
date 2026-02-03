@@ -4,7 +4,6 @@ import { clsx } from 'clsx';
 import { BrainCircuit, Clock, CheckCircle2 } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
-// 👇 UPDATED INTERFACE
 export interface Message {
   id: string;
   sender: 'user' | 'ai';
@@ -22,7 +21,7 @@ export interface Message {
     success?: boolean; 
     error?: string; 
     displayText?: string;
-    agentResults?: Record<string, {  // 🔑 NEW: Stores all agent results
+    agentResults?: Record<string, {
       success: boolean;
       data: any;
       error?: string;
@@ -39,13 +38,12 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.sender === 'user';
   const { setSelectedAgent, setRightPanelOpen } = useUIStore();
 
-  // --- ARTIFACT CARD RENDERER (ONLY FOR ORCHESTRATOR PLAN NOW) ---
   if (message.type === 'analysis') {
     const isPlan = !!message.metadata?.agents;
 
     return (
       <div className="mb-8 max-w-[85%] animate-fade-in-up">
-        <div className="flex items-center text-xs font-bold text-slate-500 mb-2 ml-1 uppercase tracking-wider">
+        <div className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 mb-2 ml-1 uppercase tracking-wider">
           <BrainCircuit size={14} className="mr-2" />
           Orchestrator Plan
         </div>
@@ -58,8 +56,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             }
           }}
           className={clsx(
-            "group relative bg-white dark:bg-[#212121] border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-all overflow-hidden",
-            isPlan && "hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer"
+            "group relative bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-700 rounded-xl shadow-sm-light dark:shadow-none transition-all overflow-hidden",
+            isPlan && "hover:shadow-md-light dark:hover:shadow-none hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer"
           )}
         >
           <div className={clsx(
@@ -71,10 +69,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           <div className="p-5 pl-6">
             <div className="flex justify-between items-start mb-3">
               <div>
-                <h4 className="font-heading font-semibold text-lg text-slate-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                <h4 className="font-heading font-semibold text-lg text-slate-800 dark:text-zinc-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {message.text}
                 </h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
                   {isPlan 
                     ? "Executing agent workflow..." 
                     : message.metadata?.summary || "Click to view detailed analysis"
@@ -85,9 +83,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
               <div className={clsx(
                 "p-1.5 rounded-lg transition-colors",
                 message.status === 'processing' 
-                    ? "bg-amber-50 text-accent-amber" 
+                    ? "bg-amber-50 dark:bg-amber-900/20 text-accent-amber" 
                     : message.status === 'failed'
-                    ? "bg-red-50 text-red-500"
+                    ? "bg-red-50 dark:bg-red-900/20 text-red-500"
                     : "bg-teal-50 dark:bg-teal-900/20 text-accent-teal"
               )}>
                 {message.status === 'processing' ? (
@@ -101,13 +99,13 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             {(message.status === 'processing' || isPlan) && (
                 <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-medium">
-                        <span className="flex items-center text-slate-500">
+                        <span className="flex items-center text-slate-500 dark:text-zinc-500">
                             {message.status === 'processing' ? "Processing..." : "Workflow Progress"}
                         </span>
-                        <span className="text-slate-600 dark:text-slate-400">{message.metadata?.progress}%</span>
+                        <span className="text-slate-600 dark:text-zinc-400">{message.metadata?.progress}%</span>
                     </div>
                     
-                    <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-zinc-800 rounded-full h-1.5 overflow-hidden">
                         <div 
                             className={clsx(
                                 "h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden",
@@ -120,9 +118,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                     </div>
 
                     {isPlan && message.metadata?.agents && (
-                        <div className="pt-3 mt-1 border-t border-slate-100 dark:border-slate-700 flex flex-wrap gap-2">
+                        <div className="pt-3 mt-1 border-t border-slate-100 dark:border-zinc-800 flex flex-wrap gap-2">
                             {message.metadata.agents.map((agent, idx) => (
-                                <span key={idx} className="text-[10px] uppercase font-bold tracking-wider text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                                <span key={idx} className="text-[10px] uppercase font-bold tracking-wider text-slate-500 dark:text-zinc-500 bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded">
                                     {agent}
                                 </span>
                             ))}
@@ -132,33 +130,32 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             )}
           </div>
         </div>
-        <span className="text-[10px] text-slate-400 ml-1 mt-2 block">{message.timestamp}</span>
+        <span className="text-[10px] text-slate-400 dark:text-zinc-600 ml-1 mt-2 block">{message.timestamp}</span>
       </div>
     );
   }
 
-  // --- STANDARD TEXT MESSAGE ---
   return (
     <div className={clsx("flex w-full mb-6 animate-fade-in-up", isUser ? "justify-end" : "justify-start")}>
       <div className={clsx("max-w-[75%] flex flex-col", isUser ? "items-end" : "items-start")}>
         
         {!isUser && (
-          <span className="flex items-center text-xs font-bold text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+          <span className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 mb-1.5 ml-1 uppercase tracking-wider">
             <BrainCircuit size={12} className="mr-1.5" />
             Orchestrator
           </span>
         )}
 
         <div className={clsx(
-          "px-5 py-3.5 text-[15px] leading-relaxed shadow-sm",
+          "px-5 py-3.5 text-[15px] leading-relaxed shadow-sm-light dark:shadow-none",
           isUser 
             ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm" 
-            : "bg-white dark:bg-[#212121] border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl rounded-tl-sm"
+            : "bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-200 rounded-2xl rounded-tl-sm"
         )}>
           {message.metadata?.displayText || message.text}
         </div>
         
-        <span className={clsx("text-[10px] text-slate-400 mt-1.5", isUser ? "mr-1" : "ml-1")}>
+        <span className={clsx("text-[10px] text-slate-400 dark:text-zinc-600 mt-1.5", isUser ? "mr-1" : "ml-1")}>
           {message.timestamp}
         </span>
       </div>

@@ -4,9 +4,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   DARK MODE POLISH - GLOBAL STYLES
+   ======================================== */
+
+/* Smooth color transitions on mode switch */
+* {
+  @apply transition-colors duration-300;
+}
+
+/* Root color variables for dynamic switching */
+:root {
+  --bg-main: #FAFAFA;
+  --bg-surface: #F5F5F5;
+  --bg-elevated: #FFFFFF;
+  --border-color: #E5E5E5;
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+}
+
+.dark {
+  --bg-main: #0A0A0A;
+  --bg-surface: #121212;
+  --bg-elevated: #1A1A1A;
+  --border-color: #27272A;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+}
+
 @layer base {
+  html {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+  }
+
   body {
-    @apply font-sans antialiased text-slate-900 dark:text-slate-50 bg-light-bg dark:bg-dark-bg transition-colors duration-300;
+    @apply font-sans antialiased text-slate-900 dark:text-zinc-100 bg-light-bg dark:bg-dark-bg;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -14,14 +47,76 @@
   }
 }
 
-/* Custom Scrollbar for "Sophisticated Workspace" feel */
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-light-surface dark:bg-dark-surface;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-zinc-700 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-zinc-600;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   @apply bg-transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600;
+  @apply bg-slate-300 dark:bg-zinc-700 rounded-full hover:bg-slate-400 dark:hover:bg-zinc-600;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-primary-500/20 text-primary-700 dark:text-primary-300;
+}
+
+/* Focus rings */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Better default link styling */
+a {
+  @apply transition-colors duration-200;
+}
+
+/* Code blocks in dark mode */
+code {
+  @apply bg-slate-100 dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 px-1.5 py-0.5 rounded text-sm;
+}
+
+pre {
+  @apply bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-lg p-4 overflow-x-auto;
+}
+
+/* Placeholder text */
+::placeholder {
+  @apply text-slate-400 dark:text-zinc-500;
+}
+
+/* Disabled state */
+:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* HR separator */
+hr {
+  @apply border-slate-200 dark:border-zinc-800;
 }

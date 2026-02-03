@@ -8,49 +8,71 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'], // Clean professional look
-        mono: ['JetBrains Mono', 'monospace'], // For data/tech elements
-        heading: ['DM Sans', 'sans-serif'], // For main titles
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        heading: ['DM Sans', 'sans-serif'],
       },
       colors: {
         primary: {
-          DEFAULT: '#4A90E2', // Warm Blue
+          DEFAULT: '#4A90E2',
           50: '#EFF6FF',
           100: '#DBEAFE',
           200: '#BFDBFE',
           300: '#93C5FD',
           400: '#60A5FA',
           500: '#4A90E2',
-          600: '#3B82F6',
-          700: '#2563EB',
-          800: '#1E40AF',
-          900: '#1E3A8A',
+          600: '#3B73B8',
+          700: '#2C568A',
+          800: '#1D395C',
+          900: '#0E1C2E',
         },
         accent: {
-          teal: '#14B8A6',   // Success
-          amber: '#F59E0B',  // Warning/Processing
-          coral: '#EF4444',  // Error
-          slate: '#64748B',  // Neutral
+          teal: '#14B8A6',
+          amber: '#F59E0B',
+          coral: '#EF4444',
+          slate: '#64748B',
         },
-        // Light mode semantic backgrounds
+        // Professional Light Mode Colors
         light: {
-          bg: '#FFFFFF',
-          surface: '#F8FAFC',
-          elevated: '#F1F5F9',
-          border: '#E2E8F0',
+          bg: '#FAFAFA',
+          surface: '#F5F5F5',
+          elevated: '#FFFFFF',
+          border: '#E5E5E5',
+          text: {
+            primary: '#18181B',
+            secondary: '#52525B',
+            tertiary: '#A1A1AA',
+          }
         },
-        // Dark mode semantic backgrounds
+        // Professional Dark Mode Colors (NOT pure black)
         dark: {
-          bg: '#0A0A0A',     // True Black
-          surface: '#1A1A1A', // Dark Charcoal
-          elevated: '#2A2A2A', // Medium Charcoal
-          border: '#334155',
-        }
+          bg: '#0A0A0A',        // Main background
+          surface: '#121212',    // Elevated surfaces
+          elevated: '#1A1A1A',   // Cards, modals
+          panel: '#1F1F1F',      // Side panels
+          border: '#27272A',     // Borders (zinc-800)
+          text: {
+            primary: '#FAFAFA',  // Main text
+            secondary: '#A1A1AA', // Secondary text
+            tertiary: '#71717A', // Muted text
+          }
+        },
+      },
+      boxShadow: {
+        'sm-light': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'sm-dark': '0 1px 2px 0 rgba(0, 0, 0, 0.5)',
+        'md-light': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        'md-dark': '0 4px 6px -1px rgba(0, 0, 0, 0.6)',
+        'lg-light': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        'lg-dark': '0 10px 15px -3px rgba(0, 0, 0, 0.7)',
+        'xl-light': '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        'xl-dark': '0 20px 25px -5px rgba(0, 0, 0, 0.8)',
       },
       animation: {
         'slide-in': 'slideIn 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         'rotate-alternate': 'rotateAlternate 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
         'fade-in': 'fadeIn 0.3s ease-out',
+        'fade-in-up': 'fadeInUp 0.3s ease-out',
       },
       keyframes: {
         slideIn: {
@@ -58,29 +80,19 @@ export default {
           '100%': { transform: 'translateX(0)' },
         },
         rotateAlternate: {
-          '0%': { 
-            transform: 'rotate(0deg) scale(1)',
-          },
-          '25%': { 
-            transform: 'rotate(180deg) scale(1.05)',
-          },
-          '50%': { 
-            transform: 'rotate(180deg) scale(1)',
-          },
-          '75%': { 
-            transform: 'rotate(0deg) scale(1.05)',
-          },
-          '100%': { 
-            transform: 'rotate(0deg) scale(1)',
-          },
+          '0%': { transform: 'rotate(0deg) scale(1)' },
+          '25%': { transform: 'rotate(180deg) scale(1.05)' },
+          '50%': { transform: 'rotate(180deg) scale(1)' },
+          '75%': { transform: 'rotate(0deg) scale(1.05)' },
+          '100%': { transform: 'rotate(0deg) scale(1)' },
         },
         fadeIn: {
-          '0%': { 
-            opacity: '0',
-          },
-          '100%': { 
-            opacity: '1',
-          }
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
         }
       }
     },

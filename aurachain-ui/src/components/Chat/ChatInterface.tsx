@@ -65,11 +65,11 @@ const ChatInterface: React.FC = () => {
       <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg transition-colors duration-500">
         <div className="flex-1 flex flex-col items-center justify-center p-4">
           <div className="mb-8 text-center animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-heading font-medium text-slate-800 dark:text-slate-100 mb-3 flex items-center justify-center gap-4">
+            <h1 className="text-4xl md:text-5xl font-heading font-medium text-slate-800 dark:text-zinc-100 mb-3 flex items-center justify-center gap-4">
               <InfinityIcon size={48} className="text-primary-500" strokeWidth={2.5} />
               Good Afternoon
             </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+            <p className="text-lg text-slate-500 dark:text-zinc-400 max-w-md mx-auto">
               Ready to orchestrate your supply chain agents?
             </p>
           </div>
@@ -122,16 +122,16 @@ const ChatInterface: React.FC = () => {
                   )}
                 </div>
 
-                <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 text-white text-xs font-medium rounded-lg opacity-0 group-hover/node:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg z-50 min-w-max">
+                <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 dark:bg-zinc-800 text-white text-xs font-medium rounded-lg opacity-0 group-hover/node:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg z-50 min-w-max border border-zinc-700">
                   <div className="font-semibold">
                     {getAnalysisTitle(msg, idx)}
                   </div>
                   {msg.timestamp && (
-                    <div className="text-slate-300 text-[10px] mt-0.5">
+                    <div className="text-slate-300 dark:text-zinc-400 text-[10px] mt-0.5">
                       {msg.timestamp}
                     </div>
                   )}
-                  <div className="absolute top-1/2 -left-1 -mt-1 border-4 border-transparent border-r-slate-900" />
+                  <div className="absolute top-1/2 -left-1 -mt-1 border-4 border-transparent border-r-slate-900 dark:border-r-zinc-800" />
                 </div>
               </button>
             ))}

@@ -185,7 +185,7 @@ export default function LandingPage() {
     <div 
       ref={containerRef} 
       className={cn(
-        "bg-light-bg dark:bg-black min-h-screen text-slate-900 dark:text-zinc-100",
+        "bg-light-bg dark:bg-dark-bg min-h-screen text-slate-900 dark:text-zinc-100",
         "font-sans selection:bg-primary selection:text-white transition-colors duration-500"
       )}
     >

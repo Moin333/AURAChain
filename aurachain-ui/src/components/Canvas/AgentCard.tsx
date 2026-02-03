@@ -27,8 +27,8 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
     <div className={clsx(
       "p-4 rounded-xl border transition-all duration-300 relative overflow-hidden group",
       agent.status === 'processing' 
-        ? "bg-white dark:bg-dark-elevated border-primary-200 dark:border-primary-900 shadow-md ring-1 ring-primary-100 dark:ring-primary-900/50" 
-        : "bg-white dark:bg-dark-elevated border-light-border dark:border-dark-border hover:border-primary-200 dark:hover:border-primary-800"
+        ? "bg-light-elevated dark:bg-dark-elevated border-primary-200 dark:border-primary-800 shadow-md-light dark:shadow-none ring-1 ring-primary-100 dark:ring-primary-900/30" 
+        : "bg-light-elevated dark:bg-dark-elevated border-light-border dark:border-dark-border hover:border-primary-200 dark:hover:border-primary-700"
     )}>
       
       {/* Header */}
@@ -36,13 +36,15 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
         <div className="flex items-center">
           <div className={clsx(
             "p-2 rounded-lg mr-3 transition-colors",
-            agent.status === 'processing' ? "bg-primary-50 text-primary-600" : "bg-slate-100 dark:bg-slate-800 text-slate-500"
+            agent.status === 'processing' 
+              ? "bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400" 
+              : "bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-400"
           )}>
             <Icon size={18} />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">{agent.name}</h4>
-            <span className="text-xs text-slate-500 capitalize">{agent.status}...</span>
+            <h4 className="text-sm font-semibold text-slate-800 dark:text-zinc-100">{agent.name}</h4>
+            <span className="text-xs text-slate-500 dark:text-zinc-500 capitalize">{agent.status}...</span>
           </div>
         </div>
         
@@ -57,11 +59,11 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
       {/* Progress Bar (Only for processing) */}
       {agent.status === 'processing' && (
         <div className="space-y-1.5">
-          <div className="flex justify-between text-[10px] text-slate-500 font-medium">
+          <div className="flex justify-between text-[10px] text-slate-500 dark:text-zinc-500 font-medium">
             <span>Analyzing data patterns...</span>
             <span>{agent.progress}%</span>
           </div>
-          <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
             <div 
               className="h-full bg-accent-amber rounded-full relative"
               style={{ width: `${agent.progress}%` }}
@@ -74,14 +76,14 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
 
       {/* Summary (For completed) */}
       {agent.status === 'completed' && agent.summary && (
-        <div className="mt-2 text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-lg border border-slate-100 dark:border-slate-800">
+        <div className="mt-2 text-xs text-slate-600 dark:text-zinc-400 bg-slate-50 dark:bg-zinc-900/50 p-2 rounded-lg border border-slate-100 dark:border-zinc-800">
           {agent.summary}
         </div>
       )}
 
       {/* Active Glow Effect */}
       {agent.status === 'processing' && (
-        <div className="absolute inset-0 border-2 border-primary-500/10 rounded-xl pointer-events-none animate-pulse"></div>
+        <div className="absolute inset-0 border-2 border-primary-500/10 dark:border-primary-400/20 rounded-xl pointer-events-none animate-pulse"></div>
       )}
     </div>
   );

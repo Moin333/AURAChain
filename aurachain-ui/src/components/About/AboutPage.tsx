@@ -28,7 +28,7 @@ export default function AboutPage() {
   }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen bg-light-bg dark:bg-black text-slate-900 dark:text-zinc-100 transition-colors duration-500">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-slate-900 dark:text-zinc-100 transition-colors duration-500">
       
       {/* Header */}
       <header className="fixed top-0 w-full z-50 border-b border-light-border dark:border-zinc-800 bg-light-bg/90 dark:bg-black/90 backdrop-blur-sm">
