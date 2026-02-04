@@ -1,5 +1,5 @@
 // aurachain-ui/src/components/Chat/ChatInterface.tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { clsx } from 'clsx';
 import { Infinity as InfinityIcon } from 'lucide-react';
 import MessageBubble, { type Message } from './MessageBubble';
@@ -13,7 +13,9 @@ const ChatInterface: React.FC = () => {
     isThinking,
     processingStep,
     setRightPanelOpen,
-    isSidebarOpen
+    isSidebarOpen,
+    isRightPanelOpen,
+    rightPanelWidth
   } = useUIStore();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -57,8 +59,16 @@ const ChatInterface: React.FC = () => {
     setRightPanelOpen(true);
   };
 
-  const leftOffset = isSidebarOpen ? 280 : 72;
+  // ===== DYNAMIC PADDING FIX - START =====
+  const dynamicPaddingLeft = useMemo(() => {
+    const sidebarWidth = isSidebarOpen ? 280 : 72;
+    return sidebarWidth + 10; // 10px for timeline space
+  }, [isSidebarOpen]);
 
+  const dynamicPaddingRight = useMemo(() => {
+    return isRightPanelOpen ? Math.min(rightPanelWidth * 0.08, 80) : 32;
+  }, [isRightPanelOpen, rightPanelWidth]);
+  // ===== DYNAMIC PADDING FIX - END =====
 
   if (messages.length === 0) {
     return (
@@ -84,11 +94,12 @@ const ChatInterface: React.FC = () => {
   return (
     <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
 
+      {/* Timeline with DYNAMIC positioning */}
       {analysisMessages.length > 0 && (
         <div
           className="fixed top-24 z-40 flex flex-col items-center pointer-events-none transition-all duration-300"
           style={{
-            left: `${leftOffset + 32}px`,
+            left: `${dynamicPaddingLeft}px`,  // CHANGED: Dynamic instead of fixed
             height: '70vh',
             maxHeight: '700px'
           }}
@@ -139,7 +150,17 @@ const ChatInterface: React.FC = () => {
         </div>
       )}
 
-      <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-8">
+      {/* Messages Container with DYNAMIC padding */}
+      <div 
+        className="flex-1 overflow-y-auto custom-scrollbar"
+        style={{
+          paddingTop: '2rem',
+          paddingBottom: '2rem',
+          paddingLeft: `${dynamicPaddingLeft - 160}px`,  // CHANGED: Dynamic padding
+          paddingRight: `${dynamicPaddingRight}px`,      // CHANGED: Dynamic padding
+          transition: 'padding 300ms ease-out'           // ADDED: Smooth transition
+        }}
+      >
         <div className="max-w-3xl mx-auto relative">
 
           {messages.map((msg, index) => (
