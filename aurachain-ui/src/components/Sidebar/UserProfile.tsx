@@ -1,3 +1,4 @@
+// aurachain-ui/src/components/Sidebar/UserProfile.tsx
 import React, { useState } from 'react';
 import { clsx } from 'clsx';
 import { 

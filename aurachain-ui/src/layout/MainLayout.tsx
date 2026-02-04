@@ -1,3 +1,4 @@
+// aurachain-ui/src/layout/MainLayout.tsx
 import React, { useRef, useEffect, useState } from 'react';
 import { clsx } from 'clsx';
 import { GripVertical, ChevronDown, Plus, Building2, Check } from 'lucide-react';

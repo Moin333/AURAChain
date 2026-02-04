@@ -1,3 +1,4 @@
+// aurachain-ui/src/components/Chat/InputPanel.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Paperclip, Send, Loader2, X, FileText, Maximize2, Minimize2 } from 'lucide-react';
 import { clsx } from 'clsx';

@@ -1,3 +1,4 @@
+// aurachain-ui/src/components/Canvas/AgentCard.tsx
 import React from 'react';
 import { clsx } from 'clsx';
 import { CheckCircle2, Clock, AlertCircle, Database, TrendingUp, BrainCircuit } from 'lucide-react';

@@ -1,3 +1,4 @@
+// aurachain-ui/src/components/Canvas/ArtifactRenderer.tsx
 import React from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 

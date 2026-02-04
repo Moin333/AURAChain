@@ -1,3 +1,4 @@
+// aurachain-ui/src/components/Canvas/DetailedReport.tsx
 import React from 'react';
 import { ArrowLeft, Download, Share2, FileText, CheckCircle2 } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
