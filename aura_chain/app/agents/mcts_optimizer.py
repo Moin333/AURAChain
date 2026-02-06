@@ -1,6 +1,7 @@
 # app/agents/mcts_optimizer.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 import numpy as np
 import pandas as pd
@@ -233,9 +234,10 @@ class MCTSOptimizerAgent(BaseAgent):
         holding_cost: float,
         stockout_cost: float,
         horizon: int,
-        iterations: int
+        iterations: int,
+        session_id: str = None
     ) -> Dict:
-        """Execute MCTS algorithm"""
+        """Execute MCTS algorithm with streaming progress"""
         import time
         start_time = time.time()
         
@@ -258,6 +260,10 @@ class MCTSOptimizerAgent(BaseAgent):
         root = MCTSNode(root_state, untried_actions=list(action_space))
         
         explored_states = 0
+        
+        # Progress tracking
+        last_update = 0
+        update_frequency = 100  # Update every 100 iterations
         
         for i in range(iterations):
             node = root
@@ -294,6 +300,28 @@ class MCTSOptimizerAgent(BaseAgent):
             while node is not None:
                 node.update(normalized_reward)
                 node = node.parent
+                
+            # Publish progress update
+            if session_id and (i - last_update >= update_frequency or i == iterations - 1):
+                progress = ((i + 1) / iterations) * 100
+                
+                # Get current best solution
+                best_child = max(root.children, key=lambda c: c.visits) if root.children else None
+                current_best_cost = (1.0 - (best_child.total_reward / best_child.visits)) * max_penalty if best_child else 0
+                
+                await streaming_service.publish_agent_progress(
+                    session_id,
+                    self.name,
+                    progress,
+                    f"Iteration {i+1}/{iterations}",
+                    {
+                        "iteration": i + 1,
+                        "total_iterations": iterations,
+                        "explored_states": explored_states,
+                        "current_best_cost": float(current_best_cost)
+                    }
+                )
+                last_update = i
         
         # Extract best action
         if not root.children:
@@ -319,6 +347,96 @@ class MCTSOptimizerAgent(BaseAgent):
             "explored_states": explored_states,
             "computation_time_ms": computation_time
         }
+        
+    async def process(self, request: AgentRequest) -> AgentResponse:
+        """Main process method - updated to pass session_id"""
+        try:
+            if "dataset" not in request.context:
+                return AgentResponse(
+                    agent_name=self.name,
+                    success=False,
+                    error="No dataset provided for optimization"
+                )
+            
+            df = pd.DataFrame(request.context["dataset"])
+            
+            holding_cost = request.parameters.get("holding_cost", 5)
+            stockout_cost = request.parameters.get("stockout_cost", 50)
+            horizon = request.parameters.get("horizon", 30)
+            iterations = request.parameters.get("iterations", 2000)
+            
+            logger.info(f"Starting MCTS with {iterations} iterations, {horizon}-day horizon")
+            
+            demand_data = self._extract_demand(df)
+            
+            if len(demand_data) == 0:
+                return AgentResponse(
+                    agent_name=self.name,
+                    success=False,
+                    error="Could not extract demand data from dataset"
+                )
+            
+            current_stock = self._get_current_stock(df, demand_data)
+            
+            # Pass session_id to streaming-enabled MCTS
+            optimal_solution = await self._run_mcts(
+                current_stock=current_stock,
+                demand_history=demand_data,
+                holding_cost=holding_cost,
+                stockout_cost=stockout_cost,
+                horizon=horizon,
+                iterations=iterations,
+                session_id=request.session_id
+            )
+            
+            baseline_cost = self._calculate_baseline_cost(
+                current_stock, demand_data, holding_cost, stockout_cost, horizon
+            )
+            
+            bullwhip_metrics = self._calculate_bullwhip_effect(
+                demand_data, optimal_solution
+            )
+            
+            interpretation = await self._get_interpretation(
+                optimal_solution, baseline_cost, bullwhip_metrics, request.query
+            )
+            
+            response_data = {
+                "optimal_action": {
+                    "reorder_point": float(optimal_solution["reorder_point"]),
+                    "order_quantity": float(optimal_solution["order_quantity"]),
+                    "safety_stock": float(optimal_solution["safety_stock"])
+                },
+                "expected_savings": {
+                    "amount_inr": float(baseline_cost - optimal_solution["expected_cost"]),
+                    "percentage": float(((baseline_cost - optimal_solution["expected_cost"]) / baseline_cost) * 100)
+                },
+                "bullwhip_reduction": bullwhip_metrics,
+                "simulation_stats": {
+                    "iterations": iterations,
+                    "explored_states": optimal_solution["explored_states"],
+                    "computation_time_ms": optimal_solution["computation_time_ms"],
+                    "baseline_cost": float(baseline_cost),
+                    "optimized_cost": float(optimal_solution["expected_cost"])
+                },
+                "interpretation": interpretation
+            }
+            
+            logger.info(f"MCTS completed: {response_data['expected_savings']['percentage']:.1f}% savings")
+            
+            return AgentResponse(
+                agent_name=self.name,
+                success=True,
+                data=response_data
+            )
+            
+        except Exception as e:
+            logger.error(f"MCTS Optimizer error: {str(e)}")
+            return AgentResponse(
+                agent_name=self.name,
+                success=False,
+                error=str(e)
+            )
         
     def _sample_demand(self, demand_history: np.ndarray) -> float:
         """Sample demand from historical distribution"""

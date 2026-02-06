@@ -33,6 +33,11 @@ interface UIState {
   // --- Orchestration Data ---
   currentPlan: OrchestrationPlan | null;
   agentStatuses: Map<string, 'queued' | 'processing' | 'completed' | 'failed'>;
+
+  // NEW: Agent streaming state
+  agentProgress: Map<string, number>;
+  agentActivities: Map<string, string>;
+  agentMetrics: Map<string, Record<string, any>>;
   
   // --- Actions ---
   toggleSidebar: () => void;
@@ -46,6 +51,11 @@ interface UIState {
   uploadDataset: (file: File) => Promise<void>;
   sendMessage: (text: string) => Promise<void>;
   resetSession: () => void;
+
+  // NEW: Methods for SSE updates
+  updateAgentStatus: (agentId: string, status: 'queued' | 'processing' | 'completed' | 'failed') => void;
+  updateAgentProgress: (agentId: string, progress: number, activity: string, metrics?: Record<string, any>) => void;
+  updateAgentData: (agentId: string, data: any) => void;
 }
 
 export const useUIStore = create<UIState>((set, get) => ({
@@ -66,6 +76,11 @@ export const useUIStore = create<UIState>((set, get) => ({
   selectedAgentId: null,
   currentPlan: null,
   agentStatuses: new Map(),
+
+  // ✨ NEW: Initialize streaming state
+  agentProgress: new Map(),
+  agentActivities: new Map(),
+  agentMetrics: new Map(),
 
   // --- Layout Actions ---
   toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
@@ -124,6 +139,80 @@ export const useUIStore = create<UIState>((set, get) => ({
       console.error("Upload failed", e);
     }
   },
+
+  // NEW: Update agent status
+  updateAgentStatus: (agentId, status) => set((state) => {
+    const newStatuses = new Map(state.agentStatuses);
+    newStatuses.set(agentId, status);
+    
+    console.log(`🔄 Agent ${agentId} status: ${status}`);
+    
+    return { agentStatuses: newStatuses };
+  }),
+
+  // NEW: Update agent progress
+  updateAgentProgress: (agentId, progress, activity, metrics = {}) => set((state) => {
+    const newProgress = new Map(state.agentProgress);
+    const newActivities = new Map(state.agentActivities);
+    const newMetrics = new Map(state.agentMetrics);
+    
+    newProgress.set(agentId, progress);
+    newActivities.set(agentId, activity);
+    
+    if (Object.keys(metrics).length > 0) {
+      newMetrics.set(agentId, metrics);
+    }
+    
+    // Also update plan message progress if it exists
+    const updatedMessages = state.messages.map(m => {
+      if (m.type === 'analysis' && m.metadata?.agents?.includes(agentId)) {
+        return {
+          ...m,
+          metadata: {
+            ...m.metadata,
+            progress: Math.round(
+              Array.from(newProgress.values()).reduce((a, b) => a + b, 0) / 
+              (m.metadata.agents?.length || 1)
+            )
+          }
+        };
+      }
+      return m;
+    });
+
+    return {
+      agentProgress: newProgress,
+      agentActivities: newActivities,
+      agentMetrics: newMetrics,
+      messages: updatedMessages
+    };
+  }),
+
+  // NEW: Update agent result data
+  updateAgentData: (agentId, data) => set((state) => {
+    const updatedMessages = state.messages.map(m => {
+      if (m.type === 'analysis' && m.metadata?.agents) {
+        const agentResults = m.metadata.agentResults || {};
+        
+        return {
+          ...m,
+          metadata: {
+            ...m.metadata,
+            agentResults: {
+              ...agentResults,
+              [agentId]: {
+                success: true,
+                data: data
+              }
+            }
+          }
+        };
+      }
+      return m;
+    });
+    
+    return { messages: updatedMessages };
+  }),
 
   sendMessage: async (text: string) => {
     const { sessionId, userId, activeDataset } = get();

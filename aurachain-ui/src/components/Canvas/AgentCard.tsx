@@ -1,7 +1,8 @@
 // aurachain-ui/src/components/Canvas/AgentCard.tsx
 import React from 'react';
 import { clsx } from 'clsx';
-import { CheckCircle2, Clock, AlertCircle, Database, TrendingUp, BrainCircuit } from 'lucide-react';
+import { CheckCircle2, Clock, AlertCircle, Database, TrendingUp, BrainCircuit, Loader2 } from 'lucide-react';
+import { useUIStore } from '../../store/uiStore';
 
 export interface Agent {
   id: string;
@@ -17,6 +18,14 @@ interface AgentCardProps {
 }
 
 const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
+  // Get live streaming data
+  const { agentProgress, agentActivities, agentMetrics } = useUIStore();
+  
+  // Use live data if available, fallback to prop data
+  const liveProgress = agentProgress.get(agent.id) ?? agent.progress;
+  const liveActivity = agentActivities.get(agent.id) ?? 'Processing...';
+  const liveMetrics = agentMetrics.get(agent.id) ?? {};
+  
   // Icon Selection
   const Icon = {
     harvester: Database,
@@ -45,33 +54,54 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           </div>
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-zinc-100">{agent.name}</h4>
-            <span className="text-xs text-slate-500 dark:text-zinc-500 capitalize">{agent.status}...</span>
+            <span className="text-xs text-slate-500 dark:text-zinc-500 capitalize">{agent.status}</span>
           </div>
         </div>
         
         {/* Status Icon */}
         <div>
           {agent.status === 'completed' && <CheckCircle2 size={18} className="text-accent-teal" />}
-          {agent.status === 'processing' && <Clock size={18} className="text-accent-amber animate-pulse" />}
+          {agent.status === 'processing' && <Loader2 size={18} className="text-accent-amber animate-spin" />}
           {agent.status === 'failed' && <AlertCircle size={18} className="text-accent-coral" />}
+          {agent.status === 'queued' && <Clock size={18} className="text-slate-400 dark:text-zinc-600" />}
         </div>
       </div>
 
-      {/* Progress Bar (Only for processing) */}
+      {/* Live Progress Bar (Only for processing) */}
       {agent.status === 'processing' && (
-        <div className="space-y-1.5">
-          <div className="flex justify-between text-[10px] text-slate-500 dark:text-zinc-500 font-medium">
-            <span>Analyzing data patterns...</span>
-            <span>{agent.progress}%</span>
+        <div className="space-y-2 mb-3">
+          {/* Live Activity Text */}
+          <div className="text-[10px] font-mono text-primary-600 dark:text-primary-400 animate-pulse truncate">
+            {liveActivity}
           </div>
-          <div className="h-1.5 w-full bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-accent-amber rounded-full relative"
-              style={{ width: `${agent.progress}%` }}
-            >
-               <div className="absolute inset-0 bg-white/40 animate-[shimmer_1s_infinite]"></div>
+          
+          {/* Progress Bar */}
+          <div className="space-y-1">
+            <div className="flex justify-between text-[10px] text-slate-500 dark:text-zinc-500 font-medium">
+              <span>Progress</span>
+              <span>{Math.round(liveProgress)}%</span>
+            </div>
+            <div className="h-1.5 w-full bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-primary-500 to-accent-teal rounded-full relative transition-all duration-500 ease-out"
+                style={{ width: `${liveProgress}%` }}
+              >
+                <div className="absolute inset-0 bg-white/30 animate-[shimmer_1.5s_infinite]"></div>
+              </div>
             </div>
           </div>
+          
+          {/* Live Metrics (if available) */}
+          {Object.keys(liveMetrics).length > 0 && (
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {Object.entries(liveMetrics).slice(0, 2).map(([key, value]) => (
+                <div key={key} className="text-[10px] bg-slate-50 dark:bg-zinc-900 px-2 py-1 rounded">
+                  <div className="text-slate-500 dark:text-zinc-600 uppercase">{key}</div>
+                  <div className="font-semibold text-slate-700 dark:text-zinc-300">{String(value)}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

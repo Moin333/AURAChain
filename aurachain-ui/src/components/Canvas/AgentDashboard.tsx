@@ -12,6 +12,7 @@ const AgentDashboard: React.FC = () => {
     setRightPanelOpen, 
     currentPlan, 
     agentStatuses,
+    agentProgress,
     messages
   } = useUIStore();
 
@@ -91,12 +92,11 @@ const AgentDashboard: React.FC = () => {
         <div className="grid grid-cols-1 gap-4">
           {agentsList.map((agentName, idx) => {
             const status = agentStatuses.get(agentName) || 'queued';
+            const progress = agentProgress.get(agentName) || 0;
             
             let type: 'harvester' | 'analyst' | 'forecaster' = 'analyst';
             if(agentName.toLowerCase().includes('harvest')) type = 'harvester';
             if(agentName.toLowerCase().includes('forecast')) type = 'forecaster';
-
-            const progress = status === 'completed' ? 100 : status === 'processing' ? 50 : 0;
 
             return (
                 <div key={idx} onClick={() => setSelectedAgent(agentName)} className="cursor-pointer">

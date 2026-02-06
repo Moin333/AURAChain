@@ -4,8 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.config import get_settings
 from app.core.memory import session_manager, memory_manager
-from app.api.routes import orchestrator, data, analytics, health
-import uuid
+from app.core.streaming import streaming_service
+from app.api.routes import orchestrator, data, analytics, health, sse
 
 settings = get_settings()
 
@@ -16,6 +16,7 @@ async def lifespan(app: FastAPI):
     try:
         await session_manager.initialize()
         await memory_manager.initialize()
+        await streaming_service.initialize()
         print("✓ Memory systems initialized")
     except Exception as e:
         print(f"Warning: Memory initialization failed: {e}")
@@ -26,6 +27,7 @@ async def lifespan(app: FastAPI):
     try:
         await session_manager.close()
         await memory_manager.close()
+        await streaming_service.close()
         print("✓ Memory systems closed")
     except Exception as e:
         print(f"Warning: Memory cleanup failed: {e}")
@@ -50,6 +52,7 @@ app.include_router(orchestrator.router, prefix=settings.API_PREFIX)
 app.include_router(data.router, prefix=settings.API_PREFIX)
 app.include_router(analytics.router, prefix=settings.API_PREFIX)
 app.include_router(health.router, prefix=settings.API_PREFIX)
+app.include_router(sse.router, prefix=settings.API_PREFIX)
 
 @app.get("/")
 async def root():

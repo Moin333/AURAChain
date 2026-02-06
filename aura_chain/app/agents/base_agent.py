@@ -4,6 +4,7 @@ from typing import Dict, List, Any, Optional
 from pydantic import BaseModel
 from datetime import datetime
 from app.core.observability import observability
+from app.core.streaming import streaming_service
 from loguru import logger
 import math
 import numpy as np
@@ -43,8 +44,18 @@ class BaseAgent(ABC):
         self,
         request: AgentRequest
     ) -> AgentResponse:
-        """Execute agent with full observability"""
+        """Execute agent with full observability + streaming"""
+        session_id = request.session_id
+        
         try:
+            # Notify start
+            if session_id:
+                await streaming_service.publish_agent_started(
+                    session_id,
+                    self.name,
+                    request.query
+                )
+                
             observability.logger.log_agent_activity(
                 self.name,
                 "request_received",
@@ -64,10 +75,34 @@ class BaseAgent(ABC):
                 response.metadata = self._sanitize_for_json(response.metadata)
             # --------------------------------------------
             
+            # Notify completion
+            if session_id:
+                if response.success:
+                    await streaming_service.publish_agent_completed(
+                        session_id,
+                        self.name,
+                        response.data or {}
+                    )
+                else:
+                    await streaming_service.publish_agent_failed(
+                        session_id,
+                        self.name,
+                        response.error or "Unknown error"
+                    )
+            
             return response
             
         except Exception as e:
             logger.error(f"Agent {self.name} failed: {str(e)}")
+            
+            # Notify failure
+            if session_id:
+                await streaming_service.publish_agent_failed(
+                    session_id,
+                    self.name,
+                    str(e)
+                )
+                
             return AgentResponse(
                 agent_name=self.name,
                 success=False,

@@ -1,6 +1,7 @@
 # app/agents/forecaster.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 import pandas as pd
 import numpy as np
@@ -29,6 +30,7 @@ class ForecasterAgent(BaseAgent):
         self.indian_holidays = holidays.India(years=range(2020, 2030))
     
     async def process(self, request: AgentRequest) -> AgentResponse:
+        """Main process - updated to pass session_id"""
         try:
             # Validate input
             if "dataset" not in request.context:
@@ -62,7 +64,8 @@ class ForecasterAgent(BaseAgent):
             for col in value_cols[:3]:  # Limit to 3 columns for performance
                 logger.info(f"Forecasting column: {col}")
                 forecast_result = await self._forecast_column(
-                    df, date_col, col, forecast_periods
+                    df, date_col, col, forecast_periods,
+                    session_id=request.session_id
                 )
                 forecasts_data[col] = forecast_result
             
@@ -137,9 +140,20 @@ class ForecasterAgent(BaseAgent):
         df: pd.DataFrame, 
         date_col: str, 
         value_col: str, 
-        periods: int
+        periods: int,
+        session_id: str = None
     ) -> Dict:
-        """Generate Prophet forecast for a single column"""
+        """Generate Prophet forecast for a single column with streaming progress"""
+        
+        # Notify start of forecasting
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id,
+                self.name,
+                10,
+                f"Preparing data for {value_col}",
+                {"column": value_col}
+            )
         
         # --- FIX: Aggregate duplicates (Sum values per day) ---
         # This handles the case where you have multiple products per date
@@ -154,6 +168,16 @@ class ForecasterAgent(BaseAgent):
         # Remove any NaN values
         prophet_df = prophet_df.dropna()
         
+        # Notify model training
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id,
+                self.name,
+                30,
+                f"Training Prophet model for {value_col}",
+                {"rows": len(prophet_df)}
+            )
+        
         # Initialize Prophet model
         model = Prophet(
             yearly_seasonality=True,
@@ -165,6 +189,16 @@ class ForecasterAgent(BaseAgent):
         
         # Fit model
         model.fit(prophet_df)
+        
+        # Notify prediction
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id,
+                self.name,
+                70,
+                f"Generating {periods}-day forecast",
+                {"periods": periods}
+            )
         
         # Create future dataframe
         future = model.make_future_dataframe(periods=periods)
@@ -201,6 +235,16 @@ class ForecasterAgent(BaseAgent):
             mape = np.mean(np.abs((historical_actual - historical_predicted) / historical_actual)) * 100
             if np.isnan(mape) or np.isinf(mape):
                 mape = 0.0
+                
+        # Notify completion
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id,
+                self.name,
+                90,
+                f"Forecast complete for {value_col}",
+                {"confidence": float(1 - (mape / 100))}
+            )
         
         return {
             "predictions": predictions,

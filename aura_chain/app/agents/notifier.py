@@ -1,6 +1,7 @@
 # app/agents/notifier.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 import requests
 import json
@@ -32,6 +33,16 @@ class NotifierAgent(BaseAgent):
                     agent_name=self.name,
                     success=False,
                     error="Skipped: No order generated to notify about."
+                )
+                
+            # Notify start
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    50,
+                    "Sending notification...",
+                    {}
                 )
 
             # Get notification type

@@ -1,5 +1,6 @@
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 import pandas as pd
 import numpy as np
@@ -41,15 +42,55 @@ class TrendAnalystAgent(BaseAgent):
             df = pd.DataFrame(request.context["dataset"])
             logger.info(f"Analyzing trends for dataset: {df.shape}")
             
+            # Notify start
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    10,
+                    "Analyzing internal data patterns...",
+                    {"rows": len(df)}
+                )
+            
             # 1. Internal statistical analysis
             internal_trends = self._analyze_internal_trends(df)
+            
+            # Notify keyword extraction
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    40,
+                    "Extracting keywords for external analysis...",
+                    {}
+                )
             
             # 2. Extract product keywords for external search
             keywords = self._extract_keywords(df, request.query)
             
+            # Notify external analysis
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    60,
+                    f"Fetching Google Trends for {len(keywords)} keywords...",
+                    {"keywords": keywords}
+                )
+            
             # 3. Fetch external market trends
             external_trends = await self._analyze_external_trends(keywords)
             
+            # Notify LLM analysis
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    80,
+                    "Generating insights...",
+                    {}
+                )
+                
             # 4. Combine and interpret
             combined_analysis = {
                 "internal_trends": internal_trends,

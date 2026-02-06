@@ -1,6 +1,7 @@
 # app/agents/visualizer.py
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 from typing import Dict
 import pandas as pd
@@ -44,6 +45,16 @@ Response format:
                     success=False,
                     error="No dataset provided"
                 )
+                
+            # Notify start
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    20,
+                    "Analyzing data structure...",
+                    {}
+                )
             
             df = pd.DataFrame(request.context["dataset"])
             
@@ -55,6 +66,16 @@ Dataset columns: {list(df.columns)}
 Sample data: {df.head(3).to_dict('records')}
 
 Provide chart specification in JSON format."""
+
+            # Notify LLM call
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    50,
+                    "Generating chart specification...",
+                    {}
+                )
             
             response = await self.api_client.generate_content(
                 model_name=self.model,
@@ -67,6 +88,16 @@ Provide chart specification in JSON format."""
                 content = content.split("```json")[1].split("```")[0].strip()
             
             chart_spec = json.loads(content)
+            
+            # Notify chart creation
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    80,
+                    "Creating chart...",
+                    {"chart_type": chart_spec.get("chart_type", "unknown")}
+                )
             
             # Generate chart using plotly
             fig = self._create_chart(df, chart_spec)

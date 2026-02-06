@@ -1,11 +1,12 @@
 // aurachain-ui/src/components/Chat/ChatInterface.tsx
 import React, { useEffect, useRef, useMemo } from 'react';
 import { clsx } from 'clsx';
-import { Infinity as InfinityIcon } from 'lucide-react';
+import { Infinity as InfinityIcon, Wifi, WifiOff } from 'lucide-react';
 import MessageBubble, { type Message } from './MessageBubble';
 import InputPanel from './InputPanel';
 import ThinkingIndicator from './ThinkingIndicator';
 import { useUIStore } from '../../store/uiStore';
+import { useAgentStream } from '../../hooks/useAgentStream';
 
 const ChatInterface: React.FC = () => {
   const {
@@ -15,8 +16,12 @@ const ChatInterface: React.FC = () => {
     setRightPanelOpen,
     isSidebarOpen,
     isRightPanelOpen,
-    rightPanelWidth
+    rightPanelWidth,
+    sessionId
   } = useUIStore();
+
+  // NEW: Connect to SSE stream
+  const { isConnected, error: streamError } = useAgentStream(sessionId);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -93,6 +98,37 @@ const ChatInterface: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
+
+      {/* NEW: Connection Status Indicator */}
+      {sessionId && (
+        <div className="absolute top-4 right-4 z-50">
+          <div className={clsx(
+            "flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium transition-all",
+            isConnected 
+              ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
+              : "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+          )}>
+            {isConnected ? (
+              <>
+                <Wifi size={12} />
+                <span>Live</span>
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+              </>
+            ) : (
+              <>
+                <WifiOff size={12} />
+                <span>Offline</span>
+              </>
+            )}
+          </div>
+          
+          {streamError && (
+            <div className="mt-2 text-[10px] text-red-500 dark:text-red-400">
+              {streamError}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Timeline with DYNAMIC positioning */}
       {analysisMessages.length > 0 && (

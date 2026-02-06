@@ -1,7 +1,7 @@
 # app/agents/orchestrator.py
-
 from typing import Dict, List, Any, Optional
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
+from app.core.streaming import streaming_service
 from app.core.api_clients import groq_client
 from app.config import get_settings
 from loguru import logger
@@ -175,7 +175,7 @@ Generate the execution plan based on the Detected Mode constraints."""
         execution_plan: Dict[str, Any],
         request: AgentRequest
     ) -> List[AgentResponse]:
-        """Execute the agents sequentially based on the plan"""
+        """Execute the agents sequentially based on the plan with streaming"""
         responses = []
         
         # Lazy imports
@@ -259,6 +259,10 @@ Generate the execution plan based on the Detected Mode constraints."""
                     request.context[f"{registry_key}_output"] = response.data
                     if registry_key == "order_manager":
                         request.context["order_manager_output"] = response.data
+                        
+            if request.session_id:
+                await streaming_service.publish_workflow_completed(request.session_id)
+                logger.info(f"✅ Workflow completed for session {request.session_id}")
 
         return responses
 

@@ -1,5 +1,6 @@
 from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
 from app.core.api_clients import groq_client
+from app.core.streaming import streaming_service
 from app.config import get_settings
 import pandas as pd
 import numpy as np
@@ -44,6 +45,16 @@ Return results in JSON format."""
                     error="No dataset provided in context"
                 )
             
+            # Notify start
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    10,
+                    "Loading dataset...",
+                    {}
+                )
+                
             # Load data
             df_original = pd.DataFrame(request.context["dataset"])
             logger.info(f"Processing dataset: {df_original.shape}")
@@ -51,8 +62,28 @@ Return results in JSON format."""
             # Store original stats
             original_stats = self._get_dataset_stats(df_original)
             
+            # Notify cleaning start
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    30,
+                    f"Cleaning {len(df_original)} rows...",
+                    {"rows": len(df_original)}
+                )
+            
             # Clean the data
             df_cleaned, cleaning_log = self._clean_dataset(df_original)
+            
+             # Notify analysis
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    70,
+                    "Analyzing data quality...",
+                    {"operations": len(cleaning_log)}
+                )
             
             # Get cleaned stats
             cleaned_stats = self._get_dataset_stats(df_cleaned)
@@ -67,6 +98,16 @@ Return results in JSON format."""
             
             # Use LLM for quality assessment
             analysis = await self._get_quality_analysis(profile, request.query)
+            
+            # Notify completion
+            if request.session_id:
+                await streaming_service.publish_agent_progress(
+                    request.session_id,
+                    self.name,
+                    90,
+                    "Data cleaning complete",
+                    {"quality_score": profile["improvement_score"]}
+                )
             
             return AgentResponse(
                 agent_name=self.name,
@@ -228,6 +269,12 @@ Return results in JSON format."""
     
     def _get_dataset_stats(self, df: pd.DataFrame) -> Dict:
         """Get comprehensive dataset statistics"""
+        
+        # 🔥 FIX: Convert datetime columns to strings BEFORE creating sample
+        df_sample = df.head(3).copy()
+        for col in df_sample.select_dtypes(include=['datetime64']).columns:
+            df_sample[col] = df_sample[col].astype(str)
+        
         return {
             "shape": {
                 "rows": int(df.shape[0]),
@@ -241,7 +288,7 @@ Return results in JSON format."""
                 for col, count in df.isnull().sum().items()
             },
             "numeric_summary": df.describe().to_dict() if len(df.select_dtypes(include='number').columns) > 0 else {},
-            "sample_data": df.head(3).to_dict('records')
+            "sample_data": df_sample.to_dict('records')  # ← Now safe!
         }
     
     def _calculate_improvement(self, original: Dict, cleaned: Dict) -> float:
