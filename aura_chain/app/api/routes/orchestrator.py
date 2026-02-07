@@ -23,6 +23,7 @@ class QueryRequest(BaseModel):
 
 class QueryResponse(BaseModel):
     request_id: str
+    session_id: str
     orchestration_plan: Dict[str, Any]
     agent_responses: list[Dict[str, Any]]
     success: bool
@@ -92,6 +93,7 @@ async def process_query(request: QueryRequest):
         if not orchestrator_response.success:
             return QueryResponse(
                 request_id=request_id,
+                session_id=request.session_id,
                 orchestration_plan={},
                 agent_responses=[],
                 success=False,
@@ -124,6 +126,7 @@ async def process_query(request: QueryRequest):
         
         return QueryResponse(
             request_id=request_id,
+            session_id=request.session_id,
             orchestration_plan=plan,
             agent_responses=[
                 {

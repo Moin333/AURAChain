@@ -270,10 +270,25 @@ Return results in JSON format."""
     def _get_dataset_stats(self, df: pd.DataFrame) -> Dict:
         """Get comprehensive dataset statistics"""
         
-        # 🔥 FIX: Convert datetime columns to strings BEFORE creating sample
+        # 🔥 FIX 1: Convert datetime columns to strings in sample
         df_sample = df.head(3).copy()
         for col in df_sample.select_dtypes(include=['datetime64']).columns:
             df_sample[col] = df_sample[col].astype(str)
+        
+        # 🔥 FIX 2: Only describe NUMERIC columns (exclude datetime)
+        numeric_df = df.select_dtypes(include=['number'])
+        numeric_summary = {}
+        if len(numeric_df.columns) > 0:
+            # Convert describe() result to safe dict
+            desc_dict = numeric_df.describe().to_dict()
+            # Ensure all values are JSON-safe
+            numeric_summary = {
+                col: {
+                    stat: float(val) if not pd.isna(val) else None
+                    for stat, val in stats.items()
+                }
+                for col, stats in desc_dict.items()
+            }
         
         return {
             "shape": {
@@ -287,8 +302,8 @@ Return results in JSON format."""
                 col: float((count / len(df)) * 100) 
                 for col, count in df.isnull().sum().items()
             },
-            "numeric_summary": df.describe().to_dict() if len(df.select_dtypes(include='number').columns) > 0 else {},
-            "sample_data": df_sample.to_dict('records')  # ← Now safe!
+            "numeric_summary": numeric_summary,  # ← Now safe!
+            "sample_data": df_sample.to_dict('records')
         }
     
     def _calculate_improvement(self, original: Dict, cleaned: Dict) -> float:

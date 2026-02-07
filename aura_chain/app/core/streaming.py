@@ -89,7 +89,7 @@ class StreamingService:
         event = {
             "type": event_type,
             "agent": agent_name,
-            "data": data,
+            "data": sanitized_data,
             "timestamp": datetime.utcnow().isoformat()
         }
         

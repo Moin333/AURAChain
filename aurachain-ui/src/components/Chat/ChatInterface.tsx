@@ -17,10 +17,31 @@ const ChatInterface: React.FC = () => {
     isSidebarOpen,
     isRightPanelOpen,
     rightPanelWidth,
-    sessionId
+    sessionId,
+    ensureSession // 🔥 NEW: Import ensureSession
   } = useUIStore();
 
-  // NEW: Connect to SSE stream
+  const hasInitialized = useRef(false);
+
+  // 🔥 CRITICAL: Ensure session exists before connecting to SSE
+  useEffect(() => {
+    const initSession = async () => {
+      if (!sessionId && !hasInitialized.current) {
+        hasInitialized.current = true;
+        try {
+          console.log('🔄 Initializing session before SSE connection...');
+          await ensureSession();
+        } catch (e) {
+          console.error('❌ Failed to initialize session:', e);
+          hasInitialized.current = false;
+        }
+      }
+    };
+    
+    initSession();
+  }, [sessionId, ensureSession]); // Run once on mount
+
+  // 🔥 CRITICAL: Only connect to SSE after session exists
   const { isConnected, error: streamError } = useAgentStream(sessionId);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -64,16 +85,14 @@ const ChatInterface: React.FC = () => {
     setRightPanelOpen(true);
   };
 
-  // ===== DYNAMIC PADDING FIX - START =====
   const dynamicPaddingLeft = useMemo(() => {
     const sidebarWidth = isSidebarOpen ? 280 : 72;
-    return sidebarWidth + 10; // 10px for timeline space
+    return sidebarWidth + 10;
   }, [isSidebarOpen]);
 
   const dynamicPaddingRight = useMemo(() => {
     return isRightPanelOpen ? Math.min(rightPanelWidth * 0.08, 80) : 32;
   }, [isRightPanelOpen, rightPanelWidth]);
-  // ===== DYNAMIC PADDING FIX - END =====
 
   if (messages.length === 0) {
     return (
@@ -99,7 +118,7 @@ const ChatInterface: React.FC = () => {
   return (
     <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
 
-      {/* NEW: Connection Status Indicator */}
+      {/* Connection Status Indicator */}
       {sessionId && (
         <div className="absolute top-4 right-4 z-50">
           <div className={clsx(
@@ -117,10 +136,17 @@ const ChatInterface: React.FC = () => {
             ) : (
               <>
                 <WifiOff size={12} />
-                <span>Offline</span>
+                <span>Connecting...</span>
               </>
             )}
           </div>
+          
+          {/* 🔥 NEW: Show session ID for debugging */}
+          {sessionId && (
+            <div className="mt-1 text-[9px] text-slate-400 dark:text-zinc-600 font-mono">
+              {sessionId.substring(0, 8)}...
+            </div>
+          )}
           
           {streamError && (
             <div className="mt-2 text-[10px] text-red-500 dark:text-red-400">
@@ -130,12 +156,12 @@ const ChatInterface: React.FC = () => {
         </div>
       )}
 
-      {/* Timeline with DYNAMIC positioning */}
+      {/* Timeline */}
       {analysisMessages.length > 0 && (
         <div
           className="fixed top-24 z-40 flex flex-col items-center pointer-events-none transition-all duration-300"
           style={{
-            left: `${dynamicPaddingLeft}px`,  // CHANGED: Dynamic instead of fixed
+            left: `${dynamicPaddingLeft}px`,
             height: '70vh',
             maxHeight: '700px'
           }}
@@ -186,15 +212,15 @@ const ChatInterface: React.FC = () => {
         </div>
       )}
 
-      {/* Messages Container with DYNAMIC padding */}
+      {/* Messages Container */}
       <div 
         className="flex-1 overflow-y-auto custom-scrollbar"
         style={{
           paddingTop: '2rem',
           paddingBottom: '2rem',
-          paddingLeft: `${dynamicPaddingLeft - 160}px`,  // CHANGED: Dynamic padding
-          paddingRight: `${dynamicPaddingRight}px`,      // CHANGED: Dynamic padding
-          transition: 'padding 300ms ease-out'           // ADDED: Smooth transition
+          paddingLeft: `${dynamicPaddingLeft - 160}px`,
+          paddingRight: `${dynamicPaddingRight}px`,
+          transition: 'padding 300ms ease-out'
         }}
       >
         <div className="max-w-3xl mx-auto relative">

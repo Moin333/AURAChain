@@ -62,13 +62,21 @@ class BaseAgent(ABC):
                 {"query": request.query[:100]}
             )
             
-            response = await observability.observe_agent_execution(
+            observability.logger.log_agent_activity(
                 self.name,
-                self.process,
-                request
+                "execution_started",
+                {"args": str(request)[:100], "kwargs": "{}"}
             )
             
-            # --- CRITICAL FIX: Sanitize Data for JSON ---
+            response = await self.process(request)
+            
+            observability.logger.log_agent_activity(
+                self.name,
+                "execution_completed",
+                {"success": response.success}
+            )
+            
+            # Sanitize Data for JSON
             if response.data:
                 response.data = self._sanitize_for_json(response.data)
             if response.metadata:
@@ -94,6 +102,12 @@ class BaseAgent(ABC):
             
         except Exception as e:
             logger.error(f"Agent {self.name} failed: {str(e)}")
+            
+            observability.logger.log_agent_activity(
+                self.name,
+                "execution_failed",
+                {"error": str(e)}
+            )
             
             # Notify failure
             if session_id:

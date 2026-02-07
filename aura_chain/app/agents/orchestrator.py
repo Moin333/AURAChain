@@ -260,9 +260,9 @@ Generate the execution plan based on the Detected Mode constraints."""
                     if registry_key == "order_manager":
                         request.context["order_manager_output"] = response.data
                         
-            if request.session_id:
-                await streaming_service.publish_workflow_completed(request.session_id)
-                logger.info(f"✅ Workflow completed for session {request.session_id}")
+        if request.session_id:
+            await streaming_service.publish_workflow_completed(request.session_id)
+            logger.info(f"✅ Workflow completed for session {request.session_id}")
 
         return responses
 

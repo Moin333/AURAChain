@@ -1,5 +1,6 @@
 // aurachain-ui/src/hooks/useAgentStream.ts
-import { useEffect, useRef, useState, useCallback } from 'react';
+
+import { useEffect, useRef, useState } from 'react';
 import { useUIStore } from '../store/uiStore';
 
 interface StreamEvent {
@@ -37,24 +38,25 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
   const [error, setError] = useState<string | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const cleanup = useCallback(() => {
-    if (eventSourceRef.current) {
-      eventSourceRef.current.close();
-      eventSourceRef.current = null;
-    }
-    if (reconnectTimeoutRef.current) {
-      clearTimeout(reconnectTimeoutRef.current);
-      reconnectTimeoutRef.current = null;
-    }
-  }, []);
-
-  const connect = useCallback(() => {
+  useEffect(() => {
     if (!sessionId) {
       console.log('⏸ No session ID, skipping SSE connection');
       return;
     }
 
-    cleanup();
+    // Cleanup function
+    const cleanup = () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+        eventSourceRef.current = null;
+      }
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+        reconnectTimeoutRef.current = null;
+      }
+    };
+
+    cleanup(); // Clean up any existing connection
 
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
     const url = `${API_URL}/sse/stream/${sessionId}`;
@@ -85,7 +87,6 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
             if (update.agent) {
               updateAgentStatus(update.agent, 'processing');
               updateAgentProgress(update.agent, 0, update.data?.task || 'Starting...');
-              // Auto-open right panel when first agent starts
               setRightPanelOpen(true);
             }
             break;
@@ -106,7 +107,6 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
               updateAgentStatus(update.agent, 'completed');
               updateAgentProgress(update.agent, 100, 'Completed');
               
-              // Store agent result data
               if (update.data?.result) {
                 updateAgentData(update.agent, update.data.result);
               }
@@ -122,7 +122,6 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
             
           case 'workflow_completed':
             console.log('✅ Workflow completed');
-            // Don't close connection yet - let stream_ended handle it
             break;
             
           case 'stream_ended':
@@ -132,7 +131,7 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
             break;
             
           case 'heartbeat':
-            // Keep-alive ping, no action needed
+            // Keep-alive ping
             break;
             
           case 'error':
@@ -152,23 +151,25 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
       console.error('❌ SSE Error:', err);
       setIsConnected(false);
       setError('Connection lost');
-      
-      // Auto-reconnect after 3 seconds
-      reconnectTimeoutRef.current = setTimeout(() => {
-        console.log('🔄 Attempting to reconnect...');
-        connect();
-      }, 3000);
     };
-  }, [sessionId, cleanup, updateAgentStatus, updateAgentProgress, updateAgentData, setRightPanelOpen]);
 
-  useEffect(() => {
-    connect();
+    // Cleanup on unmount
     return cleanup;
-  }, [connect, cleanup]);
+  }, [sessionId, updateAgentStatus, updateAgentProgress, updateAgentData, setRightPanelOpen]);
+
+  // Manual reconnect function
+  const reconnect = () => {
+    console.log('🔄 Manual reconnect requested');
+    // Changing sessionId will trigger the useEffect
+    if (sessionId) {
+      setIsConnected(false);
+      setError(null);
+    }
+  };
 
   return { 
     isConnected, 
     error,
-    reconnect: connect 
+    reconnect 
   };
 };

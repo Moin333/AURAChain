@@ -67,7 +67,7 @@ async def agent_stream(session_id: str):
                         event_data = json.loads(message['data'])
                         if event_data.get('type') == 'workflow_completed':
                             logger.info(f"✓ Workflow completed for session {session_id}")
-                            # Send final event and close
+                            await asyncio.sleep(1)
                             yield f"data: {json.dumps({'type': 'stream_ended'})}\n\n"
                             break
                     except:

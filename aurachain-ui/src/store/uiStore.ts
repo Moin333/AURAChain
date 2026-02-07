@@ -34,7 +34,7 @@ interface UIState {
   currentPlan: OrchestrationPlan | null;
   agentStatuses: Map<string, 'queued' | 'processing' | 'completed' | 'failed'>;
 
-  // NEW: Agent streaming state
+  // Agent streaming state
   agentProgress: Map<string, number>;
   agentActivities: Map<string, string>;
   agentMetrics: Map<string, Record<string, any>>;
@@ -47,12 +47,14 @@ interface UIState {
   setSelectedAgent: (id: string | null) => void;
   toggleTheme: () => void;
   
+  // 🔥 NEW: Ensure session is initialized
+  ensureSession: () => Promise<string>;
   initializeSession: () => Promise<void>;
   uploadDataset: (file: File) => Promise<void>;
   sendMessage: (text: string) => Promise<void>;
   resetSession: () => void;
 
-  // NEW: Methods for SSE updates
+  // Methods for SSE updates
   updateAgentStatus: (agentId: string, status: 'queued' | 'processing' | 'completed' | 'failed') => void;
   updateAgentProgress: (agentId: string, progress: number, activity: string, metrics?: Record<string, any>) => void;
   updateAgentData: (agentId: string, data: any) => void;
@@ -77,7 +79,6 @@ export const useUIStore = create<UIState>((set, get) => ({
   currentPlan: null,
   agentStatuses: new Map(),
 
-  // ✨ NEW: Initialize streaming state
   agentProgress: new Map(),
   agentActivities: new Map(),
   agentMetrics: new Map(),
@@ -98,15 +99,45 @@ export const useUIStore = create<UIState>((set, get) => ({
 
   // --- Functional Actions ---
 
+  // 🔥 NEW: Ensures session exists and returns the session ID
+  ensureSession: async (): Promise<string> => {
+    const currentSessionId = get().sessionId;
+    
+    if (currentSessionId) {
+      return currentSessionId;
+    }
+    
+    // No session - create one
+    await get().initializeSession();
+    const newSessionId = get().sessionId;
+    
+    if (!newSessionId) {
+      throw new Error('Failed to create session');
+    }
+    
+    return newSessionId;
+  },
+
   initializeSession: async () => {
     const { userId } = get();
     try {
+      console.log('🔄 Creating new session...');
       const res = await api.createSession(userId);
-      const newSessionId = res.session_id || `sess_${Date.now()}`;
-      set({ sessionId: newSessionId });
+      
+      // 🔥 CRITICAL: Use ONLY the backend's session_id (UUID)
+      const backendSessionId = res.session_id;
+      
+      if (!backendSessionId) {
+        throw new Error('Backend did not return session_id');
+      }
+      
+      console.log(`✅ Session created: ${backendSessionId}`);
+      set({ sessionId: backendSessionId });
+      
     } catch (e) {
-      console.error("Session Init Failed", e);
-      set({ sessionId: `offline_sess_${Date.now()}` }); 
+      console.error("❌ Session Init Failed", e);
+      // 🔥 CHANGED: Don't create fallback session - let it fail
+      throw e;
     }
   },
 
@@ -140,7 +171,7 @@ export const useUIStore = create<UIState>((set, get) => ({
     }
   },
 
-  // NEW: Update agent status
+  // Update agent status
   updateAgentStatus: (agentId, status) => set((state) => {
     const newStatuses = new Map(state.agentStatuses);
     newStatuses.set(agentId, status);
@@ -150,7 +181,7 @@ export const useUIStore = create<UIState>((set, get) => ({
     return { agentStatuses: newStatuses };
   }),
 
-  // NEW: Update agent progress
+  // Update agent progress
   updateAgentProgress: (agentId, progress, activity, metrics = {}) => set((state) => {
     const newProgress = new Map(state.agentProgress);
     const newActivities = new Map(state.agentActivities);
@@ -188,7 +219,7 @@ export const useUIStore = create<UIState>((set, get) => ({
     };
   }),
 
-  // NEW: Update agent result data
+  // Update agent result data
   updateAgentData: (agentId, data) => set((state) => {
     const updatedMessages = state.messages.map(m => {
       if (m.type === 'analysis' && m.metadata?.agents) {
@@ -215,8 +246,25 @@ export const useUIStore = create<UIState>((set, get) => ({
   }),
 
   sendMessage: async (text: string) => {
-    const { sessionId, userId, activeDataset } = get();
-    if (!sessionId) await get().initializeSession();
+    // 🔥 CRITICAL: Ensure session exists BEFORE sending
+    let currentSessionId: string;
+    try {
+      currentSessionId = await get().ensureSession();
+    } catch (e) {
+      console.error('❌ Failed to get session:', e);
+      set({
+        messages: [...get().messages, {
+          id: Date.now().toString(),
+          sender: 'ai',
+          text: '❌ Session initialization failed. Please refresh the page.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          type: 'text'
+        }]
+      });
+      return;
+    }
+
+    const { userId, activeDataset } = get();
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     const userMsg: Message = {
@@ -235,7 +283,10 @@ export const useUIStore = create<UIState>((set, get) => ({
 
     try {
       const context = activeDataset ? { dataset_id: activeDataset.dataset_id } : {};
-      const response = await api.sendQuery(text, sessionId!, userId, context);
+      
+      // 🔥 CRITICAL: Pass the backend session ID
+      console.log(`📤 Sending query with session: ${currentSessionId}`);
+      const response = await api.sendQuery(text, currentSessionId, userId, context);
 
       // 1. Add "Thinking" Reasoning
       const reasoningMsg: Message = {
@@ -247,7 +298,7 @@ export const useUIStore = create<UIState>((set, get) => ({
       };
       set(state => ({ messages: [...state.messages, reasoningMsg] }));
 
-      // 2. Add the "Plan Artifact" (ONLY Orchestrator Plan in Main Chat)
+      // 2. Add the "Plan Artifact"
       const planMsg: Message = {
         id: (Date.now() + 2).toString(),
         sender: 'ai',
@@ -258,8 +309,7 @@ export const useUIStore = create<UIState>((set, get) => ({
         metadata: {
           progress: 0,
           agents: response.orchestration_plan.agents,
-          // 🔑 CRITICAL: Store agent results here for right panel access
-          agentResults: {} // Will be populated as agents complete
+          agentResults: {}
         }
       };
 
@@ -270,7 +320,7 @@ export const useUIStore = create<UIState>((set, get) => ({
         selectedAgentId: null 
       }));
 
-      // --- STREAMING SIMULATION ---
+      // --- STREAMING SIMULATION (will be replaced by real SSE) ---
       const agents = response.agent_responses;
       const totalAgents = agents.length;
       let completedCount = 0;
@@ -283,13 +333,10 @@ export const useUIStore = create<UIState>((set, get) => ({
 
         await new Promise(r => setTimeout(r, 800));
 
-        // 🚨 KEY CHANGE: DO NOT create individual agent message cards
-        // Instead, store agent results in the Plan message metadata
         set(state => ({
           agentStatuses: new Map(state.agentStatuses).set(agentRes.agent, agentRes.success ? 'completed' : 'failed'),
           selectedAgentId: agentRes.agent,
           
-          // Update the PLAN message with agent results (not create new messages)
           messages: state.messages.map(m => 
             m.id === planMsg.id 
               ? { 
@@ -297,7 +344,6 @@ export const useUIStore = create<UIState>((set, get) => ({
                   metadata: { 
                     ...m.metadata, 
                     progress: Math.round(((completedCount + 1) / totalAgents) * 100),
-                    // 🔑 Store agent result for right panel
                     agentResults: {
                       ...m.metadata?.agentResults,
                       [agentRes.agent]: {
@@ -328,7 +374,7 @@ export const useUIStore = create<UIState>((set, get) => ({
       }));
 
     } catch (error: any) {
-      console.error("Interaction failed", error);
+      console.error("❌ Interaction failed", error);
       set(state => ({
         isThinking: false,
         processingStep: null,
@@ -348,6 +394,7 @@ export const useUIStore = create<UIState>((set, get) => ({
     activeDataset: null,
     currentPlan: null,
     agentStatuses: new Map(),
-    isRightPanelOpen: false
+    isRightPanelOpen: false,
+    sessionId: null, // 🔥 ADDED: Clear session on reset
   })
 }));
