@@ -1,4 +1,4 @@
-# aura_chain/app/core/streaming.py
+# app/core/streaming.py
 import redis.asyncio as redis
 import json
 import math
@@ -14,6 +14,7 @@ settings = get_settings()
 class StreamingService:
     """
     Centralized service for publishing real-time agent updates
+    NEW: Added workflow-level events
     """
     
     def __init__(self):
@@ -40,7 +41,7 @@ class StreamingService:
     
     def _sanitize_for_json(self, obj: Any) -> Any:
         """
-        🔥 CRITICAL FIX: Recursively sanitize data for JSON serialization
+        Recursively sanitize data for JSON serialization
         Handles Timestamps, NaN, Infinity, numpy types
         """
         if isinstance(obj, dict):
@@ -48,7 +49,6 @@ class StreamingService:
         elif isinstance(obj, list):
             return [self._sanitize_for_json(v) for v in obj]
         elif isinstance(obj, (pd.Timestamp, datetime)):
-            # Convert Timestamp/datetime to ISO string
             return obj.isoformat()
         elif isinstance(obj, (float, np.floating)):
             if math.isnan(obj) or math.isinf(obj):
@@ -76,8 +76,8 @@ class StreamingService:
         
         Args:
             session_id: User session ID
-            event_type: 'agent_started' | 'agent_progress' | 'agent_completed' | 'agent_failed' | 'workflow_completed'
-            agent_name: Name of agent
+            event_type: 'workflow_started' | 'agent_started' | 'agent_progress' | 'agent_completed' | 'agent_failed' | 'workflow_completed'
+            agent_name: Name of agent (use 'orchestrator' for workflow events)
             data: Event payload
         """
         if not self.redis_client:
@@ -96,14 +96,29 @@ class StreamingService:
         channel = self._get_channel_name(session_id)
         
         try:
-            json_str = json.dumps(event)
-            await self.redis_client.publish(
-                channel,
-                json.dumps(event)
-            )
+            await self.redis_client.publish(channel, json.dumps(event))
             logger.debug(f"📡 Published {event_type} for {agent_name} to session {session_id}")
         except Exception as e:
             logger.error(f"Failed to publish event: {e}")
+    
+    # NEW: Workflow-level events
+    async def publish_workflow_started(
+        self,
+        session_id: str,
+        plan: Dict[str, Any]
+    ):
+        """Notify that workflow has started executing"""
+        await self.publish_event(
+            session_id,
+            "workflow_started",
+            "orchestrator",
+            {
+                "status": "executing",
+                "agents": plan.get("agents", []),
+                "mode": plan.get("mode", "unknown"),
+                "reasoning": plan.get("reasoning", "")
+            }
+        )
     
     async def publish_agent_started(
         self,

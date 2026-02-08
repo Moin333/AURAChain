@@ -1,15 +1,17 @@
 # app/api/routes/orchestrator.py
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, BackgroundTasks
 from typing import Dict, Any
 from pydantic import BaseModel
 from app.agents.orchestrator import orchestrator
 from app.agents.base_agent import AgentRequest
 from app.core.memory import session_manager, context_engineer
+from app.core.background import execute_workflow_background
 import uuid
 import redis.asyncio as redis
 from app.config import get_settings
 import pandas as pd
 import io
+from loguru import logger
 
 router = APIRouter(prefix="/orchestrator", tags=["orchestrator"])
 settings = get_settings()
@@ -25,15 +27,20 @@ class QueryResponse(BaseModel):
     request_id: str
     session_id: str
     orchestration_plan: Dict[str, Any]
-    agent_responses: list[Dict[str, Any]]
-    success: bool
-    error: str | None = None
+    message: str
+    status: str  # "planned" | "executing" | "completed" | "failed"
 
 @router.post("/query", response_model=QueryResponse)
-async def process_query(request: QueryRequest):
+async def process_query(request: QueryRequest, background_tasks: BackgroundTasks):
     """
-    Main endpoint: User submits query, orchestrator coordinates agents
-    FIX: Properly handle session and dataset retrieval
+    NEW BEHAVIOR: Returns plan immediately, executes agents in background
+    
+    Timeline:
+    1. T+0ms:   Receive request
+    2. T+50ms:  Create orchestration plan (fast - just LLM call)
+    3. T+100ms: Return plan to client
+    4. T+100ms: Start background task
+    5. T+200ms+ SSE events stream agent progress
     """
     try:
         request_id = str(uuid.uuid4())
@@ -43,7 +50,9 @@ async def process_query(request: QueryRequest):
             request.session_id = str(uuid.uuid4())
             await session_manager.create_session(request.user_id, request.session_id)
         
-        # CRITICAL FIX: If dataset_id is provided, fetch and inject dataset
+        logger.info(f"📥 Query received: {request.query[:50]}... (session: {request.session_id})")
+        
+        # CRITICAL: Load dataset if dataset_id provided
         if "dataset_id" in request.context and "dataset" not in request.context:
             dataset_id = request.context["dataset_id"]
             try:
@@ -52,19 +61,18 @@ async def process_query(request: QueryRequest):
                 await redis_client.close()
                 
                 if data_bytes:
-                    # Parse dataset from Redis
                     df = pd.read_json(io.BytesIO(data_bytes), orient='records')
                     
-                    # CRITICAL FIX: Convert datetime columns to strings for JSON serialization
+                    # Convert datetime columns to strings
                     for col in df.select_dtypes(include=['datetime64']).columns:
                         df[col] = df[col].astype(str)
                     
                     request.context["dataset"] = df.to_dict('records')
-                    print(f"✓ Loaded dataset with {len(df)} rows and {len(df.columns)} columns")
+                    logger.info(f"✅ Loaded dataset: {len(df)} rows, {len(df.columns)} cols")
                 else:
-                    print(f"⚠ Dataset {dataset_id} not found in Redis")
+                    logger.warning(f"⚠ Dataset {dataset_id} not found in Redis")
             except Exception as e:
-                print(f"⚠ Error loading dataset: {e}")
+                logger.error(f"⚠ Error loading dataset: {e}")
         
         # Build context using memory
         memory_context = await context_engineer.build_context(
@@ -85,61 +93,49 @@ async def process_query(request: QueryRequest):
             parameters=request.parameters
         )
         
-        # Get orchestration plan
-        orchestrator_response = await orchestrator.execute_with_observability(
-            agent_request
-        )
+        # ===== PHASE 1: CREATE PLAN (FAST - Returns in <200ms) =====
+        logger.info(f"🧠 Creating orchestration plan...")
+        orchestrator_response = await orchestrator.create_plan(agent_request)
         
         if not orchestrator_response.success:
             return QueryResponse(
                 request_id=request_id,
                 session_id=request.session_id,
                 orchestration_plan={},
-                agent_responses=[],
-                success=False,
-                error=orchestrator_response.error
+                message=f"Planning failed: {orchestrator_response.error}",
+                status="failed"
             )
         
         plan = orchestrator_response.data["plan"]
         
-        # Execute agents according to plan
-        agent_responses = await orchestrator.route_to_agents(plan, agent_request)
+        logger.info(f"✅ Plan created: {len(plan.get('agents', []))} agents assigned")
         
-        # Save conversation to session
+        # Save query to session
         await session_manager.add_message(
             request.session_id,
             "user",
             request.query
         )
         
-        # Format response
-        response_content = "\n\n".join([
-            f"{r.agent_name}: {r.data if r.success else r.error}"
-            for r in agent_responses
-        ])
-        
-        await session_manager.add_message(
-            request.session_id,
-            "assistant",
-            response_content
+        # ===== PHASE 2: EXECUTE IN BACKGROUND (SLOW - Runs async) =====
+        background_tasks.add_task(
+            execute_workflow_background,
+            plan=plan,
+            agent_request=agent_request,
+            request_id=request_id
         )
         
+        logger.info(f"🚀 Background execution started for request {request_id}")
+        
+        # ===== RETURN PLAN IMMEDIATELY =====
         return QueryResponse(
             request_id=request_id,
             session_id=request.session_id,
             orchestration_plan=plan,
-            agent_responses=[
-                {
-                    "agent": r.agent_name,
-                    "success": r.success,
-                    "data": r.data,
-                    "error": r.error
-                }
-                for r in agent_responses
-            ],
-            success=True
+            message="Orchestration plan created. Agents executing in background.",
+            status="executing"
         )
         
     except Exception as e:
-        print(f"❌ Query error: {str(e)}")
+        logger.error(f"❌ Query error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

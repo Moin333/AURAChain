@@ -12,7 +12,7 @@ settings = get_settings()
 class OrchestratorAgent(BaseAgent):
     """
     Central orchestrator that interprets queries and routes to appropriate agents.
-    Uses Mode Detection to prevent unnecessary agent firing.
+    NEW: Separated plan creation from execution
     """
     
     AGENT_CAPABILITIES = {
@@ -112,6 +112,18 @@ Respond in JSON:
         return "ad_hoc"
 
     async def process(self, request: AgentRequest) -> AgentResponse:
+        """
+        Implementation of the abstract process method.
+        For the Orchestrator, 'processing' means creating the plan.
+        """
+        return await self.create_plan(request)
+    
+    # NEW METHOD: Create plan only (fast)
+    async def create_plan(self, request: AgentRequest) -> AgentResponse:
+        """
+        Creates orchestration plan WITHOUT executing agents.
+        This is the FAST path that returns immediately.
+        """
         try:
             # 1. Detect Mode Programmatically
             detected_mode = self._detect_mode(request)
@@ -167,9 +179,10 @@ Generate the execution plan based on the Detected Mode constraints."""
             )
             
         except Exception as e:
-            logger.error(f"Orchestrator error: {str(e)}")
+            logger.error(f"Orchestrator plan creation error: {str(e)}")
             return AgentResponse(agent_name=self.name, success=False, error=str(e))
 
+    # EXISTING METHOD: Execute agents (slow - now called from background task)
     async def route_to_agents(
         self,
         execution_plan: Dict[str, Any],
@@ -246,8 +259,6 @@ Generate the execution plan based on the Detected Mode constraints."""
             response = await agent.execute_with_observability(agent_req)
             
             # --- CRITICAL UI FIX: OVERWRITE NAME ---
-            # Force the response name to match the registry key (snake_case)
-            # e.g., Change "DataHarvester" -> "data_harvester"
             response.agent_name = registry_key 
             # ---------------------------------------
             
