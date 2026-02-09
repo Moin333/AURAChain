@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import { CheckCircle2, AlertTriangle, TrendingUp, DollarSign } from 'lucide-react';
 import { api } from '../../services/api'; 
-import { useUIStore } from '../../store/uiStore';
+import { useUIStore, normalizeAgentName } from '../../store/uiStore';
 
 interface ArtifactRendererProps {
   agentType: string;
@@ -14,6 +14,15 @@ interface ArtifactRendererProps {
 
 const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) => {
   const { sessionId } = useUIStore();
+
+  const normalizedType = normalizeAgentName(agentType);
+
+  console.log('🎨 Rendering artifact:', {
+    agentType,
+    normalizedType,
+    hasData: !!data,
+    dataKeys: data ? Object.keys(data) : []
+  });
 
   if (!data || (data.error && typeof data.error === 'string')) {
       return (
@@ -30,7 +39,7 @@ const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) 
   }
 
   // DATA HARVESTER
-  if (agentType === 'DataHarvester' || agentType === 'data_harvester') {
+  if (normalizedType === 'dataharvester') {
     const profile = data?.profile || {};
     const qualityScore = profile.improvement_score || 0;
 
@@ -77,7 +86,7 @@ const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) 
   }
 
   // VISUALIZER
-  if (agentType === 'Visualizer' || agentType === 'visualizer') {
+  if (normalizedType === 'visualizer') {
     const chartData = data?.chart_data || [
       { name: 'Jan', value: 400 }, { name: 'Feb', value: 300 }, 
       { name: 'Mar', value: 600 }, { name: 'Apr', value: 800 }
@@ -113,7 +122,7 @@ const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) 
   }
 
   // MCTS OPTIMIZER
-  if (agentType === 'MCTSOptimizer' || agentType === 'mcts_optimizer') {
+  if (normalizedType === 'mctsoptimizer') {
     return (
       <div className="space-y-6">
         <div className="bg-primary-50 dark:bg-primary-900/20 p-5 rounded-xl border border-primary-100 dark:border-primary-800">
@@ -155,7 +164,7 @@ const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) 
   }
 
   // ORDER MANAGER
-  if (agentType === 'OrderManager' || agentType === 'order_manager') {
+  if (normalizedType === 'ordermanager') {
     const handleApprove = async () => {
         if (!sessionId) {
             alert("No active session found.");
@@ -221,10 +230,50 @@ const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) 
     );
   }
 
+  if (normalizedType === 'forecaster') {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div className="p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-100 dark:border-primary-800">
+          <h3 className="text-sm font-semibold text-primary-700 dark:text-primary-300 mb-2">
+            📈 Forecast Results
+          </h3>
+          <p className="text-xs text-slate-600 dark:text-zinc-400">
+            Predicted {data?.forecast_periods || 30} periods ahead
+          </p>
+        </div>
+
+        {/* Show forecast data if available */}
+        {data?.forecasts && (
+          <div className="grid grid-cols-2 gap-4">
+            {Object.entries(data.forecasts).map(([metric, values]: [string, any]) => (
+              <div key={metric} className="p-4 bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-800 rounded-xl">
+                <div className="text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-wider mb-1">
+                  {metric}
+                </div>
+                <div className="text-lg font-mono font-bold text-slate-900 dark:text-zinc-100">
+                  {Array.isArray(values) ? values[0]?.toFixed(2) : 'N/A'}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   // DEFAULT FALLBACK
   return (
-    <div className="bg-slate-900 dark:bg-zinc-950 text-slate-300 dark:text-zinc-400 p-4 rounded-xl text-xs font-mono overflow-auto max-h-[500px] border border-slate-700 dark:border-zinc-800">
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="space-y-4">
+      <div className="p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg text-xs">
+        <div className="font-semibold mb-1">Agent: {agentType}</div>
+        <div className="text-slate-500 dark:text-zinc-500">
+          Normalized: {normalizedType}
+        </div>
+      </div>
+      
+      <div className="bg-slate-900 dark:bg-zinc-950 text-slate-300 dark:text-zinc-400 p-4 rounded-xl text-xs font-mono overflow-auto max-h-[500px] border border-slate-700 dark:border-zinc-800">
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>
     </div>
   );
 };

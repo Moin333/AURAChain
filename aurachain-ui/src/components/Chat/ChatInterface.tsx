@@ -1,7 +1,7 @@
-// aurachain-ui/src/components/Chat/ChatInterface.tsx
+// src/components/Chat/ChatInterface.tsx
 import React, { useEffect, useRef, useMemo } from 'react';
 import { clsx } from 'clsx';
-import { Infinity as InfinityIcon, Wifi, WifiOff } from 'lucide-react';
+import { Infinity as InfinityIcon, Wifi, WifiOff, RefreshCw } from 'lucide-react';
 import MessageBubble, { type Message } from './MessageBubble';
 import InputPanel from './InputPanel';
 import ThinkingIndicator from './ThinkingIndicator';
@@ -18,31 +18,9 @@ const ChatInterface: React.FC = () => {
     isRightPanelOpen,
     rightPanelWidth,
     sessionId,
-    ensureSession // 🔥 NEW: Import ensureSession
   } = useUIStore();
 
-  const hasInitialized = useRef(false);
-
-  // 🔥 CRITICAL: Ensure session exists before connecting to SSE
-  useEffect(() => {
-    const initSession = async () => {
-      if (!sessionId && !hasInitialized.current) {
-        hasInitialized.current = true;
-        try {
-          console.log('🔄 Initializing session before SSE connection...');
-          await ensureSession();
-        } catch (e) {
-          console.error('❌ Failed to initialize session:', e);
-          hasInitialized.current = false;
-        }
-      }
-    };
-    
-    initSession();
-  }, [sessionId, ensureSession]); // Run once on mount
-
-  // 🔥 CRITICAL: Only connect to SSE after session exists
-  const { isConnected, error: streamError } = useAgentStream(sessionId);
+  const { isConnected, error: streamError, reconnect } = useAgentStream(sessionId);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -118,20 +96,34 @@ const ChatInterface: React.FC = () => {
   return (
     <div className="flex flex-col h-full relative bg-light-bg dark:bg-dark-bg">
 
-      {/* Connection Status Indicator */}
+      {/* Connection Status */}
       {sessionId && (
         <div className="absolute top-4 right-4 z-50">
           <div className={clsx(
             "flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium transition-all",
             isConnected 
               ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
-              : "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+              : streamError?.includes('multiple attempts')
+                ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                : "bg-yellow-500/10 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
           )}>
             {isConnected ? (
               <>
                 <Wifi size={12} />
                 <span>Live</span>
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+              </>
+            ) : streamError?.includes('multiple attempts') ? (
+              <>
+                <WifiOff size={12} />
+                <span>Disconnected</span>
+                <button 
+                  onClick={reconnect}
+                  className="ml-1 p-1 hover:bg-red-500/20 rounded transition-colors"
+                  title="Retry connection"
+                >
+                  <RefreshCw size={12} />
+                </button>
               </>
             ) : (
               <>
@@ -141,15 +133,12 @@ const ChatInterface: React.FC = () => {
             )}
           </div>
           
-          {/* 🔥 NEW: Show session ID for debugging */}
-          {sessionId && (
-            <div className="mt-1 text-[9px] text-slate-400 dark:text-zinc-600 font-mono">
-              {sessionId.substring(0, 8)}...
-            </div>
-          )}
+          <div className="mt-1 text-[9px] text-slate-400 dark:text-zinc-600 font-mono text-right">
+            {sessionId.substring(0, 8)}...
+          </div>
           
-          {streamError && (
-            <div className="mt-2 text-[10px] text-red-500 dark:text-red-400">
+          {streamError && !streamError.includes('Reconnecting') && (
+            <div className="mt-2 text-[10px] text-red-500 dark:text-red-400 max-w-[200px] text-right">
               {streamError}
             </div>
           )}

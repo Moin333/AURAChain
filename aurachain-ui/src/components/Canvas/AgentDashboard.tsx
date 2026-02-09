@@ -2,7 +2,7 @@
 import React from 'react';
 import AgentCard from './AgentCard';
 import ArtifactRenderer from './ArtifactRenderer';
-import { useUIStore } from '../../store/uiStore'; 
+import { useUIStore, normalizeAgentName } from '../../store/uiStore'; 
 import { X, ArrowLeft } from 'lucide-react'; 
 
 const AgentDashboard: React.FC = () => {
@@ -24,7 +24,22 @@ const AgentDashboard: React.FC = () => {
   };
 
   if (selectedAgentId) {
-    const agentData = agentResults[selectedAgentId];
+
+    const normalizedId = normalizeAgentName(selectedAgentId);
+
+    const agentData = 
+      agentResults[selectedAgentId] ||
+      agentResults[normalizedId] ||
+      Object.entries(agentResults).find(([key]) => 
+        normalizeAgentName(key) === normalizedId
+      )?.[1];
+
+    console.log('🔍 Looking up agent data:', {
+      selectedAgentId,
+      normalizedId,
+      availableKeys: Object.keys(agentResults),
+      foundData: !!agentData
+    });
 
     return (
         <div className="h-full flex flex-col bg-light-elevated dark:bg-dark-elevated animate-slide-in">
@@ -51,6 +66,20 @@ const AgentDashboard: React.FC = () => {
                     <h2 className="text-xl font-heading font-bold text-slate-800 dark:text-zinc-100">{selectedAgentId}</h2>
                     <span className="text-xs text-slate-500 dark:text-zinc-500">Agent execution artifact</span>
                 </div>
+
+                {/* DEBUG: Show what we found */}
+                {!agentData && (
+                  <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800 rounded-lg text-xs">
+                    <div className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">
+                      ⚠️ Debug: Agent data not found
+                    </div>
+                    <div className="text-yellow-700 dark:text-yellow-400 space-y-1 font-mono">
+                      <div>Looking for: {selectedAgentId}</div>
+                      <div>Normalized: {normalizedId}</div>
+                      <div>Available: {Object.keys(agentResults).join(', ') || 'none'}</div>
+                    </div>
+                  </div>
+                )}
                 
                 <ArtifactRenderer 
                   agentType={selectedAgentId} 

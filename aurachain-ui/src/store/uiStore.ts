@@ -39,6 +39,9 @@ interface UIState {
   agentActivities: Map<string, string>;
   agentMetrics: Map<string, Record<string, any>>;
   
+  // NEW: Session initialization state
+  sessionInitPromise: Promise<string> | null;
+  
   // --- Actions ---
   toggleSidebar: () => void;
   toggleRightPanel: () => void;
@@ -47,18 +50,26 @@ interface UIState {
   setSelectedAgent: (id: string | null) => void;
   toggleTheme: () => void;
   
-  // 🔥 NEW: Ensure session is initialized
   ensureSession: () => Promise<string>;
   initializeSession: () => Promise<void>;
   uploadDataset: (file: File) => Promise<void>;
   sendMessage: (text: string) => Promise<void>;
   resetSession: () => void;
 
-  // Methods for SSE updates
+  // SSE update methods
   updateAgentStatus: (agentId: string, status: 'queued' | 'processing' | 'completed' | 'failed') => void;
   updateAgentProgress: (agentId: string, progress: number, activity: string, metrics?: Record<string, any>) => void;
   updateAgentData: (agentId: string, data: any) => void;
+  
+  // NEW: Workflow event handlers
+  handleWorkflowStarted: (agents: string[]) => void;
+  handleWorkflowCompleted: () => void;
 }
+
+// NEW: Helper to normalize agent names
+export const normalizeAgentName = (name: string): string => {
+  return name.toLowerCase().replace(/[_\s-]/g, '');
+};
 
 export const useUIStore = create<UIState>((set, get) => ({
   // --- Initial State ---
@@ -82,6 +93,8 @@ export const useUIStore = create<UIState>((set, get) => ({
   agentProgress: new Map(),
   agentActivities: new Map(),
   agentMetrics: new Map(),
+  
+  sessionInitPromise: null,
 
   // --- Layout Actions ---
   toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
@@ -99,7 +112,7 @@ export const useUIStore = create<UIState>((set, get) => ({
 
   // --- Functional Actions ---
 
-  // 🔥 NEW: Ensures session exists and returns the session ID
+  // FIXED: Thread-safe session initialization
   ensureSession: async (): Promise<string> => {
     const currentSessionId = get().sessionId;
     
@@ -107,38 +120,42 @@ export const useUIStore = create<UIState>((set, get) => ({
       return currentSessionId;
     }
     
-    // No session - create one
-    await get().initializeSession();
-    const newSessionId = get().sessionId;
-    
-    if (!newSessionId) {
-      throw new Error('Failed to create session');
+    // Check if initialization is already in progress
+    const existingPromise = get().sessionInitPromise;
+    if (existingPromise) {
+      console.log('⏳ Reusing in-flight session creation...');
+      return existingPromise;
     }
     
-    return newSessionId;
+    // Create new initialization promise
+    const promise = (async () => {
+      try {
+        console.log('🔄 Creating new session...');
+        const res = await api.createSession(get().userId);
+        
+        const backendSessionId = res.session_id;
+        
+        if (!backendSessionId) {
+          throw new Error('Backend did not return session_id');
+        }
+        
+        console.log(`✅ Session created: ${backendSessionId}`);
+        set({ sessionId: backendSessionId, sessionInitPromise: null });
+        
+        return backendSessionId;
+      } catch (e) {
+        console.error('❌ Session creation failed:', e);
+        set({ sessionInitPromise: null });
+        throw e;
+      }
+    })();
+    
+    set({ sessionInitPromise: promise });
+    return promise;
   },
 
   initializeSession: async () => {
-    const { userId } = get();
-    try {
-      console.log('🔄 Creating new session...');
-      const res = await api.createSession(userId);
-      
-      // 🔥 CRITICAL: Use ONLY the backend's session_id (UUID)
-      const backendSessionId = res.session_id;
-      
-      if (!backendSessionId) {
-        throw new Error('Backend did not return session_id');
-      }
-      
-      console.log(`✅ Session created: ${backendSessionId}`);
-      set({ sessionId: backendSessionId });
-      
-    } catch (e) {
-      console.error("❌ Session Init Failed", e);
-      // 🔥 CHANGED: Don't create fallback session - let it fail
-      throw e;
-    }
+    await get().ensureSession();
   },
 
   uploadDataset: async (file: File) => {
@@ -156,97 +173,21 @@ export const useUIStore = create<UIState>((set, get) => ({
       const sysMsg: Message = {
         id: Date.now().toString(),
         sender: 'ai',
-        text: `dataset_uploaded`, 
+        text: `✅ Ingested **${res.filename}** (${res.shape[0]} rows). Ready for analysis.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        type: 'text', 
-        metadata: {
-            displayText: `✅ Ingested **${res.filename}** (${res.shape[0]} rows). Ready for analysis.` 
-        }
+        type: 'text'
       };
       
-      set(state => ({ messages: [...state.messages, { ...sysMsg, text: sysMsg.metadata?.displayText || "" }] }));
+      set(state => ({ messages: [...state.messages, sysMsg] }));
 
     } catch (e) {
       console.error("Upload failed", e);
     }
   },
 
-  // Update agent status
-  updateAgentStatus: (agentId, status) => set((state) => {
-    const newStatuses = new Map(state.agentStatuses);
-    newStatuses.set(agentId, status);
-    
-    console.log(`🔄 Agent ${agentId} status: ${status}`);
-    
-    return { agentStatuses: newStatuses };
-  }),
-
-  // Update agent progress
-  updateAgentProgress: (agentId, progress, activity, metrics = {}) => set((state) => {
-    const newProgress = new Map(state.agentProgress);
-    const newActivities = new Map(state.agentActivities);
-    const newMetrics = new Map(state.agentMetrics);
-    
-    newProgress.set(agentId, progress);
-    newActivities.set(agentId, activity);
-    
-    if (Object.keys(metrics).length > 0) {
-      newMetrics.set(agentId, metrics);
-    }
-    
-    // Also update plan message progress if it exists
-    const updatedMessages = state.messages.map(m => {
-      if (m.type === 'analysis' && m.metadata?.agents?.includes(agentId)) {
-        return {
-          ...m,
-          metadata: {
-            ...m.metadata,
-            progress: Math.round(
-              Array.from(newProgress.values()).reduce((a, b) => a + b, 0) / 
-              (m.metadata.agents?.length || 1)
-            )
-          }
-        };
-      }
-      return m;
-    });
-
-    return {
-      agentProgress: newProgress,
-      agentActivities: newActivities,
-      agentMetrics: newMetrics,
-      messages: updatedMessages
-    };
-  }),
-
-  // Update agent result data
-  updateAgentData: (agentId, data) => set((state) => {
-    const updatedMessages = state.messages.map(m => {
-      if (m.type === 'analysis' && m.metadata?.agents) {
-        const agentResults = m.metadata.agentResults || {};
-        
-        return {
-          ...m,
-          metadata: {
-            ...m.metadata,
-            agentResults: {
-              ...agentResults,
-              [agentId]: {
-                success: true,
-                data: data
-              }
-            }
-          }
-        };
-      }
-      return m;
-    });
-    
-    return { messages: updatedMessages };
-  }),
-
+  // FIXED: Optimistic updates, no fake delays
   sendMessage: async (text: string) => {
-    // 🔥 CRITICAL: Ensure session exists BEFORE sending
+    // Ensure session exists
     let currentSessionId: string;
     try {
       currentSessionId = await get().ensureSession();
@@ -267,6 +208,7 @@ export const useUIStore = create<UIState>((set, get) => ({
     const { userId, activeDataset } = get();
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+    // 1. Show user message immediately (optimistic)
     const userMsg: Message = {
       id: Date.now().toString(),
       sender: 'user',
@@ -278,37 +220,38 @@ export const useUIStore = create<UIState>((set, get) => ({
     set(state => ({ 
       messages: [...state.messages, userMsg],
       isThinking: true, 
-      processingStep: "Orchestrator is analyzing request..."
+      processingStep: "Creating orchestration plan..."
     }));
 
     try {
       const context = activeDataset ? { dataset_id: activeDataset.dataset_id } : {};
       
-      // 🔥 CRITICAL: Pass the backend session ID
       console.log(`📤 Sending query with session: ${currentSessionId}`);
+      
+      // 2. Send query (returns plan immediately - <200ms)
       const response = await api.sendQuery(text, currentSessionId, userId, context);
 
-      // 1. Add "Thinking" Reasoning
+      // 3. Show reasoning
       const reasoningMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'ai',
-        text: response.orchestration_plan.reasoning,
+        text: response.orchestration_plan.reasoning || 'Analyzing request...',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         type: 'text'
       };
       set(state => ({ messages: [...state.messages, reasoningMsg] }));
 
-      // 2. Add the "Plan Artifact"
+      // 4. Show plan artifact (SSE will update this)
       const planMsg: Message = {
         id: (Date.now() + 2).toString(),
         sender: 'ai',
         text: 'Agent Execution Strategy', 
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         type: 'analysis', 
-        status: 'processing',
+        status: 'processing', // Will be updated by SSE
         metadata: {
           progress: 0,
-          agents: response.orchestration_plan.agents,
+          agents: response.orchestration_plan.agents || [],
           agentResults: {}
         }
       };
@@ -317,71 +260,29 @@ export const useUIStore = create<UIState>((set, get) => ({
         messages: [...state.messages, planMsg],
         currentPlan: response.orchestration_plan,
         isRightPanelOpen: true, 
-        selectedAgentId: null 
+        selectedAgentId: null,
+        isThinking: false, // Plan received, now waiting for SSE
+        processingStep: "Agents executing..." // SSE will update this
       }));
+      
+      // 5. Initialize agent statuses
+      const newStatuses = new Map<string, 'queued' | 'processing' | 'completed' | 'failed'>();
+      (response.orchestration_plan.agents || []).forEach(agent => {
+        newStatuses.set(normalizeAgentName(agent), 'queued');
+      });
+      set({ agentStatuses: newStatuses });
 
-      // --- STREAMING SIMULATION (will be replaced by real SSE) ---
-      const agents = response.agent_responses;
-      const totalAgents = agents.length;
-      let completedCount = 0;
-
-      for (const agentRes of agents) {
-        set(state => ({
-          processingStep: `Activating ${agentRes.agent}...`,
-          agentStatuses: new Map(state.agentStatuses).set(agentRes.agent, 'processing')
-        }));
-
-        await new Promise(r => setTimeout(r, 800));
-
-        set(state => ({
-          agentStatuses: new Map(state.agentStatuses).set(agentRes.agent, agentRes.success ? 'completed' : 'failed'),
-          selectedAgentId: agentRes.agent,
-          
-          messages: state.messages.map(m => 
-            m.id === planMsg.id 
-              ? { 
-                  ...m, 
-                  metadata: { 
-                    ...m.metadata, 
-                    progress: Math.round(((completedCount + 1) / totalAgents) * 100),
-                    agentResults: {
-                      ...m.metadata?.agentResults,
-                      [agentRes.agent]: {
-                        success: agentRes.success,
-                        data: agentRes.data,
-                        error: agentRes.error
-                      }
-                    }
-                  } 
-                } 
-              : m
-          )
-        }));
-
-        completedCount++;
-        await new Promise(r => setTimeout(r, 1200));
-      }
-
-      set(state => ({
-        isThinking: false,
-        processingStep: null,
-        selectedAgentId: null, 
-        messages: state.messages.map(m => 
-            m.id === planMsg.id 
-              ? { ...m, status: 'completed', metadata: { ...m.metadata, progress: 100 } } 
-              : m
-          )
-      }));
+      console.log('✅ Plan received, waiting for SSE updates...');
 
     } catch (error: any) {
-      console.error("❌ Interaction failed", error);
+      console.error("❌ Query failed", error);
       set(state => ({
         isThinking: false,
         processingStep: null,
         messages: [...state.messages, {
           id: Date.now().toString(),
           sender: 'ai',
-          text: `System Error: ${error.message || "Unknown error"}`,
+          text: `❌ Error: ${error.message || "Unknown error"}`,
           timestamp,
           type: 'text'
         }]
@@ -389,12 +290,146 @@ export const useUIStore = create<UIState>((set, get) => ({
     }
   },
 
+  // UPDATED: Normalize agent names
+  updateAgentStatus: (agentId, status) => set((state) => {
+    const normalized = normalizeAgentName(agentId);
+    const newStatuses = new Map(state.agentStatuses);
+    newStatuses.set(normalized, status);
+    
+    console.log(`🔄 Agent ${agentId} (${normalized}) status: ${status}`);
+    
+    return { agentStatuses: newStatuses };
+  }),
+
+  // UPDATED: Normalize agent names + update plan message
+  updateAgentProgress: (agentId, progress, activity, metrics = {}) => set((state) => {
+    const normalized = normalizeAgentName(agentId);
+    const newProgress = new Map(state.agentProgress);
+    const newActivities = new Map(state.agentActivities);
+    const newMetrics = new Map(state.agentMetrics);
+    
+    newProgress.set(normalized, progress);
+    newActivities.set(normalized, activity);
+    
+    if (Object.keys(metrics).length > 0) {
+      newMetrics.set(normalized, metrics);
+    }
+    
+    // Update the plan message's overall progress
+    const updatedMessages = state.messages.map(m => {
+      if (m.type === 'analysis' && m.metadata?.agents) {
+        const agentCount = m.metadata.agents.length;
+        const totalProgress = Array.from(newProgress.values()).reduce((a, b) => a + b, 0);
+        const avgProgress = agentCount > 0 ? Math.round(totalProgress / agentCount) : 0;
+        
+        return {
+          ...m,
+          metadata: {
+            ...m.metadata,
+            progress: avgProgress
+          }
+        };
+      }
+      return m;
+    });
+
+    return {
+      agentProgress: newProgress,
+      agentActivities: newActivities,
+      agentMetrics: newMetrics,
+      messages: updatedMessages,
+      processingStep: `${agentId}: ${activity}` // Update global status
+    };
+  }),
+
+  // UPDATED: Store agent results
+  updateAgentData: (agentId, data) => set((state) => {
+    const normalized = normalizeAgentName(agentId);
+    
+    const updatedMessages = state.messages.map(m => {
+      if (m.type === 'analysis' && m.metadata?.agents) {
+        const agentResults = m.metadata.agentResults || {};
+        
+        return {
+          ...m,
+          metadata: {
+            ...m.metadata,
+            agentResults: {
+              ...agentResults,
+              [normalized]: {
+                success: true,
+                data: data,
+                originalName: agentId
+              },
+              [agentId]: {
+                success: true,
+                data: data
+              }
+            }
+          }
+        };
+      }
+      return m;
+    });
+    
+    console.log(`📦 Stored result for ${agentId} (normalized: ${normalized})`);
+    
+    return { messages: updatedMessages };
+  }),
+
+  // NEW: Handle workflow started event
+  handleWorkflowStarted: (agents: string[]) => set((state) => {
+    console.log('🎬 Workflow started:', agents);
+    
+    // Initialize all agents as queued
+    const newStatuses = new Map<string, 'queued' | 'processing' | 'completed' | 'failed'>();
+    agents.forEach(agent => {
+      newStatuses.set(normalizeAgentName(agent), 'queued');
+    });
+    
+    return {
+      agentStatuses: newStatuses,
+      processingStep: "Workflow executing..."
+    };
+  }),
+
+  // NEW: Handle workflow completed event
+  handleWorkflowCompleted: () => set((state) => {
+    console.log('✅ Workflow completed');
+    
+    // Mark plan message as completed
+    const updatedMessages = state.messages.map(m => {
+      if (m.type === 'analysis' && m.status === 'processing') {
+        return { 
+          ...m, 
+          status: 'completed' as const,
+          metadata: { 
+            ...m.metadata, 
+            progress: 100 
+          } 
+        };
+      }
+      return m;
+    });
+    
+    return {
+      messages: updatedMessages,
+      isThinking: false,
+      processingStep: null,
+      selectedAgentId: null
+    };
+  }),
+
   resetSession: () => set({
     messages: [],
     activeDataset: null,
     currentPlan: null,
     agentStatuses: new Map(),
+    agentProgress: new Map(),
+    agentActivities: new Map(),
+    agentMetrics: new Map(),
     isRightPanelOpen: false,
-    sessionId: null, // 🔥 ADDED: Clear session on reset
+    sessionId: null,
+    sessionInitPromise: null
   })
 }));
