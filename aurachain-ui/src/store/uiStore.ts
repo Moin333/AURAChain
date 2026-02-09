@@ -378,7 +378,7 @@ export const useUIStore = create<UIState>((set, get) => ({
   }),
 
   // NEW: Handle workflow started event
-  handleWorkflowStarted: (agents: string[]) => set((state) => {
+  handleWorkflowStarted: (agents: string[]) => {
     console.log('🎬 Workflow started:', agents);
     
     // Initialize all agents as queued
@@ -387,11 +387,11 @@ export const useUIStore = create<UIState>((set, get) => ({
       newStatuses.set(normalizeAgentName(agent), 'queued');
     });
     
-    return {
+    set({
       agentStatuses: newStatuses,
       processingStep: "Workflow executing..."
-    };
-  }),
+    });
+  },
 
   // NEW: Handle workflow completed event
   handleWorkflowCompleted: () => set((state) => {
