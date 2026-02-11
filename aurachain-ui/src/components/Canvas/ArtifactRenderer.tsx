@@ -1,11 +1,17 @@
-// aurachain-ui/src/components/Canvas/ArtifactRenderer.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/components/Canvas/ArtifactRenderer.tsx
 import React from 'react';
+import { normalizeAgentName } from '../../store/uiStore';
+import { LayoutGenerator } from './DynamicLayout/LayoutGenerator';
 import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
-} from 'recharts';
-import { CheckCircle2, AlertTriangle, TrendingUp, DollarSign } from 'lucide-react';
-import { api } from '../../services/api'; 
-import { useUIStore, normalizeAgentName } from '../../store/uiStore';
+  MetricsGrid, 
+  DataTable, 
+  ChartCard, 
+  JsonViewer, 
+  TextBlock, 
+  AlertBanner 
+} from './Primitives';
+import { type LayoutComponent } from '../../types/schema';
 
 interface ArtifactRendererProps {
   agentType: string;
@@ -13,267 +19,119 @@ interface ArtifactRendererProps {
 }
 
 const ArtifactRenderer: React.FC<ArtifactRendererProps> = ({ agentType, data }) => {
-  const { sessionId } = useUIStore();
-
   const normalizedType = normalizeAgentName(agentType);
+
+  // Handle errors
+  if (!data || (data.error && typeof data.error === 'string')) {
+    return (
+      <AlertBanner
+        type="error"
+        title="Execution Failed"
+        message={data?.error || "The agent could not complete the task. Please check backend logs."}
+      />
+    );
+  }
+
+  // Handle empty data
+  if (Object.keys(data).length === 0) {
+    return (
+      <AlertBanner
+        type="info"
+        title="No Data"
+        message="This agent completed successfully but returned no data."
+      />
+    );
+  }
 
   console.log('🎨 Rendering artifact:', {
     agentType,
     normalizedType,
     hasData: !!data,
-    dataKeys: data ? Object.keys(data) : []
+    dataKeys: Object.keys(data)
   });
 
-  if (!data || (data.error && typeof data.error === 'string')) {
-      return (
-          <div className="p-6 flex flex-col items-center justify-center h-64 text-center border-2 border-dashed border-red-200 dark:border-red-900 rounded-xl bg-red-50 dark:bg-red-900/10">
-              <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full mb-3 text-red-600 dark:text-red-400">
-                  <AlertTriangle size={32} />
-              </div>
-              <h3 className="text-lg font-bold text-red-700 dark:text-red-400 mb-1">Execution Failed</h3>
-              <p className="text-sm text-red-600 dark:text-red-300 max-w-xs">
-                  {data?.error || "The agent could not complete the task. Please check backend logs."}
-              </p>
-          </div>
-      );
-  }
+  // Generate layout using dynamic system
+  const layout = LayoutGenerator.generate(data, normalizedType);
 
-  // DATA HARVESTER
-  if (normalizedType === 'dataharvester') {
-    const profile = data?.profile || {};
-    const qualityScore = profile.improvement_score || 0;
-
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-900 rounded-xl border border-slate-100 dark:border-zinc-800">
-          <div>
-            <h4 className="text-sm text-slate-500 dark:text-zinc-500">Data Quality Score</h4>
-            <div className="text-3xl font-bold text-accent-teal mt-1">{qualityScore}%</div>
-          </div>
-          <div className="h-12 w-12 rounded-full bg-accent-teal/10 flex items-center justify-center text-accent-teal">
-            <CheckCircle2 size={24} />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl border border-slate-100 dark:border-zinc-800 bg-light-elevated dark:bg-dark-elevated">
-            <div className="text-xs text-slate-500 dark:text-zinc-500 mb-1">Rows Processed</div>
-            <div className="text-xl font-semibold text-slate-900 dark:text-zinc-100">{profile.cleaned?.shape?.rows || 0}</div>
-          </div>
-          <div className="p-4 rounded-xl border border-slate-100 dark:border-zinc-800 bg-light-elevated dark:bg-dark-elevated">
-            <div className="text-xs text-slate-500 dark:text-zinc-500 mb-1">Missing Values Fixed</div>
-            <div className="text-xl font-semibold text-accent-amber">
-                {Object.values(profile.original?.missing_values || {}).reduce((a: any, b: any) => a + b, 0) as number}
-            </div>
-          </div>
-        </div>
-
-        {profile.cleaning_operations && profile.cleaning_operations.length > 0 && (
-            <div>
-                <h4 className="text-sm font-bold mb-3 text-slate-700 dark:text-zinc-300">Cleaning Operations</h4>
-                <ul className="space-y-2">
-                    {profile.cleaning_operations.map((op: string, idx: number) => (
-                        <li key={idx} className="text-xs flex items-start text-slate-600 dark:text-zinc-400">
-                            <span className="mr-2 mt-0.5 text-accent-teal">•</span>
-                            {op}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        )}
-      </div>
-    );
-  }
-
-  // VISUALIZER
-  if (normalizedType === 'visualizer') {
-    const chartData = data?.chart_data || [
-      { name: 'Jan', value: 400 }, { name: 'Feb', value: 300 }, 
-      { name: 'Mar', value: 600 }, { name: 'Apr', value: 800 }
-    ];
-
-    const title = data?.chart_spec?.title || "Data Visualization";
-
-    return (
-      <div className="h-[400px] w-full mt-4 flex flex-col">
-        <h3 className="text-sm font-bold mb-4 text-center text-slate-700 dark:text-zinc-300">
-            {title}
-        </h3>
-        <div className="flex-1 w-full min-h-0">
-            <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-zinc-700" />
-                <XAxis dataKey="name" fontSize={12} stroke="#94a3b8" className="dark:stroke-zinc-500" />
-                <YAxis fontSize={12} stroke="#94a3b8" className="dark:stroke-zinc-500" />
-                <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: 'var(--bg-elevated)', 
-                      border: '1px solid var(--border-color)', 
-                      borderRadius: '8px', 
-                      color: 'var(--text-primary)' 
-                    }}
-                />
-                <Bar dataKey="value" fill="#4A90E2" radius={[4, 4, 0, 0]} />
-            </BarChart>
-            </ResponsiveContainer>
-        </div>
-      </div>
-    );
-  }
-
-  // MCTS OPTIMIZER
-  if (normalizedType === 'mctsoptimizer') {
-    return (
-      <div className="space-y-6">
-        <div className="bg-primary-50 dark:bg-primary-900/20 p-5 rounded-xl border border-primary-100 dark:border-primary-800">
-            <div className="flex items-center gap-3 mb-2">
-                <TrendingUp className="text-primary-600 dark:text-primary-400" size={20} />
-                <span className="font-bold text-primary-700 dark:text-primary-300">Optimization Result</span>
-            </div>
-            <p className="text-sm text-slate-600 dark:text-zinc-400">
-                Simulated <strong>{data?.simulation_stats?.iterations || 0}</strong> scenarios.
-            </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-800 rounded-xl shadow-sm">
-                <div className="text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-wider font-bold mb-1">Baseline Cost</div>
-                <div className="text-lg font-mono text-slate-400 dark:text-zinc-500 line-through">
-                    ₹{data?.simulation_stats?.baseline_cost?.toLocaleString() || 0}
-                </div>
-            </div>
-            <div className="p-4 bg-light-elevated dark:bg-dark-elevated border border-green-200 dark:border-green-900 rounded-xl shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-bl-lg">
-                    SAVINGS
-                </div>
-                <div className="text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-wider font-bold mb-1">Optimized Cost</div>
-                <div className="text-xl font-mono font-bold text-green-600 dark:text-green-400">
-                    ₹{data?.simulation_stats?.optimized_cost?.toLocaleString() || 0}
-                </div>
-            </div>
-        </div>
-
-        <div className="p-4 rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800">
-            <h4 className="text-sm font-semibold mb-2 text-slate-900 dark:text-zinc-100">Recommendation</h4>
-            <p className="text-sm text-slate-600 dark:text-zinc-400">
-                {data?.interpretation || "No interpretation provided."}
-            </p>
-        </div>
-      </div>
-    );
-  }
-
-  // ORDER MANAGER
-  if (normalizedType === 'ordermanager') {
-    const handleApprove = async () => {
-        if (!sessionId) {
-            alert("No active session found.");
-            return;
-        }
-        try {
-            await api.approveOrder("order_123", sessionId);
-            alert("Order Approved & Sent to Vendor!");
-        } catch(e) {
-            alert("Failed to approve order");
-        }
-    };
-
-    return (
-        <div className="space-y-4">
-            <div className="border-l-4 border-accent-amber bg-orange-50 dark:bg-orange-900/10 p-4 rounded-r-xl">
-                <h3 className="flex items-center text-accent-amber font-bold text-lg mb-1">
-                    <AlertTriangle size={20} className="mr-2" />
-                    Approval Required
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-zinc-400">
-                    The agent has prepared a purchase order based on the optimization. Please review before sending.
-                </p>
-            </div>
-
-            <div className="bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-700 rounded-xl p-4">
-                <div className="flex justify-between items-center mb-4 border-b border-slate-100 dark:border-zinc-800 pb-4">
-                    <span className="text-sm text-slate-500 dark:text-zinc-500">PO #IND-2025-001</span>
-                    <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs rounded font-bold">DRAFT</span>
-                </div>
-                
-                <div className="space-y-3">
-                    <div className="flex justify-between text-sm">
-                        <span className="text-slate-600 dark:text-zinc-400">Reorder Quantity:</span>
-                        <span className="font-mono font-bold text-slate-900 dark:text-zinc-100">{data?.optimal_action?.order_quantity || 0} Units</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                        <span className="text-slate-600 dark:text-zinc-400">Vendor:</span>
-                        <span className="font-medium text-slate-900 dark:text-zinc-100">Rajesh Electronics</span>
-                    </div>
-                    <div className="flex justify-between text-sm pt-2 border-t border-dashed border-slate-200 dark:border-zinc-800">
-                        <span className="text-slate-600 dark:text-zinc-400">Est. Cost:</span>
-                        <span className="font-bold text-slate-800 dark:text-zinc-100 flex items-center">
-                            <DollarSign size={14} /> 
-                            {data?.simulation_stats?.optimized_cost?.toLocaleString() || 0}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="flex gap-3 pt-2">
-                <button 
-                    onClick={handleApprove}
-                    className="flex-1 bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-xl font-medium transition-all shadow-lg shadow-primary-500/30"
-                >
-                    Approve Order
-                </button>
-                <button className="flex-1 bg-light-elevated dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-700 py-3 rounded-xl font-medium transition-all">
-                    Edit
-                </button>
-            </div>
-        </div>
-    );
-  }
-
-  if (normalizedType === 'forecaster') {
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-100 dark:border-primary-800">
-          <h3 className="text-sm font-semibold text-primary-700 dark:text-primary-300 mb-2">
-            📈 Forecast Results
-          </h3>
-          <p className="text-xs text-slate-600 dark:text-zinc-400">
-            Predicted {data?.forecast_periods || 30} periods ahead
-          </p>
-        </div>
-
-        {/* Show forecast data if available */}
-        {data?.forecasts && (
-          <div className="grid grid-cols-2 gap-4">
-            {Object.entries(data.forecasts).map(([metric, values]: [string, any]) => (
-              <div key={metric} className="p-4 bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-800 rounded-xl">
-                <div className="text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-wider mb-1">
-                  {metric}
-                </div>
-                <div className="text-lg font-mono font-bold text-slate-900 dark:text-zinc-100">
-                  {Array.isArray(values) ? values[0]?.toFixed(2) : 'N/A'}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // DEFAULT FALLBACK
+  // Render components from layout
   return (
-    <div className="space-y-4">
-      <div className="p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg text-xs">
-        <div className="font-semibold mb-1">Agent: {agentType}</div>
-        <div className="text-slate-500 dark:text-zinc-500">
-          Normalized: {normalizedType}
+    <div className="space-y-6 animate-fade-in">
+      {layout.title && (
+        <div>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-zinc-100">
+            {layout.title}
+          </h2>
+          {layout.description && (
+            <p className="text-sm text-slate-600 dark:text-zinc-400 mt-1">
+              {layout.description}
+            </p>
+          )}
         </div>
+      )}
+
+      <div className="space-y-4">
+        {layout.components.map((component) => (
+          <ComponentRenderer key={component.id} component={component} />
+        ))}
       </div>
-      
-      <div className="bg-slate-900 dark:bg-zinc-950 text-slate-300 dark:text-zinc-400 p-4 rounded-xl text-xs font-mono overflow-auto max-h-[500px] border border-slate-700 dark:border-zinc-800">
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </div>
+    </div>
+  );
+};
+
+/**
+ * Renders individual layout components
+ */
+const ComponentRenderer: React.FC<{ component: LayoutComponent }> = ({ component }) => {
+  const { component: type, props, width = 'full' } = component;
+
+  const widthClass = {
+    full: 'w-full',
+    half: 'w-1/2',
+    third: 'w-1/3'
+  }[width];
+
+  const renderComponent = () => {
+    const p = props as any;
+    
+    try {
+      switch (type) {
+        case 'MetricsGrid':
+          return <MetricsGrid {...p} />;
+        
+        case 'DataTable':
+          return <DataTable {...p} />;
+        
+        case 'ChartCard':
+          return <ChartCard {...p} />;
+        
+        case 'TextBlock':
+          return <TextBlock {...p} />;
+        
+        case 'JsonViewer':
+          return <JsonViewer {...p} />;
+        
+        case 'Alert':
+          return <AlertBanner {...p} />;
+        
+        default:
+          console.warn(`Unknown component type: ${type}`);
+          return <JsonViewer data={props} title={`Unknown: ${type}`} />;
+      }
+    } catch (error) {
+      console.error(`Error rendering ${type}:`, error);
+      return (
+        <AlertBanner
+          type="error"
+          title={`Failed to render ${type}`}
+          message={error instanceof Error ? error.message : 'Unknown error'}
+        />
+      );
+    }
+  };
+
+  return (
+    <div className={widthClass}>
+      {renderComponent()}
     </div>
   );
 };
