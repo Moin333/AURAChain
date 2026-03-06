@@ -42,6 +42,7 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reconnectAttemptsRef = useRef(0);
   const MAX_RECONNECT_ATTEMPTS = 5;
+  const sessionIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) {
@@ -49,10 +50,17 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
       return;
     }
 
+    // 🔥 FIX: Detect if this is a new connection or reconnection
+    const isNewSession = sessionIdRef.current !== sessionId;
+    sessionIdRef.current = sessionId;
+
+    console.log(`🔌 useAgentStream: ${isNewSession ? 'New' : 'Reconnecting to'} session ${sessionId}`);
+
     // FIXED: Proper cleanup function
     const cleanup = () => {
       if (eventSourceRef.current) {
         // Remove listeners BEFORE closing
+        console.log(`🔌 Closing SSE connection for session ${sessionId}`);
         eventSourceRef.current.onopen = null;
         eventSourceRef.current.onmessage = null;
         eventSourceRef.current.onerror = null;
@@ -141,20 +149,24 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
           
           // NEW: Workflow completed
           case 'workflow_completed':
+            console.log('✅ Workflow completed - keeping connection alive');
             handleWorkflowCompleted();
+            // DON'T call cleanup() - connection stays open!
             break;
           
           // NEW: Workflow failed
           case 'workflow_failed':
             console.error('❌ Workflow failed:', update.data?.error);
             setError(update.data?.error || 'Workflow failed');
-            handleWorkflowCompleted(); // Still close it out
+            handleWorkflowCompleted();
+            // DON'T call cleanup() - connection stays open!
             break;
             
           case 'stream_ended':
-            console.log('🏁 Stream ended by server');
-            cleanup();
+            console.log('🏁 Stream ended by server - will reconnect if needed');
+            // Backend explicitly closed the stream
             setIsConnected(false);
+            // Don't cleanup yet - let onerror handle reconnection
             break;
             
           case 'heartbeat':
@@ -174,26 +186,47 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
       }
     };
 
-    // IMPROVED: Error handling with exponential backoff
+    // 🔥 FIX: Better error handling - reconnect when connection drops
     eventSource.onerror = (err) => {
       console.error('❌ SSE Error:', err);
       setIsConnected(false);
       
-      // Attempt reconnection with exponential backoff
-      if (reconnectAttemptsRef.current < MAX_RECONNECT_ATTEMPTS) {
-        const delay = Math.min(1000 * Math.pow(2, reconnectAttemptsRef.current), 30000);
-        reconnectAttemptsRef.current++;
+      // Check if EventSource is closed
+      if (eventSourceRef.current?.readyState === EventSource.CLOSED) {
+        console.log('🔌 Connection closed, will reconnect...');
         
-        console.log(`🔄 Reconnecting in ${delay}ms (attempt ${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`);
-        setError(`Connection lost. Reconnecting... (${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`);
-        
-        reconnectTimeoutRef.current = setTimeout(() => {
-          cleanup();
-          // Trigger re-render which will create new connection
-          setIsConnected(false);
-        }, delay);
-      } else {
-        setError('Connection failed after multiple attempts. Please refresh the page.');
+        // Attempt reconnection with exponential backoff
+        if (reconnectAttemptsRef.current < MAX_RECONNECT_ATTEMPTS) {
+          const delay = Math.min(1000 * Math.pow(2, reconnectAttemptsRef.current), 30000);
+          reconnectAttemptsRef.current++;
+          
+          console.log(`🔄 Reconnecting in ${delay}ms (attempt ${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`);
+          setError(`Reconnecting... (${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`);
+          
+          reconnectTimeoutRef.current = setTimeout(() => {
+            cleanup();
+            // Force re-render by toggling state
+            setIsConnected(false);
+            // The useEffect will run again because we'll trigger it manually
+            
+            // Recreate connection immediately
+            const newEventSource = new EventSource(url);
+            eventSourceRef.current = newEventSource;
+            
+            newEventSource.onopen = () => {
+              console.log(`✅ SSE Reconnected to session ${sessionId}`);
+              setIsConnected(true);
+              setError(null);
+              reconnectAttemptsRef.current = 0;
+            };
+            
+            newEventSource.onmessage = eventSource.onmessage;
+            newEventSource.onerror = eventSource.onerror;
+          }, delay);
+        } else {
+          console.error('❌ Max reconnection attempts reached');
+          setError('Connection failed after multiple attempts. Please refresh the page.');
+        }
       }
     };
 
@@ -207,6 +240,17 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
     reconnectAttemptsRef.current = 0;
     setIsConnected(false);
     setError(null);
+
+    // Force reconnection by closing and nulling current connection
+    if (eventSourceRef.current) {
+      eventSourceRef.current.close();
+      eventSourceRef.current = null;
+    }
+    
+    // Trigger useEffect to run again
+    if (reconnectTimeoutRef.current) {
+      clearTimeout(reconnectTimeoutRef.current);
+    }
   };
 
   return { 
