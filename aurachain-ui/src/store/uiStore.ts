@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { api, type OrchestrationPlan } from '../services/api';
 import { type Message } from '../components/Chat/MessageBubble';
+import type { ReportResponse } from '../types/api';
 
 interface DatasetContext {
   dataset_id: string;
@@ -16,20 +17,20 @@ interface UIState {
   isRightPanelOpen: boolean;
   rightPanelWidth: number;
   isDarkMode: boolean;
-  
+
   // --- Session Data ---
   sessionId: string | null;
   userId: string;
   messages: Message[];
-  
+
   // --- Agentic State ---
-  isThinking: boolean; 
+  isThinking: boolean;
   processingStep: string | null;
-  
+
   // --- Context ---
   activeDataset: DatasetContext | null;
-  selectedAgentId: string | null; 
-  
+  selectedAgentId: string | null;
+
   // --- Orchestration Data ---
   currentPlan: OrchestrationPlan | null;
   agentStatuses: Map<string, 'queued' | 'processing' | 'completed' | 'failed'>;
@@ -38,10 +39,15 @@ interface UIState {
   agentProgress: Map<string, number>;
   agentActivities: Map<string, string>;
   agentMetrics: Map<string, Record<string, any>>;
-  
-  // NEW: Session initialization state
+
+  // Session initialization state
   sessionInitPromise: Promise<string> | null;
-  
+
+  // --- Report State (Phase 8) ---
+  currentWorkflowId: string | null;
+  reports: Record<string, ReportResponse>;
+  isReportLoading: boolean;
+
   // --- Actions ---
   toggleSidebar: () => void;
   toggleRightPanel: () => void;
@@ -49,7 +55,7 @@ interface UIState {
   setRightPanelWidth: (width: number) => void;
   setSelectedAgent: (id: string | null) => void;
   toggleTheme: () => void;
-  
+
   ensureSession: () => Promise<string>;
   initializeSession: () => Promise<void>;
   uploadDataset: (file: File) => Promise<void>;
@@ -60,10 +66,15 @@ interface UIState {
   updateAgentStatus: (agentId: string, status: 'queued' | 'processing' | 'completed' | 'failed') => void;
   updateAgentProgress: (agentId: string, progress: number, activity: string, metrics?: Record<string, any>) => void;
   updateAgentData: (agentId: string, data: any) => void;
-  
-  // NEW: Workflow event handlers
+
+  // Workflow event handlers
   handleWorkflowStarted: (agents: string[]) => void;
   handleWorkflowCompleted: () => void;
+
+  // Report actions (Phase 8)
+  handleReportReady: (workflowId: string, confidence: number) => void;
+  fetchReport: (workflowId: string) => Promise<void>;
+  clearReport: () => void;
 }
 
 // NEW: Helper to normalize agent names
@@ -77,14 +88,14 @@ export const useUIStore = create<UIState>((set, get) => ({
   isRightPanelOpen: false,
   rightPanelWidth: 450,
   isDarkMode: false,
-  
+
   sessionId: null,
-  userId: 'demo_user_01', 
+  userId: 'demo_user_01',
   messages: [],
-  
+
   isThinking: false,
   processingStep: null,
-  
+
   activeDataset: null,
   selectedAgentId: null,
   currentPlan: null,
@@ -93,8 +104,13 @@ export const useUIStore = create<UIState>((set, get) => ({
   agentProgress: new Map(),
   agentActivities: new Map(),
   agentMetrics: new Map(),
-  
+
   sessionInitPromise: null,
+
+  // Report state
+  currentWorkflowId: null,
+  reports: {},
+  isReportLoading: false,
 
   // --- Layout Actions ---
   toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
@@ -102,7 +118,7 @@ export const useUIStore = create<UIState>((set, get) => ({
   setRightPanelOpen: (isOpen) => set({ isRightPanelOpen: isOpen }),
   setRightPanelWidth: (width) => set({ rightPanelWidth: width }),
   setSelectedAgent: (id) => set({ selectedAgentId: id }),
-  
+
   toggleTheme: () => set((state) => {
     const newMode = !state.isDarkMode;
     if (newMode) document.documentElement.classList.add('dark');
@@ -115,33 +131,33 @@ export const useUIStore = create<UIState>((set, get) => ({
   // FIXED: Thread-safe session initialization
   ensureSession: async (): Promise<string> => {
     const currentSessionId = get().sessionId;
-    
+
     if (currentSessionId) {
       return currentSessionId;
     }
-    
+
     // Check if initialization is already in progress
     const existingPromise = get().sessionInitPromise;
     if (existingPromise) {
       console.log('⏳ Reusing in-flight session creation...');
       return existingPromise;
     }
-    
+
     // Create new initialization promise
     const promise = (async () => {
       try {
         console.log('🔄 Creating new session...');
         const res = await api.createSession(get().userId);
-        
+
         const backendSessionId = res.session_id;
-        
+
         if (!backendSessionId) {
           throw new Error('Backend did not return session_id');
         }
-        
+
         console.log(`✅ Session created: ${backendSessionId}`);
         set({ sessionId: backendSessionId, sessionInitPromise: null });
-        
+
         return backendSessionId;
       } catch (e) {
         console.error('❌ Session creation failed:', e);
@@ -149,7 +165,7 @@ export const useUIStore = create<UIState>((set, get) => ({
         throw e;
       }
     })();
-    
+
     set({ sessionInitPromise: promise });
     return promise;
   },
@@ -161,7 +177,7 @@ export const useUIStore = create<UIState>((set, get) => ({
   uploadDataset: async (file: File) => {
     try {
       const res = await api.uploadDataset(file);
-      set({ 
+      set({
         activeDataset: {
           dataset_id: res.dataset_id,
           filename: res.filename,
@@ -177,7 +193,7 @@ export const useUIStore = create<UIState>((set, get) => ({
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         type: 'text'
       };
-      
+
       set(state => ({ messages: [...state.messages, sysMsg] }));
 
     } catch (e) {
@@ -217,17 +233,17 @@ export const useUIStore = create<UIState>((set, get) => ({
       type: 'text'
     };
 
-    set(state => ({ 
+    set(state => ({
       messages: [...state.messages, userMsg],
-      isThinking: true, 
+      isThinking: true,
       processingStep: "Creating orchestration plan..."
     }));
 
     try {
       const context = activeDataset ? { dataset_id: activeDataset.dataset_id } : {};
-      
+
       console.log(`📤 Sending query with session: ${currentSessionId}`);
-      
+
       // 2. Send query (returns plan immediately - <200ms)
       const response = await api.sendQuery(text, currentSessionId, userId, context);
 
@@ -245,9 +261,9 @@ export const useUIStore = create<UIState>((set, get) => ({
       const planMsg: Message = {
         id: (Date.now() + 2).toString(),
         sender: 'ai',
-        text: 'Agent Execution Strategy', 
+        text: 'Agent Execution Strategy',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        type: 'analysis', 
+        type: 'analysis',
         status: 'processing', // Will be updated by SSE
         metadata: {
           progress: 0,
@@ -256,15 +272,15 @@ export const useUIStore = create<UIState>((set, get) => ({
         }
       };
 
-      set(state => ({ 
+      set(state => ({
         messages: [...state.messages, planMsg],
         currentPlan: response.orchestration_plan,
-        isRightPanelOpen: true, 
+        isRightPanelOpen: true,
         selectedAgentId: null,
         isThinking: false, // Plan received, now waiting for SSE
         processingStep: "Agents executing..." // SSE will update this
       }));
-      
+
       // 5. Initialize agent statuses
       const newStatuses = new Map<string, 'queued' | 'processing' | 'completed' | 'failed'>();
       (response.orchestration_plan.agents || []).forEach(agent => {
@@ -295,9 +311,9 @@ export const useUIStore = create<UIState>((set, get) => ({
     const normalized = normalizeAgentName(agentId);
     const newStatuses = new Map(state.agentStatuses);
     newStatuses.set(normalized, status);
-    
+
     console.log(`🔄 Agent ${agentId} (${normalized}) status: ${status}`);
-    
+
     return { agentStatuses: newStatuses };
   }),
 
@@ -307,21 +323,21 @@ export const useUIStore = create<UIState>((set, get) => ({
     const newProgress = new Map(state.agentProgress);
     const newActivities = new Map(state.agentActivities);
     const newMetrics = new Map(state.agentMetrics);
-    
+
     newProgress.set(normalized, progress);
     newActivities.set(normalized, activity);
-    
+
     if (Object.keys(metrics).length > 0) {
       newMetrics.set(normalized, metrics);
     }
-    
+
     // Update the plan message's overall progress
     const updatedMessages = state.messages.map(m => {
       if (m.type === 'analysis' && m.metadata?.agents) {
         const agentCount = m.metadata.agents.length;
         const totalProgress = Array.from(newProgress.values()).reduce((a, b) => a + b, 0);
         const avgProgress = agentCount > 0 ? Math.round(totalProgress / agentCount) : 0;
-        
+
         return {
           ...m,
           metadata: {
@@ -345,11 +361,11 @@ export const useUIStore = create<UIState>((set, get) => ({
   // UPDATED: Store agent results
   updateAgentData: (agentId, data) => set((state) => {
     const normalized = normalizeAgentName(agentId);
-    
+
     const updatedMessages = state.messages.map(m => {
       if (m.type === 'analysis' && m.metadata?.agents) {
         const agentResults = m.metadata.agentResults || {};
-        
+
         return {
           ...m,
           metadata: {
@@ -371,22 +387,22 @@ export const useUIStore = create<UIState>((set, get) => ({
       }
       return m;
     });
-    
+
     console.log(`📦 Stored result for ${agentId} (normalized: ${normalized})`);
-    
+
     return { messages: updatedMessages };
   }),
 
   // NEW: Handle workflow started event
   handleWorkflowStarted: (agents: string[]) => {
     console.log('🎬 Workflow started:', agents);
-    
+
     // Initialize all agents as queued
     const newStatuses = new Map<string, 'queued' | 'processing' | 'completed' | 'failed'>();
     agents.forEach(agent => {
       newStatuses.set(normalizeAgentName(agent), 'queued');
     });
-    
+
     set({
       agentStatuses: newStatuses,
       processingStep: "Workflow executing..."
@@ -396,22 +412,22 @@ export const useUIStore = create<UIState>((set, get) => ({
   // NEW: Handle workflow completed event
   handleWorkflowCompleted: () => set((state) => {
     console.log('✅ Workflow completed');
-    
+
     // Mark plan message as completed
     const updatedMessages = state.messages.map(m => {
       if (m.type === 'analysis' && m.status === 'processing') {
-        return { 
-          ...m, 
+        return {
+          ...m,
           status: 'completed' as const,
-          metadata: { 
-            ...m.metadata, 
-            progress: 100 
-          } 
+          metadata: {
+            ...m.metadata,
+            progress: 100
+          }
         };
       }
       return m;
     });
-    
+
     return {
       messages: updatedMessages,
       isThinking: false,
@@ -419,6 +435,57 @@ export const useUIStore = create<UIState>((set, get) => ({
       selectedAgentId: null
     };
   }),
+
+  // ── Report Actions (Phase 8) ──
+
+  handleReportReady: (workflowId: string, confidence: number) => {
+    console.log(`📊 Report ready: ${workflowId} (confidence: ${confidence})`);
+
+    // Store workflowId (don't fetch yet — lazy on click)
+    set({ currentWorkflowId: workflowId });
+
+    // Add report card to chat
+    const reportMsg: Message = {
+      id: `report_${Date.now()}`,
+      sender: 'ai',
+      text: `Executive Report Ready`,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      type: 'report' as any,
+      metadata: {
+        title: 'Executive Report Ready',
+        data: {
+          workflow_id: workflowId,
+          overall_confidence: confidence
+        }
+      }
+    };
+
+    set(state => ({ messages: [...state.messages, reportMsg] }));
+  },
+
+  fetchReport: async (workflowId: string) => {
+    // Check cache first
+    const cached = get().reports[workflowId];
+    if (cached) {
+      console.log(`📊 Report cache hit: ${workflowId}`);
+      return;
+    }
+
+    set({ isReportLoading: true });
+    try {
+      const report = await api.getReport(workflowId);
+      set(state => ({
+        reports: { ...state.reports, [workflowId]: report },
+        isReportLoading: false
+      }));
+      console.log(`📊 Report fetched and cached: ${workflowId}`);
+    } catch (e) {
+      console.error('❌ Failed to fetch report:', e);
+      set({ isReportLoading: false });
+    }
+  },
+
+  clearReport: () => set({ currentWorkflowId: null }),
 
   resetSession: () => set({
     messages: [],
@@ -430,6 +497,9 @@ export const useUIStore = create<UIState>((set, get) => ({
     agentMetrics: new Map(),
     isRightPanelOpen: false,
     sessionId: null,
-    sessionInitPromise: null
+    sessionInitPromise: null,
+    currentWorkflowId: null,
+    reports: {},
+    isReportLoading: false
   })
 }));

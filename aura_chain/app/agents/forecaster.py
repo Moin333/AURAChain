@@ -1,5 +1,5 @@
 # app/agents/forecaster.py
-from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
+from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse, ConfidenceScore
 from app.core.api_clients import groq_client
 from app.core.streaming import streaming_service
 from app.config import get_settings
@@ -18,8 +18,14 @@ settings = get_settings()
 
 class ForecasterAgent(BaseAgent):
     """
-    Advanced forecasting using Facebook Prophet
+    Advanced forecasting using Facebook Prophet.
+    
+    Phase 5: Reasoning-enabled agent.
+    Evaluates forecast quality (MAPE, confidence) and can retry.
     """
+    
+    max_reasoning_attempts = 2
+    min_acceptable_score = 0.5
     
     def __init__(self):
         super().__init__(
@@ -28,6 +34,37 @@ class ForecasterAgent(BaseAgent):
             api_client=groq_client
         )
         self.indian_holidays = holidays.India(years=range(2020, 2030))
+    
+    def should_reason(self) -> bool:
+        return True
+    
+    def evaluate_output(self, output: Dict, request: AgentRequest) -> tuple[float, list]:
+        """Check forecast data quality and confidence scores."""
+        from app.core.evaluation import agent_evaluator
+        result = agent_evaluator.evaluate("forecaster", output, success=True)
+        return result.score, result.issues
+    
+    def compute_confidence(self, output: Dict, eval_score: float) -> ConfidenceScore:
+        """Compute confidence from MAPE and data coverage."""
+        metadata = output.get("metadata", {})
+        mape = metadata.get("mape", 50.0)
+        model_confidence = metadata.get("confidence_score", eval_score)
+        
+        factors = {
+            "evaluation_score": eval_score,
+            "model_confidence": model_confidence,
+            "mape_penalty": max(0, 1.0 - (mape / 100))
+        }
+        
+        # Weighted average
+        score = (eval_score * 0.3 + model_confidence * 0.4 + factors["mape_penalty"] * 0.3)
+        score = max(0.0, min(1.0, score))
+        
+        return ConfidenceScore(
+            score=round(score, 2),
+            justification=f"MAPE: {mape:.1f}%, model confidence: {model_confidence:.2f}",
+            factors=factors
+        )
     
     async def process(self, request: AgentRequest) -> AgentResponse:
         """Main process - updated to pass session_id"""
@@ -69,9 +106,14 @@ class ForecasterAgent(BaseAgent):
                 )
                 forecasts_data[col] = forecast_result
             
-            # Get LLM interpretation
+            # Get upstream TrendAnalyst findings for enriched interpretation
+            trend_findings = await self.get_upstream_findings(
+                request.workflow_id, "TrendAnalyst"
+            )
+            
+            # Get LLM interpretation (enriched with trend context)
             interpretation = await self._get_interpretation(
-                forecasts_data, request.query
+                forecasts_data, request.query, trend_findings
             )
             
             # Format response for frontend
@@ -84,9 +126,34 @@ class ForecasterAgent(BaseAgent):
                     "forecasted_columns": value_cols[:3],
                     "model": "Facebook Prophet",
                     "includes_holidays": True,
-                    "generated_at": datetime.utcnow().isoformat()
+                    "generated_at": datetime.utcnow().isoformat(),
+                    "enriched_with_trends": bool(trend_findings)
                 }
             }
+            
+            # Publish curated findings for downstream agents
+            forecast_findings = {
+                "predictions_summary": {},
+                "confidence_scores": {},
+                "overall_trend": "stable"
+            }
+            for col, data in forecasts_data.items():
+                preds = data.get("predictions", [])
+                if preds:
+                    forecast_findings["predictions_summary"][col] = {
+                        "start_value": round(preds[0]["value"], 2),
+                        "end_value": round(preds[-1]["value"], 2),
+                        "trend": data.get("metrics", {}).get("trend", "unknown")
+                    }
+                forecast_findings["confidence_scores"][col] = round(
+                    data.get("confidence_score", 0), 2
+                )
+            # Determine overall trend
+            trends = [v.get("trend", "stable") for v in forecast_findings["predictions_summary"].values()]
+            if trends:
+                forecast_findings["overall_trend"] = max(set(trends), key=trends.count)
+            
+            await self.publish_findings(request.workflow_id, forecast_findings)
             
             logger.info("Forecast completed successfully")
             
@@ -294,8 +361,8 @@ class ForecasterAgent(BaseAgent):
             }
         return {}
     
-    async def _get_interpretation(self, forecasts_data: Dict, query: str) -> str:
-        """Get LLM interpretation of forecast results"""
+    async def _get_interpretation(self, forecasts_data: Dict, query: str, trend_findings: Dict = None) -> str:
+        """Get LLM interpretation of forecast results, enriched with upstream trend data"""
         
         # Prepare summary for LLM
         summary = {
@@ -321,10 +388,23 @@ class ForecasterAgent(BaseAgent):
             summary["trends"][col] = data["metrics"]["trend"]
             summary["confidence"][col] = round(data["confidence_score"], 2)
         
+        # Inject upstream trend context if available
+        trend_context = ""
+        if trend_findings:
+            trend_context = f"""
+
+Upstream Trend Analysis (from TrendAnalyst agent):
+- Trend Directions: {json.dumps(trend_findings.get('trend_directions', {}))}
+- Volatility: {json.dumps(trend_findings.get('volatility', {}))}
+- Market Sentiment: {trend_findings.get('market_sentiment', 'unknown')}
+
+Use this trend context to validate or explain your forecast predictions."""
+        
         prompt = f"""Analyze these forecast results and provide business insights:
 
 Forecast Data:
 {json.dumps(summary, indent=2)}
+{trend_context}
 
 User Query: {query}
 

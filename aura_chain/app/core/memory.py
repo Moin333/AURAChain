@@ -241,16 +241,74 @@ class MemoryManager:
         user_id: str,
         query: str
     ) -> Dict[str, Any]:
-        """Get relevant memory context for current query"""
+        """Get relevant memory context via semantic search."""
         memory = await self.get_memory(user_id)
         
-        # Simple relevance - return all for now
-        # In production, use semantic search/embeddings
+        # Try embedding-based search
+        try:
+            model = self._get_embedding_model()
+            if model and memory.facts:
+                relevant_facts = await self._semantic_search(
+                    user_id, query, memory.facts, model, top_k=5
+                )
+                return {
+                    "facts": relevant_facts,
+                    "preferences": memory.preferences,
+                    "entities": memory.entities
+                }
+        except Exception as e:
+            logger.warning(f"Semantic search fallback: {e}")
+        
+        # Fallback: return all
         return {
             "facts": memory.facts,
             "preferences": memory.preferences,
             "entities": memory.entities
         }
+    
+    def _get_embedding_model(self):
+        """Lazy-load sentence-transformers model."""
+        if not hasattr(self, '_embed_model'):
+            try:
+                from sentence_transformers import SentenceTransformer
+                self._embed_model = SentenceTransformer("all-MiniLM-L6-v2")
+                logger.info("✓ Embedding model loaded (all-MiniLM-L6-v2)")
+            except ImportError:
+                logger.warning("sentence-transformers not installed — using fallback")
+                self._embed_model = None
+        return self._embed_model
+    
+    async def _semantic_search(
+        self, user_id: str, query: str, facts: Dict, model, top_k: int = 5
+    ) -> Dict[str, Any]:
+        """Embed query and return top-k most relevant facts by cosine similarity."""
+        import numpy as np
+        
+        # Embed query
+        query_emb = model.encode(query, normalize_embeddings=True)
+        
+        # Embed all facts (text representation)
+        fact_items = list(facts.items())
+        if not fact_items:
+            return facts
+        
+        fact_texts = [f"{k}: {v}" for k, v in fact_items]
+        fact_embs = model.encode(fact_texts, normalize_embeddings=True)
+        
+        # Cosine similarity (embeddings are normalized, so dot product = cosine)
+        similarities = np.dot(fact_embs, query_emb)
+        
+        # Top-k indices
+        top_indices = np.argsort(similarities)[-top_k:][::-1]
+        
+        # Return only relevant facts
+        relevant = {}
+        for idx in top_indices:
+            if similarities[idx] > 0.2:  # Minimum relevance threshold
+                key, value = fact_items[idx]
+                relevant[key] = value
+        
+        return relevant if relevant else facts  # Fallback if nothing relevant
     
     async def summarize_session(
         self,

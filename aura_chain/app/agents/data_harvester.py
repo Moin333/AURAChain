@@ -109,6 +109,15 @@ Return results in JSON format."""
                     {"quality_score": profile["improvement_score"]}
                 )
             
+            # Publish curated findings for downstream agents
+            await self.publish_findings(request.workflow_id, {
+                "quality_score": profile["improvement_score"],
+                "rows_cleaned": len(df_cleaned),
+                "columns": list(df_cleaned.columns),
+                "cleaning_operations": cleaning_log,
+                "data_shape": {"rows": len(df_cleaned), "columns": len(df_cleaned.columns)}
+            })
+            
             return AgentResponse(
                 agent_name=self.name,
                 success=True,

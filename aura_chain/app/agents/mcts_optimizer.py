@@ -1,5 +1,5 @@
 # app/agents/mcts_optimizer.py
-from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
+from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse, ConfidenceScore
 from app.core.api_clients import groq_client
 from app.core.streaming import streaming_service
 from app.config import get_settings
@@ -90,9 +90,15 @@ class MCTSNode:
 
 class MCTSOptimizerAgent(BaseAgent):
     """
-    Real Monte Carlo Tree Search for inventory optimization
-    Minimizes total cost = holding_cost + stockout_cost
+    Real Monte Carlo Tree Search for inventory optimization.
+    Minimizes total cost = holding_cost + stockout_cost.
+    
+    Phase 5: Reasoning-enabled agent.
+    Evaluates optimization quality (optimal_action, savings) and can retry.
     """
+    
+    max_reasoning_attempts = 2
+    min_acceptable_score = 0.5
     
     def __init__(self):
         super().__init__(
@@ -101,101 +107,34 @@ class MCTSOptimizerAgent(BaseAgent):
             api_client=groq_client
         )
     
-    async def process(self, request: AgentRequest) -> AgentResponse:
-        try:
-            # Extract parameters
-            if "dataset" not in request.context:
-                return AgentResponse(
-                    agent_name=self.name,
-                    success=False,
-                    error="No dataset provided for optimization"
-                )
-            
-            df = pd.DataFrame(request.context["dataset"])
-            
-            # Get optimization parameters
-            holding_cost = request.parameters.get("holding_cost", 5)  # ₹5 per unit per day
-            stockout_cost = request.parameters.get("stockout_cost", 50)  # ₹50 per unit
-            horizon = request.parameters.get("horizon", 30)  # 30-day planning
-            iterations = request.parameters.get("iterations", 2000)  # MCTS iterations
-            
-            logger.info(f"Starting MCTS with {iterations} iterations, {horizon}-day horizon")
-            
-            # Extract demand data
-            demand_data = self._extract_demand(df)
-            
-            if len(demand_data) == 0:
-                return AgentResponse(
-                    agent_name=self.name,
-                    success=False,
-                    error="Could not extract demand data from dataset"
-                )
-            
-            # Calculate current inventory level
-            current_stock = self._get_current_stock(df, demand_data)
-            
-            # Run MCTS optimization
-            optimal_solution = await self._run_mcts(
-                current_stock=current_stock,
-                demand_history=demand_data,
-                holding_cost=holding_cost,
-                stockout_cost=stockout_cost,
-                horizon=horizon,
-                iterations=iterations
-            )
-            
-            # Calculate baseline (no optimization)
-            baseline_cost = self._calculate_baseline_cost(
-                current_stock, demand_data, holding_cost, stockout_cost, horizon
-            )
-            
-            # Calculate Bullwhip effect
-            bullwhip_metrics = self._calculate_bullwhip_effect(
-                demand_data, optimal_solution
-            )
-            
-            # Get LLM interpretation
-            interpretation = await self._get_interpretation(
-                optimal_solution, baseline_cost, bullwhip_metrics, request.query
-            )
-            
-            # Format response
-            response_data = {
-                "optimal_action": {
-                    "reorder_point": float(optimal_solution["reorder_point"]),
-                    "order_quantity": float(optimal_solution["order_quantity"]),
-                    "safety_stock": float(optimal_solution["safety_stock"])
-                },
-                "expected_savings": {
-                    "amount_inr": float(baseline_cost - optimal_solution["expected_cost"]),
-                    "percentage": float(((baseline_cost - optimal_solution["expected_cost"]) / baseline_cost) * 100)
-                },
-                "bullwhip_reduction": bullwhip_metrics,
-                "simulation_stats": {
-                    "iterations": iterations,
-                    "explored_states": optimal_solution["explored_states"],
-                    "computation_time_ms": optimal_solution["computation_time_ms"],
-                    "baseline_cost": float(baseline_cost),
-                    "optimized_cost": float(optimal_solution["expected_cost"])
-                },
-                "interpretation": interpretation
-            }
-            
-            logger.info(f"MCTS completed: {response_data['expected_savings']['percentage']:.1f}% savings")
-            
-            return AgentResponse(
-                agent_name=self.name,
-                success=True,
-                data=response_data
-            )
-            
-        except Exception as e:
-            logger.error(f"MCTS Optimizer error: {str(e)}")
-            return AgentResponse(
-                agent_name=self.name,
-                success=False,
-                error=str(e)
-            )
+    def should_reason(self) -> bool:
+        return True
+    
+    def evaluate_output(self, output: Dict, request: AgentRequest) -> tuple[float, list]:
+        """Check optimization output quality."""
+        from app.core.evaluation import agent_evaluator
+        result = agent_evaluator.evaluate("mcts_optimizer", output, success=True)
+        return result.score, result.issues
+    
+    def compute_confidence(self, output: Dict, eval_score: float) -> ConfidenceScore:
+        """Compute confidence from MCTS simulation quality and savings."""
+        savings = output.get("expected_savings", {})
+        savings_pct = savings.get("percentage", 0) if isinstance(savings, dict) else 0
+        
+        factors = {
+            "evaluation_score": eval_score,
+            "savings_positive": 1.0 if savings_pct > 0 else 0.3,
+            "has_optimal_action": 1.0 if "optimal_action" in output else 0.0
+        }
+        
+        score = (eval_score * 0.4 + factors["savings_positive"] * 0.3 + factors["has_optimal_action"] * 0.3)
+        score = max(0.0, min(1.0, score))
+        
+        return ConfidenceScore(
+            score=round(score, 2),
+            justification=f"Savings: {savings_pct:.1f}%, evaluation: {eval_score:.2f}",
+            factors=factors
+        )
     
     def _extract_demand(self, df: pd.DataFrame) -> np.ndarray:
         """Extract demand/sales/quantity data"""
@@ -397,8 +336,14 @@ class MCTSOptimizerAgent(BaseAgent):
                 demand_data, optimal_solution
             )
             
+            # Get upstream Forecaster findings for enriched interpretation
+            forecast_findings = await self.get_upstream_findings(
+                request.workflow_id, "Forecaster"
+            )
+            
             interpretation = await self._get_interpretation(
-                optimal_solution, baseline_cost, bullwhip_metrics, request.query
+                optimal_solution, baseline_cost, bullwhip_metrics, request.query,
+                forecast_findings
             )
             
             response_data = {
@@ -421,6 +366,18 @@ class MCTSOptimizerAgent(BaseAgent):
                 },
                 "interpretation": interpretation
             }
+            
+            # Publish curated findings for downstream agents
+            savings_pct = float(((baseline_cost - optimal_solution["expected_cost"]) / baseline_cost) * 100) if baseline_cost > 0 else 0
+            await self.publish_findings(request.workflow_id, {
+                "optimal_action": {
+                    "reorder_point": float(optimal_solution["reorder_point"]),
+                    "order_quantity": float(optimal_solution["order_quantity"]),
+                    "safety_stock": float(optimal_solution["safety_stock"])
+                },
+                "expected_savings_pct": round(savings_pct, 1),
+                "bullwhip_improvement_pct": round(bullwhip_metrics.get("improvement_percentage", 0), 1)
+            })
             
             logger.info(f"MCTS completed: {response_data['expected_savings']['percentage']:.1f}% savings")
             
@@ -484,9 +441,10 @@ class MCTSOptimizerAgent(BaseAgent):
         solution: Dict,
         baseline_cost: float,
         bullwhip_metrics: Dict,
-        query: str
+        query: str,
+        forecast_findings: Dict = None
     ) -> str:
-        """Get LLM interpretation of results"""
+        """Get LLM interpretation of results, enriched with upstream forecast data"""
         
         summary = {
             "recommended_action": f"Order {solution['order_quantity']:.0f} units when stock drops to {solution['reorder_point']:.0f}",
@@ -495,10 +453,23 @@ class MCTSOptimizerAgent(BaseAgent):
             "safety_stock": f"{solution['safety_stock']:.0f} units"
         }
         
+        # Inject upstream forecast context if available
+        forecast_context = ""
+        if forecast_findings:
+            forecast_context = f"""
+
+Upstream Forecast Analysis (from Forecaster agent):
+- Predictions Summary: {json.dumps(forecast_findings.get('predictions_summary', {}))}
+- Confidence Scores: {json.dumps(forecast_findings.get('confidence_scores', {}))}
+- Overall Trend: {forecast_findings.get('overall_trend', 'unknown')}
+
+Use this forecast context to validate your inventory recommendations."""
+        
         prompt = f"""Interpret these inventory optimization results for an MSME owner:
 
 Results:
 {json.dumps(summary, indent=2)}
+{forecast_context}
 
 User Query: {query}
 

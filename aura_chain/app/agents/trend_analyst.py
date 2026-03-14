@@ -1,4 +1,4 @@
-from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse
+from app.agents.base_agent import BaseAgent, AgentRequest, AgentResponse, ConfidenceScore
 from app.core.api_clients import groq_client
 from app.core.streaming import streaming_service
 from app.config import get_settings
@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from pytrends.request import TrendReq
-import time
+import asyncio
 import json
 from typing import Dict, List, Any
 from loguru import logger
@@ -20,7 +20,13 @@ class TrendAnalystAgent(BaseAgent):
     - Internal data patterns (statistical analysis)
     - External market intelligence (Google Trends)
     - Seasonal patterns and anomalies
+    
+    Phase 5: Reasoning-enabled agent.
+    Evaluates insight quality and data coverage.
     """
+    
+    max_reasoning_attempts = 2
+    min_acceptable_score = 0.5
     
     def __init__(self):
         super().__init__(
@@ -29,6 +35,35 @@ class TrendAnalystAgent(BaseAgent):
             api_client=groq_client
         )
         self.pytrends = None
+    
+    def should_reason(self) -> bool:
+        return True
+    
+    def evaluate_output(self, output: Dict, request: AgentRequest) -> tuple[float, list]:
+        """Check trend analysis output quality."""
+        from app.core.evaluation import agent_evaluator
+        result = agent_evaluator.evaluate("trend_analyst", output, success=True)
+        return result.score, result.issues
+    
+    def compute_confidence(self, output: Dict, eval_score: float) -> ConfidenceScore:
+        """Compute confidence from insights quality and data coverage."""
+        metadata = output.get("metadata", {})
+        data_points = metadata.get("data_points_analyzed", 0)
+        
+        factors = {
+            "evaluation_score": eval_score,
+            "has_insights": 1.0 if output.get("insights") else 0.3,
+            "data_coverage": min(1.0, data_points / 100) if data_points > 0 else 0.2
+        }
+        
+        score = (eval_score * 0.4 + factors["has_insights"] * 0.3 + factors["data_coverage"] * 0.3)
+        score = max(0.0, min(1.0, score))
+        
+        return ConfidenceScore(
+            score=round(score, 2),
+            justification=f"Data points: {data_points}, has insights: {bool(output.get('insights'))}",
+            factors=factors
+        )
     
     async def process(self, request: AgentRequest) -> AgentResponse:
         try:
@@ -100,6 +135,21 @@ class TrendAnalystAgent(BaseAgent):
             
             # 5. Get LLM insights
             insights = await self._get_insights(combined_analysis, request.query)
+            
+            # Publish curated findings for downstream agents
+            trend_findings = {
+                "trend_directions": {},
+                "volatility": {},
+                "market_sentiment": "neutral"
+            }
+            for col, trend_data in internal_trends.items():
+                trend_findings["trend_directions"][col] = trend_data.get("trend_direction", "unknown")
+                trend_findings["volatility"][col] = trend_data.get("volatility", "unknown")
+            if external_trends:
+                trend_findings["market_sentiment"] = "active"
+                trend_findings["external_keywords"] = keywords
+            
+            await self.publish_findings(request.workflow_id, trend_findings)
             
             return AgentResponse(
                 agent_name=self.name,
@@ -271,8 +321,8 @@ class TrendAnalystAgent(BaseAgent):
                             "related_queries": top_queries
                         }
                     
-                    # Rate limit: sleep 2 seconds between requests
-                    time.sleep(2)
+                    # Rate limit: async sleep to avoid blocking the event loop
+                    await asyncio.sleep(2)
                     
                 except Exception as e:
                     logger.warning(f"Failed to fetch trends for '{keyword}': {e}")

@@ -53,10 +53,18 @@ Provide a detailed order processing plan."""
                     {}
                 )
             
+            order_plan = response.get("text", "Order processing plan")
+            
+            # Publish curated findings for downstream agents (e.g., Notifier)
+            await self.publish_findings(request.workflow_id, {
+                "order_created": True,
+                "plan_summary": order_plan[:500] if len(order_plan) > 500 else order_plan
+            })
+            
             return AgentResponse(
                 agent_name=self.name,
                 success=True,
-                data={"plan": response.get("text", "Order processing plan")}
+                data={"plan": order_plan}
             )
             
         except Exception as e:

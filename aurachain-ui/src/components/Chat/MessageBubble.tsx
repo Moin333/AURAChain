@@ -1,7 +1,7 @@
 // aurachain-ui/src/components/Chat/MessageBubble.tsx
 import React from 'react';
 import { clsx } from 'clsx';
-import { BrainCircuit, Clock, CheckCircle2 } from 'lucide-react';
+import { BrainCircuit, Clock, CheckCircle2, FileBarChart, ChevronRight } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
 export interface Message {
@@ -9,17 +9,17 @@ export interface Message {
   sender: 'user' | 'ai';
   text: string;
   timestamp: string;
-  type: 'text' | 'analysis' | 'agent_result'; 
+  type: 'text' | 'analysis' | 'agent_result' | 'report';
   status?: 'processing' | 'completed' | 'failed';
   metadata?: {
-    title?: string;  
+    title?: string;
     agents?: string[];
     progress?: number;
     data?: any;
-    agent?: string; 
+    agent?: string;
     summary?: string;
-    success?: boolean; 
-    error?: string; 
+    success?: boolean;
+    error?: string;
     displayText?: string;
     agentResults?: Record<string, {
       success: boolean;
@@ -36,7 +36,7 @@ interface MessageBubbleProps {
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.sender === 'user';
-  const { setSelectedAgent, setRightPanelOpen } = useUIStore();
+  const { setSelectedAgent, setRightPanelOpen, fetchReport } = useUIStore();
 
   if (message.type === 'analysis') {
     const isPlan = !!message.metadata?.agents;
@@ -47,11 +47,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           <BrainCircuit size={14} className="mr-2" />
           Orchestrator Plan
         </div>
-        
-        <div 
+
+        <div
           onClick={() => {
             if (isPlan) {
-              setSelectedAgent(null); 
+              setSelectedAgent(null);
               setRightPanelOpen(true);
             }
           }}
@@ -62,8 +62,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         >
           <div className={clsx(
             "absolute left-0 top-0 bottom-0 w-1 transition-colors",
-            message.status === 'processing' ? "bg-accent-amber" : 
-            message.status === 'failed' ? "bg-red-500" : "bg-accent-teal"
+            message.status === 'processing' ? "bg-accent-amber" :
+              message.status === 'failed' ? "bg-red-500" : "bg-accent-teal"
           )} />
 
           <div className="p-5 pl-6">
@@ -73,61 +73,124 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                   {message.text}
                 </h4>
                 <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
-                  {isPlan 
-                    ? "Executing agent workflow..." 
+                  {isPlan
+                    ? "Executing agent workflow..."
                     : message.metadata?.summary || "Click to view detailed analysis"
                   }
                 </p>
               </div>
-              
+
               <div className={clsx(
                 "p-1.5 rounded-lg transition-colors",
-                message.status === 'processing' 
-                    ? "bg-amber-50 dark:bg-amber-900/20 text-accent-amber" 
-                    : message.status === 'failed'
+                message.status === 'processing'
+                  ? "bg-amber-50 dark:bg-amber-900/20 text-accent-amber"
+                  : message.status === 'failed'
                     ? "bg-red-50 dark:bg-red-900/20 text-red-500"
                     : "bg-teal-50 dark:bg-teal-900/20 text-accent-teal"
               )}>
                 {message.status === 'processing' ? (
-                    <Clock size={18} className="animate-spin" />
+                  <Clock size={18} className="animate-spin" />
                 ) : (
-                    <CheckCircle2 size={18} />
+                  <CheckCircle2 size={18} />
                 )}
               </div>
             </div>
-            
-            {(message.status === 'processing' || isPlan) && (
-                <div className="space-y-3">
-                    <div className="flex items-center justify-between text-xs font-medium">
-                        <span className="flex items-center text-slate-500 dark:text-zinc-500">
-                            {message.status === 'processing' ? "Processing..." : "Workflow Progress"}
-                        </span>
-                        <span className="text-slate-600 dark:text-zinc-400">{message.metadata?.progress}%</span>
-                    </div>
-                    
-                    <div className="w-full bg-slate-100 dark:bg-zinc-800 rounded-full h-1.5 overflow-hidden">
-                        <div 
-                            className={clsx(
-                                "h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden",
-                                message.status === 'processing' ? "bg-accent-amber" : "bg-accent-teal"
-                            )}
-                            style={{ width: `${message.metadata?.progress}%` }}
-                        >
-                            <div className="absolute inset-0 bg-white/30 w-full h-full animate-[shimmer_1.5s_infinite]"></div>
-                        </div>
-                    </div>
 
-                    {isPlan && message.metadata?.agents && (
-                        <div className="pt-3 mt-1 border-t border-slate-100 dark:border-zinc-800 flex flex-wrap gap-2">
-                            {message.metadata.agents.map((agent, idx) => (
-                                <span key={idx} className="text-[10px] uppercase font-bold tracking-wider text-slate-500 dark:text-zinc-500 bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded">
-                                    {agent}
-                                </span>
-                            ))}
-                        </div>
-                    )}
+            {(message.status === 'processing' || isPlan) && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-xs font-medium">
+                  <span className="flex items-center text-slate-500 dark:text-zinc-500">
+                    {message.status === 'processing' ? "Processing..." : "Workflow Progress"}
+                  </span>
+                  <span className="text-slate-600 dark:text-zinc-400">{message.metadata?.progress}%</span>
                 </div>
+
+                <div className="w-full bg-slate-100 dark:bg-zinc-800 rounded-full h-1.5 overflow-hidden">
+                  <div
+                    className={clsx(
+                      "h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden",
+                      message.status === 'processing' ? "bg-accent-amber" : "bg-accent-teal"
+                    )}
+                    style={{ width: `${message.metadata?.progress}%` }}
+                  >
+                    <div className="absolute inset-0 bg-white/30 w-full h-full animate-[shimmer_1.5s_infinite]"></div>
+                  </div>
+                </div>
+
+                {isPlan && message.metadata?.agents && (
+                  <div className="pt-3 mt-1 border-t border-slate-100 dark:border-zinc-800 flex flex-wrap gap-2">
+                    {message.metadata.agents.map((agent, idx) => (
+                      <span key={idx} className="text-[10px] uppercase font-bold tracking-wider text-slate-500 dark:text-zinc-500 bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded">
+                        {agent}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             )}
+          </div>
+        </div>
+        <span className="text-[10px] text-slate-400 dark:text-zinc-600 ml-1 mt-2 block">{message.timestamp}</span>
+      </div>
+    );
+  }
+
+  // ── Report Card ──
+  if (message.type === 'report') {
+    const confidence = message.metadata?.data?.overall_confidence || 0;
+    const workflowId = message.metadata?.data?.workflow_id;
+    const pct = Math.round(confidence * 100);
+    const barColor = pct >= 80 ? 'bg-accent-teal' : pct >= 60 ? 'bg-accent-amber' : 'bg-red-500';
+
+    return (
+      <div className="mb-8 max-w-[85%] animate-fade-in-up">
+        <div className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 mb-2 ml-1 uppercase tracking-wider">
+          <FileBarChart size={14} className="mr-2" />
+          Executive Report
+        </div>
+        <div
+          onClick={() => {
+            if (workflowId) {
+              fetchReport(workflowId);
+              setSelectedAgent('__report__');
+              setRightPanelOpen(true);
+            }
+          }}
+          className="group relative bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-700 rounded-xl shadow-sm-light dark:shadow-none hover:shadow-md-light dark:hover:shadow-none hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer transition-all overflow-hidden"
+        >
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-500" />
+
+          <div className="p-5 pl-6">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h4 className="font-heading font-semibold text-lg text-slate-800 dark:text-zinc-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  📊 Executive Report Ready
+                </h4>
+                <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">
+                  Multi-agent analysis complete
+                </p>
+              </div>
+              <div className="p-1.5 bg-primary-50 dark:bg-primary-900/20 text-primary-500 rounded-lg">
+                <CheckCircle2 size={18} />
+              </div>
+            </div>
+
+            {/* Confidence bar */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs font-medium">
+                <span className="text-slate-500 dark:text-zinc-500">Overall Confidence</span>
+                <span className="text-slate-600 dark:text-zinc-400 font-bold">{pct}%</span>
+              </div>
+              <div className="w-full bg-slate-100 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+                <div className={`h-full rounded-full transition-all duration-1000 ${barColor}`} style={{ width: `${pct}%` }} />
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
+              <span className="text-xs text-primary-500 font-semibold group-hover:text-primary-600 transition-colors">View Full Report</span>
+              <ChevronRight size={14} className="text-primary-500 group-hover:translate-x-1 transition-transform" />
+            </div>
           </div>
         </div>
         <span className="text-[10px] text-slate-400 dark:text-zinc-600 ml-1 mt-2 block">{message.timestamp}</span>
@@ -138,7 +201,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   return (
     <div className={clsx("flex w-full mb-6 animate-fade-in-up", isUser ? "justify-end" : "justify-start")}>
       <div className={clsx("max-w-[75%] flex flex-col", isUser ? "items-end" : "items-start")}>
-        
+
         {!isUser && (
           <span className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 mb-1.5 ml-1 uppercase tracking-wider">
             <BrainCircuit size={12} className="mr-1.5" />
@@ -148,13 +211,13 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
 
         <div className={clsx(
           "px-5 py-3.5 text-[15px] leading-relaxed shadow-sm-light dark:shadow-none",
-          isUser 
-            ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm" 
+          isUser
+            ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm"
             : "bg-light-elevated dark:bg-dark-elevated border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-200 rounded-2xl rounded-tl-sm"
         )}>
           {message.metadata?.displayText || message.text}
         </div>
-        
+
         <span className={clsx("text-[10px] text-slate-400 dark:text-zinc-600 mt-1.5", isUser ? "mr-1" : "ml-1")}>
           {message.timestamp}
         </span>

@@ -102,6 +102,14 @@ Provide chart specification in JSON format."""
             # Generate chart using plotly
             fig = self._create_chart(df, chart_spec)
             
+            # Publish curated findings for downstream agents
+            await self.publish_findings(request.workflow_id, {
+                "chart_type": chart_spec.get("chart_type", "unknown"),
+                "title": chart_spec.get("title", ""),
+                "x_axis": chart_spec.get("x_axis", ""),
+                "y_axis": chart_spec.get("y_axis", "")
+            })
+            
             return AgentResponse(
                 agent_name=self.name,
                 success=True,

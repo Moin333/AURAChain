@@ -33,14 +33,10 @@ class QueryResponse(BaseModel):
 @router.post("/query", response_model=QueryResponse)
 async def process_query(request: QueryRequest, background_tasks: BackgroundTasks):
     """
-    NEW BEHAVIOR: Returns plan immediately, executes agents in background
+    Returns plan immediately, executes agents in background.
     
-    Timeline:
-    1. T+0ms:   Receive request
-    2. T+50ms:  Create orchestration plan (fast - just LLM call)
-    3. T+100ms: Return plan to client
-    4. T+100ms: Start background task
-    5. T+200ms+ SSE events stream agent progress
+    Phase 3: Plan now includes execution_levels for parallel dispatch,
+    cost estimates, and structured intent analysis.
     """
     try:
         request_id = str(uuid.uuid4())
@@ -93,7 +89,7 @@ async def process_query(request: QueryRequest, background_tasks: BackgroundTasks
             parameters=request.parameters
         )
         
-        # ===== PHASE 1: CREATE PLAN (FAST - Returns in <200ms) =====
+        # ===== CREATE PLAN (IntentAnalyzer + WorkflowPlanner) =====
         logger.info(f"🧠 Creating orchestration plan...")
         orchestrator_response = await orchestrator.create_plan(agent_request)
         
@@ -108,7 +104,10 @@ async def process_query(request: QueryRequest, background_tasks: BackgroundTasks
         
         plan = orchestrator_response.data["plan"]
         
-        logger.info(f"✅ Plan created: {len(plan.get('agents', []))} agents assigned")
+        n_agents = len(plan.get('agents', []))
+        n_levels = len(plan.get('execution_levels', []))
+        est_ms = plan.get('estimated_duration_ms', 0)
+        logger.info(f"✅ Plan created: {n_agents} agents in {n_levels} levels (~{est_ms}ms)")
         
         # Save query to session
         await session_manager.add_message(
@@ -117,7 +116,7 @@ async def process_query(request: QueryRequest, background_tasks: BackgroundTasks
             request.query
         )
         
-        # ===== PHASE 2: EXECUTE IN BACKGROUND (SLOW - Runs async) =====
+        # ===== EXECUTE IN BACKGROUND (parallel by levels) =====
         background_tasks.add_task(
             execute_workflow_background,
             plan=plan,
@@ -132,7 +131,7 @@ async def process_query(request: QueryRequest, background_tasks: BackgroundTasks
             request_id=request_id,
             session_id=request.session_id,
             orchestration_plan=plan,
-            message="Orchestration plan created. Agents executing in background.",
+            message=f"Plan created: {n_agents} agents in {n_levels} parallel levels. Executing in background.",
             status="executing"
         )
         

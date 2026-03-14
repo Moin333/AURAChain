@@ -63,6 +63,13 @@ class NotifierAgent(BaseAgent):
             if not success:
                 logger.warning("Discord notification failed, falling back to log")
             
+            # Publish curated findings for workflow completeness
+            await self.publish_findings(request.workflow_id, {
+                "notification_sent": success,
+                "channel": "discord" if success else "log",
+                "notification_type": notification_type
+            })
+            
             return AgentResponse(
                 agent_name=self.name,
                 success=True,
