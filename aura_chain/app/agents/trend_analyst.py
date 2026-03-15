@@ -38,6 +38,61 @@ class TrendAnalystAgent(BaseAgent):
     
     def should_reason(self) -> bool:
         return True
+        
+    def should_react(self) -> bool:
+        return True
+        
+    def get_react_tools(self) -> List[str]:
+        return ["sql_query", "demand_velocity", "fetch_global_trends", "correlation_analysis"]
+
+    async def _run_react_loop(self, request: AgentRequest) -> AgentResponse:
+        """Phase 5: Execute full ReAct loop instead of procedural process()"""
+        logger.info(f"Starting autonomous ReAct loop for TrendAnalyst.")
+        
+        # Override the request query to enforce the output format
+        enforced_query = (
+            f"Original query: {request.query}\n"
+            "Use your tools to analyze the datasets internal trends and external Google trends. "
+            "You MUST output your Final Answer exactly in this JSON schema:\n"
+            "{\n"
+            '  "trend_directions": {"metric_col": "increasing or decreasing or stable"},\n'
+            '  "volatility": {"metric_col": "high or medium or low"},\n'
+            '  "market_sentiment": "active or neutral",\n'
+            '  "external_keywords": ["keyword1", "keyword2"],\n'
+            '  "insights": "Detailed human readable markdown analysis string"\n'
+            "}"
+        )
+        
+        react_request = AgentRequest(
+            query=enforced_query,
+            context=request.context,
+            session_id=request.session_id,
+            user_id=request.user_id,
+            workflow_id=request.workflow_id
+        )
+        
+        response = await super()._run_react_loop(react_request)
+        
+        if response.success and response.data:
+            trend_findings = {
+                "trend_directions": response.data.get("trend_directions", {}),
+                "volatility": response.data.get("volatility", {}),
+                "market_sentiment": response.data.get("market_sentiment", "neutral"),
+                "external_keywords": response.data.get("external_keywords", [])
+            }
+            await self.publish_findings(request.workflow_id, trend_findings)
+            
+            response.data = {
+                "insights": response.data.get("insights", "Analysis complete."),
+                "analysis": trend_findings,
+                "metadata": {
+                    "analysis_date": pd.Timestamp.now().isoformat(),
+                    "data_points_analyzed": len(request.context.get("dataset", [])),
+                    "mode": "ReAct_Autonomous"
+                }
+            }
+            
+        return response
     
     def evaluate_output(self, output: Dict, request: AgentRequest) -> tuple[float, list]:
         """Check trend analysis output quality."""
@@ -87,10 +142,9 @@ class TrendAnalystAgent(BaseAgent):
                     {"rows": len(df)}
                 )
             
-            # 1. Internal statistical analysis
-            internal_trends = self._analyze_internal_trends(df)
+            from app.core.trend_engine import LayeredTrendEngine
             
-            # Notify keyword extraction
+            # Extract keywords first
             if request.session_id:
                 await streaming_service.publish_agent_progress(
                     request.session_id,
@@ -100,21 +154,20 @@ class TrendAnalystAgent(BaseAgent):
                     {}
                 )
             
-            # 2. Extract product keywords for external search
             keywords = self._extract_keywords(df, request.query)
             
-            # Notify external analysis
+            # Run Layered Trend Engine
             if request.session_id:
                 await streaming_service.publish_agent_progress(
                     request.session_id,
                     self.name,
                     60,
-                    f"Fetching Google Trends for {len(keywords)} keywords...",
+                    f"Running Layered Trend Engine for keywords {keywords}...",
                     {"keywords": keywords}
                 )
-            
-            # 3. Fetch external market trends
-            external_trends = await self._analyze_external_trends(keywords)
+                
+            engine = LayeredTrendEngine(self)
+            combined_analysis = await engine.analyze(df, keywords)
             
             # Notify LLM analysis
             if request.session_id:
@@ -125,15 +178,8 @@ class TrendAnalystAgent(BaseAgent):
                     "Generating insights...",
                     {}
                 )
-                
-            # 4. Combine and interpret
-            combined_analysis = {
-                "internal_trends": internal_trends,
-                "external_trends": external_trends,
-                "keywords_analyzed": keywords
-            }
             
-            # 5. Get LLM insights
+            # Get LLM insights
             insights = await self._get_insights(combined_analysis, request.query)
             
             # Publish curated findings for downstream agents
@@ -142,12 +188,16 @@ class TrendAnalystAgent(BaseAgent):
                 "volatility": {},
                 "market_sentiment": "neutral"
             }
-            for col, trend_data in internal_trends.items():
+            
+            internal_stats = combined_analysis.get("internal_statistics", {})
+            for col, trend_data in internal_stats.items():
                 trend_findings["trend_directions"][col] = trend_data.get("trend_direction", "unknown")
                 trend_findings["volatility"][col] = trend_data.get("volatility", "unknown")
-            if external_trends:
+                
+            external_trends = combined_analysis.get("external_market_trends", {})
+            if external_trends and not external_trends.get("error"):
                 trend_findings["market_sentiment"] = "active"
-                trend_findings["external_keywords"] = keywords
+            trend_findings["external_keywords"] = keywords
             
             await self.publish_findings(request.workflow_id, trend_findings)
             
@@ -173,74 +223,6 @@ class TrendAnalystAgent(BaseAgent):
                 error=str(e)
             )
     
-    def _analyze_internal_trends(self, df: pd.DataFrame) -> Dict:
-        """Analyze internal data patterns"""
-        numeric_cols = df.select_dtypes(include=[np.number]).columns
-        
-        trends = {}
-        
-        # --- HELPER: Sanitize NaN/Inf for JSON ---
-        def safe_float(val: Any) -> float:
-            try:
-                if pd.isna(val) or np.isinf(val):
-                    return 0.0
-                return float(val)
-            except:
-                return 0.0
-
-        for col in numeric_cols:
-            series = df[col].dropna()
-            
-            if len(series) < 2:
-                continue
-            
-            # Linear regression for trend
-            x = np.arange(len(series))
-            # Catch warnings for constant data
-            try:
-                slope, intercept, r_value, p_value, std_err = stats.linregress(x, series)
-            except Exception:
-                slope, intercept, r_value, p_value, std_err = 0, 0, 0, 1, 0
-            
-            # Calculate additional metrics
-            mean_val = series.mean()
-            std_val = series.std()
-            cv = (std_val / mean_val) * 100 if mean_val != 0 else 0  # Coefficient of variation
-            
-            # Detect anomalies (values > 2 std from mean)
-            z_scores = np.abs(stats.zscore(series))
-            # Handle NaN z-scores (constant data)
-            if np.isnan(z_scores).all():
-                anomalies = 0
-            else:
-                anomalies = (z_scores > 2).sum()
-            
-            # Growth rate (first to last)
-            if len(series) > 1 and series.iloc[0] != 0:
-                growth_rate = ((series.iloc[-1] - series.iloc[0]) / series.iloc[0]) * 100
-            else:
-                growth_rate = 0
-            
-            trends[col] = {
-                "trend_direction": "increasing" if slope > 0 else "decreasing",
-                "slope": safe_float(slope),
-                "r_squared": safe_float(r_value ** 2),
-                "p_value": safe_float(p_value),
-                "significance": "significant" if p_value < 0.05 else "not significant",
-                "statistics": {
-                    "mean": safe_float(mean_val),
-                    "std": safe_float(std_val),
-                    "coefficient_of_variation": safe_float(cv),
-                    "min": safe_float(series.min()),
-                    "max": safe_float(series.max()),
-                    "growth_rate_pct": safe_float(growth_rate)
-                },
-                "anomalies_detected": int(anomalies),
-                "volatility": "high" if cv > 30 else "medium" if cv > 15 else "low"
-            }
-        
-        return trends
-    
     def _extract_keywords(self, df: pd.DataFrame, query: str) -> List[str]:
         """Extract product/category keywords from data"""
         keywords = []
@@ -265,78 +247,7 @@ class TrendAnalystAgent(BaseAgent):
         keywords = [k for k in keywords if len(str(k)) > 2]
         
         return keywords if keywords else ["market trends"]
-    
-    async def _analyze_external_trends(self, keywords: List[str]) -> Dict:
-        """Fetch Google Trends data"""
-        if not keywords:
-            return {}
-        
-        try:
-            # Initialize pytrends
-            if self.pytrends is None:
-                self.pytrends = TrendReq(hl='en-US', tz=360)
-            
-            trends_data = {}
-            
-            for keyword in keywords[:3]:  # Limit to 3 keywords to avoid rate limits
-                try:
-                    logger.info(f"Fetching Google Trends for: {keyword}")
-                    
-                    # Build payload
-                    self.pytrends.build_payload(
-                        [str(keyword)],
-                        cat=0,
-                        timeframe='today 3-m',  # Last 3 months
-                        geo='IN'  # India
-                    )
-                    
-                    # Get interest over time
-                    interest_df = self.pytrends.interest_over_time()
-                    
-                    if not interest_df.empty and str(keyword) in interest_df.columns:
-                        series = interest_df[str(keyword)]
-                        
-                        # Calculate trend
-                        current = series.iloc[-1]
-                        previous = series.iloc[0]
-                        change_pct = ((current - previous) / previous * 100) if previous != 0 else 0
-                        
-                        # Get related queries
-                        try:
-                            related = self.pytrends.related_queries()
-                            top_queries = []
-                            if str(keyword) in related and 'top' in related[str(keyword)]:
-                                top_df = related[str(keyword)]['top']
-                                if not top_df.empty:
-                                    top_queries = top_df['query'].head(5).tolist()
-                        except:
-                            top_queries = []
-                        
-                        trends_data[str(keyword)] = {
-                            "current_interest": int(current),
-                            "trend": "increasing" if change_pct > 5 else "decreasing" if change_pct < -5 else "stable",
-                            "change_percentage": float(change_pct),
-                            "average_interest": float(series.mean()),
-                            "peak_interest": int(series.max()),
-                            "related_queries": top_queries
-                        }
-                    
-                    # Rate limit: async sleep to avoid blocking the event loop
-                    await asyncio.sleep(2)
-                    
-                except Exception as e:
-                    logger.warning(f"Failed to fetch trends for '{keyword}': {e}")
-                    continue
-            
-            if trends_data:
-                logger.info(f"Successfully fetched trends for {len(trends_data)} keywords")
-            
-            return trends_data
-            
-        except Exception as e:
-            logger.warning(f"External trends analysis failed: {e}")
-            return {}
-    
+
     async def _get_insights(self, analysis: Dict, query: str) -> Dict:
         """Generate insights using LLM"""
         

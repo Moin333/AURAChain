@@ -1,10 +1,45 @@
 from typing import Dict, Any, List
 import pandas as pd
 import numpy as np
+import duckdb
 from loguru import logger
 
 class DataTools:
     """Collection of data manipulation tools"""
+    
+    @staticmethod
+    async def sql_query(
+        df: pd.DataFrame,
+        query: str
+    ) -> pd.DataFrame:
+        """
+        Run a SQL query on the dataset using DuckDB.
+        The dataframe is accessible as a table named 'df'.
+        
+        Tool definition for LLM:
+        {
+            "name": "sql_query",
+            "description": "Execute a SQL query against the dataset (table name relates to 'df')",
+            "parameters": {
+                "query": "SELECT category, SUM(sales) FROM df GROUP BY category"
+            }
+        }
+        """
+        try:
+            import asyncio
+            loop = asyncio.get_event_loop()
+            
+            def _execute_query():
+                # duckdb requires treating the local df variable as a table
+                return duckdb.query(query).df()
+                
+            result_df = await loop.run_in_executor(None, _execute_query)
+            logger.info(f"Executed SQL query returning {len(result_df)} rows")
+            return result_df
+            
+        except Exception as e:
+            logger.error(f"SQL query error: {str(e)}")
+            raise
     
     @staticmethod
     async def filter_data(

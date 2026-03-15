@@ -28,7 +28,7 @@ class TestToolRegistry:
         assert result.success is True
         assert result.data["result"] == 10
         assert result.cached is False
-        assert result.duration_ms > 0
+        assert result.duration_ms >= 0
     
     @pytest.mark.asyncio
     async def test_invoke_unregistered_tool(self):

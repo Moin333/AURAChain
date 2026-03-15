@@ -15,8 +15,10 @@ Instead of direct function calls. This enables:
 import json
 import hashlib
 import time
+import pandas as pd
+from collections import deque
 import redis.asyncio as redis
-from typing import Dict, Any, List, Optional, Callable
+from typing import Dict, Any, List, Optional, Callable, Literal
 from pydantic import BaseModel
 from loguru import logger
 from app.config import get_settings
@@ -50,6 +52,12 @@ class ToolInfo(BaseModel):
     description: str
     parameters: Dict[str, Any]
     cacheable: bool = True
+    requires_approval: bool = False
+    approval_callback: Optional[Callable] = None
+    cost_type: Literal["zero", "compute", "network"] = "zero"
+    avg_latency_ms: float = 0.0
+    success_rate: float = 1.0
+    fallback_tool: Optional[str] = None
 
 
 class ToolRegistry:
@@ -65,6 +73,7 @@ class ToolRegistry:
         self._tool_info: Dict[str, ToolInfo] = {}
         self._redis_client: Optional[redis.Redis] = None
         self._call_count: Dict[str, int] = {}
+        self._success_window: Dict[str, deque] = {}
         self._cache_hits: int = 0
         self._total_calls: int = 0
     
@@ -88,7 +97,11 @@ class ToolRegistry:
         func: Callable,
         description: str = "",
         parameters: Dict[str, Any] = None,
-        cacheable: bool = True
+        cacheable: bool = True,
+        requires_approval: bool = False,
+        approval_callback: Optional[Callable] = None,
+        cost_type: Literal["zero", "compute", "network"] = "zero",
+        fallback_tool: Optional[str] = None
     ) -> None:
         """Register a tool with the registry."""
         self._tools[name] = func
@@ -96,16 +109,31 @@ class ToolRegistry:
             name=name,
             description=description,
             parameters=parameters or {},
-            cacheable=cacheable
+            cacheable=cacheable,
+            requires_approval=requires_approval,
+            approval_callback=approval_callback,
+            cost_type=cost_type,
+            fallback_tool=fallback_tool
         )
         self._call_count[name] = 0
+        self._success_window[name] = deque(maxlen=20)
         logger.debug(f"📦 Tool registered: {name}")
     
+    async def _request_approval(self, name: str, kwargs: Dict[str, Any]):
+        """Request human approval before executing sensitive tool."""
+        tool_info = self._tool_info[name]
+        logger.info(f"Tool {name} awaiting approval")
+        if tool_info.approval_callback:
+            await tool_info.approval_callback(name, kwargs)
+        else:
+            import asyncio
+            await asyncio.sleep(1)  # mock approval
+
     async def invoke(self, name: str, **kwargs) -> ToolResult:
         """
         Invoke a registered tool by name.
         
-        Handles: logging, caching, error recovery (1 retry).
+        Handles: logging, caching, error recovery (1 retry), performance tracking.
         """
         if name not in self._tools:
             return ToolResult(
@@ -116,9 +144,12 @@ class ToolRegistry:
         
         self._total_calls += 1
         self._call_count[name] = self._call_count.get(name, 0) + 1
+        tool_info = self._tool_info[name]
+
+        if tool_info.requires_approval:
+            await self._request_approval(name, kwargs)
         
         # Check cache for cacheable tools
-        tool_info = self._tool_info[name]
         cache_key = None
         if tool_info.cacheable and self._redis_client:
             cache_key = self._cache_key(name, kwargs)
@@ -135,17 +166,29 @@ class ToolRegistry:
         
         # Execute with retry (1 retry on failure)
         for attempt in range(1, 3):
-            start = time.time()
+            start = time.perf_counter()
             try:
                 func = self._tools[name]
-                result = await func(**kwargs)
-                duration_ms = (time.time() - start) * 1000
+                import inspect
+                if inspect.iscoroutinefunction(func):
+                    result = await func(**kwargs)
+                else:
+                    result = func(**kwargs)
+                duration_ms = (time.perf_counter() - start) * 1000
                 
                 logger.info(
                     f"🔧 Tool {name}: {duration_ms:.0f}ms "
                     f"(attempt {attempt})"
                 )
                 
+                # Update metrics
+                alpha = 0.1
+                tool_info.avg_latency_ms = alpha * duration_ms + (1 - alpha) * tool_info.avg_latency_ms
+                window = self._success_window.get(name)
+                if window is not None:
+                    window.append(1)
+                    tool_info.success_rate = sum(window) / len(window)
+
                 # Cache result
                 if cache_key and self._redis_client:
                     await self._set_cached(cache_key, result)
@@ -158,13 +201,22 @@ class ToolRegistry:
                 )
                 
             except Exception as e:
-                duration_ms = (time.time() - start) * 1000
+                duration_ms = (time.perf_counter() - start) * 1000
                 if attempt < 2:
                     logger.warning(
                         f"⚠️ Tool {name} failed ({duration_ms:.0f}ms), retrying: {e}"
                     )
                 else:
                     logger.error(f"❌ Tool {name} failed after retry: {e}")
+                    
+                    # Update metrics on failure
+                    alpha = 0.1
+                    tool_info.avg_latency_ms = alpha * duration_ms + (1 - alpha) * tool_info.avg_latency_ms
+                    window = self._success_window.get(name)
+                    if window is not None:
+                        window.append(0)
+                        tool_info.success_rate = sum(window) / len(window)
+                        
                     return ToolResult(
                         tool_name=name,
                         success=False,
@@ -194,10 +246,21 @@ class ToolRegistry:
         }
     
     def _cache_key(self, tool_name: str, kwargs: Dict) -> str:
-        """Create a cache key from tool name + args hash."""
-        # Only hash serializable args
+        """Create a cache key using DataFrame-aware hashing."""
+        def _df_key(df: pd.DataFrame) -> str:
+            return hashlib.sha256(
+                pd.util.hash_pandas_object(df, index=True).values.tobytes()
+            ).hexdigest()[:16]
+
+        hashable_args = {}
+        for k, v in kwargs.items():
+            if isinstance(v, pd.DataFrame):
+                hashable_args[k] = _df_key(v)
+            else:
+                hashable_args[k] = v
+
         try:
-            args_str = json.dumps(kwargs, sort_keys=True, default=str)
+            args_str = json.dumps(hashable_args, sort_keys=True, default=str)
         except (TypeError, ValueError):
             return ""
         
@@ -237,6 +300,12 @@ def register_default_tools():
     from app.tools.data_tools import DataTools
     
     tool_registry.register(
+        "auto_eda",
+        AnalysisTools.auto_eda,
+        description="Automatically profile the dataset for schema, nulls, skewness, and cardinality",
+        parameters={"df": "DataFrame"}
+    )
+    tool_registry.register(
         "detect_outliers",
         AnalysisTools.detect_outliers,
         description="Detect outliers in data using IQR or Z-score",
@@ -266,6 +335,24 @@ def register_default_tools():
         DataTools.aggregate_data,
         description="Group and aggregate data",
         parameters={"df": "DataFrame", "group_by": "List[str]", "aggregations": "Dict"}
+    )
+    tool_registry.register(
+        "demand_velocity",
+        AnalysisTools.demand_velocity,
+        description="Calculate rolling sales velocity or demand pacing",
+        parameters={"df": "DataFrame", "date_column": "str", "value_column": "str", "freq": "str"}
+    )
+    tool_registry.register(
+        "sql_query",
+        DataTools.sql_query,
+        description="Run a SQL query against the dataset using DuckDB",
+        parameters={"df": "DataFrame", "query": "str"}
+    )
+    tool_registry.register(
+        "fetch_global_trends",
+        AnalysisTools.fetch_global_trends,
+        description="Fetch external market trends from Google Trends for a list of keywords.",
+        parameters={"keywords": "List[str]"}
     )
     
     logger.info(f"📦 {len(tool_registry._tools)} tools registered")

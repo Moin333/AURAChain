@@ -7,6 +7,7 @@ from app.core.streaming import streaming_service
 from loguru import logger
 import math
 import numpy as np
+import json
 
 
 class ConfidenceScore(BaseModel):
@@ -77,6 +78,17 @@ class BaseAgent(ABC):
             from app.core.tool_registry import tool_registry
             self._tools_registry = tool_registry
         return self._tools_registry
+        
+    async def execute_tool(self, tool_name: str, **kwargs) -> Any:
+        """
+        Execute a tool from the ToolRegistry.
+        This serves as the single proxy layer for all LLM-driven or hardcoded computation tasks.
+        """
+        result = await self.tools_registry.invoke(tool_name, **kwargs)
+        
+        if result.error:
+            raise RuntimeError(f"Tool '{tool_name}' failed: {result.error}")
+        return result.result
     
     async def log_reasoning(
         self,
@@ -119,8 +131,16 @@ class BaseAgent(ABC):
     # ── Reasoning Loop (opt-in) ──
     
     def should_reason(self) -> bool:
-        """Override to enable reasoning loop. Default: False (single-shot)."""
+        """Override to enable evaluation loop. Default: False (single-shot)."""
         return False
+        
+    def should_react(self) -> bool:
+        """Override to enable ReAct loop. Default: False (procedural)."""
+        return False
+        
+    def get_react_tools(self) -> List[str]:
+        """Override to provide a list of tool names available in ReAct loop."""
+        return []
     
     def evaluate_output(self, output: Dict[str, Any], request: AgentRequest) -> tuple[float, List[str]]:
         """
@@ -253,6 +273,112 @@ class BaseAgent(ABC):
         )
         
         return best_result
+        
+    async def request_peer_assistance(self, request: AgentRequest, target_agent_name: str, query: str) -> str:
+        """Dynamically spawn another agent to answer a question, suspending current loop."""
+        from app.core.registry import get_agent
+        target_agent = get_agent(target_agent_name)
+        if not target_agent:
+            return f"Error: Agent '{target_agent_name}' not found."
+            
+        logger.info(f"🔄 {self.name} delegating to {target_agent_name}: '{query}'")
+        sub_request = AgentRequest(
+            query=query,
+            context=request.context,
+            session_id=request.session_id,
+            user_id=request.user_id,
+            workflow_id=request.workflow_id
+        )
+        response = await target_agent.execute_with_observability(sub_request)
+        if response.success:
+            return f"Response from {target_agent_name}:\n{json.dumps(self._sanitize_for_json(response.data))}"
+        return f"{target_agent_name} failed: {response.error}"
+
+    async def _run_react_loop(self, request: AgentRequest) -> AgentResponse:
+        """Main ReAct Loop execution simulating autonomous tool use."""
+        available_tools = self.get_react_tools()
+        system_prompt = self.get_system_prompt()
+        
+        system_prompt += "\n\nYou are operating in a ReAct (Reasoning and Acting) loop."
+        system_prompt += "\nYou have access to the following tools:\n"
+        
+        tool_schemas = []
+        for t in available_tools:
+            schema = self.tools_registry.get_tool_schema(t)
+            if schema:
+                tool_schemas.append(schema)
+                
+        system_prompt += json.dumps(tool_schemas, indent=2)
+        system_prompt += "\n\nYou also have a tool 'ask_peer' to request help from another agent. Args: {\"target_agent\": \"...\", \"query\": \"...\"}"
+        
+        system_prompt += "\n\nFormat your response exactly as follows:\n"
+        system_prompt += "Thought: <reasoning>\n"
+        system_prompt += "Action: <tool_name>\n"
+        system_prompt += "Action Input: <json payload>\n"
+        system_prompt += "OR to finish:\n"
+        system_prompt += "Thought: <final reasoning>\n"
+        system_prompt += "Final Answer: <json response payload>\n"
+        
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Query: {request.query}\nContext keys: {list(request.context.keys())}"}
+        ]
+        
+        max_iterations = 6
+        for i in range(max_iterations):
+            resp = await self.api_client.create_completion(self.model, messages)
+            response_text = resp["content"]
+            logger.info(f"🧠 {self.name} ReAct step {i}:\n{response_text}")
+            
+            messages.append({"role": "assistant", "content": response_text})
+            
+            if "Final Answer:" in response_text:
+                try:
+                    ans_text = response_text.split("Final Answer:")[1].strip()
+                    if ans_text.startswith("```json"):
+                        ans_text = ans_text[7:-3].strip()
+                    elif ans_text.startswith("```"):
+                        ans_text = ans_text[3:-3].strip()
+                    payload = json.loads(ans_text)
+                    return AgentResponse(agent_name=self.name, success=True, data=payload)
+                except Exception as e:
+                    messages.append({"role": "user", "content": f"Failed to parse Final Answer JSON: {e}"})
+                    continue
+                    
+            if "Action:" in response_text and "Action Input:" in response_text:
+                lines = response_text.split("\n")
+                action = next((l.split("Action:")[1].strip() for l in lines if l.startswith("Action:")), None)
+                in_action_input = False
+                action_input_lines = []
+                for line in lines:
+                    if line.startswith("Action Input:"):
+                        in_action_input = True
+                        action_input_lines.append(line.split("Action Input:")[1].strip())
+                    elif in_action_input and line and not line.startswith("Thought:") and not line.startswith("Action:"):
+                        action_input_lines.append(line)
+                
+                action_input_str = "\n".join(action_input_lines).strip()
+                if action_input_str.startswith("```json"): action_input_str = action_input_str[7:-3].strip()
+                if action_input_str.startswith("```"): action_input_str = action_input_str[3:-3].strip()
+                
+                if action and action_input_str:
+                    try:
+                        args = json.loads(action_input_str)
+                        if action == "ask_peer":
+                            obs = await self.request_peer_assistance(
+                                request, args.get("target_agent", ""), args.get("query", "")
+                            )
+                        else:
+                            obs = await self.execute_tool(action, **args)
+                        messages.append({"role": "user", "content": f"Observation: {json.dumps(self._sanitize_for_json(obs))[:2000]}"})
+                    except Exception as e:
+                        messages.append({"role": "user", "content": f"Observation Tool Error: {e}"})
+                else:
+                    messages.append({"role": "user", "content": "Format error: Need Action and Action Input lines."})
+            else:
+                messages.append({"role": "user", "content": "You must use an Action or output Final Answer."})
+                
+        return AgentResponse(agent_name=self.name, success=False, error="Max iterations reached in ReAct loop.")
     
     async def publish_findings(self, workflow_id: str, findings: dict) -> None:
         """Publish curated findings for downstream agents to consume."""
@@ -309,8 +435,10 @@ class BaseAgent(ABC):
                 {"args": str(request)[:100], "kwargs": "{}"}
             )
             
-            # Use reasoning loop if agent opts in, otherwise single-shot
-            if self.should_reason():
+            # Use ReAct loop if agent opts in, else reasoning, else single-shot
+            if self.should_react():
+                response = await self._run_react_loop(request)
+            elif self.should_reason():
                 response = await self.execute_with_reasoning(request)
             else:
                 response = await self.process(request)

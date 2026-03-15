@@ -1,0 +1,110 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.7, pytest-7.4.3, pluggy-1.6.0 -- C:\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dorem\Desktop\web-dev\AURAChain\aura_chain
+plugins: anyio-4.11.0, asyncio-0.21.1, cov-4.1.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 47 items
+
+tests/test_agents.py::TestAgentRegistry::test_register_agent PASSED      [  2%]
+tests/test_agents.py::TestAgentRegistry::test_duplicate_registration_skipped PASSED [  4%]
+tests/test_agents.py::TestAgentRegistry::test_name_normalization PASSED  [  6%]
+tests/test_agents.py::TestAgentRegistry::test_register_auto_with_capability PASSED [  8%]
+tests/test_agents.py::TestAgentRegistry::test_register_auto_without_capability_raises PASSED [ 10%]
+tests/test_agents.py::TestAgentRegistry::test_list_capabilities PASSED   [ 12%]
+tests/test_agents.py::TestEvaluationMetrics::test_data_harvester_metrics PASSED [ 14%]
+tests/test_agents.py::TestEvaluationMetrics::test_forecaster_mape_metric PASSED [ 17%]
+tests/test_agents.py::TestEvaluationMetrics::test_mcts_optimizer_cost_improvement PASSED [ 19%]
+tests/test_agents.py::TestEvaluationMetrics::test_unknown_agent_returns_empty PASSED [ 21%]
+tests/test_agents.py::TestEvaluationMetrics::test_visualizer_chart_validity PASSED [ 23%]
+tests/test_agents.py::TestWorkflowVisualizer::test_build_graph PASSED    [ 25%]
+tests/test_agents.py::TestWorkflowVisualizer::test_to_mermaid PASSED     [ 27%]
+tests/test_agents.py::TestWorkflowVisualizer::test_critical_path PASSED  [ 29%]
+tests/test_decision_system.py::TestDecisionMemory::test_record_and_retrieve_decision PASSED [ 31%]
+tests/test_decision_system.py::TestDecisionMemory::test_record_outcome PASSED [ 34%]
+tests/test_decision_system.py::TestDecisionMemory::test_decision_type_field PASSED [ 36%]
+tests/test_decision_system.py::TestExperimentLogger::test_log_experiment PASSED [ 38%]
+tests/test_decision_system.py::TestExperimentLogger::test_compare_experiments PASSED [ 40%]
+tests/test_decision_system.py::TestExperimentLogger::test_hash_dataset PASSED [ 42%]
+tests/test_decision_system.py::TestReasoningTrace::test_append_and_get_trace PASSED [ 44%]
+tests/test_decision_system.py::TestReasoningTrace::test_reasoning_entry_truncation PASSED [ 46%]
+tests/test_full_workflow.py::TestFullWorkflowE2E::test_query_returns_plan PASSED [ 48%]
+tests/test_full_workflow.py::TestFullWorkflowE2E::test_experiment_records_metrics_not_outputs PASSED [ 51%]
+tests/test_full_workflow.py::TestFullWorkflowE2E::test_decision_only_recorded_with_actions PASSED [ 53%]
+tests/test_full_workflow.py::TestFullWorkflowE2E::test_decision_recorded_with_recommendations PASSED [ 55%]
+tests/test_full_workflow.py::TestFullWorkflowE2E::test_visualization_of_e2e_plan PASSED [ 57%]
+tests/test_full_workflow.py::TestPerformance::test_workflow_visualization_speed PASSED [ 59%]
+tests/test_full_workflow.py::TestPerformance::test_tool_registry_cache_effectiveness PASSED [ 61%]
+tests/test_memory.py::TestToolRegistry::test_invoke_registered_tool PASSED [ 63%]
+tests/test_memory.py::TestToolRegistry::test_invoke_unregistered_tool PASSED [ 65%]
+tests/test_memory.py::TestToolRegistry::test_invoke_retry_on_failure PASSED [ 68%]
+tests/test_memory.py::TestToolRegistry::test_tool_stats PASSED           [ 70%]
+tests/test_memory.py::TestToolRegistry::test_list_tools PASSED           [ 72%]
+tests/test_memory.py::TestSemanticMemory::test_semantic_search_returns_relevant_facts PASSED [ 74%]
+tests/test_memory.py::TestSemanticMemory::test_get_embedding_model_fallback PASSED [ 76%]
+tests/test_reports.py::TestReportAPI::test_get_report_not_found PASSED   [ 78%]
+tests/test_reports.py::TestReportAPI::test_get_summary_not_found PASSED  [ 80%]
+tests/test_reports.py::TestExperimentAPI::test_list_experiments_empty PASSED [ 82%]
+tests/test_reports.py::TestDecisionAPI::test_list_decisions_empty PASSED [ 85%]
+tests/test_reports.py::TestDecisionAPI::test_get_decision_not_found PASSED [ 87%]
+tests/test_reports.py::TestDecisionAPI::test_decision_stats PASSED       [ 89%]
+tests/test_reports.py::TestVisualizationAPI::test_visualize_workflow PASSED [ 91%]
+tests/test_reports.py::TestFailureScenarios::test_circuit_breaker_opens_after_failures FAILED [ 93%]
+tests/test_reports.py::TestFailureScenarios::test_agent_timeout_produces_error_response PASSED [ 95%]
+tests/test_reports.py::TestFailureScenarios::test_tool_registry_retry_on_failure PASSED [ 97%]
+tests/test_reports.py::TestFailureScenarios::test_semantic_memory_fallback_on_no_model PASSED [100%]
+
+================================== FAILURES ===================================
+_______ TestFailureScenarios.test_circuit_breaker_opens_after_failures ________
+
+self = <tests.test_reports.TestFailureScenarios object at 0x0000029F18770A50>
+
+    @pytest.mark.asyncio
+    async def test_circuit_breaker_opens_after_failures(self):
+        from app.core.api_clients import CircuitBreaker
+        from collections import defaultdict
+    
+        cb = CircuitBreaker.__new__(CircuitBreaker)
+        cb.failure_threshold = 3
+        cb.cooldown_seconds = 60
+        cb._failures = defaultdict(int)
+        cb._open_since = {}
+        cb._latencies = defaultdict(list)
+        cb._error_counts = defaultdict(int)
+        cb._total_calls = defaultdict(int)
+        cb._total_errors = defaultdict(int)
+    
+        key = "groq:test-model"
+        for _ in range(3):
+            cb.record_failure(key, "test-model")
+    
+>       assert key in cb._open_since
+E       AssertionError: assert 'groq:test-model' in {'groq:test-model:test-model': 1773463531.8342814}
+E        +  where {'groq:test-model:test-model': 1773463531.8342814} = <app.core.api_clients.CircuitBreaker object at 0x0000029F3E66B410>._open_since
+
+tests\test_reports.py:139: AssertionError
+---------------------------- Captured stdout call -----------------------------
+2026-03-14 10:15:31 | WARNING  | app.core.api_clients:record_failure | \U0001f534 Circuit breaker OPEN for groq:test-model:test-model (3 consecutive failures)
+============================== warnings summary ===============================
+tests/test_agents.py::TestAgentRegistry::test_register_agent
+  C:\Users\Dorem\AppData\Roaming\Python\Python311\site-packages\jupyter_client\connect.py:22: DeprecationWarning: Jupyter is migrating its paths to use standard platformdirs
+  given by the platformdirs library.  To remove this warning and
+  see the appropriate new directories, set the environment variable
+  `JUPYTER_PLATFORM_DIRS=1` and then run `jupyter --paths`.
+  The use of platformdirs will be the default in `jupyter_core` v6
+    from jupyter_core.paths import jupyter_data_dir, jupyter_runtime_dir, secure_write
+
+tests/test_agents.py::TestAgentRegistry::test_register_agent
+  C:\Users\Dorem\Desktop\web-dev\AURAChain\aura_chain\app\core\streaming.py:6: DeprecationWarning: 
+  Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+  (to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+  but was not found to be installed on your system.
+  If this would cause problems for you,
+  please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+          
+    import pandas as pd
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_reports.py::TestFailureScenarios::test_circuit_breaker_opens_after_failures
+================== 1 failed, 46 passed, 2 warnings in 6.81s ===================

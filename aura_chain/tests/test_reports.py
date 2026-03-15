@@ -120,20 +120,24 @@ class TestFailureScenarios:
     @pytest.mark.asyncio
     async def test_circuit_breaker_opens_after_failures(self):
         from app.core.api_clients import CircuitBreaker
+        from collections import defaultdict
         
         cb = CircuitBreaker.__new__(CircuitBreaker)
         cb.failure_threshold = 3
         cb.cooldown_seconds = 60
-        cb._failures = {}
+        cb._failures = defaultdict(int)
         cb._open_since = {}
-        cb._latencies = {}
-        cb._error_counts = {}
+        cb._latencies = defaultdict(list)
+        cb._error_counts = defaultdict(int)
+        cb._total_calls = defaultdict(int)
+        cb._total_errors = defaultdict(int)
         
-        key = "groq:test-model"
+        key = "groq"
+        model = "test-model"
         for _ in range(3):
-            cb.record_failure(key)
+            cb.record_failure(key, model)
         
-        assert cb.is_open(key) is True
+        assert cb._key(key, model) in cb._open_since
     
     @pytest.mark.asyncio
     async def test_agent_timeout_produces_error_response(self):
@@ -183,7 +187,7 @@ class TestFailureScenarios:
         manager.redis_client = AsyncMock()
         
         # Mock get_memory
-        memory = Memory(user_id="u1")
+        memory = Memory(user_id="u1", last_updated="2024-01-01T00:00:00Z")
         memory.facts = {"fact1": "value1", "fact2": "value2"}
         manager.get_memory = AsyncMock(return_value=memory)
         

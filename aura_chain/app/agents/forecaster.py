@@ -11,6 +11,7 @@ import holidays
 import json
 from typing import Dict, List
 from datetime import datetime, timedelta
+import scipy.stats as stats
 from loguru import logger
 
 settings = get_settings()
@@ -33,10 +34,39 @@ class ForecasterAgent(BaseAgent):
             model=settings.FORECASTER_MODEL,
             api_client=groq_client
         )
-        self.indian_holidays = holidays.India(years=range(2020, 2030))
     
     def should_reason(self) -> bool:
         return True
+        
+    def should_react(self) -> bool:
+        return True
+        
+    def get_react_tools(self) -> List[str]:
+        return ["sql_query", "detect_outliers"]
+
+    async def _run_react_loop(self, request: AgentRequest) -> AgentResponse:
+        """Phase 5: Autonomous ReAct EDA + Procedural Core IP"""
+        logger.info(f"Starting autonomous ReAct pre-processing for Forecaster.")
+        
+        # 1. Run the base ReAct loop for EDA
+        eda_request = AgentRequest(
+            query=f"Analyze the dataset for anomalies using detect_outliers and sql_query. Provide a summary of data shape and anomalies before Prophet runs. Original query: {request.query}",
+            context=request.context,
+            session_id=request.session_id,
+            user_id=request.user_id,
+            workflow_id=request.workflow_id
+        )
+        eda_result = await super()._run_react_loop(eda_request)
+        
+        # 2. Run the procedural Prophet math
+        response = await self.process(request)
+        
+        # 3. Inject EDA findings
+        if eda_result.success and response.success and response.data:
+            if "interpretation" in response.data:
+                 response.data["interpretation"] = f"**Pre-processing EDA Findings:**\n{json.dumps(eda_result.data)}\n\n**Prophet Forecast:**\n" + response.data["interpretation"]
+                 
+        return response
     
     def evaluate_output(self, output: Dict, request: AgentRequest) -> tuple[float, list]:
         """Check forecast data quality and confidence scores."""
@@ -98,11 +128,20 @@ class ForecasterAgent(BaseAgent):
             # Generate forecasts for each numeric column
             forecasts_data = {}
             
+            # Extract locale from context or query
+            locale = "US"
+            query_lower = request.query.lower()
+            if "india" in query_lower or " in " in query_lower:
+                if "india" in query_lower: locale = "IN"
+                elif "uk" in query_lower: locale = "UK"
+                elif "australia" in query_lower: locale = "AU"
+            
             for col in value_cols[:3]:  # Limit to 3 columns for performance
                 logger.info(f"Forecasting column: {col}")
                 forecast_result = await self._forecast_column(
                     df, date_col, col, forecast_periods,
-                    session_id=request.session_id
+                    session_id=request.session_id,
+                    locale=locale
                 )
                 forecasts_data[col] = forecast_result
             
@@ -208,7 +247,8 @@ class ForecasterAgent(BaseAgent):
         date_col: str, 
         value_col: str, 
         periods: int,
-        session_id: str = None
+        session_id: str = None,
+        locale: str = "US"
     ) -> Dict:
         """Generate Prophet forecast for a single column with streaming progress"""
         
@@ -245,17 +285,36 @@ class ForecasterAgent(BaseAgent):
                 {"rows": len(prophet_df)}
             )
         
-        # Initialize Prophet model
-        model = Prophet(
-            yearly_seasonality=True,
-            weekly_seasonality=True,
-            daily_seasonality=False,
-            holidays=self._create_holiday_df(prophet_df['ds'].min(), prophet_df['ds'].max()),
-            interval_width=0.95
-        )
+        # Detect seasonality dynamically via FFT
+        seasonalities = self._detect_prophet_seasonality(prophet_df, 'y')
+        
+        # Decide growth model
+        # If variance is low and data seems bounded, use logistic
+        cv = prophet_df['y'].std() / prophet_df['y'].mean() if prophet_df['y'].mean() > 0 else 1.0
         
         # Fit model
-        model.fit(prophet_df)
+        import asyncio
+        loop = asyncio.get_event_loop()
+        
+        def _train_prophet():
+            growth = 'linear'
+            if cv < 0.3 and len(prophet_df) > 30:
+                growth = 'logistic'
+                prophet_df['cap'] = prophet_df['y'].max() * 1.5
+                prophet_df['floor'] = max(0, prophet_df['y'].min() * 0.5)
+                
+            model = Prophet(
+                growth=growth,
+                yearly_seasonality=seasonalities.get("yearly_seasonality", False),
+                weekly_seasonality=seasonalities.get("weekly_seasonality", False),
+                daily_seasonality=False,
+                holidays=self._create_holiday_df(prophet_df['ds'].min(), prophet_df['ds'].max(), locale),
+                interval_width=0.95
+            )
+            model.fit(prophet_df)
+            return model, growth
+            
+        model, growth_type = await loop.run_in_executor(None, _train_prophet)
         
         # Notify prediction
         if session_id:
@@ -269,9 +328,12 @@ class ForecasterAgent(BaseAgent):
         
         # Create future dataframe
         future = model.make_future_dataframe(periods=periods)
+        if growth_type == 'logistic':
+            future['cap'] = prophet_df['y'].max() * 1.5
+            future['floor'] = max(0, prophet_df['y'].min() * 0.5)
         
         # Generate forecast
-        forecast = model.predict(future)
+        forecast = await loop.run_in_executor(None, model.predict, future)
         
         # Extract forecast data (only future periods)
         future_forecast = forecast.tail(periods)
@@ -324,18 +386,64 @@ class ForecasterAgent(BaseAgent):
             }
         }
     
-    def _create_holiday_df(self, start_date, end_date) -> pd.DataFrame:
-        """Create holiday dataframe for Prophet"""
-        holiday_list = []
+    def _detect_prophet_seasonality(self, df: pd.DataFrame, value_col: str) -> Dict[str, bool]:
+        """Use FFT to autonomously detect if time-series has weekly or yearly cyclicality"""
+        seasonalities = {"weekly_seasonality": False, "yearly_seasonality": False}
+        series = df[value_col].values
+        if len(series) < 14:
+            return seasonalities
+            
+        # Detrend
+        x = np.arange(len(series))
+        slope, intercept, _, _, _ = stats.linregress(x, series)
+        detrended = series - (slope * x + intercept)
         
-        for date, name in self.indian_holidays.items():
-            if start_date <= pd.Timestamp(date) <= end_date + timedelta(days=365):
-                holiday_list.append({
-                    'ds': pd.Timestamp(date),
-                    'holiday': name
-                })
+        # Compute FFT
+        fft_values = np.fft.fft(detrended)
+        frequencies = np.fft.fftfreq(len(series))
         
-        return pd.DataFrame(holiday_list) if holiday_list else pd.DataFrame(columns=['ds', 'holiday'])
+        pos_mask = frequencies > 0
+        freqs = frequencies[pos_mask]
+        magnitudes = np.abs(fft_values)[pos_mask]
+        
+        if len(freqs) == 0:
+            return seasonalities
+            
+        top_indices = np.argsort(magnitudes)[-3:]
+        top_freqs = freqs[top_indices]
+        
+        # Convert frequencies to periods (assuming daily data index)
+        top_periods = 1 / top_freqs
+        
+        for period in top_periods:
+            if 6.0 <= period <= 8.0:
+                seasonalities["weekly_seasonality"] = True
+            elif 350.0 <= period <= 380.0:
+                seasonalities["yearly_seasonality"] = True
+                
+        logger.info(f"Autonomously detected seasonalities: {seasonalities}")
+        return seasonalities
+
+    def _create_holiday_df(self, start_date, end_date, context_locale: str = "US") -> pd.DataFrame:
+        """Create locale-aware holiday dataframe"""
+        try:
+            import holidays
+            try:
+                country_holidays = holidays.country_holidays(context_locale, years=range(start_date.year, end_date.year + 2))
+            except NotImplementedError:
+                # Fallback to US if context locale is not supported
+                country_holidays = holidays.country_holidays("US", years=range(start_date.year, end_date.year + 2))
+                
+            holiday_list = []
+            for date, name in country_holidays.items():
+                if start_date <= pd.Timestamp(date) <= end_date + pd.Timedelta(days=365):
+                    holiday_list.append({
+                        'ds': pd.Timestamp(date),
+                        'holiday': name
+                    })
+            return pd.DataFrame(holiday_list) if holiday_list else pd.DataFrame(columns=['ds', 'holiday'])
+        except ImportError:
+            return pd.DataFrame(columns=['ds', 'holiday'])
     
     def _extract_weekly_pattern(self, model, forecast) -> Dict:
         """Extract weekly seasonality pattern"""

@@ -1,5 +1,5 @@
 # app/api/routes/data.py
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
 from typing import List
 import pandas as pd
 import uuid
@@ -32,8 +32,31 @@ def sanitize_dataframe_for_json(df: pd.DataFrame) -> pd.DataFrame:
     
     return df_copy
 
+async def trigger_pre_fitting(dataset_id: str, json_data: str):
+    """Background task to pre-fit Forecaster model"""
+    from app.agents.forecaster import ForecasterAgent
+    from app.agents.base_agent import AgentRequest
+    import json
+    from loguru import logger
+    
+    try:
+        logger.info(f"Starting background pre-fitting for Forecaster on dataset {dataset_id}")
+        agent = ForecasterAgent()
+        df_records = json.loads(json_data)
+        request = AgentRequest(
+            workflow_id=dataset_id,
+            query="Analyze future trends",
+            context={"dataset": df_records},
+            parameters={"periods": 30}
+        )
+        # Run processing
+        await agent.process(request)
+        logger.info(f"✓ Background pre-fitting complete for {dataset_id}")
+    except Exception as e:
+        logger.error(f"Background pre-fitting failed: {e}")
+
 @router.post("/upload")
-async def upload_dataset(file: UploadFile = File(...)):
+async def upload_dataset(file: UploadFile = File(...), background_tasks: BackgroundTasks = None):
     """
     Upload dataset (CSV, Excel, JSON)
     Returns dataset_id for use in queries
@@ -72,6 +95,9 @@ async def upload_dataset(file: UploadFile = File(...)):
         await redis_client.close()
         
         print(f"✓ Uploaded dataset: {len(df)} rows, {len(df.columns)} columns")
+        
+        if background_tasks:
+            background_tasks.add_task(trigger_pre_fitting, dataset_id, json_data)
         
         return {
             "dataset_id": dataset_id,

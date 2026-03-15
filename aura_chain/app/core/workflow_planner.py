@@ -113,6 +113,17 @@ class WorkflowPlanner:
         if intent.depth == "deep" and intent.has_data and "data_harvester" not in resolved:
             resolved.add("data_harvester")
             logger.info("Auto-included data_harvester for deep analysis")
+
+        # Passive AutoEDA
+        if intent.has_data and "dataset" in context:
+            try:
+                import pandas as pd
+                from app.tools.analysis_tools import AnalysisTools
+                df_eda = pd.DataFrame(context["dataset"][:500])
+                eda_profile = AnalysisTools.auto_eda(df_eda)
+                logger.info(f"Passive AutoEDA complete: {len(eda_profile.get('insights', []))} insights found")
+            except Exception as e:
+                logger.warning(f"Passive AutoEDA failed: {str(e)}")
         
         # ── Step 5: Topological sort → execution levels ──
         execution_levels = self._topological_sort(resolved, agent_registry)

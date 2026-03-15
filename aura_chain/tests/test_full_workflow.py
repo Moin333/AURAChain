@@ -46,30 +46,32 @@ class TestFullWorkflowE2E:
             ]
         }
 
-        with patch("app.agents.orchestrator.orchestrator.process_query", new_callable=AsyncMock) as mock_query:
-            mock_query.return_value = {
-                "request_id": "req_e2e_001",
-                "session_id": "sess_e2e",
-                "orchestration_plan": mock_plan,
-                "message": "Analysis planned",
-                "status": "planned"
-            }
+        with patch("app.agents.orchestrator.orchestrator.create_plan", new_callable=AsyncMock) as mock_plan_call:
+            from app.agents.base_agent import AgentResponse
+            mock_plan_call.return_value = AgentResponse(
+                agent_name="Orchestrator", 
+                success=True, 
+                data={"plan": mock_plan}
+            )
             
             from app.main import app
             transport = ASGITransport(app=app)
-            async with AsyncClient(transport=transport, base_url="http://test") as client:
-                resp = await client.post("/api/v1/orchestrator/query", json={
-                    "query": "Optimize inventory for festive sneaker demand",
-                    "session_id": "sess_e2e",
-                    "user_id": "test_user",
-                    "context": {},
-                    "parameters": {}
-                })
-                
-                assert resp.status_code == 200
-                data = resp.json()
-                assert "request_id" in data
-                assert data["status"] == "planned"
+            with patch("app.core.memory.context_engineer.build_context", new_callable=AsyncMock) as mock_ctx, \
+                 patch("app.core.memory.session_manager.add_message", new_callable=AsyncMock) as mock_add_msg:
+                mock_ctx.return_value = {}
+                async with AsyncClient(transport=transport, base_url="http://test") as client:
+                    resp = await client.post("/api/v1/orchestrator/query", json={
+                        "query": "Optimize inventory for festive sneaker demand",
+                        "session_id": "sess_e2e",
+                        "user_id": "test_user",
+                        "context": {},
+                        "parameters": {}
+                    })
+                    
+                    assert resp.status_code == 200
+                    data = resp.json()
+                    assert "request_id" in data
+                    assert data["status"] == "executing"
     
     @pytest.mark.asyncio
     async def test_experiment_records_metrics_not_outputs(self):

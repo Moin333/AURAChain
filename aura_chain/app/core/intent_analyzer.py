@@ -16,6 +16,7 @@ from typing import Any, Dict, Optional
 from pydantic import BaseModel
 from loguru import logger
 from app.core.api_clients import groq_client
+from app.core.tool_registry import tool_registry
 from app.config import get_settings
 
 settings = get_settings()
@@ -87,7 +88,11 @@ class IntentAnalyzer:
         """
         has_data = "dataset_id" in context or "dataset" in context
         
+        tools_avail = "\n".join(f"- {t.name}: {t.description}" for t in tool_registry.list_tools())
         prompt = f"""{INTENT_SYSTEM_PROMPT}
+
+AVAILABLE TOOLS (do not name agents, tools only):
+{tools_avail}
 
 CONTEXT:
 - Has Dataset: {"Yes" if has_data else "No"}

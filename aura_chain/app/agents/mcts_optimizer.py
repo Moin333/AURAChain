@@ -20,15 +20,29 @@ class InventoryState:
     current_stock: float
     day: int
     total_cost: float = 0.0
+    pending_orders: List[tuple] = None  # [(arrival_day, qty)]
     
+    def __post_init__(self):
+        if self.pending_orders is None:
+            self.pending_orders = []
+
     def is_terminal(self, horizon: int) -> bool:
         """Check if we've reached the planning horizon"""
         return self.day >= horizon
     
     def transition(self, order_qty: float, demand: float, holding_cost: float, stockout_cost: float) -> 'InventoryState':
-        """Simulate one day transition"""
-        # Receive order (simplified: instant delivery)
-        new_stock = self.current_stock + order_qty
+        """Simulate one day transition with stochastic lead times"""
+        # Determine lead time (e.g., 0 to 3 days uniformly)
+        lead_time = int(np.random.randint(0, 4))
+        new_pending = list(self.pending_orders)
+        if order_qty > 0:
+            new_pending.append((self.day + lead_time, order_qty))
+            
+        # Receive arrived orders today
+        arrived_this_day = sum(qty for arr_day, qty in new_pending if arr_day <= self.day)
+        new_pending = [(arr_day, qty) for arr_day, qty in new_pending if arr_day > self.day]
+        
+        new_stock = self.current_stock + arrived_this_day
         
         # Fulfill demand
         fulfilled = min(demand, new_stock)
@@ -42,7 +56,8 @@ class InventoryState:
         return InventoryState(
             current_stock=ending_stock,
             day=self.day + 1,
-            total_cost=self.total_cost + day_holding_cost + day_stockout_cost
+            total_cost=self.total_cost + day_holding_cost + day_stockout_cost,
+            pending_orders=new_pending
         )
 
 
@@ -62,11 +77,16 @@ class MCTSNode:
     def is_fully_expanded(self) -> bool:
         return len(self.untried_actions) == 0
     
-    def best_child(self, exploration_weight: float = 1.414) -> 'MCTSNode':
-        """Select child using UCB1 formula"""
+    def best_child(self) -> 'MCTSNode':
+        """Select child using UCB1 formula with dynamic variance exploration"""
         if not self.children:
              # Safety valve if logic goes wrong, though logic below prevents this
             return self 
+            
+        # Dynamic exploration based on reward variance
+        rewards = [c.total_reward / c.visits for c in self.children if c.visits > 0]
+        variance = np.var(rewards) if len(rewards) > 1 else 0
+        exploration_weight = 1.0 + (variance * 2.0)
             
         return max(
             self.children,
@@ -88,6 +108,111 @@ class MCTSNode:
         self.total_reward += reward
 
 
+def _sample_demand(demand_history: np.ndarray) -> float:
+    """Sample from historical demand"""
+    return float(np.random.choice(demand_history))
+
+def _mcts_worker(
+    current_stock: float,
+    demand_history: np.ndarray,
+    holding_cost: float,
+    stockout_cost: float,
+    horizon: int,
+    iterations: int, # Kept for signature compatibility, used as fallback limit
+    seed: int = 42
+) -> Dict:
+    """Top-level function for running MCTS off the main event loop."""
+    import time
+    start_time = time.time()
+    np.random.seed(seed)
+    
+    mean_demand = float(np.mean(demand_history))
+    std_demand = float(np.std(demand_history))
+    
+    # Base continuous space bounds
+    max_action = mean_demand * 3
+    action_space = [0.0] + list(np.linspace(0.1, max_action, 10))
+    action_space = sorted(list(set([float(a) for a in action_space])))
+    
+    max_penalty = stockout_cost * (mean_demand * 2) * horizon
+    if max_penalty == 0: max_penalty = 1.0
+    
+    root_state = InventoryState(current_stock=current_stock, day=0, pending_orders=[])
+    root = MCTSNode(root_state, untried_actions=list(action_space))
+    explored_states = 0
+    max_time_budget = 4.5 # seconds max computation time
+    
+    while True:
+        elapsed = time.time() - start_time
+        if elapsed > max_time_budget or root.visits >= iterations * 2:
+            break
+            
+        # Confidence-based Convergence check
+        if len(root.children) >= 2 and root.visits > 100:
+            best_2 = sorted(root.children, key=lambda c: c.visits, reverse=True)[:2]
+            v1, v2 = best_2[0].visits, best_2[1].visits
+            if v1 > 0 and v2 > 0 and (v1 - v2) / v1 > 0.3:
+                # Top action has >30% more visits than second best, confident enough
+                break
+                
+        node = root
+        state = InventoryState(current_stock=current_stock, day=0, pending_orders=[])
+        
+        while node.is_fully_expanded() and not state.is_terminal(horizon):
+            if not node.children: break
+            
+            # Progressive Widening
+            if node.visits > 5 * math.pow(len(node.children), 1.5):
+                # Sample a new continuous action directly inside untried pool
+                new_action = float(np.random.uniform(0.1, max_action))
+                node.untried_actions.append(new_action)
+                break
+                
+            node = node.best_child()
+            demand = _sample_demand(demand_history)
+            state = state.transition(node.action, demand, holding_cost, stockout_cost)
+        
+        if not state.is_terminal(horizon) and not node.is_fully_expanded():
+            action = node.untried_actions[0]
+            demand = _sample_demand(demand_history)
+            new_state = state.transition(action, demand, holding_cost, stockout_cost)
+            node = node.add_child(action, new_state, action_space)
+            state = new_state
+            explored_states += 1
+            
+        sim_state = InventoryState(state.current_stock, state.day, state.total_cost, list(state.pending_orders))
+        while not sim_state.is_terminal(horizon):
+            # Continue rollout randomly prioritizing base action space or uniform
+            if np.random.random() < 0.5:
+                action = np.random.choice(action_space)
+            else:
+                action = float(np.random.uniform(0.0, max_action))
+            demand = _sample_demand(demand_history)
+            sim_state = sim_state.transition(action, demand, holding_cost, stockout_cost)
+            
+        normalized_reward = 1.0 - (min(sim_state.total_cost, max_penalty) / max_penalty)
+        
+        while node is not None:
+            node.update(normalized_reward)
+            node = node.parent
+            
+    if not root.children:
+         return {"reorder_point": 0, "order_quantity": 0, "safety_stock": 0, "expected_cost": 0, "explored_states": 0, "computation_time_ms": 0}
+
+    best_child = max(root.children, key=lambda c: c.visits)
+    computation_time = (time.time() - start_time) * 1000
+    expected_cost = (1.0 - (best_child.total_reward / best_child.visits)) * max_penalty
+
+    return {
+        "reorder_point": mean_demand * 1.5,
+        "order_quantity": best_child.action,
+        "safety_stock": std_demand * 1.65,
+        "expected_cost": expected_cost,
+        "explored_states": explored_states,
+        "computation_time_ms": computation_time,
+        "convergence_reason": "confidence_threshold" if elapsed <= max_time_budget else "time_budget"
+    }
+
 class MCTSOptimizerAgent(BaseAgent):
     """
     Real Monte Carlo Tree Search for inventory optimization.
@@ -106,6 +231,8 @@ class MCTSOptimizerAgent(BaseAgent):
             model=settings.MCTS_OPTIMIZER_MODEL,
             api_client=groq_client
         )
+        import concurrent.futures
+        self._pool = concurrent.futures.ProcessPoolExecutor(max_workers=2)
     
     def should_reason(self) -> bool:
         return True
@@ -176,116 +303,35 @@ class MCTSOptimizerAgent(BaseAgent):
         iterations: int,
         session_id: str = None
     ) -> Dict:
-        """Execute MCTS algorithm with streaming progress"""
-        import time
-        start_time = time.time()
+        """Execute MCTS algorithm via ProcessPoolExecutor"""
+        import asyncio
+        loop = asyncio.get_event_loop()
         
-        logger.info(f"MCTS Debug: Stock={current_stock}, Holding=${holding_cost}, Stockout=${stockout_cost}")
-
-        # Define action space
-        mean_demand = float(np.mean(demand_history))
-        std_demand = float(np.std(demand_history))
+        logger.info(f"Starting MCTS Simulation via ProcessPoolExecutor...")
         
-        # Action space: 0, plus steps up to 3x demand
-        action_space = [0.0] + list(np.linspace(0.1, mean_demand * 3, 10))
-        action_space = sorted(list(set([float(a) for a in action_space])))
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id, self.name, 10, "Starting MCTS Simulation...", {}
+            )
         
-        # Calculate Max Penalty for Normalization (Crucial for MCTS)
-        # Max possible cost = Stockout every day for max demand
-        max_penalty = stockout_cost * (mean_demand * 2) * horizon
-        if max_penalty == 0: max_penalty = 1.0 # Prevent div/0
-
-        root_state = InventoryState(current_stock=current_stock, day=0)
-        root = MCTSNode(root_state, untried_actions=list(action_space))
+        result = await loop.run_in_executor(
+            self._pool,
+            _mcts_worker,
+            current_stock,
+            demand_history,
+            holding_cost,
+            stockout_cost,
+            horizon,
+            iterations,
+            42
+        )
         
-        explored_states = 0
-        
-        # Progress tracking
-        last_update = 0
-        update_frequency = 100  # Update every 100 iterations
-        
-        for i in range(iterations):
-            node = root
-            state = InventoryState(current_stock=current_stock, day=0)
+        if session_id:
+            await streaming_service.publish_agent_progress(
+                session_id, self.name, 100, "MCTS Optimization complete", result
+            )
             
-            # Selection
-            while node.is_fully_expanded() and not state.is_terminal(horizon):
-                if not node.children: break
-                node = node.best_child()
-                demand = self._sample_demand(demand_history)
-                state = state.transition(node.action, demand, holding_cost, stockout_cost)
-            
-            # Expansion
-            if not state.is_terminal(horizon) and not node.is_fully_expanded():
-                action = node.untried_actions[0]
-                demand = self._sample_demand(demand_history)
-                new_state = state.transition(action, demand, holding_cost, stockout_cost)
-                node = node.add_child(action, new_state, action_space)
-                state = new_state
-                explored_states += 1
-            
-            # Simulation
-            sim_state = InventoryState(state.current_stock, state.day, state.total_cost)
-            while not sim_state.is_terminal(horizon):
-                action = np.random.choice(action_space)
-                demand = self._sample_demand(demand_history)
-                sim_state = sim_state.transition(action, demand, holding_cost, stockout_cost)
-            
-            # Backpropagation (With Normalization!)
-            # Convert Cost to Reward [0, 1]
-            # 1.0 = No Cost (Perfect), 0.0 = Max Cost (Disaster)
-            normalized_reward = 1.0 - (min(sim_state.total_cost, max_penalty) / max_penalty)
-            
-            while node is not None:
-                node.update(normalized_reward)
-                node = node.parent
-                
-            # Publish progress update
-            if session_id and (i - last_update >= update_frequency or i == iterations - 1):
-                progress = ((i + 1) / iterations) * 100
-                
-                # Get current best solution
-                best_child = max(root.children, key=lambda c: c.visits) if root.children else None
-                current_best_cost = (1.0 - (best_child.total_reward / best_child.visits)) * max_penalty if best_child else 0
-                
-                await streaming_service.publish_agent_progress(
-                    session_id,
-                    self.name,
-                    progress,
-                    f"Iteration {i+1}/{iterations}",
-                    {
-                        "iteration": i + 1,
-                        "total_iterations": iterations,
-                        "explored_states": explored_states,
-                        "current_best_cost": float(current_best_cost)
-                    }
-                )
-                last_update = i
-        
-        # Extract best action
-        if not root.children:
-             return {"reorder_point": 0, "order_quantity": 0, "safety_stock": 0, "expected_cost": 0, "explored_states": 0, "computation_time_ms": 0}
-
-        # Select child with highest visit count
-        best_child = max(root.children, key=lambda c: c.visits)
-        
-        # Log the winner for debugging
-        logger.info(f"MCTS Winner: Action={best_child.action:.1f}, Visits={best_child.visits}, AvgReward={best_child.total_reward/best_child.visits:.4f}")
-
-        computation_time = (time.time() - start_time) * 1000
-        
-        # De-normalize cost for display
-        # Approximate expected cost based on inverse reward
-        expected_cost = (1.0 - (best_child.total_reward / best_child.visits)) * max_penalty
-
-        return {
-            "reorder_point": mean_demand * 1.5,
-            "order_quantity": best_child.action,
-            "safety_stock": std_demand * 1.65,
-            "expected_cost": expected_cost,
-            "explored_states": explored_states,
-            "computation_time_ms": computation_time
-        }
+        return result
         
     async def process(self, request: AgentRequest) -> AgentResponse:
         """Main process method - updated to pass session_id"""
@@ -317,6 +363,23 @@ class MCTSOptimizerAgent(BaseAgent):
             
             current_stock = self._get_current_stock(df, demand_data)
             
+            # Fetch upstream Forecaster findings BEFORE running MCTS to scale demand signal
+            forecast_findings = await self.get_upstream_findings(
+                request.workflow_id, "Forecaster"
+            )
+            
+            if forecast_findings and "predictions_summary" in forecast_findings:
+                preds = list(forecast_findings["predictions_summary"].values())
+                if preds:
+                    try:
+                        start_val = max(0.01, float(preds[0].get("start_value", 1.0)))
+                        end_val = max(0.01, float(preds[0].get("end_value", 1.0)))
+                        ratio = end_val / start_val
+                        logger.info(f"Applying Prophet forecast ratio to demand history: {ratio:.2f}")
+                        demand_data = demand_data * ratio
+                    except Exception as e:
+                        logger.warning(f"Failed to scale demand by Prophet forecast: {e}")
+
             # Pass session_id to streaming-enabled MCTS
             optimal_solution = await self._run_mcts(
                 current_stock=current_stock,
@@ -334,11 +397,6 @@ class MCTSOptimizerAgent(BaseAgent):
             
             bullwhip_metrics = self._calculate_bullwhip_effect(
                 demand_data, optimal_solution
-            )
-            
-            # Get upstream Forecaster findings for enriched interpretation
-            forecast_findings = await self.get_upstream_findings(
-                request.workflow_id, "Forecaster"
             )
             
             interpretation = await self._get_interpretation(
