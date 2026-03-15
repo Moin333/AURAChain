@@ -117,7 +117,7 @@ Output your JSON analysis:"""
                 content = content.split("```")[1].split("```")[0].strip()
             
             try:
-                intent_data = json.loads(content)
+                intent_data = json.loads(content, strict=False)
             except json.JSONDecodeError:
                 logger.error(f"Failed to parse intent JSON. Raw: {content}")
                 return self._fallback_intent(query, has_data)

@@ -243,7 +243,18 @@ Write for an MSME business owner. Be specific, actionable, and data-driven."""
             elif "```" in content:
                 content = content.split("```")[1].split("```")[0].strip()
             
-            result = json.loads(content)
+            # Try parsing with strict=False (LLM output may contain control chars)
+            try:
+                result = json.loads(content, strict=False)
+            except json.JSONDecodeError:
+                # Attempt to repair truncated JSON
+                repaired = content.rstrip()
+                if repaired.count('"') % 2 != 0:
+                    repaired += '"'
+                for open_ch, close_ch in [('[', ']'), ('{', '}')]:
+                    diff = repaired.count(open_ch) - repaired.count(close_ch)
+                    repaired += close_ch * max(0, diff)
+                result = json.loads(repaired, strict=False)
             
             # Map JSON keys → section titles
             section_map = [
@@ -258,6 +269,11 @@ Write for an MSME business owner. Be specific, actionable, and data-driven."""
             sections = []
             for key, title in section_map:
                 content_text = result.get(key, "No data available.")
+                # LLM sometimes returns a list of bullet points instead of a string
+                if isinstance(content_text, list):
+                    content_text = "\n".join(str(item) for item in content_text)
+                elif not isinstance(content_text, str):
+                    content_text = str(content_text)
                 sections.append(ReportSection(title=title, content=content_text))
             
             return sections

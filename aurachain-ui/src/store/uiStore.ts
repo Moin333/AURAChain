@@ -334,15 +334,23 @@ export const useUIStore = create<UIState>((set, get) => ({
     // Update the plan message's overall progress
     const updatedMessages = state.messages.map(m => {
       if (m.type === 'analysis' && m.metadata?.agents) {
-        const agentCount = m.metadata.agents.length;
-        const totalProgress = Array.from(newProgress.values()).reduce((a, b) => a + b, 0);
+        const currentAgents = m.metadata.agents.map((a: string) => normalizeAgentName(a));
+        const agentCount = currentAgents.length;
+        
+        // Sum progress ONLY for agents in the current workflow plan
+        let totalProgress = 0;
+        currentAgents.forEach((agent: string) => {
+          totalProgress += newProgress.get(agent) || 0;
+        });
+        
         const avgProgress = agentCount > 0 ? Math.round(totalProgress / agentCount) : 0;
+        const cappedProgress = Math.min(100, Math.max(0, avgProgress));
 
         return {
           ...m,
           metadata: {
             ...m.metadata,
-            progress: avgProgress
+            progress: cappedProgress
           }
         };
       }

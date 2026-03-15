@@ -60,6 +60,8 @@ Multi-Agent Systems, Supply Chain Optimization, Monte Carlo Tree Search, Demand 
 
 Supply chain management stands at the intersection of several compounding pressures: globalized sourcing, demand volatility, lean inventory mandates, and shortened product lifecycles. While large enterprises mitigate these pressures through dedicated ERP systems and analytics teams, Micro, Small, and Medium Enterprises (MSMEs) --- which account for over 90\% of businesses and 60\% of employment in developing economies~\cite{msme_report} --- operate with minimal technological support. The consequences are well-documented: chronic overstocking or stockouts, amplified demand distortion (the Bullwhip Effect~\cite{lee1997bullwhip}), and reactive rather than predictive decision-making.
 
+Despite the proliferation of AI-driven supply chain solutions, existing systems largely fail to address the specific challenges faced by MSMEs. Traditional enterprise AI platforms require massive volumes of structured historical data, specialized cloud infrastructure, and dedicated data science teams for deployment and continuous maintenance. Furthermore, these monolithic systems often operate as "black boxes," generating rigid forecasts without providing actionable context or explainability. For resource-constrained MSMEs dealing with sparse transaction histories, noisy data, and highly dynamic local market conditions, such heavyweight solutions are not only cost-prohibitive but fundamentally misaligned with their operational realities.
+
 Recent advances in Large Language Models (LLMs) and autonomous agent frameworks have opened new possibilities for building intelligent systems that can reason over unstructured data, select appropriate analytical tools, and synthesize actionable recommendations without requiring the end user to specify exact procedures. However, existing LLM-agent frameworks such as AutoGPT~\cite{autogpt2023} and LangChain~\cite{langchain2023} remain general-purpose and lack the domain-specific grounding necessary for supply chain applications, where decisions carry direct financial consequences.
 
 This paper presents \textbf{AURAChain} (Autonomous, Unified, Reasoning-driven, Agent Chain), a production-grade multi-agent platform purpose-built for MSME supply chain intelligence. Unlike conventional approaches that treat forecasting, optimization, and decision support as isolated modules, AURAChain weaves them into a coherent agent pipeline where each specialist agent contributes to a chain of reasoning that transforms raw business data into actionable decisions.
@@ -393,11 +395,11 @@ The web interface is built with React 19, TypeScript, and Vite, providing:
 Experiments were conducted on three datasets to evaluate system performance across different scenarios:
 
 \begin{enumerate}
-    \item \textbf{Synthetic Supply Chain Dataset}: A generated dataset of 1,200 records spanning 365 days across 5 product categories with realistic seasonal patterns, trend components, and noise. Variables include: date, product category, demand quantity, unit price, stock level, and lead time.
+    \item \textbf{Diwali Sales Dataset}~\cite{diwali_sales}: A publicly available Kaggle dataset (\texttt{Diwali Sales DataSet.csv}) containing sales information during the Diwali festival period in India, utilized to evaluate the system's ability to extract market trends, customer demographics, and seasonal spending peaks.
     
-    \item \textbf{Retail Sales Dataset}~\cite{retail_dataset}: A publicly available retail transaction dataset containing 541,909 records from a UK online retailer, spanning December 2010 to December 2011. This dataset tests scalability and real-world pattern detection.
+    \item \textbf{SuperMarket Analysis Dataset}~\cite{supermarket_analysis}: A Kaggle dataset (\texttt{SuperMarket Analysis.csv}) containing comprehensive supermarket transaction records, utilized to test the system's capability in sales trend analysis, customer segmentation, and market basket analysis across varied product lines.
     
-    \item \textbf{Supply Chain Simulation}: A purpose-built simulation environment generating 90-day supply chain scenarios with stochastic demand ($\mu = 100, \sigma = 30$), variable lead times (1--4 days), holding cost (\$5/unit/day), and stockout penalty (\$50/unit/day). This environment evaluates the MCTS optimizer under controlled conditions.
+    \item \textbf{Indian MSME Retail Dataset}~\cite{msme_synthetic}: A custom-designed synthetic dataset (\texttt{indian\_msmE\_retail\_dataset\_50k.csv}) containing 50,000 records tailored specifically for the Indian Micro, Small, and Medium Enterprise (MSME) context, created to stress-test the entire multi-agent system at its full operational potential.
 \end{enumerate}
 
 \subsection{Baselines}
@@ -715,6 +717,15 @@ R.~Sharma and A.~Gupta, ``Digital supply chain management: Trends, challenges, a
 
 \bibitem{enhancing_sc}
 L.~Zhang and M.~Chen, ``Enhancing supply chain resilience through AI-driven multi-agent coordination,'' \textit{Computers \& Industrial Engineering}, 2024.
+
+\bibitem{diwali_sales}
+Kaggle, ``Diwali Sales Data,'' 2023. [Online]. Available: \url{https://www.kaggle.com/}
+
+\bibitem{supermarket_analysis}
+Kaggle, ``Supermarket Sales Data,'' 2019. [Online]. Available: \url{https://www.kaggle.com/}
+
+\bibitem{msme_synthetic}
+AURAChain Research, ``Indian MSME Retail Synthetic Dataset (50k),'' 2024.
 
 \end{thebibliography}
 

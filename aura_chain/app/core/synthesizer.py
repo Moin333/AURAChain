@@ -141,8 +141,8 @@ class ResponseSynthesizer:
                     serialized = str(value)
                 
                 if len(serialized) > MAX_FIELD_CHARS:
-                    # Truncate with indicator
-                    clean[key] = json.loads(serialized[:MAX_FIELD_CHARS]) if serialized[:1] in ('{', '[') else serialized[:MAX_FIELD_CHARS] + "...[truncated]"
+                    # Truncate with indicator (BUG FIX: do not attempt to json.loads a mid-sliced string)
+                    clean[key] = serialized[:MAX_FIELD_CHARS] + "...[truncated]"
                 else:
                     clean[key] = value
             
@@ -155,7 +155,15 @@ class ResponseSynthesizer:
         sanitized_artifacts: Dict[str, Any],
         workflow_id: str
     ) -> tuple[str, List[str]]:
-        """Run LLM to produce unified narrative + key insights."""
+        """Run structured two-step LLM synthesis.
+        
+        BUG-5 fix: Instead of one giant JSON response, we split into:
+          Step 1: Generate plain-text summary (no JSON envelope → no truncation risk)
+          Step 2: Generate key insights as a JSON array
+        
+        This structural approach eliminates the 'Unterminated string' crash
+        that occurred when max_tokens cut off mid-JSON.
+        """
         
         # Build per-agent summaries
         agent_sections = []
@@ -165,49 +173,88 @@ class ResponseSynthesizer:
         
         agents_text = "\n\n".join(agent_sections)
         
-        prompt = f"""You are a business analyst synthesizing results from multiple AI agents.
+        # ── STEP 1: Generate summary as plain text ──
+        summary_prompt = f"""You are a business analyst writing for an MSME business owner.
 
-Below are the outputs from each agent in execution order:
+Below are the outputs from multiple AI agents in execution order:
 
 {agents_text}
 
-Produce:
-1. A **summary** (2-4 paragraphs) that combines all findings into a coherent business narrative. Write for an MSME business owner — clear, actionable, no jargon.
-2. A list of **key_insights** (3-7 bullet points) — the most important takeaways.
+Write a clear, actionable summary (2-4 paragraphs) that combines all findings into a coherent business narrative.
+- Write in plain English, no jargon
+- Focus on what the business owner should know and do
+- Include specific numbers and trends where available
 
-Respond in JSON:
-{{
-    "summary": "...",
-    "key_insights": ["insight1", "insight2", ...]
-}}"""
-        
+Output ONLY the summary text, no JSON wrapping, no markdown headers."""
+
+        summary = ""
         try:
             response = await self.api_client.generate_content(
                 model_name=self.model,
-                prompt=prompt,
+                prompt=summary_prompt,
                 temperature=0.4,
-                max_tokens=1500
+                max_tokens=2000
             )
+            summary = response.get("text", "").strip()
+            if not summary:
+                summary = f"Workflow completed with agents: {', '.join(sanitized_artifacts.keys())}."
+        except Exception as e:
+            logger.warning(f"Summary generation failed: {e}")
+            summary = f"Analysis completed by {len(sanitized_artifacts)} agents: {', '.join(sanitized_artifacts.keys())}."
+        
+        # ── STEP 2: Generate key insights as JSON array ──
+        insights_prompt = f"""Based on the following analysis results, extract 3-7 key insights as bullet points.
+
+{agents_text}
+
+Output ONLY a JSON array of strings. Example:
+["Insight 1", "Insight 2", "Insight 3"]
+
+No explanation, no wrapping — just the JSON array."""
+
+        key_insights = []
+        try:
+            response = await self.api_client.generate_content(
+                model_name=self.model,
+                prompt=insights_prompt,
+                temperature=0.3,
+                max_tokens=800
+            )
+            content = response.get("text", "[]").strip()
             
-            content = response.get("text", "{}")
-            
+            # Strip markdown fences if present
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0].strip()
             elif "```" in content:
                 content = content.split("```")[1].split("```")[0].strip()
             
-            result = json.loads(content)
-            return result.get("summary", "Synthesis complete."), result.get("key_insights", [])
-            
+            # Parse JSON array
+            try:
+                parsed = json.loads(content, strict=False)
+                if isinstance(parsed, list):
+                    key_insights = [str(item) for item in parsed]
+                elif isinstance(parsed, dict) and "key_insights" in parsed:
+                    key_insights = [str(item) for item in parsed["key_insights"]]
+            except json.JSONDecodeError:
+                # Try repair
+                repaired = content.rstrip()
+                if repaired.count('"') % 2 != 0:
+                    repaired += '"'
+                diff = repaired.count('[') - repaired.count(']')
+                repaired += ']' * max(0, diff)
+                try:
+                    parsed = json.loads(repaired, strict=False)
+                    key_insights = [str(item) for item in parsed] if isinstance(parsed, list) else []
+                except json.JSONDecodeError:
+                    logger.warning("Could not parse insights JSON, falling back to line split")
+                    key_insights = [line.strip("- •").strip() for line in content.split("\n") if line.strip()]
         except Exception as e:
-            logger.error(f"LLM synthesis failed: {e}")
-            # Fallback: simple concatenation
-            agent_names = list(sanitized_artifacts.keys())
-            return (
-                f"Workflow completed with {len(agent_names)} agents: {', '.join(agent_names)}.",
-                [f"{name} completed successfully" for name in agent_names]
-            )
+            logger.warning(f"Insights generation failed: {e}")
+            key_insights = [f"{name} completed successfully" for name in sanitized_artifacts.keys()]
+        
+        return summary, key_insights
 
 
 # Global instance
 response_synthesizer = ResponseSynthesizer()
+

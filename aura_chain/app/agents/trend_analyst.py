@@ -36,6 +36,25 @@ class TrendAnalystAgent(BaseAgent):
         )
         self.pytrends = None
     
+    def get_system_prompt(self) -> str:
+        """BUG-6 fix: Domain-specific system prompt for TrendAnalyst."""
+        return (
+            "You are TrendAnalyst, a specialized supply chain trend analysis agent. "
+            "Your job is to analyze business datasets for demand trends, seasonal patterns, and market signals.\n\n"
+            "YOUR CAPABILITIES:\n"
+            "- Use sql_query to run SQL on the dataset (table name is 'df')\n"
+            "- Use demand_velocity to calculate rolling sales velocity\n"
+            "- Use fetch_global_trends to get Google Trends data for keywords\n"
+            "- Use correlation_analysis to find relationships between columns\n\n"
+            "STRICT RULES:\n"
+            "- NEVER write Python code. You are NOT a Python interpreter.\n"
+            "- NEVER fabricate or invent data. Only use observations from tools.\n"
+            "- NEVER pass a 'df' parameter — it is automatically provided to tools.\n"
+            "- For sql_query, always use 'df' as the table name.\n"
+            "- Be concise in your Thought sections.\n"
+        )
+
+    
     def should_reason(self) -> bool:
         return True
         
@@ -59,7 +78,10 @@ class TrendAnalystAgent(BaseAgent):
             '  "volatility": {"metric_col": "high or medium or low"},\n'
             '  "market_sentiment": "active or neutral",\n'
             '  "external_keywords": ["keyword1", "keyword2"],\n'
-            '  "insights": "Detailed human readable markdown analysis string"\n'
+            '  "key_findings": ["Finding 1", "Finding 2"],\n'
+            '  "opportunities": [{"message": "opportunity 1", "confidence": 0.8}],\n'
+            '  "risks": [{"message": "risk 1", "confidence": 0.9}],\n'
+            '  "recommendations": ["rec 1", "rec 2"]\n'
             "}"
         )
         
@@ -82,9 +104,30 @@ class TrendAnalystAgent(BaseAgent):
             }
             await self.publish_findings(request.workflow_id, trend_findings)
             
+            # Map ReAct simplified JSON back to the deeply nested structure expected by the React UI (LayoutGenerator.ts)
+            ui_internal_trends = {}
+            for col, t_dir in trend_findings["trend_directions"].items():
+                ui_internal_trends[col] = {
+                    "trend_direction": t_dir,
+                    "volatility": trend_findings["volatility"].get(col, "unknown")
+                }
+                
+            ui_external_trends = {}
+            for kw in trend_findings["external_keywords"]:
+                ui_external_trends[kw] = {"trend": "active", "current_interest": 100}
+
             response.data = {
-                "insights": response.data.get("insights", "Analysis complete."),
-                "analysis": trend_findings,
+                "insights": {
+                    "market_sentiment": trend_findings["market_sentiment"],
+                    "key_findings": response.data.get("key_findings", []),
+                    "opportunities": response.data.get("opportunities", []),
+                    "risks": response.data.get("risks", []),
+                    "recommendations": response.data.get("recommendations", [])
+                },
+                "analysis": {
+                    "internal_trends": ui_internal_trends,
+                    "external_trends": ui_external_trends
+                },
                 "metadata": {
                     "analysis_date": pd.Timestamp.now().isoformat(),
                     "data_points_analyzed": len(request.context.get("dataset", [])),

@@ -231,6 +231,22 @@ class ToolRegistry:
         """List all registered tools."""
         return list(self._tool_info.values())
     
+    def get_tool_schema(self, name: str) -> Optional[Dict[str, Any]]:
+        """
+        Return a JSON-serializable schema dict for a tool.
+        
+        Used by the ReAct loop to describe available tools to the LLM.
+        Returns None if the tool is not registered.
+        """
+        info = self._tool_info.get(name)
+        if not info:
+            return None
+        return {
+            "name": info.name,
+            "description": info.description,
+            "parameters": info.parameters,
+        }
+    
     def get_stats(self) -> Dict[str, Any]:
         """Get tool usage statistics for health dashboard."""
         return {

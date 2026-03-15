@@ -109,10 +109,12 @@ class WorkflowPlanner:
         resolved, guardrail_warnings = self._apply_guardrails(resolved, intent)
         warnings.extend(guardrail_warnings)
         
-        # ── Step 4: Auto-include data_harvester for deep analysis ──
-        if intent.depth == "deep" and intent.has_data and "data_harvester" not in resolved:
+        # ── Step 4: Auto-include data_harvester if dataset exists ──
+        # BUG-9 fix: If the query involves data, ALWAYS include data_harvester
+        # Otherwise agents like trend_analyst get removed due to missing dependencies
+        if intent.has_data and "data_harvester" not in resolved:
             resolved.add("data_harvester")
-            logger.info("Auto-included data_harvester for deep analysis")
+            logger.info("Auto-included data_harvester because dataset exists")
 
         # Passive AutoEDA
         if intent.has_data and "dataset" in context:
