@@ -193,7 +193,15 @@ export const useAgentStream = (sessionId: string | null): UseAgentStreamReturn =
             console.log('Unknown event type:', update.type);
         }
       } catch (err) {
-        console.error('Failed to parse SSE message:', err);
+        const rawLen = event.data?.length ?? 0;
+        console.error('Failed to parse SSE message:', err, `Raw data length: ${rawLen}`);
+        // Surface parse errors — likely truncated payload
+        if (err instanceof SyntaxError) {
+          const msg = rawLen > 100000
+            ? `Agent payload too large (${Math.round(rawLen / 1024)}KB) and was truncated`
+            : err.message.slice(0, 100);
+          setError(msg);
+        }
       }
     };
 

@@ -11,6 +11,10 @@ from app.config import get_settings
 
 settings = get_settings()
 
+# Safety limit: payloads larger than this are truncated before publishing.
+# Prevents SSE/Redis corruption from oversized agent outputs.
+MAX_SSE_PAYLOAD_BYTES = 512_000  # 512 KB
+
 class StreamingService:
     """
     Centralized service for publishing real-time agent updates
@@ -96,7 +100,24 @@ class StreamingService:
         channel = self._get_channel_name(session_id)
         
         try:
-            await self.redis_client.publish(channel, json.dumps(event))
+            payload = json.dumps(event)
+            
+            # Safety: truncate oversized payloads to prevent SSE/Redis corruption
+            if len(payload.encode('utf-8')) > MAX_SSE_PAYLOAD_BYTES:
+                logger.warning(
+                    f"⚠️ SSE payload too large ({len(payload)} chars) for "
+                    f"{agent_name}/{event_type}, sending truncation notice"
+                )
+                event["data"] = {
+                    "_truncated": True,
+                    "status": event.get("data", {}).get("status", "completed"),
+                    "message": f"Result from {agent_name} was too large for "
+                               f"live streaming ({len(payload)} bytes). "
+                               f"Full data available in workflow artifacts."
+                }
+                payload = json.dumps(event)
+            
+            await self.redis_client.publish(channel, payload)
             logger.debug(f"📡 Published {event_type} for {agent_name} to session {session_id}")
         except Exception as e:
             logger.error(f"Failed to publish event: {e}")

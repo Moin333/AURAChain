@@ -540,7 +540,7 @@ export class LayoutGenerator {
       const xKey = chartSpec?.x_axis ?? chartSpec?.x ?? 'date';
       const yKey = chartSpec?.y_axis ?? chartSpec?.y ?? 'sales';
       const chartType = (chartSpec?.chart_type ?? chartSpec?.type ?? 'bar').toLowerCase();
-      const validType = ['line', 'bar', 'area'].includes(chartType) ? chartType : 'bar';
+      const validType = ['line', 'bar', 'area', 'scatter', 'pie'].includes(chartType) ? chartType : 'bar';
 
       components.push({
         id: 'viz-chart',
@@ -551,7 +551,8 @@ export class LayoutGenerator {
           yKey,
           title: chartSpec?.title ?? 'Data Visualization',
           type: validType,
-          color: '#4A90E2'
+          color: '#4A90E2',
+          colorBy: chartSpec?.color_by ?? undefined
         },
         width: 'full',
         order: 1
