@@ -398,6 +398,105 @@ export class LayoutGenerator {
       });
     }
 
+    // Render Co-occurrence groups / SKU groups
+    const skuGroups = data?.optimal_action?.sku_groups;
+    if (Array.isArray(skuGroups) && skuGroups.length > 0) {
+      const tableData = skuGroups.map((g: any) => {
+        const skusStr = g.skus.map((s: any) => `${s.sku} (Qty: ${Math.round(s.order_quantity)}, ROP: ${Math.round(s.reorder_point)})`).join(', ');
+        return {
+          group_id: `Group ${g.group_id}`,
+          skus: skusStr,
+          rationale: g.group_rationale,
+          savings: `${Number(g.combined_savings_pct).toFixed(1)}%`
+        };
+      });
+      
+      components.push({
+        id: 'mcts-groups-table',
+        component: 'DataTable',
+        props: {
+          data: tableData,
+          columns: [
+            { key: 'group_id', label: 'SKU Group' },
+            { key: 'skus', label: 'Co-ordered SKUs & Quantities' },
+            { key: 'rationale', label: 'Optimization Rationale' },
+            { key: 'savings', label: 'Expected Savings' }
+          ]
+        },
+        width: 'full',
+        order: 3
+      });
+    }
+
+    // Render SKU Associations (Apriori rules)
+    const associations = data?.sku_associations?.associations;
+    if (Array.isArray(associations) && associations.length > 0) {
+      const assocData = associations.map((a: any) => ({
+        rule: `${a.antecedent.join(', ')} ➔ ${a.consequent.join(', ')}`,
+        support: `${(a.support * 100).toFixed(1)}%`,
+        confidence: `${(a.confidence * 100).toFixed(1)}%`,
+        lift: a.lift.toFixed(2)
+      }));
+
+      components.push({
+        id: 'mcts-assoc-table',
+        component: 'DataTable',
+        props: {
+          data: assocData,
+          columns: [
+            { key: 'rule', label: 'Association Rule' },
+            { key: 'support', label: 'Support (Co-occurrence Frequency)' },
+            { key: 'confidence', label: 'Confidence (Rule Strength)' },
+            { key: 'lift', label: 'Lift (Correlation Index)' }
+          ]
+        },
+        width: 'full',
+        order: 4
+      });
+    }
+
+    // Render Bullwhip Effect Chart
+    const bullwhip = data?.bullwhip_reduction ?? {};
+    if (bullwhip.tiers) {
+      const chartData: any[] = [];
+      const tierMapping: Record<string, string> = {
+        retailer: 'Retailer',
+        distributor: 'Distributor',
+        wholesaler: 'Wholesaler',
+        manufacturer: 'Manufacturer'
+      };
+
+      for (const [tierKey, values] of Object.entries(bullwhip.tiers)) {
+        const tierName = tierMapping[tierKey] || tierKey;
+        const valObj = values as any;
+        chartData.push({
+          tier: tierName,
+          ratio: Number(Number(valObj.before ?? 0).toFixed(2)),
+          type: 'Traditional / Naive'
+        });
+        chartData.push({
+          tier: tierName,
+          ratio: Number(Number(valObj.after ?? 0).toFixed(2)),
+          type: 'With AURAChain (Ideal)'
+        });
+      }
+
+      components.push({
+        id: 'mcts-bullwhip-chart',
+        component: 'ChartCard',
+        props: {
+          data: chartData,
+          xKey: 'tier',
+          yKey: 'ratio',
+          colorBy: 'type',
+          type: 'line',
+          title: '📈 Bullwhip Effect Variance Ratio (Orders / End-Consumer Demand)'
+        },
+        width: 'full',
+        order: 5
+      });
+    }
+
     return { components };
   }
 

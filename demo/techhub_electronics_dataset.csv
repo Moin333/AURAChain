@@ -1,0 +1,2710 @@
+date,store_city,product_name,brand,units_sold,unit_price_inr,stock_on_hand,restock_lead_time_days,promotion_flag,sale_event
+2024-01-01,Mumbai,boAt Airdopes 141,boAt,24,1256.24,92,5,0,none
+2024-01-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1473.07,74,3,0,none
+2024-01-01,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14189.5,26,4,0,none
+2024-01-01,Mumbai,Noise ColorFit Pulse 2,Noise,13,1567.07,51,4,0,none
+2024-01-01,Mumbai,JBL Go 3,JBL,11,2180.41,44,6,0,none
+2024-01-01,Bangalore,boAt Airdopes 141,boAt,29,1279.02,108,5,0,none
+2024-01-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1497.9,39,3,0,none
+2024-01-01,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14036.75,39,6,1,none
+2024-01-01,Bangalore,Noise ColorFit Pulse 2,Noise,16,1606.79,,6,0,none
+2024-01-01,Bangalore,JBL Go 3,JBL,12,2165.8,34,3,0,none
+2024-01-01,Delhi,boAt Airdopes 141,boAt,28,1289.16,89,4,0,none
+2024-01-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1537.42,,4,0,none
+2024-01-01,Delhi,Samsung Galaxy M14 5G,Samsung,9,13857.27,35,7,0,none
+2024-01-01,Delhi,Noise ColorFit Pulse 2,Noise,13,1616.62,34,7,0,none
+2024-01-01,Delhi,JBL Go 3,JBL,11,2165.23,37,3,0,none
+2024-01-02,Mumbai,boAt Airdopes 141,boAt,25,1256.03,75,6,0,none
+2024-01-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1495.6,74,3,0,none
+2024-01-02,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14005.53,30,7,0,none
+2024-01-02,Mumbai,Noise ColorFit Pulse 2,Noise,13,1633.54,49,4,0,none
+2024-01-02,Mumbai,JBL Go 3,JBL,13,2210.32,58,4,0,none
+2024-01-02,Bangalore,boAt Airdopes 141,boAt,92,1328.01,339,4,0,none
+2024-01-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1544.5,61,4,0,none
+2024-01-02,Bangalore,Samsung Galaxy M14 5G,Samsung,60,13936.6,246,3,0,none
+2024-01-02,Bangalore,Noise ColorFit Pulse 2,Noise,14,1627.91,47,6,0,none
+2024-01-02,Bangalore,JBL Go 3,JBL,11,2195.54,46,7,0,none
+2024-01-02,Delhi,boAt Airdopes 141,boAt,25,1262.1,63,3,0,none
+2024-01-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1478.3,59,7,0,none
+2024-01-02,Delhi,Samsung Galaxy M14 5G,Samsung,8,14158.08,33,7,0,none
+2024-01-02,Delhi,Noise ColorFit Pulse 2,Noise,14,1567.31,35,4,0,none
+2024-01-02,Delhi,JBL Go 3,JBL,11,2200.83,43,3,0,none
+2024-01-03,Mumbai,boAt Airdopes 141,boAt,108,1293.32,435,7,0,none
+2024-01-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1499.78,59,7,0,none
+2024-01-03,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13847.65,40,3,0,none
+2024-01-03,Mumbai,Noise ColorFit Pulse 2,Noise,13,1626.69,63,5,0,none
+2024-01-03,Mumbai,JBL Go 3,JBL,12,2247.99,55,4,0,none
+2024-01-03,Bangalore,boAt Airdopes 141,boAt,24,,82,5,0,none
+2024-01-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1547.51,72,3,0,none
+2024-01-03,Bangalore,Samsung Galaxy M14 5G,Samsung,8,14126.91,37,5,0,none
+2024-01-03,Bangalore,Noise ColorFit Pulse 2,Noise,14,1567.33,66,5,0,none
+2024-01-03,Bangalore,JBL Go 3,JBL,12,2155.66,56,6,1,none
+2024-01-03,Delhi,boAt Airdopes 141,boAt,24,1342.81,118,5,1,none
+2024-01-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1478.0,68,4,0,none
+2024-01-03,Delhi,Samsung Galaxy M14 5G,Samsung,10,14004.69,31,6,0,none
+2024-01-03,Delhi,Noise ColorFit Pulse 2,Noise,14,1588.31,53,4,0,none
+2024-01-03,Delhi,JBL Go 3,JBL,10,2154.44,28,3,0,none
+2024-01-04,Mumbai,boAt Airdopes 141,boAt,23,1287.09,87,5,0,none
+2024-01-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1481.89,89,5,0,none
+2024-01-04,Mumbai,Samsung Galaxy M14 5G,Samsung,45,13832.56,144,4,0,none
+2024-01-04,Mumbai,Noise ColorFit Pulse 2,Noise,15,1578.96,61,3,0,none
+2024-01-04,Mumbai,JBL Go 3,JBL,12,2236.91,42,5,0,none
+2024-01-04,Bangalore,boAt Airdopes 141,boAt,28,1300.3,100,7,0,none
+2024-01-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1531.64,83,4,0,none
+2024-01-04,Bangalore,Samsung Galaxy M14 5G,Samsung,,13806.54,31,4,0,none
+2024-01-04,Bangalore,Noise ColorFit Pulse 2,Noise,15,1602.52,62,3,0,none
+2024-01-04,Bangalore,JBL Go 3,JBL,11,2213.99,40,6,1,none
+2024-01-04,Delhi,boAt Airdopes 141,boAt,29,1268.83,116,5,0,none
+2024-01-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1516.2,80,6,0,none
+2024-01-04,Delhi,Samsung Galaxy M14 5G,Samsung,,14156.47,27,3,0,none
+2024-01-04,Delhi,Noise ColorFit Pulse 2,Noise,16,1569.98,78,4,1,none
+2024-01-04,Delhi,JBL Go 3,JBL,11,2209.34,45,5,0,none
+2024-01-05,Mumbai,boAt Airdopes 141,boAt,120,1317.16,422,4,0,none
+2024-01-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1482.83,63,4,0,none
+2024-01-05,Mumbai,Samsung Galaxy M14 5G,Samsung,6,13943.28,21,5,0,none
+2024-01-05,Mumbai,Noise ColorFit Pulse 2,Noise,17,1563.89,84,6,0,none
+2024-01-05,Mumbai,JBL Go 3,JBL,13,2240.34,63,7,0,none
+2024-01-05,Bangalore,boAt Airdopes 141,boAt,22,1262.86,103,6,1,none
+2024-01-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1546.63,54,4,0,none
+2024-01-05,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13882.15,48,6,0,none
+2024-01-05,Bangalore,Noise ColorFit Pulse 2,Noise,13,1566.47,51,5,0,none
+2024-01-05,Bangalore,JBL Go 3,JBL,12,2190.28,42,7,0,none
+2024-01-05,Delhi,boAt Airdopes 141,boAt,23,1301.92,103,4,0,none
+2024-01-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1480.2,77,3,0,none
+2024-01-05,Delhi,Samsung Galaxy M14 5G,Samsung,10,14171.1,48,7,0,none
+2024-01-05,Delhi,Noise ColorFit Pulse 2,Noise,14,,59,6,0,none
+2024-01-05,Delhi,JBL Go 3,JBL,11,2245.24,45,7,0,none
+2024-01-06,Mumbai,boAt Airdopes 141,boAt,,1307.29,104,4,0,none
+2024-01-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1473.24,80,7,0,none
+2024-01-06,Mumbai,Samsung Galaxy M14 5G,Samsung,60,14152.94,247,3,0,none
+2024-01-06,Mumbai,Noise ColorFit Pulse 2,Noise,18,1617.26,54,5,0,none
+2024-01-06,Mumbai,JBL Go 3,JBL,13,2231.0,40,4,0,none
+2024-01-06,Bangalore,boAt Airdopes 141,boAt,25,1340.04,66,7,0,none
+2024-01-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1454.18,50,6,0,none
+2024-01-06,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14059.99,46,6,1,none
+2024-01-06,Bangalore,Noise ColorFit Pulse 2,Noise,17,1565.93,43,5,0,none
+2024-01-06,Bangalore,JBL Go 3,JBL,13,2179.87,59,3,1,none
+2024-01-06,Delhi,boAt Airdopes 141,boAt,27,1285.42,128,3,0,none
+2024-01-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1455.2,60,3,0,none
+2024-01-06,Delhi,Samsung Galaxy M14 5G,Samsung,12,13903.87,51,5,0,none
+2024-01-06,Delhi,Noise ColorFit Pulse 2,Noise,18,1631.6,50,6,0,none
+2024-01-06,Delhi,JBL Go 3,JBL,10,2241.81,30,5,0,none
+2024-01-07,Mumbai,boAt Airdopes 141,boAt,29,1256.9,87,4,0,none
+2024-01-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,23,1547.03,108,3,0,none
+2024-01-07,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13965.74,45,4,0,none
+2024-01-07,Mumbai,Noise ColorFit Pulse 2,Noise,15,1578.38,59,5,0,none
+2024-01-07,Mumbai,JBL Go 3,JBL,13,2167.83,35,5,0,none
+2024-01-07,Bangalore,boAt Airdopes 141,boAt,32,1348.1,88,6,0,none
+2024-01-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,22,1509.05,101,4,0,none
+2024-01-07,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14110.11,49,3,0,none
+2024-01-07,Bangalore,Noise ColorFit Pulse 2,Noise,17,1552.82,74,4,0,none
+2024-01-07,Bangalore,JBL Go 3,JBL,14,2156.79,36,6,0,none
+2024-01-07,Delhi,boAt Airdopes 141,boAt,26,1265.37,110,6,0,none
+2024-01-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1537.37,71,3,0,none
+2024-01-07,Delhi,Samsung Galaxy M14 5G,Samsung,44,13968.5,200,6,0,none
+2024-01-07,Delhi,Noise ColorFit Pulse 2,Noise,16,1563.25,72,6,0,none
+2024-01-07,Delhi,JBL Go 3,JBL,14,2241.55,39,6,0,none
+2024-01-08,Mumbai,boAt Airdopes 141,boAt,27,1253.35,129,5,1,none
+2024-01-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1527.58,46,6,0,none
+2024-01-08,Mumbai,Samsung Galaxy M14 5G,Samsung,8,14174.42,23,5,0,none
+2024-01-08,Mumbai,Noise ColorFit Pulse 2,Noise,16,1552.81,74,3,0,none
+2024-01-08,Mumbai,JBL Go 3,JBL,11,2179.82,,6,0,none
+2024-01-08,Bangalore,boAt Airdopes 141,boAt,23,1325.36,102,6,0,none
+2024-01-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1485.53,72,7,0,none
+2024-01-08,Bangalore,Samsung Galaxy M14 5G,Samsung,9,,34,6,0,none
+2024-01-08,Bangalore,Noise ColorFit Pulse 2,Noise,12,1618.25,33,4,0,none
+2024-01-08,Bangalore,JBL Go 3,JBL,12,2155.55,41,5,0,none
+2024-01-08,Delhi,boAt Airdopes 141,boAt,29,1299.22,139,4,0,none
+2024-01-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1476.82,60,6,0,none
+2024-01-08,Delhi,Samsung Galaxy M14 5G,Samsung,10,13942.91,47,7,0,none
+2024-01-08,Delhi,Noise ColorFit Pulse 2,Noise,11,1586.15,38,5,0,none
+2024-01-08,Delhi,JBL Go 3,JBL,11,2223.36,29,7,0,none
+2024-01-09,Mumbai,boAt Airdopes 141,boAt,96,1271.16,310,6,0,none
+2024-01-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1453.56,42,7,0,none
+2024-01-09,Mumbai,Samsung Galaxy M14 5G,Samsung,8,14048.57,29,4,1,none
+2024-01-09,Mumbai,Noise ColorFit Pulse 2,Noise,13,,54,5,0,none
+2024-01-09,Mumbai,JBL Go 3,JBL,10,2193.38,48,6,0,none
+2024-01-09,Bangalore,boAt Airdopes 141,boAt,24,1272.77,64,3,1,none
+2024-01-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1513.16,86,4,0,none
+2024-01-09,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13990.17,38,6,0,none
+2024-01-09,Bangalore,Noise ColorFit Pulse 2,Noise,13,1572.23,34,5,0,none
+2024-01-09,Bangalore,JBL Go 3,JBL,11,2212.59,46,7,0,none
+2024-01-09,Delhi,boAt Airdopes 141,boAt,28,1339.47,129,4,0,none
+2024-01-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1472.92,91,7,0,none
+2024-01-09,Delhi,Samsung Galaxy M14 5G,Samsung,8,13922.1,24,7,0,none
+2024-01-09,Delhi,Noise ColorFit Pulse 2,Noise,,1611.2,44,4,0,none
+2024-01-09,Delhi,JBL Go 3,JBL,11,2234.65,48,4,0,none
+2024-01-10,Mumbai,boAt Airdopes 141,boAt,25,1340.44,122,3,0,none
+2024-01-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1524.14,82,6,0,none
+2024-01-10,Mumbai,Samsung Galaxy M14 5G,Samsung,,13968.51,20,5,0,none
+2024-01-10,Mumbai,Noise ColorFit Pulse 2,Noise,14,1577.76,61,6,1,none
+2024-01-10,Mumbai,JBL Go 3,JBL,10,2205.61,43,3,0,none
+2024-01-10,Bangalore,boAt Airdopes 141,boAt,24,1283.78,66,4,0,none
+2024-01-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1464.89,95,4,0,none
+2024-01-10,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14050.17,34,6,0,none
+2024-01-10,Bangalore,Noise ColorFit Pulse 2,Noise,12,1586.19,39,6,0,none
+2024-01-10,Bangalore,JBL Go 3,JBL,11,2224.45,48,3,0,none
+2024-01-10,Delhi,boAt Airdopes 141,boAt,28,1323.2,82,6,0,none
+2024-01-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1475.75,70,7,0,none
+2024-01-10,Delhi,Samsung Galaxy M14 5G,Samsung,8,13863.37,27,4,0,none
+2024-01-10,Delhi,Noise ColorFit Pulse 2,Noise,14,1563.83,46,5,0,none
+2024-01-10,Delhi,JBL Go 3,JBL,10,2187.83,26,6,0,none
+2024-01-11,Mumbai,boAt Airdopes 141,boAt,25,1322.82,63,4,0,none
+2024-01-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1471.86,77,7,0,none
+2024-01-11,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13966.83,40,4,0,none
+2024-01-11,Mumbai,Noise ColorFit Pulse 2,Noise,16,,77,4,0,none
+2024-01-11,Mumbai,JBL Go 3,JBL,11,2170.79,47,4,0,none
+2024-01-11,Bangalore,boAt Airdopes 141,boAt,24,1300.22,98,5,0,none
+2024-01-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1461.24,84,5,0,none
+2024-01-11,Bangalore,Samsung Galaxy M14 5G,Samsung,8,14165.17,33,5,0,none
+2024-01-11,Bangalore,Noise ColorFit Pulse 2,Noise,18,1645.09,66,4,0,none
+2024-01-11,Bangalore,JBL Go 3,JBL,10,2205.21,31,4,0,none
+2024-01-11,Delhi,boAt Airdopes 141,boAt,23,1261.52,105,5,0,none
+2024-01-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1516.88,67,5,0,none
+2024-01-11,Delhi,Samsung Galaxy M14 5G,Samsung,9,13860.1,29,6,1,none
+2024-01-11,Delhi,Noise ColorFit Pulse 2,Noise,14,1632.13,57,3,0,none
+2024-01-11,Delhi,JBL Go 3,JBL,10,2167.57,36,4,0,none
+2024-01-12,Mumbai,boAt Airdopes 141,boAt,23,1346.72,63,7,0,none
+2024-01-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1537.27,58,5,0,none
+2024-01-12,Mumbai,Samsung Galaxy M14 5G,Samsung,9,14161.19,,4,0,none
+2024-01-12,Mumbai,Noise ColorFit Pulse 2,Noise,15,1615.53,69,5,0,none
+2024-01-12,Mumbai,JBL Go 3,JBL,10,2213.65,26,3,0,none
+2024-01-12,Bangalore,boAt Airdopes 141,boAt,22,1252.39,95,4,0,none
+2024-01-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1526.06,54,6,0,none
+2024-01-12,Bangalore,Samsung Galaxy M14 5G,Samsung,9,14192.71,42,5,0,none
+2024-01-12,Bangalore,Noise ColorFit Pulse 2,Noise,,1578.92,63,3,0,none
+2024-01-12,Bangalore,JBL Go 3,JBL,11,2149.62,33,6,0,none
+2024-01-12,Delhi,boAt Airdopes 141,boAt,25,1310.67,102,7,0,none
+2024-01-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1535.92,60,3,0,none
+2024-01-12,Delhi,Samsung Galaxy M14 5G,Samsung,,,28,5,0,none
+2024-01-12,Delhi,Noise ColorFit Pulse 2,Noise,12,1601.22,,6,0,none
+2024-01-12,Delhi,JBL Go 3,JBL,10,2208.2,48,4,0,none
+2024-01-13,Mumbai,boAt Airdopes 141,boAt,120,1249.93,501,3,0,none
+2024-01-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,22,1494.08,96,3,0,none
+2024-01-13,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13998.24,46,5,0,none
+2024-01-13,Mumbai,Noise ColorFit Pulse 2,Noise,16,1617.66,65,6,0,none
+2024-01-13,Mumbai,JBL Go 3,JBL,13,2206.5,47,4,0,none
+2024-01-13,Bangalore,boAt Airdopes 141,boAt,30,1290.8,104,6,0,none
+2024-01-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1531.74,87,7,0,none
+2024-01-13,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14189.56,37,6,0,none
+2024-01-13,Bangalore,Noise ColorFit Pulse 2,Noise,17,1591.25,67,3,0,none
+2024-01-13,Bangalore,JBL Go 3,JBL,13,2246.54,58,7,0,none
+2024-01-13,Delhi,boAt Airdopes 141,boAt,25,1324.02,121,4,0,none
+2024-01-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1507.64,50,6,0,none
+2024-01-13,Delhi,Samsung Galaxy M14 5G,Samsung,11,14153.04,42,6,0,none
+2024-01-13,Delhi,Noise ColorFit Pulse 2,Noise,19,1577.98,75,5,0,none
+2024-01-13,Delhi,JBL Go 3,JBL,,2212.27,67,4,0,none
+2024-01-14,Mumbai,boAt Airdopes 141,boAt,30,1269.46,140,7,0,none
+2024-01-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1530.88,83,5,0,none
+2024-01-14,Mumbai,Samsung Galaxy M14 5G,Samsung,48,14021.95,224,6,0,none
+2024-01-14,Mumbai,Noise ColorFit Pulse 2,Noise,15,1558.0,49,4,0,none
+2024-01-14,Mumbai,JBL Go 3,JBL,11,2164.97,54,4,0,none
+2024-01-14,Bangalore,boAt Airdopes 141,boAt,29,1274.79,110,6,1,none
+2024-01-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1478.88,84,3,0,none
+2024-01-14,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14164.72,47,6,0,none
+2024-01-14,Bangalore,Noise ColorFit Pulse 2,Noise,19,1642.4,89,4,0,none
+2024-01-14,Bangalore,JBL Go 3,JBL,14,2181.26,43,3,0,none
+2024-01-14,Delhi,boAt Airdopes 141,boAt,30,1304.34,86,4,0,none
+2024-01-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,22,1498.1,72,6,0,none
+2024-01-14,Delhi,Samsung Galaxy M14 5G,Samsung,10,13883.46,37,5,0,none
+2024-01-14,Delhi,Noise ColorFit Pulse 2,Noise,17,1588.01,60,4,1,none
+2024-01-14,Delhi,JBL Go 3,JBL,84,2183.09,239,3,0,none
+2024-01-15,Mumbai,boAt Airdopes 141,boAt,27,1267.07,124,7,0,none
+2024-01-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1509.86,67,5,0,none
+2024-01-15,Mumbai,Samsung Galaxy M14 5G,Samsung,60,14092.09,211,3,0,none
+2024-01-15,Mumbai,Noise ColorFit Pulse 2,Noise,16,1558.03,56,6,0,none
+2024-01-15,Mumbai,JBL Go 3,JBL,11,2206.49,51,5,0,none
+2024-01-15,Bangalore,boAt Airdopes 141,boAt,25,1330.65,117,5,0,none
+2024-01-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1493.64,44,7,0,none
+2024-01-15,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13923.77,39,3,1,none
+2024-01-15,Bangalore,Noise ColorFit Pulse 2,Noise,15,1572.84,54,5,0,none
+2024-01-15,Bangalore,JBL Go 3,JBL,10,2199.08,32,3,0,none
+2024-01-15,Delhi,boAt Airdopes 141,boAt,26,1288.66,127,3,0,none
+2024-01-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1488.56,97,5,0,none
+2024-01-15,Delhi,Samsung Galaxy M14 5G,Samsung,11,14125.02,51,3,0,none
+2024-01-15,Delhi,Noise ColorFit Pulse 2,Noise,14,1615.31,35,3,0,none
+2024-01-15,Delhi,JBL Go 3,JBL,12,2226.66,58,3,0,none
+2024-01-16,Mumbai,boAt Airdopes 141,boAt,25,1275.58,105,5,0,none
+2024-01-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1452.94,50,5,0,none
+2024-01-16,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13906.36,37,7,0,none
+2024-01-16,Mumbai,Noise ColorFit Pulse 2,Noise,16,1622.59,70,5,0,none
+2024-01-16,Mumbai,JBL Go 3,JBL,10,2220.04,37,7,0,none
+2024-01-16,Bangalore,boAt Airdopes 141,boAt,24,1345.96,84,5,0,none
+2024-01-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1536.84,58,3,0,none
+2024-01-16,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13974.96,39,3,0,none
+2024-01-16,Bangalore,Noise ColorFit Pulse 2,Noise,15,1615.82,43,4,0,none
+2024-01-16,Bangalore,JBL Go 3,JBL,11,2196.52,49,4,0,none
+2024-01-16,Delhi,boAt Airdopes 141,boAt,21,1288.75,105,4,0,none
+2024-01-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1521.31,,6,0,none
+2024-01-16,Delhi,Samsung Galaxy M14 5G,Samsung,10,14194.89,35,5,0,none
+2024-01-16,Delhi,Noise ColorFit Pulse 2,Noise,14,1581.39,65,4,0,none
+2024-01-16,Delhi,JBL Go 3,JBL,44,2174.65,209,5,0,none
+2024-01-17,Mumbai,boAt Airdopes 141,boAt,22,,75,7,0,none
+2024-01-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1489.95,64,7,0,none
+2024-01-17,Mumbai,Samsung Galaxy M14 5G,Samsung,8,14033.96,34,3,0,none
+2024-01-17,Mumbai,Noise ColorFit Pulse 2,Noise,16,1560.05,76,5,0,none
+2024-01-17,Mumbai,JBL Go 3,JBL,12,2199.49,36,4,1,none
+2024-01-17,Bangalore,boAt Airdopes 141,boAt,27,1321.29,,3,0,none
+2024-01-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1515.81,48,6,0,none
+2024-01-17,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13856.49,33,7,0,none
+2024-01-17,Bangalore,Noise ColorFit Pulse 2,Noise,15,1631.31,60,3,0,none
+2024-01-17,Bangalore,JBL Go 3,JBL,11,2176.54,28,3,0,none
+2024-01-17,Delhi,boAt Airdopes 141,boAt,25,1288.6,110,3,0,none
+2024-01-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1534.47,56,6,0,none
+2024-01-17,Delhi,Samsung Galaxy M14 5G,Samsung,10,,31,5,0,none
+2024-01-17,Delhi,Noise ColorFit Pulse 2,Noise,14,1565.99,48,3,0,none
+2024-01-17,Delhi,JBL Go 3,JBL,10,2155.54,28,5,0,none
+2024-01-18,Mumbai,boAt Airdopes 141,boAt,24,1276.91,62,4,0,none
+2024-01-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1528.49,56,5,0,none
+2024-01-18,Mumbai,Samsung Galaxy M14 5G,Samsung,8,14179.38,30,4,0,none
+2024-01-18,Mumbai,Noise ColorFit Pulse 2,Noise,13,1602.47,46,7,0,none
+2024-01-18,Mumbai,JBL Go 3,JBL,10,2176.04,,6,1,none
+2024-01-18,Bangalore,boAt Airdopes 141,boAt,24,1272.16,71,3,1,none
+2024-01-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1520.87,41,5,0,none
+2024-01-18,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14143.51,31,5,0,none
+2024-01-18,Bangalore,Noise ColorFit Pulse 2,Noise,13,1551.53,55,6,0,none
+2024-01-18,Bangalore,JBL Go 3,JBL,11,2222.41,47,3,0,none
+2024-01-18,Delhi,boAt Airdopes 141,boAt,26,1322.83,101,4,0,none
+2024-01-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1542.57,56,5,0,none
+2024-01-18,Delhi,Samsung Galaxy M14 5G,Samsung,9,14071.43,23,5,0,none
+2024-01-18,Delhi,Noise ColorFit Pulse 2,Noise,14,1631.87,45,3,0,none
+2024-01-18,Delhi,JBL Go 3,JBL,10,2217.84,46,6,0,none
+2024-01-19,Mumbai,boAt Airdopes 141,boAt,27,1267.93,132,7,0,none
+2024-01-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1473.97,40,5,0,none
+2024-01-19,Mumbai,Samsung Galaxy M14 5G,Samsung,9,14081.25,23,6,0,none
+2024-01-19,Mumbai,Noise ColorFit Pulse 2,Noise,13,1607.76,40,3,0,none
+2024-01-19,Mumbai,JBL Go 3,JBL,10,2232.12,28,5,1,none
+2024-01-19,Bangalore,boAt Airdopes 141,boAt,23,1260.06,75,3,0,none
+2024-01-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1546.98,63,5,0,none
+2024-01-19,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13874.92,35,3,0,none
+2024-01-19,Bangalore,Noise ColorFit Pulse 2,Noise,14,1556.81,61,3,0,none
+2024-01-19,Bangalore,JBL Go 3,JBL,9,2233.57,43,4,0,none
+2024-01-19,Delhi,boAt Airdopes 141,boAt,22,1272.02,62,5,0,none
+2024-01-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1541.11,95,6,0,none
+2024-01-19,Delhi,Samsung Galaxy M14 5G,Samsung,10,13831.09,42,4,0,none
+2024-01-19,Delhi,Noise ColorFit Pulse 2,Noise,16,1596.94,49,5,1,none
+2024-01-19,Delhi,JBL Go 3,JBL,,2200.46,36,5,1,none
+2024-01-20,Mumbai,boAt Airdopes 141,boAt,31,1286.88,78,7,0,none
+2024-01-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1511.57,55,6,0,none
+2024-01-20,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14042.66,36,7,0,none
+2024-01-20,Mumbai,Noise ColorFit Pulse 2,Noise,19,1633.81,58,6,0,none
+2024-01-20,Mumbai,JBL Go 3,JBL,12,2185.0,37,6,0,none
+2024-01-20,Bangalore,boAt Airdopes 141,boAt,29,1274.35,79,7,0,none
+2024-01-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1518.67,91,7,0,none
+2024-01-20,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14134.42,58,7,0,none
+2024-01-20,Bangalore,Noise ColorFit Pulse 2,Noise,19,1605.3,84,4,0,none
+2024-01-20,Bangalore,JBL Go 3,JBL,15,2194.97,42,4,0,none
+2024-01-20,Delhi,boAt Airdopes 141,boAt,31,1340.75,145,4,0,none
+2024-01-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1500.32,88,5,0,none
+2024-01-20,Delhi,Samsung Galaxy M14 5G,Samsung,11,14120.21,31,4,0,none
+2024-01-20,Delhi,Noise ColorFit Pulse 2,Noise,68,1556.38,214,4,0,none
+2024-01-20,Delhi,JBL Go 3,JBL,,2236.54,50,5,0,none
+2024-01-21,Mumbai,boAt Airdopes 141,boAt,24,1252.55,71,7,0,none
+2024-01-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1536.3,85,3,0,none
+2024-01-21,Mumbai,Samsung Galaxy M14 5G,Samsung,11,,37,6,0,none
+2024-01-21,Mumbai,Noise ColorFit Pulse 2,Noise,17,1551.05,62,7,1,none
+2024-01-21,Mumbai,JBL Go 3,JBL,,2205.9,50,4,0,none
+2024-01-21,Bangalore,boAt Airdopes 141,boAt,33,1326.43,135,3,0,none
+2024-01-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,24,1525.33,104,7,0,none
+2024-01-21,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14080.69,46,6,0,none
+2024-01-21,Bangalore,Noise ColorFit Pulse 2,Noise,18,1616.14,63,6,0,none
+2024-01-21,Bangalore,JBL Go 3,JBL,14,2179.85,60,7,0,none
+2024-01-21,Delhi,boAt Airdopes 141,boAt,34,1284.35,125,6,0,none
+2024-01-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,,77,4,0,none
+2024-01-21,Delhi,Samsung Galaxy M14 5G,Samsung,9,13999.77,25,4,0,none
+2024-01-21,Delhi,Noise ColorFit Pulse 2,Noise,19,1636.55,,4,1,none
+2024-01-21,Delhi,JBL Go 3,JBL,13,2235.77,33,6,0,none
+2024-01-22,Mumbai,boAt Airdopes 141,boAt,26,1253.55,106,5,0,none
+2024-01-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1514.41,59,6,0,none
+2024-01-22,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13856.06,40,3,0,none
+2024-01-22,Mumbai,Noise ColorFit Pulse 2,Noise,15,1606.5,46,7,0,none
+2024-01-22,Mumbai,JBL Go 3,JBL,11,2226.26,54,6,0,none
+2024-01-22,Bangalore,boAt Airdopes 141,boAt,25,1329.92,124,4,0,none
+2024-01-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,80,1461.22,309,4,0,none
+2024-01-22,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14167.58,29,3,0,none
+2024-01-22,Bangalore,Noise ColorFit Pulse 2,Noise,15,1640.24,71,6,0,none
+2024-01-22,Bangalore,JBL Go 3,JBL,11,2189.19,51,3,0,none
+2024-01-22,Delhi,boAt Airdopes 141,boAt,24,1335.03,62,3,0,none
+2024-01-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1548.43,55,7,0,none
+2024-01-22,Delhi,Samsung Galaxy M14 5G,Samsung,8,13853.61,26,3,0,none
+2024-01-22,Delhi,Noise ColorFit Pulse 2,Noise,14,1606.92,66,4,0,none
+2024-01-22,Delhi,JBL Go 3,JBL,10,2192.48,28,5,0,none
+2024-01-23,Mumbai,boAt Airdopes 141,boAt,26,1284.17,114,6,0,none
+2024-01-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1537.2,,3,0,none
+2024-01-23,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14078.37,43,3,0,none
+2024-01-23,Mumbai,Noise ColorFit Pulse 2,Noise,16,1562.58,57,4,0,none
+2024-01-23,Mumbai,JBL Go 3,JBL,12,2244.72,32,4,0,none
+2024-01-23,Bangalore,boAt Airdopes 141,boAt,,1250.52,79,3,0,none
+2024-01-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1494.37,54,5,0,none
+2024-01-23,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13926.31,35,4,0,none
+2024-01-23,Bangalore,Noise ColorFit Pulse 2,Noise,15,1641.63,47,7,0,none
+2024-01-23,Bangalore,JBL Go 3,JBL,11,2211.08,28,3,0,none
+2024-01-23,Delhi,boAt Airdopes 141,boAt,24,1296.35,99,6,0,none
+2024-01-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1523.33,55,3,0,none
+2024-01-23,Delhi,Samsung Galaxy M14 5G,Samsung,9,13888.31,36,5,0,none
+2024-01-23,Delhi,Noise ColorFit Pulse 2,Noise,16,1606.07,80,3,0,none
+2024-01-23,Delhi,JBL Go 3,JBL,11,2231.19,40,3,0,none
+2024-01-24,Mumbai,boAt Airdopes 141,boAt,23,1319.26,79,5,0,none
+2024-01-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1518.5,,6,0,none
+2024-01-24,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13994.51,,7,0,none
+2024-01-24,Mumbai,Noise ColorFit Pulse 2,Noise,15,1566.84,64,5,0,none
+2024-01-24,Mumbai,JBL Go 3,JBL,12,2198.34,33,4,0,none
+2024-01-24,Bangalore,boAt Airdopes 141,boAt,28,1320.25,91,6,0,none
+2024-01-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1461.95,73,7,0,none
+2024-01-24,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13997.64,48,3,0,none
+2024-01-24,Bangalore,Noise ColorFit Pulse 2,Noise,13,1648.49,38,3,0,none
+2024-01-24,Bangalore,JBL Go 3,JBL,10,2153.06,42,7,0,none
+2024-01-24,Delhi,boAt Airdopes 141,boAt,21,1306.1,53,6,0,none
+2024-01-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1454.48,68,6,0,none
+2024-01-24,Delhi,Samsung Galaxy M14 5G,Samsung,8,13927.2,24,3,0,none
+2024-01-24,Delhi,Noise ColorFit Pulse 2,Noise,13,1588.48,61,3,0,none
+2024-01-24,Delhi,JBL Go 3,JBL,12,2179.5,34,4,0,none
+2024-01-25,Mumbai,boAt Airdopes 141,boAt,23,,110,7,0,none
+2024-01-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1531.34,41,4,0,none
+2024-01-25,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13976.95,42,3,0,none
+2024-01-25,Mumbai,Noise ColorFit Pulse 2,Noise,14,1630.43,52,3,0,none
+2024-01-25,Mumbai,JBL Go 3,JBL,10,2170.1,46,4,0,none
+2024-01-25,Bangalore,boAt Airdopes 141,boAt,22,1258.15,58,4,0,none
+2024-01-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1453.18,83,5,0,none
+2024-01-25,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13922.83,31,7,0,none
+2024-01-25,Bangalore,Noise ColorFit Pulse 2,Noise,14,1613.08,43,7,0,none
+2024-01-25,Bangalore,JBL Go 3,JBL,11,2189.14,29,5,0,none
+2024-01-25,Delhi,boAt Airdopes 141,boAt,23,1324.04,86,3,0,none
+2024-01-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1469.13,62,4,0,none
+2024-01-25,Delhi,Samsung Galaxy M14 5G,Samsung,10,13919.01,29,5,0,none
+2024-01-25,Delhi,Noise ColorFit Pulse 2,Noise,15,1578.82,40,7,0,none
+2024-01-25,Delhi,JBL Go 3,JBL,11,2206.92,39,4,0,none
+2024-01-26,Mumbai,boAt Airdopes 141,boAt,38,1284.94,158,3,1,Republic Day
+2024-01-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,24,1536.91,67,6,1,Republic Day
+2024-01-26,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14026.35,39,5,1,Republic Day
+2024-01-26,Mumbai,Noise ColorFit Pulse 2,Noise,,1636.15,83,3,1,Republic Day
+2024-01-26,Mumbai,JBL Go 3,JBL,17,2206.04,72,4,1,Republic Day
+2024-01-26,Bangalore,boAt Airdopes 141,boAt,41,1259.96,161,3,1,Republic Day
+2024-01-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,26,1527.4,111,3,1,Republic Day
+2024-01-26,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13868.88,49,3,1,Republic Day
+2024-01-26,Bangalore,Noise ColorFit Pulse 2,Noise,115,1627.66,297,4,1,Republic Day
+2024-01-26,Bangalore,JBL Go 3,JBL,17,2241.49,72,3,1,Republic Day
+2024-01-26,Delhi,boAt Airdopes 141,boAt,31,1326.93,148,7,1,Republic Day
+2024-01-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,28,1520.74,94,4,1,Republic Day
+2024-01-26,Delhi,Samsung Galaxy M14 5G,Samsung,12,13902.72,51,5,1,Republic Day
+2024-01-26,Delhi,Noise ColorFit Pulse 2,Noise,23,1631.52,103,7,1,Republic Day
+2024-01-26,Delhi,JBL Go 3,JBL,15,2160.58,74,5,1,Republic Day
+2024-01-27,Mumbai,boAt Airdopes 141,boAt,27,1306.5,130,3,0,none
+2024-01-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1531.58,67,3,0,none
+2024-01-27,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13919.19,52,3,0,none
+2024-01-27,Mumbai,Noise ColorFit Pulse 2,Noise,17,1603.54,46,6,0,none
+2024-01-27,Mumbai,JBL Go 3,JBL,13,2215.1,59,3,0,none
+2024-01-27,Bangalore,boAt Airdopes 141,boAt,35,1282.27,101,4,0,none
+2024-01-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1499.68,,4,0,none
+2024-01-27,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13840.5,40,7,0,none
+2024-01-27,Bangalore,Noise ColorFit Pulse 2,Noise,14,1586.67,68,5,0,none
+2024-01-27,Bangalore,JBL Go 3,JBL,12,2185.18,50,6,0,none
+2024-01-27,Delhi,boAt Airdopes 141,boAt,150,1260.91,516,5,0,none
+2024-01-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,21,1481.52,60,5,0,none
+2024-01-27,Delhi,Samsung Galaxy M14 5G,Samsung,,13911.35,44,5,0,none
+2024-01-27,Delhi,Noise ColorFit Pulse 2,Noise,19,1644.0,78,6,0,none
+2024-01-27,Delhi,JBL Go 3,JBL,14,2228.37,47,4,0,none
+2024-01-28,Mumbai,boAt Airdopes 141,boAt,33,1317.14,157,7,0,none
+2024-01-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1468.74,69,6,0,none
+2024-01-28,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13988.02,36,7,0,none
+2024-01-28,Mumbai,Noise ColorFit Pulse 2,Noise,17,1596.02,66,6,0,none
+2024-01-28,Mumbai,JBL Go 3,JBL,,2177.84,57,5,0,none
+2024-01-28,Bangalore,boAt Airdopes 141,boAt,29,1347.05,137,7,0,none
+2024-01-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,23,1542.0,67,4,0,none
+2024-01-28,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13935.7,35,5,0,none
+2024-01-28,Bangalore,Noise ColorFit Pulse 2,Noise,20,1615.94,95,4,0,none
+2024-01-28,Bangalore,JBL Go 3,JBL,15,2192.26,46,5,0,none
+2024-01-28,Delhi,boAt Airdopes 141,boAt,30,1333.97,93,3,0,none
+2024-01-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1519.41,77,7,0,none
+2024-01-28,Delhi,Samsung Galaxy M14 5G,Samsung,10,14042.07,48,5,0,none
+2024-01-28,Delhi,Noise ColorFit Pulse 2,Noise,16,1632.86,53,3,0,none
+2024-01-28,Delhi,JBL Go 3,JBL,15,2208.02,60,3,1,none
+2024-01-29,Mumbai,boAt Airdopes 141,boAt,23,1305.85,70,4,0,none
+2024-01-29,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1466.3,72,5,0,none
+2024-01-29,Mumbai,Samsung Galaxy M14 5G,Samsung,9,14034.5,28,3,0,none
+2024-01-29,Mumbai,Noise ColorFit Pulse 2,Noise,14,1596.79,40,6,0,none
+2024-01-29,Mumbai,JBL Go 3,JBL,11,2224.96,30,7,1,none
+2024-01-29,Bangalore,boAt Airdopes 141,boAt,24,1269.12,105,5,0,none
+2024-01-29,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1450.3,79,7,0,none
+2024-01-29,Bangalore,Samsung Galaxy M14 5G,Samsung,9,,23,4,0,none
+2024-01-29,Bangalore,Noise ColorFit Pulse 2,Noise,15,1585.39,71,6,0,none
+2024-01-29,Bangalore,JBL Go 3,JBL,10,2161.83,28,7,0,none
+2024-01-29,Delhi,boAt Airdopes 141,boAt,27,1330.5,103,6,0,none
+2024-01-29,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1521.79,65,3,1,none
+2024-01-29,Delhi,Samsung Galaxy M14 5G,Samsung,12,13827.39,40,7,0,none
+2024-01-29,Delhi,Noise ColorFit Pulse 2,Noise,64,1639.58,221,3,0,none
+2024-01-29,Delhi,JBL Go 3,JBL,9,2240.4,40,7,0,none
+2024-01-30,Mumbai,boAt Airdopes 141,boAt,23,1320.37,71,6,0,none
+2024-01-30,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1547.68,52,6,0,none
+2024-01-30,Mumbai,Samsung Galaxy M14 5G,Samsung,,13896.05,48,4,0,none
+2024-01-30,Mumbai,Noise ColorFit Pulse 2,Noise,16,,66,6,0,none
+2024-01-30,Mumbai,JBL Go 3,JBL,11,2246.32,47,4,0,none
+2024-01-30,Bangalore,boAt Airdopes 141,boAt,19,1336.89,51,3,0,none
+2024-01-30,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1528.95,46,3,0,none
+2024-01-30,Bangalore,Samsung Galaxy M14 5G,Samsung,9,14001.8,41,4,0,none
+2024-01-30,Bangalore,Noise ColorFit Pulse 2,Noise,14,1646.65,54,5,0,none
+2024-01-30,Bangalore,JBL Go 3,JBL,12,2179.92,,6,0,none
+2024-01-30,Delhi,boAt Airdopes 141,boAt,25,1260.37,106,7,0,none
+2024-01-30,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1524.2,43,3,0,none
+2024-01-30,Delhi,Samsung Galaxy M14 5G,Samsung,9,13971.31,42,4,0,none
+2024-01-30,Delhi,Noise ColorFit Pulse 2,Noise,75,1558.47,271,6,0,none
+2024-01-30,Delhi,JBL Go 3,JBL,9,2173.97,32,3,0,none
+2024-01-31,Mumbai,boAt Airdopes 141,boAt,29,1283.26,78,4,0,none
+2024-01-31,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1502.73,84,4,0,none
+2024-01-31,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14109.55,49,4,0,none
+2024-01-31,Mumbai,Noise ColorFit Pulse 2,Noise,13,1560.83,63,7,0,none
+2024-01-31,Mumbai,JBL Go 3,JBL,11,2151.77,47,4,0,none
+2024-01-31,Bangalore,boAt Airdopes 141,boAt,23,1255.94,,6,0,none
+2024-01-31,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1498.37,79,5,0,none
+2024-01-31,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14077.71,29,3,0,none
+2024-01-31,Bangalore,Noise ColorFit Pulse 2,Noise,,1569.89,44,5,0,none
+2024-01-31,Bangalore,JBL Go 3,JBL,12,2214.92,48,5,0,none
+2024-01-31,Delhi,boAt Airdopes 141,boAt,22,1271.33,59,3,0,none
+2024-01-31,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1466.63,65,5,0,none
+2024-01-31,Delhi,Samsung Galaxy M14 5G,Samsung,10,14171.9,26,4,0,none
+2024-01-31,Delhi,Noise ColorFit Pulse 2,Noise,14,1575.29,,3,0,none
+2024-01-31,Delhi,JBL Go 3,JBL,11,2220.15,30,3,0,none
+2024-02-01,Mumbai,boAt Airdopes 141,boAt,25,1268.08,79,6,0,none
+2024-02-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1536.02,88,6,0,none
+2024-02-01,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14144.87,33,3,0,none
+2024-02-01,Mumbai,Noise ColorFit Pulse 2,Noise,17,1558.79,54,5,1,none
+2024-02-01,Mumbai,JBL Go 3,JBL,13,2211.75,59,3,0,none
+2024-02-01,Bangalore,boAt Airdopes 141,boAt,26,1285.45,90,5,0,none
+2024-02-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1471.69,60,3,0,none
+2024-02-01,Bangalore,Samsung Galaxy M14 5G,Samsung,,13878.74,27,3,0,none
+2024-02-01,Bangalore,Noise ColorFit Pulse 2,Noise,14,1600.17,68,6,0,none
+2024-02-01,Bangalore,JBL Go 3,JBL,10,2176.1,49,5,1,none
+2024-02-01,Delhi,boAt Airdopes 141,boAt,25,1326.0,77,3,0,none
+2024-02-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1505.21,48,6,0,none
+2024-02-01,Delhi,Samsung Galaxy M14 5G,Samsung,10,13821.77,31,4,0,none
+2024-02-01,Delhi,Noise ColorFit Pulse 2,Noise,14,1623.45,69,6,0,none
+2024-02-01,Delhi,JBL Go 3,JBL,11,2156.05,48,4,0,none
+2024-02-02,Mumbai,boAt Airdopes 141,boAt,26,1260.66,81,7,0,none
+2024-02-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1456.6,71,7,0,none
+2024-02-02,Mumbai,Samsung Galaxy M14 5G,Samsung,8,14127.82,34,3,0,none
+2024-02-02,Mumbai,Noise ColorFit Pulse 2,Noise,85,1583.0,374,4,0,none
+2024-02-02,Mumbai,JBL Go 3,JBL,14,2189.1,40,4,0,none
+2024-02-02,Bangalore,boAt Airdopes 141,boAt,29,1348.77,119,5,0,none
+2024-02-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1482.2,62,5,0,none
+2024-02-02,Bangalore,Samsung Galaxy M14 5G,Samsung,54,14111.42,188,3,0,none
+2024-02-02,Bangalore,Noise ColorFit Pulse 2,Noise,13,1568.63,57,5,0,none
+2024-02-02,Bangalore,JBL Go 3,JBL,10,2225.68,,3,0,none
+2024-02-02,Delhi,boAt Airdopes 141,boAt,26,1273.89,,4,0,none
+2024-02-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1542.46,69,4,0,none
+2024-02-02,Delhi,Samsung Galaxy M14 5G,Samsung,10,14169.89,32,5,0,none
+2024-02-02,Delhi,Noise ColorFit Pulse 2,Noise,12,1621.88,40,6,0,none
+2024-02-02,Delhi,JBL Go 3,JBL,11,2178.51,28,5,0,none
+2024-02-03,Mumbai,boAt Airdopes 141,boAt,24,1319.78,108,4,0,none
+2024-02-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,25,1532.99,91,5,0,none
+2024-02-03,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13808.4,45,4,0,none
+2024-02-03,Mumbai,Noise ColorFit Pulse 2,Noise,18,1575.08,52,4,0,none
+2024-02-03,Mumbai,JBL Go 3,JBL,14,2229.51,49,7,0,none
+2024-02-03,Bangalore,boAt Airdopes 141,boAt,33,1342.17,155,6,1,none
+2024-02-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1517.58,78,5,0,none
+2024-02-03,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13887.75,36,6,0,none
+2024-02-03,Bangalore,Noise ColorFit Pulse 2,Noise,18,1621.47,59,3,0,none
+2024-02-03,Bangalore,JBL Go 3,JBL,17,2161.9,62,7,1,none
+2024-02-03,Delhi,boAt Airdopes 141,boAt,32,1300.98,92,3,0,none
+2024-02-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1480.6,86,7,0,none
+2024-02-03,Delhi,Samsung Galaxy M14 5G,Samsung,11,13934.21,31,4,0,none
+2024-02-03,Delhi,Noise ColorFit Pulse 2,Noise,21,1571.65,62,5,0,none
+2024-02-03,Delhi,JBL Go 3,JBL,13,2240.55,48,7,0,none
+2024-02-04,Mumbai,boAt Airdopes 141,boAt,32,1281.12,,5,0,none
+2024-02-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1483.38,89,5,0,none
+2024-02-04,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13945.34,,5,0,none
+2024-02-04,Mumbai,Noise ColorFit Pulse 2,Noise,15,1624.63,66,7,0,none
+2024-02-04,Mumbai,JBL Go 3,JBL,15,2230.3,47,5,0,none
+2024-02-04,Bangalore,boAt Airdopes 141,boAt,30,1331.06,101,4,0,none
+2024-02-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,20,1453.8,94,7,0,none
+2024-02-04,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14133.94,,5,0,none
+2024-02-04,Bangalore,Noise ColorFit Pulse 2,Noise,18,1555.77,78,4,0,none
+2024-02-04,Bangalore,JBL Go 3,JBL,12,2212.86,57,7,0,none
+2024-02-04,Delhi,boAt Airdopes 141,boAt,33,,151,7,1,none
+2024-02-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1469.84,69,3,0,none
+2024-02-04,Delhi,Samsung Galaxy M14 5G,Samsung,13,13872.52,42,7,0,none
+2024-02-04,Delhi,Noise ColorFit Pulse 2,Noise,18,1570.9,85,6,0,none
+2024-02-04,Delhi,JBL Go 3,JBL,11,2246.25,41,7,1,none
+2024-02-05,Mumbai,boAt Airdopes 141,boAt,32,1339.0,93,3,0,none
+2024-02-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1451.34,53,4,0,none
+2024-02-05,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14120.36,43,7,0,none
+2024-02-05,Mumbai,Noise ColorFit Pulse 2,Noise,15,1629.27,71,4,0,none
+2024-02-05,Mumbai,JBL Go 3,JBL,11,2209.29,52,4,0,none
+2024-02-05,Bangalore,boAt Airdopes 141,boAt,24,1291.44,91,6,0,none
+2024-02-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1516.76,46,6,0,none
+2024-02-05,Bangalore,Samsung Galaxy M14 5G,Samsung,9,14146.71,31,6,0,none
+2024-02-05,Bangalore,Noise ColorFit Pulse 2,Noise,10,1580.58,38,4,0,none
+2024-02-05,Bangalore,JBL Go 3,JBL,10,2196.18,38,7,0,none
+2024-02-05,Delhi,boAt Airdopes 141,boAt,25,1284.41,89,5,0,none
+2024-02-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1527.44,66,7,0,none
+2024-02-05,Delhi,Samsung Galaxy M14 5G,Samsung,9,14020.69,37,3,0,none
+2024-02-05,Delhi,Noise ColorFit Pulse 2,Noise,15,1583.01,73,7,0,none
+2024-02-05,Delhi,JBL Go 3,JBL,10,2246.55,,6,0,none
+2024-02-06,Mumbai,boAt Airdopes 141,boAt,21,1342.8,59,5,0,none
+2024-02-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1487.77,55,7,1,none
+2024-02-06,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13882.88,48,4,0,none
+2024-02-06,Mumbai,Noise ColorFit Pulse 2,Noise,14,1621.01,67,4,0,none
+2024-02-06,Mumbai,JBL Go 3,JBL,10,2234.86,35,3,0,none
+2024-02-06,Bangalore,boAt Airdopes 141,boAt,26,1257.41,75,3,1,none
+2024-02-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1516.25,84,5,0,none
+2024-02-06,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13992.23,28,4,0,none
+2024-02-06,Bangalore,Noise ColorFit Pulse 2,Noise,14,1639.55,62,7,0,none
+2024-02-06,Bangalore,JBL Go 3,JBL,10,2182.7,35,4,0,none
+2024-02-06,Delhi,boAt Airdopes 141,boAt,26,1249.46,117,7,0,none
+2024-02-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1487.05,75,5,0,none
+2024-02-06,Delhi,Samsung Galaxy M14 5G,Samsung,10,14160.51,45,7,0,none
+2024-02-06,Delhi,Noise ColorFit Pulse 2,Noise,16,1575.23,64,4,0,none
+2024-02-06,Delhi,JBL Go 3,JBL,12,2153.64,43,3,0,none
+2024-02-07,Mumbai,boAt Airdopes 141,boAt,25,1257.73,111,3,0,none
+2024-02-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1493.89,65,3,0,none
+2024-02-07,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13947.21,43,7,0,none
+2024-02-07,Mumbai,Noise ColorFit Pulse 2,Noise,,1589.13,73,6,0,none
+2024-02-07,Mumbai,JBL Go 3,JBL,10,2209.19,47,4,0,none
+2024-02-07,Bangalore,boAt Airdopes 141,boAt,88,1334.14,417,3,0,none
+2024-02-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1532.99,68,4,0,none
+2024-02-07,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13888.25,46,4,0,none
+2024-02-07,Bangalore,Noise ColorFit Pulse 2,Noise,16,1646.11,71,6,0,none
+2024-02-07,Bangalore,JBL Go 3,JBL,13,2223.47,40,6,0,none
+2024-02-07,Delhi,boAt Airdopes 141,boAt,23,1260.97,76,4,0,none
+2024-02-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1546.41,53,5,0,none
+2024-02-07,Delhi,Samsung Galaxy M14 5G,Samsung,10,14031.92,49,6,0,none
+2024-02-07,Delhi,Noise ColorFit Pulse 2,Noise,11,1585.95,49,5,0,none
+2024-02-07,Delhi,JBL Go 3,JBL,12,2166.49,36,4,0,none
+2024-02-08,Mumbai,boAt Airdopes 141,boAt,25,1269.58,94,3,0,none
+2024-02-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1468.32,67,3,0,none
+2024-02-08,Mumbai,Samsung Galaxy M14 5G,Samsung,,13939.01,47,7,0,none
+2024-02-08,Mumbai,Noise ColorFit Pulse 2,Noise,14,1559.17,68,5,0,none
+2024-02-08,Mumbai,JBL Go 3,JBL,54,2232.04,267,3,0,none
+2024-02-08,Bangalore,boAt Airdopes 141,boAt,30,1251.21,77,3,0,none
+2024-02-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1539.01,53,4,0,none
+2024-02-08,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13922.71,,3,0,none
+2024-02-08,Bangalore,Noise ColorFit Pulse 2,Noise,17,1624.68,53,5,0,none
+2024-02-08,Bangalore,JBL Go 3,JBL,12,2225.51,37,3,0,none
+2024-02-08,Delhi,boAt Airdopes 141,boAt,25,1282.16,68,3,0,none
+2024-02-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1464.47,55,5,0,none
+2024-02-08,Delhi,Samsung Galaxy M14 5G,Samsung,,14092.97,39,3,0,none
+2024-02-08,Delhi,Noise ColorFit Pulse 2,Noise,14,1568.13,49,4,0,none
+2024-02-08,Delhi,JBL Go 3,JBL,11,2188.84,33,3,0,none
+2024-02-09,Mumbai,boAt Airdopes 141,boAt,25,1282.02,65,6,0,none
+2024-02-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1458.99,45,6,0,none
+2024-02-09,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13824.38,36,6,0,none
+2024-02-09,Mumbai,Noise ColorFit Pulse 2,Noise,16,1620.95,72,3,0,none
+2024-02-09,Mumbai,JBL Go 3,JBL,11,2183.8,47,5,0,none
+2024-02-09,Bangalore,boAt Airdopes 141,boAt,26,1292.07,80,4,0,none
+2024-02-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1471.1,52,5,0,none
+2024-02-09,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13975.8,49,7,0,none
+2024-02-09,Bangalore,Noise ColorFit Pulse 2,Noise,13,1584.47,,4,0,none
+2024-02-09,Bangalore,JBL Go 3,JBL,10,2178.32,28,6,0,none
+2024-02-09,Delhi,boAt Airdopes 141,boAt,,1286.52,84,6,0,none
+2024-02-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1519.93,58,3,0,none
+2024-02-09,Delhi,Samsung Galaxy M14 5G,Samsung,9,14060.84,38,5,0,none
+2024-02-09,Delhi,Noise ColorFit Pulse 2,Noise,19,1616.02,93,4,0,none
+2024-02-09,Delhi,JBL Go 3,JBL,12,2159.21,36,6,1,none
+2024-02-10,Mumbai,boAt Airdopes 141,boAt,32,1264.39,131,4,0,none
+2024-02-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1466.31,53,6,0,none
+2024-02-10,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14037.11,41,3,0,none
+2024-02-10,Mumbai,Noise ColorFit Pulse 2,Noise,17,,48,3,0,none
+2024-02-10,Mumbai,JBL Go 3,JBL,12,2234.53,57,4,0,none
+2024-02-10,Bangalore,boAt Airdopes 141,boAt,28,1300.6,130,3,0,none
+2024-02-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1460.6,94,4,0,none
+2024-02-10,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14006.87,50,5,0,none
+2024-02-10,Bangalore,Noise ColorFit Pulse 2,Noise,20,1611.49,89,6,0,none
+2024-02-10,Bangalore,JBL Go 3,JBL,14,2224.27,50,3,0,none
+2024-02-10,Delhi,boAt Airdopes 141,boAt,160,1299.78,516,5,0,none
+2024-02-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1486.18,88,4,0,none
+2024-02-10,Delhi,Samsung Galaxy M14 5G,Samsung,11,14046.26,47,3,0,none
+2024-02-10,Delhi,Noise ColorFit Pulse 2,Noise,18,1560.39,52,3,0,none
+2024-02-10,Delhi,JBL Go 3,JBL,12,2189.59,37,6,0,none
+2024-02-11,Mumbai,boAt Airdopes 141,boAt,26,1337.74,86,6,0,none
+2024-02-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1474.87,86,4,0,none
+2024-02-11,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14012.68,60,7,0,none
+2024-02-11,Mumbai,Noise ColorFit Pulse 2,Noise,21,1632.35,88,5,0,none
+2024-02-11,Mumbai,JBL Go 3,JBL,13,2231.22,54,3,0,none
+2024-02-11,Bangalore,boAt Airdopes 141,boAt,28,1256.02,133,7,1,none
+2024-02-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,20,1494.39,,4,0,none
+2024-02-11,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14048.66,34,4,0,none
+2024-02-11,Bangalore,Noise ColorFit Pulse 2,Noise,19,1569.49,93,7,0,none
+2024-02-11,Bangalore,JBL Go 3,JBL,13,2241.51,50,7,0,none
+2024-02-11,Delhi,boAt Airdopes 141,boAt,28,1329.64,128,4,0,none
+2024-02-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1470.73,93,5,0,none
+2024-02-11,Delhi,Samsung Galaxy M14 5G,Samsung,11,14117.76,47,6,0,none
+2024-02-11,Delhi,Noise ColorFit Pulse 2,Noise,16,1640.85,59,7,0,none
+2024-02-11,Delhi,JBL Go 3,JBL,14,2239.08,44,5,0,none
+2024-02-12,Mumbai,boAt Airdopes 141,boAt,130,1274.39,595,7,0,none
+2024-02-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1516.22,49,6,0,none
+2024-02-12,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14002.82,29,4,0,none
+2024-02-12,Mumbai,Noise ColorFit Pulse 2,Noise,16,1633.08,46,7,0,none
+2024-02-12,Mumbai,JBL Go 3,JBL,14,2152.83,62,7,0,none
+2024-02-12,Bangalore,boAt Airdopes 141,boAt,26,1308.45,126,4,0,none
+2024-02-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1504.07,65,3,1,none
+2024-02-12,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13901.26,41,5,0,none
+2024-02-12,Bangalore,Noise ColorFit Pulse 2,Noise,13,1560.41,40,3,0,none
+2024-02-12,Bangalore,JBL Go 3,JBL,52,2169.9,135,6,0,none
+2024-02-12,Delhi,boAt Airdopes 141,boAt,30,1293.07,108,7,0,none
+2024-02-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1489.77,79,7,0,none
+2024-02-12,Delhi,Samsung Galaxy M14 5G,Samsung,10,14158.68,36,3,1,none
+2024-02-12,Delhi,Noise ColorFit Pulse 2,Noise,15,,49,4,0,none
+2024-02-12,Delhi,JBL Go 3,JBL,10,2172.15,27,3,0,none
+2024-02-13,Mumbai,boAt Airdopes 141,boAt,28,1329.81,78,3,0,none
+2024-02-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1523.0,76,3,0,none
+2024-02-13,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13890.22,44,5,0,none
+2024-02-13,Mumbai,Noise ColorFit Pulse 2,Noise,12,1614.17,38,4,0,none
+2024-02-13,Mumbai,JBL Go 3,JBL,10,2166.13,29,5,0,none
+2024-02-13,Bangalore,boAt Airdopes 141,boAt,28,1279.28,111,3,0,none
+2024-02-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1530.06,58,6,0,none
+2024-02-13,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13827.19,35,6,0,none
+2024-02-13,Bangalore,Noise ColorFit Pulse 2,Noise,13,1646.65,50,6,0,none
+2024-02-13,Bangalore,JBL Go 3,JBL,10,2235.26,42,5,0,none
+2024-02-13,Delhi,boAt Airdopes 141,boAt,24,1276.48,99,3,0,none
+2024-02-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1479.81,47,7,0,none
+2024-02-13,Delhi,Samsung Galaxy M14 5G,Samsung,12,13901.87,54,7,0,none
+2024-02-13,Delhi,Noise ColorFit Pulse 2,Noise,15,1619.35,51,7,0,none
+2024-02-13,Delhi,JBL Go 3,JBL,,2229.11,33,7,0,none
+2024-02-14,Mumbai,boAt Airdopes 141,boAt,32,1318.62,139,5,1,Valentines Day
+2024-02-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1543.94,98,5,1,Valentines Day
+2024-02-14,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14174.43,50,5,1,Valentines Day
+2024-02-14,Mumbai,Noise ColorFit Pulse 2,Noise,25,1647.39,118,4,1,Valentines Day
+2024-02-14,Mumbai,JBL Go 3,JBL,13,2182.66,36,4,1,Valentines Day
+2024-02-14,Bangalore,boAt Airdopes 141,boAt,39,1346.03,,3,1,Valentines Day
+2024-02-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,102,1486.52,255,4,1,Valentines Day
+2024-02-14,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13966.8,50,3,1,Valentines Day
+2024-02-14,Bangalore,Noise ColorFit Pulse 2,Noise,17,1561.46,79,3,1,Valentines Day
+2024-02-14,Bangalore,JBL Go 3,JBL,15,2163.65,52,7,1,Valentines Day
+2024-02-14,Delhi,boAt Airdopes 141,boAt,43,1315.36,144,6,1,Valentines Day
+2024-02-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1541.78,72,3,1,Valentines Day
+2024-02-14,Delhi,Samsung Galaxy M14 5G,Samsung,12,13971.02,46,6,1,Valentines Day
+2024-02-14,Delhi,Noise ColorFit Pulse 2,Noise,21,1610.97,95,4,1,Valentines Day
+2024-02-14,Delhi,JBL Go 3,JBL,12,2167.81,40,6,1,Valentines Day
+2024-02-15,Mumbai,boAt Airdopes 141,boAt,,1254.79,98,3,0,none
+2024-02-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1526.98,71,4,0,none
+2024-02-15,Mumbai,Samsung Galaxy M14 5G,Samsung,10,,26,6,0,none
+2024-02-15,Mumbai,Noise ColorFit Pulse 2,Noise,17,,84,3,0,none
+2024-02-15,Mumbai,JBL Go 3,JBL,12,2211.07,32,7,0,none
+2024-02-15,Bangalore,boAt Airdopes 141,boAt,22,1251.49,95,6,0,none
+2024-02-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1515.5,54,3,0,none
+2024-02-15,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14045.61,33,7,0,none
+2024-02-15,Bangalore,Noise ColorFit Pulse 2,Noise,16,1614.99,57,7,0,none
+2024-02-15,Bangalore,JBL Go 3,JBL,10,2177.95,42,4,0,none
+2024-02-15,Delhi,boAt Airdopes 141,boAt,30,1313.82,135,4,0,none
+2024-02-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1463.18,86,3,0,none
+2024-02-15,Delhi,Samsung Galaxy M14 5G,Samsung,,13868.99,39,5,0,none
+2024-02-15,Delhi,Noise ColorFit Pulse 2,Noise,16,1588.72,62,3,0,none
+2024-02-15,Delhi,JBL Go 3,JBL,11,2153.04,52,6,0,none
+2024-02-16,Mumbai,boAt Airdopes 141,boAt,26,1271.91,65,5,0,none
+2024-02-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1547.48,66,4,0,none
+2024-02-16,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13899.66,42,4,0,none
+2024-02-16,Mumbai,Noise ColorFit Pulse 2,Noise,56,1569.17,183,3,0,none
+2024-02-16,Mumbai,JBL Go 3,JBL,9,2159.65,30,4,0,none
+2024-02-16,Bangalore,boAt Airdopes 141,boAt,26,1257.35,81,3,0,none
+2024-02-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1520.42,71,7,0,none
+2024-02-16,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13915.79,31,6,0,none
+2024-02-16,Bangalore,Noise ColorFit Pulse 2,Noise,14,1642.94,51,7,0,none
+2024-02-16,Bangalore,JBL Go 3,JBL,11,2219.09,45,7,0,none
+2024-02-16,Delhi,boAt Airdopes 141,boAt,28,1261.35,115,3,0,none
+2024-02-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1493.6,51,7,0,none
+2024-02-16,Delhi,Samsung Galaxy M14 5G,Samsung,9,14195.36,23,7,0,none
+2024-02-16,Delhi,Noise ColorFit Pulse 2,Noise,13,1595.84,46,4,0,none
+2024-02-16,Delhi,JBL Go 3,JBL,12,2186.16,50,6,0,none
+2024-02-17,Mumbai,boAt Airdopes 141,boAt,30,1307.32,109,6,0,none
+2024-02-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,,1481.95,62,6,0,none
+2024-02-17,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14124.28,29,5,0,none
+2024-02-17,Mumbai,Noise ColorFit Pulse 2,Noise,16,1553.26,43,4,0,none
+2024-02-17,Mumbai,JBL Go 3,JBL,,2155.69,54,6,0,none
+2024-02-17,Bangalore,boAt Airdopes 141,boAt,30,1293.57,92,4,0,none
+2024-02-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1524.91,48,6,0,none
+2024-02-17,Bangalore,Samsung Galaxy M14 5G,Samsung,,14020.97,42,7,0,none
+2024-02-17,Bangalore,Noise ColorFit Pulse 2,Noise,20,1620.88,65,4,0,none
+2024-02-17,Bangalore,JBL Go 3,JBL,,2218.67,,3,0,none
+2024-02-17,Delhi,boAt Airdopes 141,boAt,29,1287.83,128,5,0,none
+2024-02-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,21,1537.88,70,3,0,none
+2024-02-17,Delhi,Samsung Galaxy M14 5G,Samsung,16,14119.67,65,4,0,none
+2024-02-17,Delhi,Noise ColorFit Pulse 2,Noise,100,1583.85,432,7,0,none
+2024-02-17,Delhi,JBL Go 3,JBL,13,2245.34,42,7,0,none
+2024-02-18,Mumbai,boAt Airdopes 141,boAt,30,1283.36,124,3,0,none
+2024-02-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1483.22,74,5,0,none
+2024-02-18,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14002.26,39,3,0,none
+2024-02-18,Mumbai,Noise ColorFit Pulse 2,Noise,20,1621.4,67,7,0,none
+2024-02-18,Mumbai,JBL Go 3,JBL,15,2158.86,72,4,1,none
+2024-02-18,Bangalore,boAt Airdopes 141,boAt,35,1284.05,131,3,0,none
+2024-02-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1476.41,59,4,0,none
+2024-02-18,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13858.44,48,5,0,none
+2024-02-18,Bangalore,Noise ColorFit Pulse 2,Noise,17,1583.39,84,6,0,none
+2024-02-18,Bangalore,JBL Go 3,JBL,15,2226.42,66,7,0,none
+2024-02-18,Delhi,boAt Airdopes 141,boAt,26,1256.82,72,7,1,none
+2024-02-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1530.24,62,7,0,none
+2024-02-18,Delhi,Samsung Galaxy M14 5G,Samsung,11,14089.86,29,3,0,none
+2024-02-18,Delhi,Noise ColorFit Pulse 2,Noise,,1597.82,97,5,0,none
+2024-02-18,Delhi,JBL Go 3,JBL,14,2222.98,42,4,1,none
+2024-02-19,Mumbai,boAt Airdopes 141,boAt,25,1285.19,119,6,0,none
+2024-02-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1453.23,85,6,0,none
+2024-02-19,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14000.43,48,5,0,none
+2024-02-19,Mumbai,Noise ColorFit Pulse 2,Noise,12,1600.26,60,4,0,none
+2024-02-19,Mumbai,JBL Go 3,JBL,10,2167.13,27,6,0,none
+2024-02-19,Bangalore,boAt Airdopes 141,boAt,25,1269.61,97,7,0,none
+2024-02-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1482.41,71,4,0,none
+2024-02-19,Bangalore,Samsung Galaxy M14 5G,Samsung,8,13858.33,34,3,0,none
+2024-02-19,Bangalore,Noise ColorFit Pulse 2,Noise,15,1561.9,53,6,1,none
+2024-02-19,Bangalore,JBL Go 3,JBL,12,2209.91,43,5,0,none
+2024-02-19,Delhi,boAt Airdopes 141,boAt,27,1272.92,69,3,0,none
+2024-02-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1473.11,63,6,0,none
+2024-02-19,Delhi,Samsung Galaxy M14 5G,Samsung,11,13945.17,37,6,0,none
+2024-02-19,Delhi,Noise ColorFit Pulse 2,Noise,15,,73,7,0,none
+2024-02-19,Delhi,JBL Go 3,JBL,10,2220.81,50,7,0,none
+2024-02-20,Mumbai,boAt Airdopes 141,boAt,21,1321.01,70,3,0,none
+2024-02-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1512.82,60,3,0,none
+2024-02-20,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13905.98,48,5,0,none
+2024-02-20,Mumbai,Noise ColorFit Pulse 2,Noise,15,1609.82,60,6,0,none
+2024-02-20,Mumbai,JBL Go 3,JBL,11,2188.64,49,3,0,none
+2024-02-20,Bangalore,boAt Airdopes 141,boAt,22,1317.2,76,5,0,none
+2024-02-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1462.74,70,7,0,none
+2024-02-20,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13835.57,25,5,0,none
+2024-02-20,Bangalore,Noise ColorFit Pulse 2,Noise,15,1627.85,64,7,0,none
+2024-02-20,Bangalore,JBL Go 3,JBL,12,2201.83,55,7,0,none
+2024-02-20,Delhi,boAt Airdopes 141,boAt,26,1279.53,129,3,0,none
+2024-02-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1523.64,73,7,0,none
+2024-02-20,Delhi,Samsung Galaxy M14 5G,Samsung,13,14043.96,44,4,0,none
+2024-02-20,Delhi,Noise ColorFit Pulse 2,Noise,18,1645.07,68,5,0,none
+2024-02-20,Delhi,JBL Go 3,JBL,,2204.36,,7,0,none
+2024-02-21,Mumbai,boAt Airdopes 141,boAt,28,1263.31,112,4,0,none
+2024-02-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1489.86,52,5,0,none
+2024-02-21,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13953.05,43,7,0,none
+2024-02-21,Mumbai,Noise ColorFit Pulse 2,Noise,14,1558.47,61,7,0,none
+2024-02-21,Mumbai,JBL Go 3,JBL,10,2236.51,33,6,1,none
+2024-02-21,Bangalore,boAt Airdopes 141,boAt,20,1254.54,87,5,0,none
+2024-02-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1495.06,82,5,0,none
+2024-02-21,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14072.49,41,7,0,none
+2024-02-21,Bangalore,Noise ColorFit Pulse 2,Noise,16,1579.52,43,4,0,none
+2024-02-21,Bangalore,JBL Go 3,JBL,11,2240.35,42,4,0,none
+2024-02-21,Delhi,boAt Airdopes 141,boAt,,1329.67,127,4,1,none
+2024-02-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1464.63,69,7,0,none
+2024-02-21,Delhi,Samsung Galaxy M14 5G,Samsung,,14071.16,36,6,0,none
+2024-02-21,Delhi,Noise ColorFit Pulse 2,Noise,15,1615.11,50,3,0,none
+2024-02-21,Delhi,JBL Go 3,JBL,11,2149.9,41,6,0,none
+2024-02-22,Mumbai,boAt Airdopes 141,boAt,26,1281.19,82,6,0,none
+2024-02-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1507.01,65,7,0,none
+2024-02-22,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13937.23,31,6,0,none
+2024-02-22,Mumbai,Noise ColorFit Pulse 2,Noise,15,1583.13,53,5,1,none
+2024-02-22,Mumbai,JBL Go 3,JBL,10,2222.48,42,4,0,none
+2024-02-22,Bangalore,boAt Airdopes 141,boAt,24,1310.62,71,7,0,none
+2024-02-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1547.46,47,3,0,none
+2024-02-22,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14152.59,,5,0,none
+2024-02-22,Bangalore,Noise ColorFit Pulse 2,Noise,17,1647.3,56,4,0,none
+2024-02-22,Bangalore,JBL Go 3,JBL,9,2244.69,28,3,1,none
+2024-02-22,Delhi,boAt Airdopes 141,boAt,,1287.25,,3,0,none
+2024-02-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1454.87,66,7,0,none
+2024-02-22,Delhi,Samsung Galaxy M14 5G,Samsung,10,13830.2,50,6,0,none
+2024-02-22,Delhi,Noise ColorFit Pulse 2,Noise,14,1642.55,47,6,0,none
+2024-02-22,Delhi,JBL Go 3,JBL,12,2151.46,46,7,1,none
+2024-02-23,Mumbai,boAt Airdopes 141,boAt,24,1333.67,78,4,1,none
+2024-02-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,,1537.16,47,3,0,none
+2024-02-23,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13904.39,37,3,0,none
+2024-02-23,Mumbai,Noise ColorFit Pulse 2,Noise,16,1647.61,53,5,0,none
+2024-02-23,Mumbai,JBL Go 3,JBL,12,2187.04,43,7,0,none
+2024-02-23,Bangalore,boAt Airdopes 141,boAt,28,1286.04,79,7,0,none
+2024-02-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1535.49,67,6,0,none
+2024-02-23,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14124.93,34,6,0,none
+2024-02-23,Bangalore,Noise ColorFit Pulse 2,Noise,17,1614.22,79,4,0,none
+2024-02-23,Bangalore,JBL Go 3,JBL,12,2245.76,56,6,1,none
+2024-02-23,Delhi,boAt Airdopes 141,boAt,156,1342.96,439,5,0,none
+2024-02-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1449.4,47,5,0,none
+2024-02-23,Delhi,Samsung Galaxy M14 5G,Samsung,60,14122.52,166,6,0,none
+2024-02-23,Delhi,Noise ColorFit Pulse 2,Noise,16,1611.26,58,7,1,none
+2024-02-23,Delhi,JBL Go 3,JBL,11,2175.71,,7,0,none
+2024-02-24,Mumbai,boAt Airdopes 141,boAt,30,1327.56,114,3,0,none
+2024-02-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1475.89,66,7,0,none
+2024-02-24,Mumbai,Samsung Galaxy M14 5G,Samsung,78,13965.0,345,7,0,none
+2024-02-24,Mumbai,Noise ColorFit Pulse 2,Noise,20,1557.21,88,4,0,none
+2024-02-24,Mumbai,JBL Go 3,JBL,12,2231.52,36,5,0,none
+2024-02-24,Bangalore,boAt Airdopes 141,boAt,34,1319.26,160,5,1,none
+2024-02-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1459.57,81,6,1,none
+2024-02-24,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14087.8,55,7,0,none
+2024-02-24,Bangalore,Noise ColorFit Pulse 2,Noise,17,1594.73,85,6,0,none
+2024-02-24,Bangalore,JBL Go 3,JBL,15,2197.18,72,7,0,none
+2024-02-24,Delhi,boAt Airdopes 141,boAt,27,1322.03,72,4,0,none
+2024-02-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1503.22,58,4,0,none
+2024-02-24,Delhi,Samsung Galaxy M14 5G,Samsung,13,,49,5,0,none
+2024-02-24,Delhi,Noise ColorFit Pulse 2,Noise,20,1594.72,60,6,0,none
+2024-02-24,Delhi,JBL Go 3,JBL,14,2216.35,57,7,0,none
+2024-02-25,Mumbai,boAt Airdopes 141,boAt,32,1333.54,104,3,0,none
+2024-02-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1542.61,66,7,0,none
+2024-02-25,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14011.1,29,5,0,none
+2024-02-25,Mumbai,Noise ColorFit Pulse 2,Noise,17,1644.28,51,4,0,none
+2024-02-25,Mumbai,JBL Go 3,JBL,,2157.77,27,7,0,none
+2024-02-25,Bangalore,boAt Airdopes 141,boAt,35,1285.99,169,6,0,none
+2024-02-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1503.02,87,4,0,none
+2024-02-25,Bangalore,Samsung Galaxy M14 5G,Samsung,16,13885.57,63,6,0,none
+2024-02-25,Bangalore,Noise ColorFit Pulse 2,Noise,17,1627.62,60,5,0,none
+2024-02-25,Bangalore,JBL Go 3,JBL,13,2243.04,47,5,0,none
+2024-02-25,Delhi,boAt Airdopes 141,boAt,34,1297.94,91,4,0,none
+2024-02-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1511.6,49,5,0,none
+2024-02-25,Delhi,Samsung Galaxy M14 5G,Samsung,14,14117.38,35,4,0,none
+2024-02-25,Delhi,Noise ColorFit Pulse 2,Noise,20,1600.94,52,7,0,none
+2024-02-25,Delhi,JBL Go 3,JBL,15,2202.44,59,3,0,none
+2024-02-26,Mumbai,boAt Airdopes 141,boAt,23,1300.65,71,6,0,none
+2024-02-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1528.58,48,6,0,none
+2024-02-26,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13888.76,30,6,0,none
+2024-02-26,Mumbai,Noise ColorFit Pulse 2,Noise,15,1618.82,45,6,0,none
+2024-02-26,Mumbai,JBL Go 3,JBL,12,2221.36,45,7,0,none
+2024-02-26,Bangalore,boAt Airdopes 141,boAt,26,1312.66,124,4,0,none
+2024-02-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1483.47,55,3,0,none
+2024-02-26,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13901.65,48,3,0,none
+2024-02-26,Bangalore,Noise ColorFit Pulse 2,Noise,15,1600.76,67,4,0,none
+2024-02-26,Bangalore,JBL Go 3,JBL,11,2155.52,30,4,0,none
+2024-02-26,Delhi,boAt Airdopes 141,boAt,26,1346.2,88,3,0,none
+2024-02-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1532.63,46,5,0,none
+2024-02-26,Delhi,Samsung Galaxy M14 5G,Samsung,10,14186.5,47,3,0,none
+2024-02-26,Delhi,Noise ColorFit Pulse 2,Noise,18,1597.9,55,4,1,none
+2024-02-26,Delhi,JBL Go 3,JBL,12,2206.38,36,3,0,none
+2024-02-27,Mumbai,boAt Airdopes 141,boAt,25,1267.14,75,6,0,none
+2024-02-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1474.09,72,7,0,none
+2024-02-27,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13979.53,26,6,0,none
+2024-02-27,Mumbai,Noise ColorFit Pulse 2,Noise,18,1550.25,52,7,0,none
+2024-02-27,Mumbai,JBL Go 3,JBL,12,2158.27,33,4,0,none
+2024-02-27,Bangalore,boAt Airdopes 141,boAt,23,1332.68,,5,0,none
+2024-02-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1516.91,53,6,0,none
+2024-02-27,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13845.82,45,3,0,none
+2024-02-27,Bangalore,Noise ColorFit Pulse 2,Noise,16,1591.1,41,5,0,none
+2024-02-27,Bangalore,JBL Go 3,JBL,12,2211.36,45,6,0,none
+2024-02-27,Delhi,boAt Airdopes 141,boAt,,1287.1,69,7,0,none
+2024-02-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1539.47,62,4,0,none
+2024-02-27,Delhi,Samsung Galaxy M14 5G,Samsung,10,14188.52,32,6,0,none
+2024-02-27,Delhi,Noise ColorFit Pulse 2,Noise,16,1644.39,65,3,0,none
+2024-02-27,Delhi,JBL Go 3,JBL,11,2220.08,52,4,0,none
+2024-02-28,Mumbai,boAt Airdopes 141,boAt,19,1257.13,81,4,0,none
+2024-02-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1474.56,49,4,0,none
+2024-02-28,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14062.2,29,5,0,none
+2024-02-28,Mumbai,Noise ColorFit Pulse 2,Noise,16,1558.5,46,5,1,none
+2024-02-28,Mumbai,JBL Go 3,JBL,11,2218.55,31,5,0,none
+2024-02-28,Bangalore,boAt Airdopes 141,boAt,22,1261.85,107,3,0,none
+2024-02-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1473.22,65,3,0,none
+2024-02-28,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14016.01,48,4,0,none
+2024-02-28,Bangalore,Noise ColorFit Pulse 2,Noise,17,1603.53,80,3,1,none
+2024-02-28,Bangalore,JBL Go 3,JBL,10,2233.09,45,3,0,none
+2024-02-28,Delhi,boAt Airdopes 141,boAt,25,1284.93,67,7,0,none
+2024-02-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1535.59,77,7,0,none
+2024-02-28,Delhi,Samsung Galaxy M14 5G,Samsung,,14009.76,47,7,0,none
+2024-02-28,Delhi,Noise ColorFit Pulse 2,Noise,17,,46,5,0,none
+2024-02-28,Delhi,JBL Go 3,JBL,11,2200.84,31,5,0,none
+2024-02-29,Mumbai,boAt Airdopes 141,boAt,27,1331.44,122,7,0,none
+2024-02-29,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1454.91,42,5,0,none
+2024-02-29,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13826.67,30,6,0,none
+2024-02-29,Mumbai,Noise ColorFit Pulse 2,Noise,13,1601.96,35,6,0,none
+2024-02-29,Mumbai,JBL Go 3,JBL,7,2153.52,29,4,0,none
+2024-02-29,Bangalore,boAt Airdopes 141,boAt,24,1334.35,64,7,0,none
+2024-02-29,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1452.95,63,5,0,none
+2024-02-29,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13995.75,41,5,0,none
+2024-02-29,Bangalore,Noise ColorFit Pulse 2,Noise,15,1591.91,41,3,0,none
+2024-02-29,Bangalore,JBL Go 3,JBL,11,2228.97,50,6,0,none
+2024-02-29,Delhi,boAt Airdopes 141,boAt,23,1316.56,82,7,0,none
+2024-02-29,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,12,1456.42,42,3,0,none
+2024-02-29,Delhi,Samsung Galaxy M14 5G,Samsung,11,13882.95,31,7,0,none
+2024-02-29,Delhi,Noise ColorFit Pulse 2,Noise,16,1568.2,55,5,0,none
+2024-02-29,Delhi,JBL Go 3,JBL,12,2203.81,38,3,0,none
+2024-03-01,Mumbai,boAt Airdopes 141,boAt,27,1256.43,124,4,0,none
+2024-03-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1530.81,42,4,0,none
+2024-03-01,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14016.09,37,7,0,none
+2024-03-01,Mumbai,Noise ColorFit Pulse 2,Noise,,1599.54,44,7,0,none
+2024-03-01,Mumbai,JBL Go 3,JBL,10,2154.4,42,7,1,none
+2024-03-01,Bangalore,boAt Airdopes 141,boAt,84,1332.31,257,7,0,none
+2024-03-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1547.2,42,6,0,none
+2024-03-01,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13816.03,44,6,0,none
+2024-03-01,Bangalore,Noise ColorFit Pulse 2,Noise,15,1638.4,68,7,0,none
+2024-03-01,Bangalore,JBL Go 3,JBL,13,2182.82,59,6,0,none
+2024-03-01,Delhi,boAt Airdopes 141,boAt,26,1336.37,67,3,0,none
+2024-03-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1507.99,38,5,0,none
+2024-03-01,Delhi,Samsung Galaxy M14 5G,Samsung,8,14014.85,29,6,0,none
+2024-03-01,Delhi,Noise ColorFit Pulse 2,Noise,14,1558.37,52,5,0,none
+2024-03-01,Delhi,JBL Go 3,JBL,12,2229.72,44,6,0,none
+2024-03-02,Mumbai,boAt Airdopes 141,boAt,29,1279.22,135,6,1,none
+2024-03-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1526.12,49,5,0,none
+2024-03-02,Mumbai,Samsung Galaxy M14 5G,Samsung,,13881.16,37,3,0,none
+2024-03-02,Mumbai,Noise ColorFit Pulse 2,Noise,20,,62,7,0,none
+2024-03-02,Mumbai,JBL Go 3,JBL,15,2193.54,58,7,0,none
+2024-03-02,Bangalore,boAt Airdopes 141,boAt,34,1301.97,,6,0,none
+2024-03-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1455.84,95,5,0,none
+2024-03-02,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14138.69,65,5,0,none
+2024-03-02,Bangalore,Noise ColorFit Pulse 2,Noise,,1618.67,48,4,0,none
+2024-03-02,Bangalore,JBL Go 3,JBL,15,2222.85,56,7,0,none
+2024-03-02,Delhi,boAt Airdopes 141,boAt,32,1301.69,,5,0,none
+2024-03-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,21,1485.2,71,5,0,none
+2024-03-02,Delhi,Samsung Galaxy M14 5G,Samsung,13,14087.6,51,4,0,none
+2024-03-02,Delhi,Noise ColorFit Pulse 2,Noise,19,1549.65,72,7,0,none
+2024-03-02,Delhi,JBL Go 3,JBL,13,2174.95,,4,0,none
+2024-03-03,Mumbai,boAt Airdopes 141,boAt,32,1346.07,138,3,0,none
+2024-03-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1504.58,69,4,0,none
+2024-03-03,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14133.75,47,7,0,none
+2024-03-03,Mumbai,Noise ColorFit Pulse 2,Noise,16,1644.87,63,7,0,none
+2024-03-03,Mumbai,JBL Go 3,JBL,14,2233.61,,3,0,none
+2024-03-03,Bangalore,boAt Airdopes 141,boAt,32,1345.97,96,6,1,none
+2024-03-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1461.76,72,6,0,none
+2024-03-03,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13843.16,35,5,0,none
+2024-03-03,Bangalore,Noise ColorFit Pulse 2,Noise,,1620.13,78,3,0,none
+2024-03-03,Bangalore,JBL Go 3,JBL,12,2171.79,56,6,0,none
+2024-03-03,Delhi,boAt Airdopes 141,boAt,31,1262.39,146,4,0,none
+2024-03-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1454.22,73,7,0,none
+2024-03-03,Delhi,Samsung Galaxy M14 5G,Samsung,12,14151.96,51,4,0,none
+2024-03-03,Delhi,Noise ColorFit Pulse 2,Noise,20,1577.83,68,5,0,none
+2024-03-03,Delhi,JBL Go 3,JBL,12,2202.79,48,6,0,none
+2024-03-04,Mumbai,boAt Airdopes 141,boAt,23,1340.95,65,5,1,none
+2024-03-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1470.69,80,7,0,none
+2024-03-04,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13931.11,33,3,0,none
+2024-03-04,Mumbai,Noise ColorFit Pulse 2,Noise,,1610.14,39,6,0,none
+2024-03-04,Mumbai,JBL Go 3,JBL,11,2224.41,29,3,0,none
+2024-03-04,Bangalore,boAt Airdopes 141,boAt,22,1287.65,109,7,0,none
+2024-03-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1508.61,70,7,0,none
+2024-03-04,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14086.76,36,7,0,none
+2024-03-04,Bangalore,Noise ColorFit Pulse 2,Noise,16,1594.73,40,3,0,none
+2024-03-04,Bangalore,JBL Go 3,JBL,11,2178.45,55,5,0,none
+2024-03-04,Delhi,boAt Airdopes 141,boAt,27,1344.88,93,3,0,none
+2024-03-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1521.82,,7,0,none
+2024-03-04,Delhi,Samsung Galaxy M14 5G,Samsung,11,13935.1,32,6,0,none
+2024-03-04,Delhi,Noise ColorFit Pulse 2,Noise,16,1632.16,,5,0,none
+2024-03-04,Delhi,JBL Go 3,JBL,11,2151.02,34,3,0,none
+2024-03-05,Mumbai,boAt Airdopes 141,boAt,24,1323.72,109,4,0,none
+2024-03-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1467.83,47,3,0,none
+2024-03-05,Mumbai,Samsung Galaxy M14 5G,Samsung,,14114.54,35,5,0,none
+2024-03-05,Mumbai,Noise ColorFit Pulse 2,Noise,18,1646.0,62,4,0,none
+2024-03-05,Mumbai,JBL Go 3,JBL,,2164.87,46,3,0,none
+2024-03-05,Bangalore,boAt Airdopes 141,boAt,132,1285.13,501,6,0,none
+2024-03-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1490.39,53,6,1,none
+2024-03-05,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13888.78,42,3,0,none
+2024-03-05,Bangalore,Noise ColorFit Pulse 2,Noise,18,1614.31,61,3,1,none
+2024-03-05,Bangalore,JBL Go 3,JBL,14,2204.24,55,7,0,none
+2024-03-05,Delhi,boAt Airdopes 141,boAt,25,1321.63,104,5,0,none
+2024-03-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1478.84,45,5,0,none
+2024-03-05,Delhi,Samsung Galaxy M14 5G,Samsung,11,14117.12,31,7,0,none
+2024-03-05,Delhi,Noise ColorFit Pulse 2,Noise,15,1619.71,73,7,0,none
+2024-03-05,Delhi,JBL Go 3,JBL,12,2242.33,36,5,0,none
+2024-03-06,Mumbai,boAt Airdopes 141,boAt,25,1268.35,65,7,0,none
+2024-03-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1545.05,71,3,0,none
+2024-03-06,Mumbai,Samsung Galaxy M14 5G,Samsung,55,13901.63,198,7,0,none
+2024-03-06,Mumbai,Noise ColorFit Pulse 2,Noise,16,1606.55,51,6,0,none
+2024-03-06,Mumbai,JBL Go 3,JBL,12,2150.6,36,4,0,none
+2024-03-06,Bangalore,boAt Airdopes 141,boAt,26,1344.27,128,3,0,none
+2024-03-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1513.82,71,4,1,none
+2024-03-06,Bangalore,Samsung Galaxy M14 5G,Samsung,8,13885.53,24,5,0,none
+2024-03-06,Bangalore,Noise ColorFit Pulse 2,Noise,18,1561.47,48,5,0,none
+2024-03-06,Bangalore,JBL Go 3,JBL,10,2240.14,47,6,0,none
+2024-03-06,Delhi,boAt Airdopes 141,boAt,25,1312.67,84,6,0,none
+2024-03-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1532.95,48,6,0,none
+2024-03-06,Delhi,Samsung Galaxy M14 5G,Samsung,11,13883.85,44,3,0,none
+2024-03-06,Delhi,Noise ColorFit Pulse 2,Noise,17,,68,4,0,none
+2024-03-06,Delhi,JBL Go 3,JBL,10,2197.69,36,3,0,none
+2024-03-07,Mumbai,boAt Airdopes 141,boAt,28,1271.95,92,5,0,none
+2024-03-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,70,1460.62,286,7,0,none
+2024-03-07,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14149.75,29,4,0,none
+2024-03-07,Mumbai,Noise ColorFit Pulse 2,Noise,14,1580.63,56,5,1,none
+2024-03-07,Mumbai,JBL Go 3,JBL,13,2246.43,59,3,0,none
+2024-03-07,Bangalore,boAt Airdopes 141,boAt,27,1333.77,107,3,0,none
+2024-03-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,12,1469.67,38,4,0,none
+2024-03-07,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13819.17,53,3,1,none
+2024-03-07,Bangalore,Noise ColorFit Pulse 2,Noise,13,1644.92,51,7,0,none
+2024-03-07,Bangalore,JBL Go 3,JBL,12,2183.14,46,3,0,none
+2024-03-07,Delhi,boAt Airdopes 141,boAt,24,1323.31,87,3,1,none
+2024-03-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1516.3,66,7,0,none
+2024-03-07,Delhi,Samsung Galaxy M14 5G,Samsung,11,14083.53,33,3,0,none
+2024-03-07,Delhi,Noise ColorFit Pulse 2,Noise,13,1619.82,54,4,0,none
+2024-03-07,Delhi,JBL Go 3,JBL,11,2159.17,48,7,0,none
+2024-03-08,Mumbai,boAt Airdopes 141,boAt,96,1343.42,300,5,1,Womens Day
+2024-03-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1537.57,43,7,1,Womens Day
+2024-03-08,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14175.37,46,6,1,Womens Day
+2024-03-08,Mumbai,Noise ColorFit Pulse 2,Noise,18,1624.53,63,7,1,Womens Day
+2024-03-08,Mumbai,JBL Go 3,JBL,10,2152.3,47,7,1,Womens Day
+2024-03-08,Bangalore,boAt Airdopes 141,boAt,23,1301.62,85,5,1,Womens Day
+2024-03-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1483.31,,3,1,Womens Day
+2024-03-08,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14191.01,40,6,1,Womens Day
+2024-03-08,Bangalore,Noise ColorFit Pulse 2,Noise,17,1563.82,52,4,1,Womens Day
+2024-03-08,Bangalore,JBL Go 3,JBL,9,2157.36,37,6,1,Womens Day
+2024-03-08,Delhi,boAt Airdopes 141,boAt,,1251.1,93,7,1,Womens Day
+2024-03-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1472.0,59,5,1,Womens Day
+2024-03-08,Delhi,Samsung Galaxy M14 5G,Samsung,11,13916.38,43,5,1,Womens Day
+2024-03-08,Delhi,Noise ColorFit Pulse 2,Noise,15,1633.0,,7,1,Womens Day
+2024-03-08,Delhi,JBL Go 3,JBL,12,2179.99,34,6,1,Womens Day
+2024-03-09,Mumbai,boAt Airdopes 141,boAt,30,1342.66,110,4,0,none
+2024-03-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1518.73,79,3,0,none
+2024-03-09,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13836.5,60,5,0,none
+2024-03-09,Mumbai,Noise ColorFit Pulse 2,Noise,19,1571.1,95,6,0,none
+2024-03-09,Mumbai,JBL Go 3,JBL,14,2175.31,60,5,0,none
+2024-03-09,Bangalore,boAt Airdopes 141,boAt,28,1302.16,97,3,0,none
+2024-03-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,21,1519.63,94,3,0,none
+2024-03-09,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14103.47,48,7,0,none
+2024-03-09,Bangalore,Noise ColorFit Pulse 2,Noise,17,1607.45,51,6,1,none
+2024-03-09,Bangalore,JBL Go 3,JBL,11,2234.9,52,7,1,none
+2024-03-09,Delhi,boAt Airdopes 141,boAt,33,1321.29,142,6,0,none
+2024-03-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1470.76,67,7,0,none
+2024-03-09,Delhi,Samsung Galaxy M14 5G,Samsung,12,14145.99,37,3,0,none
+2024-03-09,Delhi,Noise ColorFit Pulse 2,Noise,19,1616.79,65,6,0,none
+2024-03-09,Delhi,JBL Go 3,JBL,14,2171.33,62,6,0,none
+2024-03-10,Mumbai,boAt Airdopes 141,boAt,31,1329.67,100,5,0,none
+2024-03-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,22,1504.56,107,4,0,none
+2024-03-10,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14139.82,57,6,0,none
+2024-03-10,Mumbai,Noise ColorFit Pulse 2,Noise,19,1554.21,82,7,0,none
+2024-03-10,Mumbai,JBL Go 3,JBL,13,2152.17,60,7,0,none
+2024-03-10,Bangalore,boAt Airdopes 141,boAt,27,,91,4,0,none
+2024-03-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,20,1506.39,92,4,0,none
+2024-03-10,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14145.22,55,6,0,none
+2024-03-10,Bangalore,Noise ColorFit Pulse 2,Noise,17,1564.03,44,7,0,none
+2024-03-10,Bangalore,JBL Go 3,JBL,13,2158.84,46,3,0,none
+2024-03-10,Delhi,boAt Airdopes 141,boAt,32,1346.09,116,5,0,none
+2024-03-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1516.93,98,5,0,none
+2024-03-10,Delhi,Samsung Galaxy M14 5G,Samsung,12,14089.08,49,4,0,none
+2024-03-10,Delhi,Noise ColorFit Pulse 2,Noise,18,1616.78,55,4,0,none
+2024-03-10,Delhi,JBL Go 3,JBL,14,2176.95,68,4,0,none
+2024-03-11,Mumbai,boAt Airdopes 141,boAt,21,1301.43,83,4,0,none
+2024-03-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1475.28,47,7,0,none
+2024-03-11,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14150.35,35,7,0,none
+2024-03-11,Mumbai,Noise ColorFit Pulse 2,Noise,13,1647.23,61,5,0,none
+2024-03-11,Mumbai,JBL Go 3,JBL,12,2193.79,32,7,0,none
+2024-03-11,Bangalore,boAt Airdopes 141,boAt,25,1261.45,100,3,0,none
+2024-03-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1470.95,39,4,0,none
+2024-03-11,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14142.99,48,5,0,none
+2024-03-11,Bangalore,Noise ColorFit Pulse 2,Noise,17,1622.5,80,5,0,none
+2024-03-11,Bangalore,JBL Go 3,JBL,12,2216.7,59,4,0,none
+2024-03-11,Delhi,boAt Airdopes 141,boAt,25,1262.27,66,3,1,none
+2024-03-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1484.24,79,3,0,none
+2024-03-11,Delhi,Samsung Galaxy M14 5G,Samsung,12,13907.04,31,5,1,none
+2024-03-11,Delhi,Noise ColorFit Pulse 2,Noise,15,1591.92,74,7,0,none
+2024-03-11,Delhi,JBL Go 3,JBL,12,2233.59,42,4,0,none
+2024-03-12,Mumbai,boAt Airdopes 141,boAt,27,1333.79,96,6,1,none
+2024-03-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1546.08,49,3,0,none
+2024-03-12,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13849.04,58,3,0,none
+2024-03-12,Mumbai,Noise ColorFit Pulse 2,Noise,15,1594.57,40,6,0,none
+2024-03-12,Mumbai,JBL Go 3,JBL,11,2153.38,34,6,0,none
+2024-03-12,Bangalore,boAt Airdopes 141,boAt,27,1293.66,104,7,0,none
+2024-03-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1485.13,57,6,0,none
+2024-03-12,Bangalore,Samsung Galaxy M14 5G,Samsung,9,13988.26,41,6,0,none
+2024-03-12,Bangalore,Noise ColorFit Pulse 2,Noise,12,1565.66,44,4,0,none
+2024-03-12,Bangalore,JBL Go 3,JBL,10,2201.74,30,7,0,none
+2024-03-12,Delhi,boAt Airdopes 141,boAt,27,1310.82,84,5,0,none
+2024-03-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1510.95,89,5,0,none
+2024-03-12,Delhi,Samsung Galaxy M14 5G,Samsung,9,13927.84,40,4,1,none
+2024-03-12,Delhi,Noise ColorFit Pulse 2,Noise,13,1605.74,34,4,0,none
+2024-03-12,Delhi,JBL Go 3,JBL,11,2224.89,35,4,0,none
+2024-03-13,Mumbai,boAt Airdopes 141,boAt,22,1318.47,65,6,0,none
+2024-03-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1519.66,62,7,0,none
+2024-03-13,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14084.79,35,4,0,none
+2024-03-13,Mumbai,Noise ColorFit Pulse 2,Noise,15,1554.07,65,4,0,none
+2024-03-13,Mumbai,JBL Go 3,JBL,13,2237.44,58,5,0,none
+2024-03-13,Bangalore,boAt Airdopes 141,boAt,24,,85,4,0,none
+2024-03-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1516.11,72,3,0,none
+2024-03-13,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13842.18,29,5,0,none
+2024-03-13,Bangalore,Noise ColorFit Pulse 2,Noise,18,1625.26,58,5,0,none
+2024-03-13,Bangalore,JBL Go 3,JBL,11,2159.85,28,6,0,none
+2024-03-13,Delhi,boAt Airdopes 141,boAt,27,1282.68,,4,0,none
+2024-03-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1508.98,37,3,0,none
+2024-03-13,Delhi,Samsung Galaxy M14 5G,Samsung,10,13871.39,41,6,0,none
+2024-03-13,Delhi,Noise ColorFit Pulse 2,Noise,16,1554.59,54,7,1,none
+2024-03-13,Delhi,JBL Go 3,JBL,13,2175.57,40,7,0,none
+2024-03-14,Mumbai,boAt Airdopes 141,boAt,28,1329.47,92,3,0,none
+2024-03-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1540.33,44,5,0,none
+2024-03-14,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14129.28,56,6,0,none
+2024-03-14,Mumbai,Noise ColorFit Pulse 2,Noise,16,1590.38,43,4,0,none
+2024-03-14,Mumbai,JBL Go 3,JBL,10,2171.69,44,6,0,none
+2024-03-14,Bangalore,boAt Airdopes 141,boAt,23,1292.91,60,4,0,none
+2024-03-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1477.95,,3,1,none
+2024-03-14,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13936.74,36,3,0,none
+2024-03-14,Bangalore,Noise ColorFit Pulse 2,Noise,16,1626.68,59,3,0,none
+2024-03-14,Bangalore,JBL Go 3,JBL,11,2161.76,47,4,0,none
+2024-03-14,Delhi,boAt Airdopes 141,boAt,24,1304.27,83,5,0,none
+2024-03-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1522.01,71,4,0,none
+2024-03-14,Delhi,Samsung Galaxy M14 5G,Samsung,12,13865.0,41,4,0,none
+2024-03-14,Delhi,Noise ColorFit Pulse 2,Noise,14,1632.18,57,3,0,none
+2024-03-14,Delhi,JBL Go 3,JBL,11,2226.24,46,3,0,none
+2024-03-15,Mumbai,boAt Airdopes 141,boAt,22,1337.91,101,7,0,none
+2024-03-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1492.25,69,5,0,none
+2024-03-15,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13975.58,33,3,0,none
+2024-03-15,Mumbai,Noise ColorFit Pulse 2,Noise,16,1554.91,61,5,0,none
+2024-03-15,Mumbai,JBL Go 3,JBL,12,2152.03,54,5,0,none
+2024-03-15,Bangalore,boAt Airdopes 141,boAt,26,1254.38,95,7,0,none
+2024-03-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1539.48,41,6,0,none
+2024-03-15,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14001.18,55,7,0,none
+2024-03-15,Bangalore,Noise ColorFit Pulse 2,Noise,16,1612.06,60,3,0,none
+2024-03-15,Bangalore,JBL Go 3,JBL,11,2219.02,47,6,0,none
+2024-03-15,Delhi,boAt Airdopes 141,boAt,27,1320.77,82,5,0,none
+2024-03-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1521.42,56,3,0,none
+2024-03-15,Delhi,Samsung Galaxy M14 5G,Samsung,11,14126.26,46,7,0,none
+2024-03-15,Delhi,Noise ColorFit Pulse 2,Noise,14,1617.36,39,5,0,none
+2024-03-15,Delhi,JBL Go 3,JBL,12,2192.66,35,6,0,none
+2024-03-16,Mumbai,boAt Airdopes 141,boAt,24,1338.63,72,6,0,none
+2024-03-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,,1531.32,82,5,0,none
+2024-03-16,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14183.28,70,5,0,none
+2024-03-16,Mumbai,Noise ColorFit Pulse 2,Noise,17,1595.82,83,3,0,none
+2024-03-16,Mumbai,JBL Go 3,JBL,16,2225.02,45,6,0,none
+2024-03-16,Bangalore,boAt Airdopes 141,boAt,30,1282.39,129,6,0,none
+2024-03-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1485.36,60,3,0,none
+2024-03-16,Bangalore,Samsung Galaxy M14 5G,Samsung,15,14012.91,65,6,0,none
+2024-03-16,Bangalore,Noise ColorFit Pulse 2,Noise,20,,88,6,0,none
+2024-03-16,Bangalore,JBL Go 3,JBL,13,2172.12,47,7,0,none
+2024-03-16,Delhi,boAt Airdopes 141,boAt,33,1325.18,,5,0,none
+2024-03-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1531.33,56,7,0,none
+2024-03-16,Delhi,Samsung Galaxy M14 5G,Samsung,15,14104.15,65,5,0,none
+2024-03-16,Delhi,Noise ColorFit Pulse 2,Noise,18,1550.36,70,4,0,none
+2024-03-16,Delhi,JBL Go 3,JBL,16,2186.85,68,7,0,none
+2024-03-17,Mumbai,boAt Airdopes 141,boAt,24,1283.45,,4,0,none
+2024-03-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,21,1492.1,,6,0,none
+2024-03-17,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14172.81,48,7,0,none
+2024-03-17,Mumbai,Noise ColorFit Pulse 2,Noise,18,1590.68,87,4,1,none
+2024-03-17,Mumbai,JBL Go 3,JBL,12,2209.8,43,4,0,none
+2024-03-17,Bangalore,boAt Airdopes 141,boAt,33,1341.19,87,7,0,none
+2024-03-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1525.24,64,4,1,none
+2024-03-17,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13985.92,39,4,0,none
+2024-03-17,Bangalore,Noise ColorFit Pulse 2,Noise,18,1636.08,58,3,0,none
+2024-03-17,Bangalore,JBL Go 3,JBL,14,2180.13,44,3,0,none
+2024-03-17,Delhi,boAt Airdopes 141,boAt,31,1295.98,103,4,0,none
+2024-03-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1488.6,62,6,0,none
+2024-03-17,Delhi,Samsung Galaxy M14 5G,Samsung,12,14040.97,46,3,0,none
+2024-03-17,Delhi,Noise ColorFit Pulse 2,Noise,20,1639.96,65,5,0,none
+2024-03-17,Delhi,JBL Go 3,JBL,16,2204.0,57,4,0,none
+2024-03-18,Mumbai,boAt Airdopes 141,boAt,24,1346.3,81,3,0,none
+2024-03-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1517.28,41,5,0,none
+2024-03-18,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13821.6,32,7,0,none
+2024-03-18,Mumbai,Noise ColorFit Pulse 2,Noise,16,1613.54,64,5,0,none
+2024-03-18,Mumbai,JBL Go 3,JBL,11,,36,4,0,none
+2024-03-18,Bangalore,boAt Airdopes 141,boAt,28,1254.37,122,3,1,none
+2024-03-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1491.63,,5,0,none
+2024-03-18,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14009.2,45,4,0,none
+2024-03-18,Bangalore,Noise ColorFit Pulse 2,Noise,15,1570.37,52,7,0,none
+2024-03-18,Bangalore,JBL Go 3,JBL,11,,51,3,0,none
+2024-03-18,Delhi,boAt Airdopes 141,boAt,27,1344.86,132,5,0,none
+2024-03-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1519.78,50,3,0,none
+2024-03-18,Delhi,Samsung Galaxy M14 5G,Samsung,13,14149.82,44,3,0,none
+2024-03-18,Delhi,Noise ColorFit Pulse 2,Noise,15,1550.5,55,6,0,none
+2024-03-18,Delhi,JBL Go 3,JBL,12,2185.78,46,6,0,none
+2024-03-19,Mumbai,boAt Airdopes 141,boAt,26,1282.28,128,3,0,none
+2024-03-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1486.76,43,7,0,none
+2024-03-19,Mumbai,Samsung Galaxy M14 5G,Samsung,10,13967.91,34,7,0,none
+2024-03-19,Mumbai,Noise ColorFit Pulse 2,Noise,17,1586.19,60,6,0,none
+2024-03-19,Mumbai,JBL Go 3,JBL,12,2184.11,36,4,0,none
+2024-03-19,Bangalore,boAt Airdopes 141,boAt,22,1341.26,68,7,0,none
+2024-03-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1475.47,66,5,0,none
+2024-03-19,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14065.32,38,6,0,none
+2024-03-19,Bangalore,Noise ColorFit Pulse 2,Noise,13,1581.74,50,7,0,none
+2024-03-19,Bangalore,JBL Go 3,JBL,12,2207.71,42,3,0,none
+2024-03-19,Delhi,boAt Airdopes 141,boAt,26,1277.53,67,7,0,none
+2024-03-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1511.63,51,7,0,none
+2024-03-19,Delhi,Samsung Galaxy M14 5G,Samsung,10,14198.42,33,6,0,none
+2024-03-19,Delhi,Noise ColorFit Pulse 2,Noise,16,1613.52,77,4,0,none
+2024-03-19,Delhi,JBL Go 3,JBL,,2168.53,,3,0,none
+2024-03-20,Mumbai,boAt Airdopes 141,boAt,27,1343.43,77,7,0,none
+2024-03-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1508.7,50,5,0,none
+2024-03-20,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13954.88,31,4,0,none
+2024-03-20,Mumbai,Noise ColorFit Pulse 2,Noise,,1553.28,52,6,0,none
+2024-03-20,Mumbai,JBL Go 3,JBL,9,2234.88,42,3,0,none
+2024-03-20,Bangalore,boAt Airdopes 141,boAt,24,1313.65,75,4,1,none
+2024-03-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1480.25,74,4,0,none
+2024-03-20,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14063.18,67,6,0,none
+2024-03-20,Bangalore,Noise ColorFit Pulse 2,Noise,16,1648.61,49,4,1,none
+2024-03-20,Bangalore,JBL Go 3,JBL,11,2233.36,41,7,0,none
+2024-03-20,Delhi,boAt Airdopes 141,boAt,26,1273.16,80,7,0,none
+2024-03-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1471.82,48,7,0,none
+2024-03-20,Delhi,Samsung Galaxy M14 5G,Samsung,,13909.51,33,5,0,none
+2024-03-20,Delhi,Noise ColorFit Pulse 2,Noise,15,1580.94,46,3,0,none
+2024-03-20,Delhi,JBL Go 3,JBL,12,2234.78,57,5,0,none
+2024-03-21,Mumbai,boAt Airdopes 141,boAt,24,1267.53,108,7,0,none
+2024-03-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1493.14,75,5,0,none
+2024-03-21,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14112.58,49,4,0,none
+2024-03-21,Mumbai,Noise ColorFit Pulse 2,Noise,18,1627.04,,6,0,none
+2024-03-21,Mumbai,JBL Go 3,JBL,13,2186.54,38,4,0,none
+2024-03-21,Bangalore,boAt Airdopes 141,boAt,26,1339.61,106,5,0,none
+2024-03-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1512.38,84,6,0,none
+2024-03-21,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14075.18,33,3,0,none
+2024-03-21,Bangalore,Noise ColorFit Pulse 2,Noise,14,1582.93,66,4,0,none
+2024-03-21,Bangalore,JBL Go 3,JBL,11,2196.64,32,7,0,none
+2024-03-21,Delhi,boAt Airdopes 141,boAt,23,1341.71,77,4,0,none
+2024-03-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1503.34,71,6,0,none
+2024-03-21,Delhi,Samsung Galaxy M14 5G,Samsung,10,14008.77,43,7,0,none
+2024-03-21,Delhi,Noise ColorFit Pulse 2,Noise,16,1571.63,69,7,0,none
+2024-03-21,Delhi,JBL Go 3,JBL,12,2205.46,44,4,0,none
+2024-03-22,Mumbai,boAt Airdopes 141,boAt,20,1342.05,67,5,0,none
+2024-03-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1535.79,57,6,0,none
+2024-03-22,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13834.83,42,4,0,none
+2024-03-22,Mumbai,Noise ColorFit Pulse 2,Noise,16,1641.35,64,7,0,none
+2024-03-22,Mumbai,JBL Go 3,JBL,13,2152.12,45,4,0,none
+2024-03-22,Bangalore,boAt Airdopes 141,boAt,27,1249.24,121,3,0,none
+2024-03-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,,39,7,0,none
+2024-03-22,Bangalore,Samsung Galaxy M14 5G,Samsung,12,,57,6,0,none
+2024-03-22,Bangalore,Noise ColorFit Pulse 2,Noise,16,1612.41,46,3,0,none
+2024-03-22,Bangalore,JBL Go 3,JBL,12,2176.15,39,7,0,none
+2024-03-22,Delhi,boAt Airdopes 141,boAt,30,1329.29,140,6,0,none
+2024-03-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1546.41,51,7,0,none
+2024-03-22,Delhi,Samsung Galaxy M14 5G,Samsung,10,14005.57,35,4,0,none
+2024-03-22,Delhi,Noise ColorFit Pulse 2,Noise,64,1557.61,198,6,0,none
+2024-03-22,Delhi,JBL Go 3,JBL,13,2229.8,52,6,0,none
+2024-03-23,Mumbai,boAt Airdopes 141,boAt,31,1261.8,109,7,0,none
+2024-03-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1483.86,67,3,0,none
+2024-03-23,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13886.57,56,6,0,none
+2024-03-23,Mumbai,Noise ColorFit Pulse 2,Noise,19,1628.34,83,3,0,none
+2024-03-23,Mumbai,JBL Go 3,JBL,14,2235.18,36,4,0,none
+2024-03-23,Bangalore,boAt Airdopes 141,boAt,29,1273.58,89,6,0,none
+2024-03-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1470.43,73,4,0,none
+2024-03-23,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13802.36,57,4,0,none
+2024-03-23,Bangalore,Noise ColorFit Pulse 2,Noise,20,1637.02,82,3,0,none
+2024-03-23,Bangalore,JBL Go 3,JBL,14,2200.53,41,6,0,none
+2024-03-23,Delhi,boAt Airdopes 141,boAt,29,1295.55,134,3,0,none
+2024-03-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,21,1533.65,87,6,0,none
+2024-03-23,Delhi,Samsung Galaxy M14 5G,Samsung,52,14117.93,256,4,0,none
+2024-03-23,Delhi,Noise ColorFit Pulse 2,Noise,20,1585.29,72,7,0,none
+2024-03-23,Delhi,JBL Go 3,JBL,12,2195.53,39,5,0,none
+2024-03-24,Mumbai,boAt Airdopes 141,boAt,30,,85,6,0,none
+2024-03-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1538.51,54,4,0,none
+2024-03-24,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14073.26,40,4,0,none
+2024-03-24,Mumbai,Noise ColorFit Pulse 2,Noise,17,1554.93,83,5,0,none
+2024-03-24,Mumbai,JBL Go 3,JBL,12,2244.46,52,4,0,none
+2024-03-24,Bangalore,boAt Airdopes 141,boAt,35,1249.06,134,7,0,none
+2024-03-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1510.75,48,3,0,none
+2024-03-24,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13814.98,38,7,0,none
+2024-03-24,Bangalore,Noise ColorFit Pulse 2,Noise,17,1624.55,48,4,0,none
+2024-03-24,Bangalore,JBL Go 3,JBL,15,2192.11,53,7,1,none
+2024-03-24,Delhi,boAt Airdopes 141,boAt,32,1347.91,149,6,1,none
+2024-03-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1450.34,94,7,0,none
+2024-03-24,Delhi,Samsung Galaxy M14 5G,Samsung,15,13913.5,52,7,0,none
+2024-03-24,Delhi,Noise ColorFit Pulse 2,Noise,18,1612.99,60,3,0,none
+2024-03-24,Delhi,JBL Go 3,JBL,14,2200.84,69,5,1,none
+2024-03-25,Mumbai,boAt Airdopes 141,boAt,35,1282.99,173,4,1,Holi
+2024-03-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,23,1472.18,110,5,1,Holi
+2024-03-25,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14062.62,53,6,1,Holi
+2024-03-25,Mumbai,Noise ColorFit Pulse 2,Noise,20,1583.92,54,6,1,Holi
+2024-03-25,Mumbai,JBL Go 3,JBL,17,2247.62,54,4,1,Holi
+2024-03-25,Bangalore,boAt Airdopes 141,boAt,37,1341.26,142,4,1,Holi
+2024-03-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,23,,99,5,1,Holi
+2024-03-25,Bangalore,Samsung Galaxy M14 5G,Samsung,15,14104.56,45,3,1,Holi
+2024-03-25,Bangalore,Noise ColorFit Pulse 2,Noise,21,1608.71,86,3,1,Holi
+2024-03-25,Bangalore,JBL Go 3,JBL,15,2214.5,42,4,1,Holi
+2024-03-25,Delhi,boAt Airdopes 141,boAt,37,1347.75,137,4,1,Holi
+2024-03-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1474.6,86,5,1,Holi
+2024-03-25,Delhi,Samsung Galaxy M14 5G,Samsung,16,14029.48,64,7,1,Holi
+2024-03-25,Delhi,Noise ColorFit Pulse 2,Noise,19,1549.49,64,7,1,Holi
+2024-03-25,Delhi,JBL Go 3,JBL,84,2215.37,294,3,1,Holi
+2024-03-26,Mumbai,boAt Airdopes 141,boAt,26,1324.68,70,5,0,none
+2024-03-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1488.17,52,7,0,none
+2024-03-26,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14158.29,,6,1,none
+2024-03-26,Mumbai,Noise ColorFit Pulse 2,Noise,19,1635.36,51,3,1,none
+2024-03-26,Mumbai,JBL Go 3,JBL,12,2158.04,31,5,0,none
+2024-03-26,Bangalore,boAt Airdopes 141,boAt,26,1297.92,98,5,0,none
+2024-03-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1502.35,81,5,1,none
+2024-03-26,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13925.28,48,7,0,none
+2024-03-26,Bangalore,Noise ColorFit Pulse 2,Noise,15,1620.79,64,6,0,none
+2024-03-26,Bangalore,JBL Go 3,JBL,12,2189.58,52,3,0,none
+2024-03-26,Delhi,boAt Airdopes 141,boAt,30,1296.79,98,5,0,none
+2024-03-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1458.27,45,4,0,none
+2024-03-26,Delhi,Samsung Galaxy M14 5G,Samsung,,14192.08,47,4,0,none
+2024-03-26,Delhi,Noise ColorFit Pulse 2,Noise,16,1641.98,,4,0,none
+2024-03-26,Delhi,JBL Go 3,JBL,10,2162.63,30,5,0,none
+2024-03-27,Mumbai,boAt Airdopes 141,boAt,25,1277.43,98,4,0,none
+2024-03-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1537.32,62,3,0,none
+2024-03-27,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13982.23,,6,0,none
+2024-03-27,Mumbai,Noise ColorFit Pulse 2,Noise,20,1549.38,50,6,0,none
+2024-03-27,Mumbai,JBL Go 3,JBL,12,2192.66,54,6,0,none
+2024-03-27,Bangalore,boAt Airdopes 141,boAt,24,1257.81,84,4,0,none
+2024-03-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1492.55,64,4,0,none
+2024-03-27,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14124.12,49,5,0,none
+2024-03-27,Bangalore,Noise ColorFit Pulse 2,Noise,13,1596.98,52,3,0,none
+2024-03-27,Bangalore,JBL Go 3,JBL,13,2217.19,41,4,0,none
+2024-03-27,Delhi,boAt Airdopes 141,boAt,22,1333.73,99,5,0,none
+2024-03-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,60,1505.59,164,3,0,none
+2024-03-27,Delhi,Samsung Galaxy M14 5G,Samsung,11,14072.48,49,3,0,none
+2024-03-27,Delhi,Noise ColorFit Pulse 2,Noise,16,1613.0,77,4,0,none
+2024-03-27,Delhi,JBL Go 3,JBL,11,2244.74,42,4,0,none
+2024-03-28,Mumbai,boAt Airdopes 141,boAt,22,1296.88,,4,0,none
+2024-03-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1537.91,61,5,0,none
+2024-03-28,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13871.63,42,6,0,none
+2024-03-28,Mumbai,Noise ColorFit Pulse 2,Noise,14,1623.11,62,6,0,none
+2024-03-28,Mumbai,JBL Go 3,JBL,12,2174.99,36,7,0,none
+2024-03-28,Bangalore,boAt Airdopes 141,boAt,25,1272.68,100,6,0,none
+2024-03-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1477.04,68,6,1,none
+2024-03-28,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13908.53,35,5,0,none
+2024-03-28,Bangalore,Noise ColorFit Pulse 2,Noise,16,1567.57,59,7,0,none
+2024-03-28,Bangalore,JBL Go 3,JBL,10,2199.73,48,7,0,none
+2024-03-28,Delhi,boAt Airdopes 141,boAt,22,1297.78,83,7,0,none
+2024-03-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1473.04,55,5,0,none
+2024-03-28,Delhi,Samsung Galaxy M14 5G,Samsung,10,14126.46,31,5,0,none
+2024-03-28,Delhi,Noise ColorFit Pulse 2,Noise,13,1621.95,55,6,0,none
+2024-03-28,Delhi,JBL Go 3,JBL,13,2235.31,,4,0,none
+2024-03-29,Mumbai,boAt Airdopes 141,boAt,,1305.93,149,4,0,none
+2024-03-29,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1516.42,65,7,0,none
+2024-03-29,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13887.82,47,3,0,none
+2024-03-29,Mumbai,Noise ColorFit Pulse 2,Noise,18,1617.23,86,6,0,none
+2024-03-29,Mumbai,JBL Go 3,JBL,12,2229.63,37,3,0,none
+2024-03-29,Bangalore,boAt Airdopes 141,boAt,23,1279.88,111,3,0,none
+2024-03-29,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1473.12,74,6,0,none
+2024-03-29,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13835.07,28,7,0,none
+2024-03-29,Bangalore,Noise ColorFit Pulse 2,Noise,17,1557.41,74,7,0,none
+2024-03-29,Bangalore,JBL Go 3,JBL,13,2156.91,64,6,1,none
+2024-03-29,Delhi,boAt Airdopes 141,boAt,24,1297.44,93,7,1,none
+2024-03-29,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1482.11,79,7,0,none
+2024-03-29,Delhi,Samsung Galaxy M14 5G,Samsung,11,13813.31,37,7,0,none
+2024-03-29,Delhi,Noise ColorFit Pulse 2,Noise,16,1648.01,41,6,0,none
+2024-03-29,Delhi,JBL Go 3,JBL,13,2236.51,64,5,0,none
+2024-03-30,Mumbai,boAt Airdopes 141,boAt,29,1299.63,80,4,0,none
+2024-03-30,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1474.23,93,5,0,none
+2024-03-30,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13832.63,40,4,0,none
+2024-03-30,Mumbai,Noise ColorFit Pulse 2,Noise,19,1640.35,49,7,0,none
+2024-03-30,Mumbai,JBL Go 3,JBL,15,2244.28,43,6,0,none
+2024-03-30,Bangalore,boAt Airdopes 141,boAt,30,1314.49,78,5,0,none
+2024-03-30,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1476.27,51,6,0,none
+2024-03-30,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13985.48,44,3,0,none
+2024-03-30,Bangalore,Noise ColorFit Pulse 2,Noise,25,1637.1,65,3,0,none
+2024-03-30,Bangalore,JBL Go 3,JBL,17,2177.18,64,3,0,none
+2024-03-30,Delhi,boAt Airdopes 141,boAt,26,1280.01,127,3,0,none
+2024-03-30,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1528.97,62,5,0,none
+2024-03-30,Delhi,Samsung Galaxy M14 5G,Samsung,14,13925.33,59,4,0,none
+2024-03-30,Delhi,Noise ColorFit Pulse 2,Noise,22,,107,3,0,none
+2024-03-30,Delhi,JBL Go 3,JBL,15,2161.56,70,5,0,none
+2024-03-31,Mumbai,boAt Airdopes 141,boAt,30,1298.6,104,5,0,none
+2024-03-31,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1469.67,53,5,0,none
+2024-03-31,Mumbai,Samsung Galaxy M14 5G,Samsung,,14101.13,45,5,0,none
+2024-03-31,Mumbai,Noise ColorFit Pulse 2,Noise,18,1626.98,74,4,0,none
+2024-03-31,Mumbai,JBL Go 3,JBL,17,2189.97,,5,0,none
+2024-03-31,Bangalore,boAt Airdopes 141,boAt,38,1266.0,176,4,0,none
+2024-03-31,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1486.68,56,6,0,none
+2024-03-31,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13875.72,59,3,0,none
+2024-03-31,Bangalore,Noise ColorFit Pulse 2,Noise,25,1608.82,112,3,0,none
+2024-03-31,Bangalore,JBL Go 3,JBL,14,2166.19,58,6,0,none
+2024-03-31,Delhi,boAt Airdopes 141,boAt,35,1347.7,170,5,0,none
+2024-03-31,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1460.69,72,5,0,none
+2024-03-31,Delhi,Samsung Galaxy M14 5G,Samsung,,14051.37,50,7,0,none
+2024-03-31,Delhi,Noise ColorFit Pulse 2,Noise,23,1623.81,94,7,0,none
+2024-03-31,Delhi,JBL Go 3,JBL,14,2202.97,64,6,0,none
+2024-04-01,Mumbai,boAt Airdopes 141,boAt,17,1348.37,69,3,1,none
+2024-04-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1455.95,71,5,0,none
+2024-04-01,Mumbai,Samsung Galaxy M14 5G,Samsung,12,,37,7,0,none
+2024-04-01,Mumbai,Noise ColorFit Pulse 2,Noise,17,1625.67,64,5,0,none
+2024-04-01,Mumbai,JBL Go 3,JBL,,2193.38,32,5,0,none
+2024-04-01,Bangalore,boAt Airdopes 141,boAt,26,1348.88,124,4,0,none
+2024-04-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1452.7,43,3,0,none
+2024-04-01,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14130.14,46,3,0,none
+2024-04-01,Bangalore,Noise ColorFit Pulse 2,Noise,17,1561.75,63,4,0,none
+2024-04-01,Bangalore,JBL Go 3,JBL,13,2158.13,34,3,0,none
+2024-04-01,Delhi,boAt Airdopes 141,boAt,25,1334.47,,5,0,none
+2024-04-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1508.75,44,7,0,none
+2024-04-01,Delhi,Samsung Galaxy M14 5G,Samsung,,14112.12,119,4,0,none
+2024-04-01,Delhi,Noise ColorFit Pulse 2,Noise,16,1560.44,64,6,0,none
+2024-04-01,Delhi,JBL Go 3,JBL,15,2178.01,69,6,0,none
+2024-04-02,Mumbai,boAt Airdopes 141,boAt,28,1323.97,102,5,0,none
+2024-04-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1536.58,40,3,0,none
+2024-04-02,Mumbai,Samsung Galaxy M14 5G,Samsung,,14058.86,38,7,0,none
+2024-04-02,Mumbai,Noise ColorFit Pulse 2,Noise,14,1641.68,58,5,1,none
+2024-04-02,Mumbai,JBL Go 3,JBL,14,2199.87,67,3,0,none
+2024-04-02,Bangalore,boAt Airdopes 141,boAt,25,1264.52,93,4,0,none
+2024-04-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1450.27,48,5,0,none
+2024-04-02,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13802.34,43,4,0,none
+2024-04-02,Bangalore,Noise ColorFit Pulse 2,Noise,18,1619.48,52,5,0,none
+2024-04-02,Bangalore,JBL Go 3,JBL,14,2231.29,35,7,0,none
+2024-04-02,Delhi,boAt Airdopes 141,boAt,24,1269.1,98,4,0,none
+2024-04-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1486.47,52,3,1,none
+2024-04-02,Delhi,Samsung Galaxy M14 5G,Samsung,12,14190.0,42,6,0,none
+2024-04-02,Delhi,Noise ColorFit Pulse 2,Noise,17,1628.36,46,6,0,none
+2024-04-02,Delhi,JBL Go 3,JBL,14,2181.03,41,4,1,none
+2024-04-03,Mumbai,boAt Airdopes 141,boAt,24,1258.52,110,5,0,none
+2024-04-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1458.16,57,4,0,none
+2024-04-03,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14003.67,45,5,0,none
+2024-04-03,Mumbai,Noise ColorFit Pulse 2,Noise,16,1639.36,76,6,1,none
+2024-04-03,Mumbai,JBL Go 3,JBL,15,2240.5,67,5,0,none
+2024-04-03,Bangalore,boAt Airdopes 141,boAt,21,1326.44,85,5,0,none
+2024-04-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1463.88,75,7,0,none
+2024-04-03,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13888.09,51,5,0,none
+2024-04-03,Bangalore,Noise ColorFit Pulse 2,Noise,16,1633.0,78,6,0,none
+2024-04-03,Bangalore,JBL Go 3,JBL,48,2214.67,181,4,0,none
+2024-04-03,Delhi,boAt Airdopes 141,boAt,27,1255.34,115,5,0,none
+2024-04-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1486.79,42,5,1,none
+2024-04-03,Delhi,Samsung Galaxy M14 5G,Samsung,10,14010.58,43,6,0,none
+2024-04-03,Delhi,Noise ColorFit Pulse 2,Noise,78,1552.93,210,4,0,none
+2024-04-03,Delhi,JBL Go 3,JBL,13,2178.37,34,4,0,none
+2024-04-04,Mumbai,boAt Airdopes 141,boAt,28,1330.54,127,4,0,none
+2024-04-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1489.23,65,4,0,none
+2024-04-04,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13839.96,36,3,0,none
+2024-04-04,Mumbai,Noise ColorFit Pulse 2,Noise,17,1584.19,58,4,0,none
+2024-04-04,Mumbai,JBL Go 3,JBL,12,2223.36,40,7,0,none
+2024-04-04,Bangalore,boAt Airdopes 141,boAt,29,1281.68,135,3,0,none
+2024-04-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1486.14,43,6,0,none
+2024-04-04,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13807.67,45,5,0,none
+2024-04-04,Bangalore,Noise ColorFit Pulse 2,Noise,,1624.65,58,5,0,none
+2024-04-04,Bangalore,JBL Go 3,JBL,13,2213.55,53,4,0,none
+2024-04-04,Delhi,boAt Airdopes 141,boAt,21,1344.25,90,4,0,none
+2024-04-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1469.17,54,6,0,none
+2024-04-04,Delhi,Samsung Galaxy M14 5G,Samsung,12,13901.62,51,5,0,none
+2024-04-04,Delhi,Noise ColorFit Pulse 2,Noise,18,1554.23,75,6,1,none
+2024-04-04,Delhi,JBL Go 3,JBL,14,2151.13,57,5,0,none
+2024-04-05,Mumbai,boAt Airdopes 141,boAt,25,1323.6,85,6,0,none
+2024-04-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1531.29,68,4,0,none
+2024-04-05,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13813.44,39,3,0,none
+2024-04-05,Mumbai,Noise ColorFit Pulse 2,Noise,19,1628.99,75,3,0,none
+2024-04-05,Mumbai,JBL Go 3,JBL,16,2243.22,52,6,0,none
+2024-04-05,Bangalore,boAt Airdopes 141,boAt,26,1326.39,91,6,0,none
+2024-04-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1524.4,55,7,0,none
+2024-04-05,Bangalore,Samsung Galaxy M14 5G,Samsung,13,,,3,0,none
+2024-04-05,Bangalore,Noise ColorFit Pulse 2,Noise,17,1639.73,43,4,1,none
+2024-04-05,Bangalore,JBL Go 3,JBL,13,2185.3,56,3,0,none
+2024-04-05,Delhi,boAt Airdopes 141,boAt,28,1315.08,140,7,0,none
+2024-04-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1478.72,79,5,0,none
+2024-04-05,Delhi,Samsung Galaxy M14 5G,Samsung,11,13951.05,,6,0,none
+2024-04-05,Delhi,Noise ColorFit Pulse 2,Noise,17,1643.48,75,7,0,none
+2024-04-05,Delhi,JBL Go 3,JBL,12,2167.68,45,4,0,none
+2024-04-06,Mumbai,boAt Airdopes 141,boAt,186,,852,7,0,none
+2024-04-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1506.35,71,5,0,none
+2024-04-06,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13862.61,68,5,0,none
+2024-04-06,Mumbai,Noise ColorFit Pulse 2,Noise,21,1559.56,77,4,0,none
+2024-04-06,Mumbai,JBL Go 3,JBL,16,2154.78,47,7,0,none
+2024-04-06,Bangalore,boAt Airdopes 141,boAt,32,1252.87,113,6,0,none
+2024-04-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1534.07,49,4,0,none
+2024-04-06,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13993.51,65,4,0,none
+2024-04-06,Bangalore,Noise ColorFit Pulse 2,Noise,18,1640.92,54,3,0,none
+2024-04-06,Bangalore,JBL Go 3,JBL,16,2232.58,67,3,0,none
+2024-04-06,Delhi,boAt Airdopes 141,boAt,30,1347.41,114,6,0,none
+2024-04-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1479.51,85,4,0,none
+2024-04-06,Delhi,Samsung Galaxy M14 5G,Samsung,14,13915.17,68,4,0,none
+2024-04-06,Delhi,Noise ColorFit Pulse 2,Noise,22,1617.23,91,5,0,none
+2024-04-06,Delhi,JBL Go 3,JBL,14,2227.29,36,5,0,none
+2024-04-07,Mumbai,boAt Airdopes 141,boAt,28,1338.85,119,6,0,none
+2024-04-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1499.84,57,4,0,none
+2024-04-07,Mumbai,Samsung Galaxy M14 5G,Samsung,15,13812.82,38,4,0,none
+2024-04-07,Mumbai,Noise ColorFit Pulse 2,Noise,21,1632.6,88,4,0,none
+2024-04-07,Mumbai,JBL Go 3,JBL,16,2185.46,72,4,0,none
+2024-04-07,Bangalore,boAt Airdopes 141,boAt,30,1257.55,,6,0,none
+2024-04-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1493.49,104,6,0,none
+2024-04-07,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13956.75,73,3,0,none
+2024-04-07,Bangalore,Noise ColorFit Pulse 2,Noise,17,1590.92,72,5,0,none
+2024-04-07,Bangalore,JBL Go 3,JBL,14,,68,7,0,none
+2024-04-07,Delhi,boAt Airdopes 141,boAt,29,1330.81,121,6,0,none
+2024-04-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1506.14,46,3,0,none
+2024-04-07,Delhi,Samsung Galaxy M14 5G,Samsung,13,14020.66,63,4,0,none
+2024-04-07,Delhi,Noise ColorFit Pulse 2,Noise,20,1564.96,63,7,0,none
+2024-04-07,Delhi,JBL Go 3,JBL,17,2236.47,70,4,0,none
+2024-04-08,Mumbai,boAt Airdopes 141,boAt,19,1329.99,92,6,0,none
+2024-04-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1454.03,,6,0,none
+2024-04-08,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14155.26,49,3,0,none
+2024-04-08,Mumbai,Noise ColorFit Pulse 2,Noise,15,1580.78,74,4,0,none
+2024-04-08,Mumbai,JBL Go 3,JBL,13,2211.06,60,7,0,none
+2024-04-08,Bangalore,boAt Airdopes 141,boAt,28,1279.1,91,6,0,none
+2024-04-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1491.04,58,7,0,none
+2024-04-08,Bangalore,Samsung Galaxy M14 5G,Samsung,12,,43,7,0,none
+2024-04-08,Bangalore,Noise ColorFit Pulse 2,Noise,17,1630.63,50,6,0,none
+2024-04-08,Bangalore,JBL Go 3,JBL,12,2239.25,46,7,0,none
+2024-04-08,Delhi,boAt Airdopes 141,boAt,24,1266.66,82,6,0,none
+2024-04-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1453.67,39,6,0,none
+2024-04-08,Delhi,Samsung Galaxy M14 5G,Samsung,44,13981.5,130,4,0,none
+2024-04-08,Delhi,Noise ColorFit Pulse 2,Noise,16,1633.83,58,6,0,none
+2024-04-08,Delhi,JBL Go 3,JBL,,2159.52,36,7,0,none
+2024-04-09,Mumbai,boAt Airdopes 141,boAt,25,1317.55,77,5,1,Gudi Padwa
+2024-04-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1459.46,50,5,1,Gudi Padwa
+2024-04-09,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13948.57,48,3,1,Gudi Padwa
+2024-04-09,Mumbai,Noise ColorFit Pulse 2,Noise,19,1561.22,90,4,1,Gudi Padwa
+2024-04-09,Mumbai,JBL Go 3,JBL,12,2208.04,54,7,1,Gudi Padwa
+2024-04-09,Bangalore,boAt Airdopes 141,boAt,26,,130,4,1,Gudi Padwa
+2024-04-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1500.12,80,6,1,Gudi Padwa
+2024-04-09,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14050.65,51,5,1,Gudi Padwa
+2024-04-09,Bangalore,Noise ColorFit Pulse 2,Noise,13,1645.12,43,7,1,Gudi Padwa
+2024-04-09,Bangalore,JBL Go 3,JBL,12,2245.58,58,5,1,Gudi Padwa
+2024-04-09,Delhi,boAt Airdopes 141,boAt,26,1320.81,127,4,1,Gudi Padwa
+2024-04-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1484.75,65,6,1,Gudi Padwa
+2024-04-09,Delhi,Samsung Galaxy M14 5G,Samsung,11,14002.56,39,5,1,Gudi Padwa
+2024-04-09,Delhi,Noise ColorFit Pulse 2,Noise,17,,57,6,1,Gudi Padwa
+2024-04-09,Delhi,JBL Go 3,JBL,12,2210.69,47,7,1,Gudi Padwa
+2024-04-10,Mumbai,boAt Airdopes 141,boAt,24,1295.33,90,7,0,none
+2024-04-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,,1509.38,68,7,0,none
+2024-04-10,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13881.19,42,5,0,none
+2024-04-10,Mumbai,Noise ColorFit Pulse 2,Noise,19,1608.44,48,7,0,none
+2024-04-10,Mumbai,JBL Go 3,JBL,15,2188.58,72,7,0,none
+2024-04-10,Bangalore,boAt Airdopes 141,boAt,24,1290.11,62,5,0,none
+2024-04-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1511.11,63,5,0,none
+2024-04-10,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13816.55,45,7,0,none
+2024-04-10,Bangalore,Noise ColorFit Pulse 2,Noise,16,1620.91,42,4,0,none
+2024-04-10,Bangalore,JBL Go 3,JBL,14,2240.35,58,5,0,none
+2024-04-10,Delhi,boAt Airdopes 141,boAt,24,1313.73,97,5,0,none
+2024-04-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,11,1527.86,46,6,0,none
+2024-04-10,Delhi,Samsung Galaxy M14 5G,Samsung,11,14102.38,52,5,0,none
+2024-04-10,Delhi,Noise ColorFit Pulse 2,Noise,17,1563.63,56,3,0,none
+2024-04-10,Delhi,JBL Go 3,JBL,14,2166.74,42,7,0,none
+2024-04-11,Mumbai,boAt Airdopes 141,boAt,27,1263.61,105,6,0,none
+2024-04-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1528.77,60,3,0,none
+2024-04-11,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14036.49,38,6,0,none
+2024-04-11,Mumbai,Noise ColorFit Pulse 2,Noise,15,1571.95,39,3,0,none
+2024-04-11,Mumbai,JBL Go 3,JBL,13,2213.02,63,7,0,none
+2024-04-11,Bangalore,boAt Airdopes 141,boAt,23,1258.74,107,7,0,none
+2024-04-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1481.84,47,7,0,none
+2024-04-11,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13823.65,52,6,0,none
+2024-04-11,Bangalore,Noise ColorFit Pulse 2,Noise,15,1648.41,49,3,0,none
+2024-04-11,Bangalore,JBL Go 3,JBL,14,2152.25,59,6,1,none
+2024-04-11,Delhi,boAt Airdopes 141,boAt,25,1316.33,88,7,0,none
+2024-04-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1455.6,66,5,0,none
+2024-04-11,Delhi,Samsung Galaxy M14 5G,Samsung,14,14194.93,68,6,0,none
+2024-04-11,Delhi,Noise ColorFit Pulse 2,Noise,14,1633.26,63,7,0,none
+2024-04-11,Delhi,JBL Go 3,JBL,14,2150.75,51,5,0,none
+2024-04-12,Mumbai,boAt Airdopes 141,boAt,112,1320.11,289,4,0,none
+2024-04-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1485.74,39,5,0,none
+2024-04-12,Mumbai,Samsung Galaxy M14 5G,Samsung,10,14056.52,34,5,0,none
+2024-04-12,Mumbai,Noise ColorFit Pulse 2,Noise,16,1626.28,45,4,0,none
+2024-04-12,Mumbai,JBL Go 3,JBL,12,2149.83,39,4,0,none
+2024-04-12,Bangalore,boAt Airdopes 141,boAt,25,1267.91,113,4,0,none
+2024-04-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1490.07,60,6,1,none
+2024-04-12,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13931.18,46,4,0,none
+2024-04-12,Bangalore,Noise ColorFit Pulse 2,Noise,17,1636.22,77,4,0,none
+2024-04-12,Bangalore,JBL Go 3,JBL,15,2210.2,56,3,0,none
+2024-04-12,Delhi,boAt Airdopes 141,boAt,25,1326.2,75,7,0,none
+2024-04-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1508.43,53,3,0,none
+2024-04-12,Delhi,Samsung Galaxy M14 5G,Samsung,14,14031.35,42,3,0,none
+2024-04-12,Delhi,Noise ColorFit Pulse 2,Noise,20,1556.86,55,3,1,none
+2024-04-12,Delhi,JBL Go 3,JBL,13,2186.57,56,3,0,none
+2024-04-13,Mumbai,boAt Airdopes 141,boAt,31,1249.23,106,7,0,none
+2024-04-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,22,1452.12,55,5,0,none
+2024-04-13,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14119.28,,6,0,none
+2024-04-13,Mumbai,Noise ColorFit Pulse 2,Noise,18,1588.35,50,3,0,none
+2024-04-13,Mumbai,JBL Go 3,JBL,17,2244.2,62,5,0,none
+2024-04-13,Bangalore,boAt Airdopes 141,boAt,32,1297.65,150,3,0,none
+2024-04-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1530.97,53,6,0,none
+2024-04-13,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13952.51,42,6,0,none
+2024-04-13,Bangalore,Noise ColorFit Pulse 2,Noise,20,1577.63,90,4,1,none
+2024-04-13,Bangalore,JBL Go 3,JBL,17,2180.14,58,4,1,none
+2024-04-13,Delhi,boAt Airdopes 141,boAt,31,1264.57,96,7,0,none
+2024-04-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1460.12,69,6,0,none
+2024-04-13,Delhi,Samsung Galaxy M14 5G,Samsung,,14197.29,48,3,0,none
+2024-04-13,Delhi,Noise ColorFit Pulse 2,Noise,23,1566.17,97,3,0,none
+2024-04-13,Delhi,JBL Go 3,JBL,16,2180.9,70,5,0,none
+2024-04-14,Mumbai,boAt Airdopes 141,boAt,33,1347.16,121,6,0,none
+2024-04-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1462.46,52,7,0,none
+2024-04-14,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13831.53,42,7,0,none
+2024-04-14,Mumbai,Noise ColorFit Pulse 2,Noise,19,1621.43,63,5,1,none
+2024-04-14,Mumbai,JBL Go 3,JBL,18,2163.59,77,5,0,none
+2024-04-14,Bangalore,boAt Airdopes 141,boAt,28,1277.25,81,3,0,none
+2024-04-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,20,1502.1,55,4,0,none
+2024-04-14,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13877.15,54,7,0,none
+2024-04-14,Bangalore,Noise ColorFit Pulse 2,Noise,23,1567.88,95,4,0,none
+2024-04-14,Bangalore,JBL Go 3,JBL,15,2173.99,41,5,0,none
+2024-04-14,Delhi,boAt Airdopes 141,boAt,35,1278.51,139,3,0,none
+2024-04-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1487.22,58,5,0,none
+2024-04-14,Delhi,Samsung Galaxy M14 5G,Samsung,14,14083.36,50,4,0,none
+2024-04-14,Delhi,Noise ColorFit Pulse 2,Noise,20,1626.92,73,3,0,none
+2024-04-14,Delhi,JBL Go 3,JBL,14,2243.28,46,5,0,none
+2024-04-15,Mumbai,boAt Airdopes 141,boAt,26,1284.57,88,6,0,none
+2024-04-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1475.58,64,6,0,none
+2024-04-15,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14010.91,51,6,0,none
+2024-04-15,Mumbai,Noise ColorFit Pulse 2,Noise,15,1566.79,62,3,0,none
+2024-04-15,Mumbai,JBL Go 3,JBL,14,2183.46,67,5,0,none
+2024-04-15,Bangalore,boAt Airdopes 141,boAt,23,1253.5,63,7,0,none
+2024-04-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1464.9,60,6,0,none
+2024-04-15,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14034.96,55,6,0,none
+2024-04-15,Bangalore,Noise ColorFit Pulse 2,Noise,13,1642.09,62,5,0,none
+2024-04-15,Bangalore,JBL Go 3,JBL,15,2190.39,55,5,0,none
+2024-04-15,Delhi,boAt Airdopes 141,boAt,27,1343.04,122,3,0,none
+2024-04-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1490.06,48,3,1,none
+2024-04-15,Delhi,Samsung Galaxy M14 5G,Samsung,13,13925.5,52,7,0,none
+2024-04-15,Delhi,Noise ColorFit Pulse 2,Noise,80,1642.48,307,3,0,none
+2024-04-15,Delhi,JBL Go 3,JBL,11,2167.53,37,6,0,none
+2024-04-16,Mumbai,boAt Airdopes 141,boAt,26,1261.27,101,3,0,none
+2024-04-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1494.39,64,6,0,none
+2024-04-16,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14038.4,41,3,0,none
+2024-04-16,Mumbai,Noise ColorFit Pulse 2,Noise,90,1606.4,236,7,0,none
+2024-04-16,Mumbai,JBL Go 3,JBL,,2224.61,59,7,0,none
+2024-04-16,Bangalore,boAt Airdopes 141,boAt,24,1279.27,90,3,0,none
+2024-04-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1535.95,58,6,0,none
+2024-04-16,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13960.96,60,6,0,none
+2024-04-16,Bangalore,Noise ColorFit Pulse 2,Noise,17,1623.61,59,6,1,none
+2024-04-16,Bangalore,JBL Go 3,JBL,14,2173.86,44,6,0,none
+2024-04-16,Delhi,boAt Airdopes 141,boAt,25,1275.23,88,5,0,none
+2024-04-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1453.88,47,3,0,none
+2024-04-16,Delhi,Samsung Galaxy M14 5G,Samsung,,14007.39,49,4,0,none
+2024-04-16,Delhi,Noise ColorFit Pulse 2,Noise,16,1603.11,40,6,0,none
+2024-04-16,Delhi,JBL Go 3,JBL,15,2194.89,44,6,0,none
+2024-04-17,Mumbai,boAt Airdopes 141,boAt,26,1302.16,119,6,1,Ram Navami
+2024-04-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1521.81,43,3,1,Ram Navami
+2024-04-17,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13837.54,45,4,1,Ram Navami
+2024-04-17,Mumbai,Noise ColorFit Pulse 2,Noise,14,1613.65,67,7,1,Ram Navami
+2024-04-17,Mumbai,JBL Go 3,JBL,,2218.23,42,3,1,Ram Navami
+2024-04-17,Bangalore,boAt Airdopes 141,boAt,25,1333.29,78,6,1,Ram Navami
+2024-04-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,78,1500.34,240,5,1,Ram Navami
+2024-04-17,Bangalore,Samsung Galaxy M14 5G,Samsung,10,13864.03,31,5,1,Ram Navami
+2024-04-17,Bangalore,Noise ColorFit Pulse 2,Noise,16,1645.19,61,4,1,Ram Navami
+2024-04-17,Bangalore,JBL Go 3,JBL,14,2166.04,54,4,1,Ram Navami
+2024-04-17,Delhi,boAt Airdopes 141,boAt,27,1308.11,80,4,1,Ram Navami
+2024-04-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,,54,5,1,Ram Navami
+2024-04-17,Delhi,Samsung Galaxy M14 5G,Samsung,14,13883.0,49,7,1,Ram Navami
+2024-04-17,Delhi,Noise ColorFit Pulse 2,Noise,16,1622.75,69,3,1,Ram Navami
+2024-04-17,Delhi,JBL Go 3,JBL,15,2186.94,69,3,1,Ram Navami
+2024-04-18,Mumbai,boAt Airdopes 141,boAt,26,1302.96,71,4,0,none
+2024-04-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1546.22,54,4,0,none
+2024-04-18,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14054.33,44,3,0,none
+2024-04-18,Mumbai,Noise ColorFit Pulse 2,Noise,18,1606.45,70,3,0,none
+2024-04-18,Mumbai,JBL Go 3,JBL,12,,,4,0,none
+2024-04-18,Bangalore,boAt Airdopes 141,boAt,25,1252.66,101,4,0,none
+2024-04-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1483.17,38,5,0,none
+2024-04-18,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13825.63,62,4,0,none
+2024-04-18,Bangalore,Noise ColorFit Pulse 2,Noise,18,1641.57,66,5,0,none
+2024-04-18,Bangalore,JBL Go 3,JBL,15,2206.44,61,5,0,none
+2024-04-18,Delhi,boAt Airdopes 141,boAt,24,1285.1,119,4,0,none
+2024-04-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1507.94,47,6,0,none
+2024-04-18,Delhi,Samsung Galaxy M14 5G,Samsung,14,14149.5,69,5,0,none
+2024-04-18,Delhi,Noise ColorFit Pulse 2,Noise,17,1616.98,75,4,0,none
+2024-04-18,Delhi,JBL Go 3,JBL,14,,42,4,0,none
+2024-04-19,Mumbai,boAt Airdopes 141,boAt,22,1293.53,65,3,0,none
+2024-04-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1465.83,34,6,0,none
+2024-04-19,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14172.33,47,4,0,none
+2024-04-19,Mumbai,Noise ColorFit Pulse 2,Noise,17,1618.92,72,4,0,none
+2024-04-19,Mumbai,JBL Go 3,JBL,13,2175.61,35,7,0,none
+2024-04-19,Bangalore,boAt Airdopes 141,boAt,26,1326.33,67,4,1,none
+2024-04-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1467.57,46,3,0,none
+2024-04-19,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13889.1,34,4,0,none
+2024-04-19,Bangalore,Noise ColorFit Pulse 2,Noise,15,1605.06,51,7,1,none
+2024-04-19,Bangalore,JBL Go 3,JBL,11,2197.92,49,6,0,none
+2024-04-19,Delhi,boAt Airdopes 141,boAt,27,1269.1,123,3,0,none
+2024-04-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1508.34,42,3,0,none
+2024-04-19,Delhi,Samsung Galaxy M14 5G,Samsung,13,14045.33,45,3,0,none
+2024-04-19,Delhi,Noise ColorFit Pulse 2,Noise,16,1603.88,66,4,0,none
+2024-04-19,Delhi,JBL Go 3,JBL,13,2187.54,43,7,0,none
+2024-04-20,Mumbai,boAt Airdopes 141,boAt,30,1253.34,107,4,0,none
+2024-04-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,19,1500.24,91,5,0,none
+2024-04-20,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14134.79,58,7,0,none
+2024-04-20,Mumbai,Noise ColorFit Pulse 2,Noise,21,1645.25,68,3,0,none
+2024-04-20,Mumbai,JBL Go 3,JBL,16,2167.25,75,6,0,none
+2024-04-20,Bangalore,boAt Airdopes 141,boAt,33,1332.52,96,4,0,none
+2024-04-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,20,1512.79,75,3,0,none
+2024-04-20,Bangalore,Samsung Galaxy M14 5G,Samsung,78,14004.55,269,6,0,none
+2024-04-20,Bangalore,Noise ColorFit Pulse 2,Noise,21,1563.05,76,6,0,none
+2024-04-20,Bangalore,JBL Go 3,JBL,22,,102,6,0,none
+2024-04-20,Delhi,boAt Airdopes 141,boAt,30,1252.05,109,5,0,none
+2024-04-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1540.06,71,3,0,none
+2024-04-20,Delhi,Samsung Galaxy M14 5G,Samsung,14,14102.1,43,3,0,none
+2024-04-20,Delhi,Noise ColorFit Pulse 2,Noise,21,1588.47,53,5,0,none
+2024-04-20,Delhi,JBL Go 3,JBL,19,2232.51,84,3,0,none
+2024-04-21,Mumbai,boAt Airdopes 141,boAt,35,1273.09,120,4,0,none
+2024-04-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1509.61,73,5,0,none
+2024-04-21,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13943.99,60,5,0,none
+2024-04-21,Mumbai,Noise ColorFit Pulse 2,Noise,22,1582.11,59,4,0,none
+2024-04-21,Mumbai,JBL Go 3,JBL,16,2171.25,52,5,0,none
+2024-04-21,Bangalore,boAt Airdopes 141,boAt,30,1281.54,105,6,0,none
+2024-04-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1501.26,79,4,0,none
+2024-04-21,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14087.93,34,5,0,none
+2024-04-21,Bangalore,Noise ColorFit Pulse 2,Noise,18,1598.8,79,7,0,none
+2024-04-21,Bangalore,JBL Go 3,JBL,15,2222.49,57,7,0,none
+2024-04-21,Delhi,boAt Airdopes 141,boAt,23,1334.18,105,7,0,none
+2024-04-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1482.53,67,6,0,none
+2024-04-21,Delhi,Samsung Galaxy M14 5G,Samsung,15,14193.29,68,3,0,none
+2024-04-21,Delhi,Noise ColorFit Pulse 2,Noise,22,1613.57,94,6,0,none
+2024-04-21,Delhi,JBL Go 3,JBL,18,2209.61,53,6,0,none
+2024-04-22,Mumbai,boAt Airdopes 141,boAt,26,1279.24,89,5,0,none
+2024-04-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1530.51,66,5,0,none
+2024-04-22,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13865.21,54,4,0,none
+2024-04-22,Mumbai,Noise ColorFit Pulse 2,Noise,20,1563.11,70,5,0,none
+2024-04-22,Mumbai,JBL Go 3,JBL,15,2178.61,68,4,0,none
+2024-04-22,Bangalore,boAt Airdopes 141,boAt,27,1270.4,100,3,0,none
+2024-04-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,68,1530.51,256,4,0,none
+2024-04-22,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13837.33,59,6,0,none
+2024-04-22,Bangalore,Noise ColorFit Pulse 2,Noise,15,1588.25,40,7,0,none
+2024-04-22,Bangalore,JBL Go 3,JBL,,2240.49,42,7,0,none
+2024-04-22,Delhi,boAt Airdopes 141,boAt,32,1319.98,98,5,0,none
+2024-04-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1500.69,59,3,0,none
+2024-04-22,Delhi,Samsung Galaxy M14 5G,Samsung,13,13977.39,,6,0,none
+2024-04-22,Delhi,Noise ColorFit Pulse 2,Noise,15,1557.45,56,6,0,none
+2024-04-22,Delhi,JBL Go 3,JBL,12,2149.18,60,7,0,none
+2024-04-23,Mumbai,boAt Airdopes 141,boAt,24,1344.03,76,5,0,none
+2024-04-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1476.32,67,3,0,none
+2024-04-23,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13874.17,62,3,0,none
+2024-04-23,Mumbai,Noise ColorFit Pulse 2,Noise,19,1573.05,91,4,0,none
+2024-04-23,Mumbai,JBL Go 3,JBL,15,2195.24,44,5,0,none
+2024-04-23,Bangalore,boAt Airdopes 141,boAt,21,1262.44,87,3,0,none
+2024-04-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1474.73,46,4,0,none
+2024-04-23,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13850.79,35,6,0,none
+2024-04-23,Bangalore,Noise ColorFit Pulse 2,Noise,15,1601.61,41,4,0,none
+2024-04-23,Bangalore,JBL Go 3,JBL,11,2217.57,37,3,0,none
+2024-04-23,Delhi,boAt Airdopes 141,boAt,22,1261.68,100,5,0,none
+2024-04-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1504.61,53,3,0,none
+2024-04-23,Delhi,Samsung Galaxy M14 5G,Samsung,78,13954.58,376,3,0,none
+2024-04-23,Delhi,Noise ColorFit Pulse 2,Noise,16,1575.06,45,6,0,none
+2024-04-23,Delhi,JBL Go 3,JBL,15,2235.77,39,3,0,none
+2024-04-24,Mumbai,boAt Airdopes 141,boAt,24,1271.95,113,6,0,none
+2024-04-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1503.84,50,3,0,none
+2024-04-24,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13877.82,,7,0,none
+2024-04-24,Mumbai,Noise ColorFit Pulse 2,Noise,14,1644.89,60,4,0,none
+2024-04-24,Mumbai,JBL Go 3,JBL,12,2177.8,34,3,0,none
+2024-04-24,Bangalore,boAt Airdopes 141,boAt,27,1290.65,106,7,0,none
+2024-04-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1494.99,53,3,1,none
+2024-04-24,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14003.03,33,7,0,none
+2024-04-24,Bangalore,Noise ColorFit Pulse 2,Noise,14,1590.81,53,6,1,none
+2024-04-24,Bangalore,JBL Go 3,JBL,16,2231.41,44,7,0,none
+2024-04-24,Delhi,boAt Airdopes 141,boAt,24,1292.63,91,3,0,none
+2024-04-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1500.86,57,6,0,none
+2024-04-24,Delhi,Samsung Galaxy M14 5G,Samsung,11,14169.84,38,3,0,none
+2024-04-24,Delhi,Noise ColorFit Pulse 2,Noise,18,1617.61,66,4,0,none
+2024-04-24,Delhi,JBL Go 3,JBL,56,2169.32,260,7,0,none
+2024-04-25,Mumbai,boAt Airdopes 141,boAt,21,1267.32,85,6,0,none
+2024-04-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1547.48,62,5,1,none
+2024-04-25,Mumbai,Samsung Galaxy M14 5G,Samsung,,13959.95,39,4,0,none
+2024-04-25,Mumbai,Noise ColorFit Pulse 2,Noise,16,1589.83,40,4,0,none
+2024-04-25,Mumbai,JBL Go 3,JBL,15,2180.46,43,7,0,none
+2024-04-25,Bangalore,boAt Airdopes 141,boAt,24,1324.31,118,7,0,none
+2024-04-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1502.71,57,4,0,none
+2024-04-25,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14086.41,39,7,0,none
+2024-04-25,Bangalore,Noise ColorFit Pulse 2,Noise,17,1551.55,56,3,0,none
+2024-04-25,Bangalore,JBL Go 3,JBL,18,2241.39,,3,0,none
+2024-04-25,Delhi,boAt Airdopes 141,boAt,23,1273.55,82,7,0,none
+2024-04-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1451.43,51,4,1,none
+2024-04-25,Delhi,Samsung Galaxy M14 5G,Samsung,12,13997.96,58,5,0,none
+2024-04-25,Delhi,Noise ColorFit Pulse 2,Noise,,1571.47,84,5,0,none
+2024-04-25,Delhi,JBL Go 3,JBL,16,2218.89,63,4,0,none
+2024-04-26,Mumbai,boAt Airdopes 141,boAt,29,,73,7,0,none
+2024-04-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1465.58,56,4,0,none
+2024-04-26,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13830.45,59,6,1,none
+2024-04-26,Mumbai,Noise ColorFit Pulse 2,Noise,19,1603.69,85,4,1,none
+2024-04-26,Mumbai,JBL Go 3,JBL,16,2200.37,59,5,0,none
+2024-04-26,Bangalore,boAt Airdopes 141,boAt,,1262.97,139,4,0,none
+2024-04-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1548.93,42,3,0,none
+2024-04-26,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13952.57,62,7,0,none
+2024-04-26,Bangalore,Noise ColorFit Pulse 2,Noise,15,1633.65,50,7,0,none
+2024-04-26,Bangalore,JBL Go 3,JBL,16,2201.97,68,7,0,none
+2024-04-26,Delhi,boAt Airdopes 141,boAt,28,1343.84,87,3,0,none
+2024-04-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1451.67,54,3,0,none
+2024-04-26,Delhi,Samsung Galaxy M14 5G,Samsung,11,14097.11,53,4,0,none
+2024-04-26,Delhi,Noise ColorFit Pulse 2,Noise,18,1636.69,79,3,0,none
+2024-04-26,Delhi,JBL Go 3,JBL,16,2211.65,71,5,0,none
+2024-04-27,Mumbai,boAt Airdopes 141,boAt,28,1255.83,,5,0,none
+2024-04-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1474.47,46,4,0,none
+2024-04-27,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14058.06,57,3,0,none
+2024-04-27,Mumbai,Noise ColorFit Pulse 2,Noise,16,1568.72,48,7,0,none
+2024-04-27,Mumbai,JBL Go 3,JBL,18,2207.8,54,6,0,none
+2024-04-27,Bangalore,boAt Airdopes 141,boAt,30,1271.93,,4,0,none
+2024-04-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1503.1,45,5,0,none
+2024-04-27,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14043.5,65,7,0,none
+2024-04-27,Bangalore,Noise ColorFit Pulse 2,Noise,24,1579.46,111,4,0,none
+2024-04-27,Bangalore,JBL Go 3,JBL,19,2195.64,65,5,0,none
+2024-04-27,Delhi,boAt Airdopes 141,boAt,32,1302.4,133,7,0,none
+2024-04-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1452.68,68,4,1,none
+2024-04-27,Delhi,Samsung Galaxy M14 5G,Samsung,15,14118.29,41,3,0,none
+2024-04-27,Delhi,Noise ColorFit Pulse 2,Noise,20,1633.61,91,3,0,none
+2024-04-27,Delhi,JBL Go 3,JBL,18,2221.61,89,7,0,none
+2024-04-28,Mumbai,boAt Airdopes 141,boAt,35,1250.03,159,6,0,none
+2024-04-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1479.0,77,5,0,none
+2024-04-28,Mumbai,Samsung Galaxy M14 5G,Samsung,15,13939.2,70,4,0,none
+2024-04-28,Mumbai,Noise ColorFit Pulse 2,Noise,25,1620.15,83,4,0,none
+2024-04-28,Mumbai,JBL Go 3,JBL,16,2189.96,63,6,0,none
+2024-04-28,Bangalore,boAt Airdopes 141,boAt,31,1288.81,146,5,1,none
+2024-04-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1458.4,50,3,0,none
+2024-04-28,Bangalore,Samsung Galaxy M14 5G,Samsung,17,14162.03,60,5,0,none
+2024-04-28,Bangalore,Noise ColorFit Pulse 2,Noise,25,1645.07,108,7,0,none
+2024-04-28,Bangalore,JBL Go 3,JBL,16,2151.57,77,4,0,none
+2024-04-28,Delhi,boAt Airdopes 141,boAt,30,1269.55,85,7,0,none
+2024-04-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1514.22,61,7,0,none
+2024-04-28,Delhi,Samsung Galaxy M14 5G,Samsung,12,14019.27,49,3,0,none
+2024-04-28,Delhi,Noise ColorFit Pulse 2,Noise,26,1643.94,81,3,0,none
+2024-04-28,Delhi,JBL Go 3,JBL,19,2232.24,49,7,0,none
+2024-04-29,Mumbai,boAt Airdopes 141,boAt,24,1282.35,79,3,0,none
+2024-04-29,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1542.13,37,4,0,none
+2024-04-29,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13832.3,58,7,0,none
+2024-04-29,Mumbai,Noise ColorFit Pulse 2,Noise,16,1589.97,42,3,0,none
+2024-04-29,Mumbai,JBL Go 3,JBL,16,2247.2,49,6,0,none
+2024-04-29,Bangalore,boAt Airdopes 141,boAt,25,1262.07,105,5,0,none
+2024-04-29,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1470.8,,3,0,none
+2024-04-29,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14193.78,50,4,1,none
+2024-04-29,Bangalore,Noise ColorFit Pulse 2,Noise,17,1575.72,46,7,0,none
+2024-04-29,Bangalore,JBL Go 3,JBL,15,2244.75,44,6,0,none
+2024-04-29,Delhi,boAt Airdopes 141,boAt,25,1310.11,120,3,0,none
+2024-04-29,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1526.9,39,4,0,none
+2024-04-29,Delhi,Samsung Galaxy M14 5G,Samsung,12,13846.67,60,4,1,none
+2024-04-29,Delhi,Noise ColorFit Pulse 2,Noise,17,1611.09,72,7,0,none
+2024-04-29,Delhi,JBL Go 3,JBL,13,2190.25,64,6,0,none
+2024-04-30,Mumbai,boAt Airdopes 141,boAt,24,1281.89,70,6,0,none
+2024-04-30,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1527.37,69,4,0,none
+2024-04-30,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14001.15,59,7,0,none
+2024-04-30,Mumbai,Noise ColorFit Pulse 2,Noise,18,1631.25,72,4,0,none
+2024-04-30,Mumbai,JBL Go 3,JBL,16,2236.34,73,5,0,none
+2024-04-30,Bangalore,boAt Airdopes 141,boAt,28,1311.16,,3,0,none
+2024-04-30,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1457.57,51,6,0,none
+2024-04-30,Bangalore,Samsung Galaxy M14 5G,Samsung,14,,47,3,1,none
+2024-04-30,Bangalore,Noise ColorFit Pulse 2,Noise,18,1645.64,71,7,0,none
+2024-04-30,Bangalore,JBL Go 3,JBL,15,2236.75,62,4,0,none
+2024-04-30,Delhi,boAt Airdopes 141,boAt,25,1334.42,73,6,0,none
+2024-04-30,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1533.81,51,3,0,none
+2024-04-30,Delhi,Samsung Galaxy M14 5G,Samsung,14,13885.17,59,5,0,none
+2024-04-30,Delhi,Noise ColorFit Pulse 2,Noise,16,1587.42,45,7,0,none
+2024-04-30,Delhi,JBL Go 3,JBL,12,2245.26,48,6,0,none
+2024-05-01,Mumbai,boAt Airdopes 141,boAt,29,1335.34,128,7,1,Summer Sale Kickoff
+2024-05-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1537.68,59,5,1,Summer Sale Kickoff
+2024-05-01,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14054.17,,7,1,Summer Sale Kickoff
+2024-05-01,Mumbai,Noise ColorFit Pulse 2,Noise,114,1642.72,545,3,1,Summer Sale Kickoff
+2024-05-01,Mumbai,JBL Go 3,JBL,27,2165.89,112,6,1,Summer Sale Kickoff
+2024-05-01,Bangalore,boAt Airdopes 141,boAt,35,1335.97,136,4,1,Summer Sale Kickoff
+2024-05-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1531.72,76,6,1,Summer Sale Kickoff
+2024-05-01,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13919.26,34,4,1,Summer Sale Kickoff
+2024-05-01,Bangalore,Noise ColorFit Pulse 2,Noise,17,1630.38,56,6,1,Summer Sale Kickoff
+2024-05-01,Bangalore,JBL Go 3,JBL,,2164.08,122,3,1,Summer Sale Kickoff
+2024-05-01,Delhi,boAt Airdopes 141,boAt,28,1298.24,118,6,1,Summer Sale Kickoff
+2024-05-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1502.43,88,7,1,Summer Sale Kickoff
+2024-05-01,Delhi,Samsung Galaxy M14 5G,Samsung,17,13892.65,47,6,1,Summer Sale Kickoff
+2024-05-01,Delhi,Noise ColorFit Pulse 2,Noise,19,1643.28,73,5,1,Summer Sale Kickoff
+2024-05-01,Delhi,JBL Go 3,JBL,27,2187.16,117,7,1,Summer Sale Kickoff
+2024-05-02,Mumbai,boAt Airdopes 141,boAt,24,1268.27,108,3,0,none
+2024-05-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1478.2,49,3,0,none
+2024-05-02,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13940.27,52,5,0,none
+2024-05-02,Mumbai,Noise ColorFit Pulse 2,Noise,16,1592.2,70,4,0,none
+2024-05-02,Mumbai,JBL Go 3,JBL,15,2197.99,67,4,0,none
+2024-05-02,Bangalore,boAt Airdopes 141,boAt,27,1337.44,111,7,0,none
+2024-05-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1537.98,61,3,1,none
+2024-05-02,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14198.39,59,5,0,none
+2024-05-02,Bangalore,Noise ColorFit Pulse 2,Noise,18,1620.04,74,3,0,none
+2024-05-02,Bangalore,JBL Go 3,JBL,15,2217.96,56,5,0,none
+2024-05-02,Delhi,boAt Airdopes 141,boAt,26,1337.0,114,5,0,none
+2024-05-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1513.11,48,3,1,none
+2024-05-02,Delhi,Samsung Galaxy M14 5G,Samsung,12,13970.55,46,4,0,none
+2024-05-02,Delhi,Noise ColorFit Pulse 2,Noise,15,1555.5,55,4,0,none
+2024-05-02,Delhi,JBL Go 3,JBL,15,2174.45,74,5,0,none
+2024-05-03,Mumbai,boAt Airdopes 141,boAt,23,1267.05,108,7,0,none
+2024-05-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1546.9,49,7,0,none
+2024-05-03,Mumbai,Samsung Galaxy M14 5G,Samsung,,14137.34,43,6,0,none
+2024-05-03,Mumbai,Noise ColorFit Pulse 2,Noise,18,1560.84,59,4,0,none
+2024-05-03,Mumbai,JBL Go 3,JBL,14,2154.84,51,4,0,none
+2024-05-03,Bangalore,boAt Airdopes 141,boAt,26,1320.69,88,5,0,none
+2024-05-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1489.84,52,3,1,none
+2024-05-03,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13818.46,46,6,0,none
+2024-05-03,Bangalore,Noise ColorFit Pulse 2,Noise,15,1590.66,73,3,0,none
+2024-05-03,Bangalore,JBL Go 3,JBL,18,,81,6,0,none
+2024-05-03,Delhi,boAt Airdopes 141,boAt,23,1265.95,108,7,0,none
+2024-05-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1546.35,50,5,0,none
+2024-05-03,Delhi,Samsung Galaxy M14 5G,Samsung,11,13820.12,54,3,0,none
+2024-05-03,Delhi,Noise ColorFit Pulse 2,Noise,17,1616.44,71,7,0,none
+2024-05-03,Delhi,JBL Go 3,JBL,19,2150.0,70,3,0,none
+2024-05-04,Mumbai,boAt Airdopes 141,boAt,,1324.29,117,7,0,none
+2024-05-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,20,1469.88,58,3,0,none
+2024-05-04,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14088.06,50,7,0,none
+2024-05-04,Mumbai,Noise ColorFit Pulse 2,Noise,21,1588.45,53,3,0,none
+2024-05-04,Mumbai,JBL Go 3,JBL,18,2232.59,85,7,0,none
+2024-05-04,Bangalore,boAt Airdopes 141,boAt,,1256.33,139,7,0,none
+2024-05-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,1470.85,56,7,0,none
+2024-05-04,Bangalore,Samsung Galaxy M14 5G,Samsung,17,13875.61,53,4,0,none
+2024-05-04,Bangalore,Noise ColorFit Pulse 2,Noise,22,1599.41,75,4,0,none
+2024-05-04,Bangalore,JBL Go 3,JBL,20,2244.37,94,4,0,none
+2024-05-04,Delhi,boAt Airdopes 141,boAt,25,1273.02,94,6,0,none
+2024-05-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1450.09,57,3,0,none
+2024-05-04,Delhi,Samsung Galaxy M14 5G,Samsung,12,13948.72,41,5,1,none
+2024-05-04,Delhi,Noise ColorFit Pulse 2,Noise,23,1570.03,70,4,0,none
+2024-05-04,Delhi,JBL Go 3,JBL,17,2161.06,47,7,0,none
+2024-05-05,Mumbai,boAt Airdopes 141,boAt,32,1311.31,124,5,0,none
+2024-05-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1545.85,63,4,0,none
+2024-05-05,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13911.34,66,6,0,none
+2024-05-05,Mumbai,Noise ColorFit Pulse 2,Noise,24,1570.86,97,3,0,none
+2024-05-05,Mumbai,JBL Go 3,JBL,95,2189.98,322,5,0,none
+2024-05-05,Bangalore,boAt Airdopes 141,boAt,30,1325.94,92,5,0,none
+2024-05-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,90,1537.24,321,4,1,none
+2024-05-05,Bangalore,Samsung Galaxy M14 5G,Samsung,15,14060.58,68,3,0,none
+2024-05-05,Bangalore,Noise ColorFit Pulse 2,Noise,23,1587.84,102,6,0,none
+2024-05-05,Bangalore,JBL Go 3,JBL,18,2185.85,85,4,0,none
+2024-05-05,Delhi,boAt Airdopes 141,boAt,29,1252.16,102,6,0,none
+2024-05-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1468.26,79,7,0,none
+2024-05-05,Delhi,Samsung Galaxy M14 5G,Samsung,14,13970.58,39,4,0,none
+2024-05-05,Delhi,Noise ColorFit Pulse 2,Noise,22,1622.38,101,3,0,none
+2024-05-05,Delhi,JBL Go 3,JBL,21,2221.42,53,7,0,none
+2024-05-06,Mumbai,boAt Airdopes 141,boAt,26,1291.98,117,6,0,none
+2024-05-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,11,1451.08,45,7,0,none
+2024-05-06,Mumbai,Samsung Galaxy M14 5G,Samsung,12,14017.23,32,3,0,none
+2024-05-06,Mumbai,Noise ColorFit Pulse 2,Noise,15,1631.35,52,5,1,none
+2024-05-06,Mumbai,JBL Go 3,JBL,14,2161.27,68,6,0,none
+2024-05-06,Bangalore,boAt Airdopes 141,boAt,27,1250.32,128,6,0,none
+2024-05-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1495.7,53,4,0,none
+2024-05-06,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14161.79,38,6,0,none
+2024-05-06,Bangalore,Noise ColorFit Pulse 2,Noise,20,1616.03,,5,0,none
+2024-05-06,Bangalore,JBL Go 3,JBL,18,2175.26,66,7,0,none
+2024-05-06,Delhi,boAt Airdopes 141,boAt,24,1284.7,77,5,0,none
+2024-05-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1480.97,52,5,0,none
+2024-05-06,Delhi,Samsung Galaxy M14 5G,Samsung,13,13873.91,54,3,0,none
+2024-05-06,Delhi,Noise ColorFit Pulse 2,Noise,17,1601.39,53,4,0,none
+2024-05-06,Delhi,JBL Go 3,JBL,15,2156.46,44,7,0,none
+2024-05-07,Mumbai,boAt Airdopes 141,boAt,22,1262.78,65,6,0,none
+2024-05-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1517.75,57,6,0,none
+2024-05-07,Mumbai,Samsung Galaxy M14 5G,Samsung,9,13920.35,37,5,1,none
+2024-05-07,Mumbai,Noise ColorFit Pulse 2,Noise,17,1554.79,51,4,0,none
+2024-05-07,Mumbai,JBL Go 3,JBL,19,2232.99,56,5,0,none
+2024-05-07,Bangalore,boAt Airdopes 141,boAt,25,1307.88,87,6,0,none
+2024-05-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1493.29,58,5,0,none
+2024-05-07,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14198.58,39,3,0,none
+2024-05-07,Bangalore,Noise ColorFit Pulse 2,Noise,15,1562.86,72,4,1,none
+2024-05-07,Bangalore,JBL Go 3,JBL,16,2191.23,,4,0,none
+2024-05-07,Delhi,boAt Airdopes 141,boAt,24,,81,5,1,none
+2024-05-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1451.13,52,4,0,none
+2024-05-07,Delhi,Samsung Galaxy M14 5G,Samsung,11,14171.85,30,5,0,none
+2024-05-07,Delhi,Noise ColorFit Pulse 2,Noise,20,1619.1,66,5,0,none
+2024-05-07,Delhi,JBL Go 3,JBL,16,2152.93,79,5,0,none
+2024-05-08,Mumbai,boAt Airdopes 141,boAt,21,1285.07,84,4,0,none
+2024-05-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1506.23,71,4,0,none
+2024-05-08,Mumbai,Samsung Galaxy M14 5G,Samsung,12,,57,4,0,none
+2024-05-08,Mumbai,Noise ColorFit Pulse 2,Noise,15,1631.33,64,7,0,none
+2024-05-08,Mumbai,JBL Go 3,JBL,16,2226.1,67,3,0,none
+2024-05-08,Bangalore,boAt Airdopes 141,boAt,29,1308.94,144,5,0,none
+2024-05-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1516.77,53,3,0,none
+2024-05-08,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14092.74,63,5,0,none
+2024-05-08,Bangalore,Noise ColorFit Pulse 2,Noise,17,1593.44,81,3,0,none
+2024-05-08,Bangalore,JBL Go 3,JBL,18,2179.4,46,4,0,none
+2024-05-08,Delhi,boAt Airdopes 141,boAt,25,1301.75,125,4,0,none
+2024-05-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1464.0,74,4,0,none
+2024-05-08,Delhi,Samsung Galaxy M14 5G,Samsung,15,13925.14,50,6,0,none
+2024-05-08,Delhi,Noise ColorFit Pulse 2,Noise,18,1580.71,,4,0,none
+2024-05-08,Delhi,JBL Go 3,JBL,14,2248.76,49,6,0,none
+2024-05-09,Mumbai,boAt Airdopes 141,boAt,21,1327.81,102,5,0,none
+2024-05-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1449.9,43,7,0,none
+2024-05-09,Mumbai,Samsung Galaxy M14 5G,Samsung,,13990.73,65,7,0,none
+2024-05-09,Mumbai,Noise ColorFit Pulse 2,Noise,11,1604.99,35,4,0,none
+2024-05-09,Mumbai,JBL Go 3,JBL,,,44,3,0,none
+2024-05-09,Bangalore,boAt Airdopes 141,boAt,26,1268.11,87,3,0,none
+2024-05-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1485.44,68,4,0,none
+2024-05-09,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14032.02,44,6,0,none
+2024-05-09,Bangalore,Noise ColorFit Pulse 2,Noise,20,1563.02,98,4,0,none
+2024-05-09,Bangalore,JBL Go 3,JBL,15,2232.97,62,7,0,none
+2024-05-09,Delhi,boAt Airdopes 141,boAt,25,1339.47,89,6,0,none
+2024-05-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,84,1487.14,216,6,0,none
+2024-05-09,Delhi,Samsung Galaxy M14 5G,Samsung,12,13983.42,49,5,0,none
+2024-05-09,Delhi,Noise ColorFit Pulse 2,Noise,17,1614.82,80,6,0,none
+2024-05-09,Delhi,JBL Go 3,JBL,16,2248.06,78,4,0,none
+2024-05-10,Mumbai,boAt Airdopes 141,boAt,23,1307.31,111,6,1,none
+2024-05-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1502.7,47,6,0,none
+2024-05-10,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13847.56,53,7,0,none
+2024-05-10,Mumbai,Noise ColorFit Pulse 2,Noise,17,1607.44,51,7,0,none
+2024-05-10,Mumbai,JBL Go 3,JBL,16,2221.26,,4,0,none
+2024-05-10,Bangalore,boAt Airdopes 141,boAt,,1337.28,125,6,0,none
+2024-05-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1543.37,65,3,0,none
+2024-05-10,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13843.34,52,7,0,none
+2024-05-10,Bangalore,Noise ColorFit Pulse 2,Noise,,1621.03,53,3,0,none
+2024-05-10,Bangalore,JBL Go 3,JBL,15,2235.8,72,3,0,none
+2024-05-10,Delhi,boAt Airdopes 141,boAt,21,1299.61,98,3,0,none
+2024-05-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,90,1497.16,350,4,0,none
+2024-05-10,Delhi,Samsung Galaxy M14 5G,Samsung,14,14144.66,42,6,0,none
+2024-05-10,Delhi,Noise ColorFit Pulse 2,Noise,16,1639.07,64,4,0,none
+2024-05-10,Delhi,JBL Go 3,JBL,14,2190.95,66,7,1,none
+2024-05-11,Mumbai,boAt Airdopes 141,boAt,27,1316.38,120,5,0,none
+2024-05-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1535.44,52,7,0,none
+2024-05-11,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13827.36,42,7,0,none
+2024-05-11,Mumbai,Noise ColorFit Pulse 2,Noise,23,1611.55,98,3,0,none
+2024-05-11,Mumbai,JBL Go 3,JBL,23,2228.99,105,4,0,none
+2024-05-11,Bangalore,boAt Airdopes 141,boAt,28,1310.95,95,5,1,none
+2024-05-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,18,,71,5,0,none
+2024-05-11,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13878.18,62,5,0,none
+2024-05-11,Bangalore,Noise ColorFit Pulse 2,Noise,19,1562.54,84,7,0,none
+2024-05-11,Bangalore,JBL Go 3,JBL,,2163.8,87,3,0,none
+2024-05-11,Delhi,boAt Airdopes 141,boAt,31,1302.25,143,5,0,none
+2024-05-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1497.68,80,7,0,none
+2024-05-11,Delhi,Samsung Galaxy M14 5G,Samsung,15,13993.17,45,7,0,none
+2024-05-11,Delhi,Noise ColorFit Pulse 2,Noise,23,1576.44,106,6,0,none
+2024-05-11,Delhi,JBL Go 3,JBL,22,2241.24,,7,0,none
+2024-05-12,Mumbai,boAt Airdopes 141,boAt,33,1317.83,124,7,0,none
+2024-05-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1479.77,63,7,0,none
+2024-05-12,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14057.41,53,5,0,none
+2024-05-12,Mumbai,Noise ColorFit Pulse 2,Noise,18,1616.91,49,6,0,none
+2024-05-12,Mumbai,JBL Go 3,JBL,21,2202.0,71,6,0,none
+2024-05-12,Bangalore,boAt Airdopes 141,boAt,26,1327.23,74,6,0,none
+2024-05-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1491.0,43,3,0,none
+2024-05-12,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13987.05,48,5,0,none
+2024-05-12,Bangalore,Noise ColorFit Pulse 2,Noise,20,1600.73,73,3,0,none
+2024-05-12,Bangalore,JBL Go 3,JBL,19,,69,4,0,none
+2024-05-12,Delhi,boAt Airdopes 141,boAt,150,1297.89,687,5,0,none
+2024-05-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,19,1543.69,88,4,0,none
+2024-05-12,Delhi,Samsung Galaxy M14 5G,Samsung,15,14179.44,71,5,0,none
+2024-05-12,Delhi,Noise ColorFit Pulse 2,Noise,21,1607.73,55,4,0,none
+2024-05-12,Delhi,JBL Go 3,JBL,23,2159.31,84,3,0,none
+2024-05-13,Mumbai,boAt Airdopes 141,boAt,23,1320.26,110,7,0,none
+2024-05-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1538.7,44,7,1,none
+2024-05-13,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13815.8,61,7,0,none
+2024-05-13,Mumbai,Noise ColorFit Pulse 2,Noise,16,1567.38,74,7,0,none
+2024-05-13,Mumbai,JBL Go 3,JBL,12,2172.71,53,6,0,none
+2024-05-13,Bangalore,boAt Airdopes 141,boAt,20,1346.06,60,6,0,none
+2024-05-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1546.78,39,3,0,none
+2024-05-13,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13995.49,45,5,0,none
+2024-05-13,Bangalore,Noise ColorFit Pulse 2,Noise,20,1630.01,61,7,0,none
+2024-05-13,Bangalore,JBL Go 3,JBL,18,2227.66,76,6,0,none
+2024-05-13,Delhi,boAt Airdopes 141,boAt,29,1279.92,142,4,0,none
+2024-05-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1510.9,,5,0,none
+2024-05-13,Delhi,Samsung Galaxy M14 5G,Samsung,11,14125.31,,4,0,none
+2024-05-13,Delhi,Noise ColorFit Pulse 2,Noise,21,1589.44,75,6,0,none
+2024-05-13,Delhi,JBL Go 3,JBL,14,2180.5,59,3,0,none
+2024-05-14,Mumbai,boAt Airdopes 141,boAt,21,1257.3,60,6,0,none
+2024-05-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1451.59,57,7,0,none
+2024-05-14,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14029.73,44,6,0,none
+2024-05-14,Mumbai,Noise ColorFit Pulse 2,Noise,80,1600.82,375,4,0,none
+2024-05-14,Mumbai,JBL Go 3,JBL,21,2174.05,56,5,1,none
+2024-05-14,Bangalore,boAt Airdopes 141,boAt,23,1286.53,90,5,0,none
+2024-05-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1465.53,63,4,0,none
+2024-05-14,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13799.02,51,6,0,none
+2024-05-14,Bangalore,Noise ColorFit Pulse 2,Noise,18,1617.9,87,5,0,none
+2024-05-14,Bangalore,JBL Go 3,JBL,13,2160.04,39,4,0,none
+2024-05-14,Delhi,boAt Airdopes 141,boAt,23,1286.58,112,5,0,none
+2024-05-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1479.47,35,6,0,none
+2024-05-14,Delhi,Samsung Galaxy M14 5G,Samsung,11,13854.71,55,6,0,none
+2024-05-14,Delhi,Noise ColorFit Pulse 2,Noise,18,1630.43,74,4,0,none
+2024-05-14,Delhi,JBL Go 3,JBL,15,2245.42,55,6,0,none
+2024-05-15,Mumbai,boAt Airdopes 141,boAt,23,1334.3,87,4,0,none
+2024-05-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1482.76,42,6,1,none
+2024-05-15,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13955.27,47,5,0,none
+2024-05-15,Mumbai,Noise ColorFit Pulse 2,Noise,21,1549.58,,4,0,none
+2024-05-15,Mumbai,JBL Go 3,JBL,17,2238.68,65,5,0,none
+2024-05-15,Bangalore,boAt Airdopes 141,boAt,144,1253.69,585,4,0,none
+2024-05-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1478.47,66,7,0,none
+2024-05-15,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13949.68,40,6,0,none
+2024-05-15,Bangalore,Noise ColorFit Pulse 2,Noise,19,1636.92,58,6,0,none
+2024-05-15,Bangalore,JBL Go 3,JBL,16,2208.09,46,4,0,none
+2024-05-15,Delhi,boAt Airdopes 141,boAt,27,1307.68,100,5,0,none
+2024-05-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1494.34,57,7,1,none
+2024-05-15,Delhi,Samsung Galaxy M14 5G,Samsung,13,14171.2,56,3,0,none
+2024-05-15,Delhi,Noise ColorFit Pulse 2,Noise,17,1600.23,59,6,0,none
+2024-05-15,Delhi,JBL Go 3,JBL,19,2180.08,67,3,0,none
+2024-05-16,Mumbai,boAt Airdopes 141,boAt,29,1272.02,120,6,0,none
+2024-05-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1507.35,62,6,0,none
+2024-05-16,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14089.42,,7,0,none
+2024-05-16,Mumbai,Noise ColorFit Pulse 2,Noise,19,1618.1,85,7,0,none
+2024-05-16,Mumbai,JBL Go 3,JBL,96,2194.68,405,4,0,none
+2024-05-16,Bangalore,boAt Airdopes 141,boAt,25,1323.4,85,7,0,none
+2024-05-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1464.58,,7,0,none
+2024-05-16,Bangalore,Samsung Galaxy M14 5G,Samsung,52,13841.73,139,6,0,none
+2024-05-16,Bangalore,Noise ColorFit Pulse 2,Noise,14,1625.33,39,4,0,none
+2024-05-16,Bangalore,JBL Go 3,JBL,17,2243.05,83,7,0,none
+2024-05-16,Delhi,boAt Airdopes 141,boAt,25,1339.16,123,7,0,none
+2024-05-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1538.53,54,4,0,none
+2024-05-16,Delhi,Samsung Galaxy M14 5G,Samsung,15,14006.9,59,7,0,none
+2024-05-16,Delhi,Noise ColorFit Pulse 2,Noise,20,1556.28,77,4,0,none
+2024-05-16,Delhi,JBL Go 3,JBL,16,2223.98,61,6,0,none
+2024-05-17,Mumbai,boAt Airdopes 141,boAt,29,1321.28,111,3,0,none
+2024-05-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1517.42,59,5,0,none
+2024-05-17,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13890.53,44,3,0,none
+2024-05-17,Mumbai,Noise ColorFit Pulse 2,Noise,16,1550.29,56,6,0,none
+2024-05-17,Mumbai,JBL Go 3,JBL,16,2222.47,66,6,0,none
+2024-05-17,Bangalore,boAt Airdopes 141,boAt,125,1278.94,508,3,0,none
+2024-05-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1516.43,76,4,0,none
+2024-05-17,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14091.04,29,4,0,none
+2024-05-17,Bangalore,Noise ColorFit Pulse 2,Noise,17,1644.75,78,6,0,none
+2024-05-17,Bangalore,JBL Go 3,JBL,18,2227.86,84,4,0,none
+2024-05-17,Delhi,boAt Airdopes 141,boAt,24,1309.97,91,7,0,none
+2024-05-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1486.5,58,4,0,none
+2024-05-17,Delhi,Samsung Galaxy M14 5G,Samsung,12,13996.24,51,5,0,none
+2024-05-17,Delhi,Noise ColorFit Pulse 2,Noise,17,1560.71,69,6,1,none
+2024-05-17,Delhi,JBL Go 3,JBL,18,2176.67,65,6,0,none
+2024-05-18,Mumbai,boAt Airdopes 141,boAt,31,1274.59,85,7,0,none
+2024-05-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,,69,3,0,none
+2024-05-18,Mumbai,Samsung Galaxy M14 5G,Samsung,15,13990.5,,3,0,none
+2024-05-18,Mumbai,Noise ColorFit Pulse 2,Noise,24,1646.97,105,4,0,none
+2024-05-18,Mumbai,JBL Go 3,JBL,18,2210.75,70,6,0,none
+2024-05-18,Bangalore,boAt Airdopes 141,boAt,30,1316.31,148,3,0,none
+2024-05-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1457.99,75,3,0,none
+2024-05-18,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13848.64,64,7,0,none
+2024-05-18,Bangalore,Noise ColorFit Pulse 2,Noise,20,1645.88,77,5,0,none
+2024-05-18,Bangalore,JBL Go 3,JBL,17,2178.36,66,5,0,none
+2024-05-18,Delhi,boAt Airdopes 141,boAt,32,1309.79,144,7,0,none
+2024-05-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1455.26,,7,0,none
+2024-05-18,Delhi,Samsung Galaxy M14 5G,Samsung,17,14190.66,44,5,0,none
+2024-05-18,Delhi,Noise ColorFit Pulse 2,Noise,21,1648.55,84,4,0,none
+2024-05-18,Delhi,JBL Go 3,JBL,21,2218.66,99,3,0,none
+2024-05-19,Mumbai,boAt Airdopes 141,boAt,30,1283.34,99,4,0,none
+2024-05-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1546.84,47,6,0,none
+2024-05-19,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13943.32,68,4,0,none
+2024-05-19,Mumbai,Noise ColorFit Pulse 2,Noise,,1606.76,55,7,0,none
+2024-05-19,Mumbai,JBL Go 3,JBL,20,2233.99,70,5,0,none
+2024-05-19,Bangalore,boAt Airdopes 141,boAt,31,1271.79,140,6,0,none
+2024-05-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1458.93,53,3,0,none
+2024-05-19,Bangalore,Samsung Galaxy M14 5G,Samsung,17,13867.06,62,3,0,none
+2024-05-19,Bangalore,Noise ColorFit Pulse 2,Noise,22,1609.01,102,6,0,none
+2024-05-19,Bangalore,JBL Go 3,JBL,16,2149.41,74,4,0,none
+2024-05-19,Delhi,boAt Airdopes 141,boAt,,1266.03,84,3,0,none
+2024-05-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1545.24,71,5,0,none
+2024-05-19,Delhi,Samsung Galaxy M14 5G,Samsung,17,13847.59,77,7,1,none
+2024-05-19,Delhi,Noise ColorFit Pulse 2,Noise,23,1625.97,92,6,0,none
+2024-05-19,Delhi,JBL Go 3,JBL,15,2197.4,70,4,1,none
+2024-05-20,Mumbai,boAt Airdopes 141,boAt,26,1318.48,100,6,0,none
+2024-05-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1545.23,63,7,0,none
+2024-05-20,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14072.59,67,6,0,none
+2024-05-20,Mumbai,Noise ColorFit Pulse 2,Noise,18,1608.16,62,6,1,none
+2024-05-20,Mumbai,JBL Go 3,JBL,16,2233.02,45,7,0,none
+2024-05-20,Bangalore,boAt Airdopes 141,boAt,22,1305.07,71,4,0,none
+2024-05-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1510.28,59,6,0,none
+2024-05-20,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14020.14,27,7,0,none
+2024-05-20,Bangalore,Noise ColorFit Pulse 2,Noise,18,1603.17,68,7,0,none
+2024-05-20,Bangalore,JBL Go 3,JBL,16,2192.57,65,6,0,none
+2024-05-20,Delhi,boAt Airdopes 141,boAt,21,1317.29,94,4,0,none
+2024-05-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1523.33,38,4,0,none
+2024-05-20,Delhi,Samsung Galaxy M14 5G,Samsung,13,13870.61,58,5,0,none
+2024-05-20,Delhi,Noise ColorFit Pulse 2,Noise,17,1565.4,68,7,0,none
+2024-05-20,Delhi,JBL Go 3,JBL,17,2240.38,62,5,0,none
+2024-05-21,Mumbai,boAt Airdopes 141,boAt,23,1303.12,62,4,0,none
+2024-05-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1512.14,72,4,0,none
+2024-05-21,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13838.81,43,7,0,none
+2024-05-21,Mumbai,Noise ColorFit Pulse 2,Noise,15,1559.84,59,6,0,none
+2024-05-21,Mumbai,JBL Go 3,JBL,20,2156.79,78,3,0,none
+2024-05-21,Bangalore,boAt Airdopes 141,boAt,,1261.15,100,5,0,none
+2024-05-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1525.9,55,4,0,none
+2024-05-21,Bangalore,Samsung Galaxy M14 5G,Samsung,12,14086.73,41,7,0,none
+2024-05-21,Bangalore,Noise ColorFit Pulse 2,Noise,18,1639.8,70,5,0,none
+2024-05-21,Bangalore,JBL Go 3,JBL,15,,71,7,0,none
+2024-05-21,Delhi,boAt Airdopes 141,boAt,31,1292.93,83,5,0,none
+2024-05-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1449.23,74,4,0,none
+2024-05-21,Delhi,Samsung Galaxy M14 5G,Samsung,12,14126.36,35,3,0,none
+2024-05-21,Delhi,Noise ColorFit Pulse 2,Noise,19,1617.34,59,6,0,none
+2024-05-21,Delhi,JBL Go 3,JBL,13,2197.9,50,6,0,none
+2024-05-22,Mumbai,boAt Airdopes 141,boAt,,1306.03,115,3,1,none
+2024-05-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1495.32,42,5,0,none
+2024-05-22,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13985.09,40,6,0,none
+2024-05-22,Mumbai,Noise ColorFit Pulse 2,Noise,17,1634.83,47,3,0,none
+2024-05-22,Mumbai,JBL Go 3,JBL,16,2246.67,76,6,0,none
+2024-05-22,Bangalore,boAt Airdopes 141,boAt,26,1290.93,73,4,1,none
+2024-05-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1451.79,52,5,0,none
+2024-05-22,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13808.28,43,6,0,none
+2024-05-22,Bangalore,Noise ColorFit Pulse 2,Noise,18,1575.56,79,7,0,none
+2024-05-22,Bangalore,JBL Go 3,JBL,18,2206.17,,7,0,none
+2024-05-22,Delhi,boAt Airdopes 141,boAt,24,1321.86,110,4,0,none
+2024-05-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1512.4,70,7,0,none
+2024-05-22,Delhi,Samsung Galaxy M14 5G,Samsung,13,14144.8,37,3,0,none
+2024-05-22,Delhi,Noise ColorFit Pulse 2,Noise,19,1646.44,,3,0,none
+2024-05-22,Delhi,JBL Go 3,JBL,19,2161.43,86,6,0,none
+2024-05-23,Mumbai,boAt Airdopes 141,boAt,24,1324.31,72,7,0,none
+2024-05-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1485.95,71,3,0,none
+2024-05-23,Mumbai,Samsung Galaxy M14 5G,Samsung,11,,35,3,0,none
+2024-05-23,Mumbai,Noise ColorFit Pulse 2,Noise,19,1588.07,76,3,0,none
+2024-05-23,Mumbai,JBL Go 3,JBL,15,2222.05,,7,0,none
+2024-05-23,Bangalore,boAt Airdopes 141,boAt,22,1321.13,80,6,0,none
+2024-05-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1492.22,68,3,0,none
+2024-05-23,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14003.52,52,4,0,none
+2024-05-23,Bangalore,Noise ColorFit Pulse 2,Noise,20,,64,4,0,none
+2024-05-23,Bangalore,JBL Go 3,JBL,16,2227.08,76,7,0,none
+2024-05-23,Delhi,boAt Airdopes 141,boAt,28,1333.23,73,4,0,none
+2024-05-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1507.97,61,6,0,none
+2024-05-23,Delhi,Samsung Galaxy M14 5G,Samsung,12,14036.37,55,4,1,none
+2024-05-23,Delhi,Noise ColorFit Pulse 2,Noise,18,1594.26,79,7,0,none
+2024-05-23,Delhi,JBL Go 3,JBL,19,2214.07,66,3,0,none
+2024-05-24,Mumbai,boAt Airdopes 141,boAt,22,1311.09,94,3,1,none
+2024-05-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,,70,3,0,none
+2024-05-24,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13973.61,35,6,0,none
+2024-05-24,Mumbai,Noise ColorFit Pulse 2,Noise,18,1646.48,73,6,0,none
+2024-05-24,Mumbai,JBL Go 3,JBL,15,2179.73,43,3,0,none
+2024-05-24,Bangalore,boAt Airdopes 141,boAt,26,1273.29,111,6,0,none
+2024-05-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1484.67,40,5,0,none
+2024-05-24,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13916.47,59,3,0,none
+2024-05-24,Bangalore,Noise ColorFit Pulse 2,Noise,19,1558.11,48,5,0,none
+2024-05-24,Bangalore,JBL Go 3,JBL,13,2189.63,63,4,0,none
+2024-05-24,Delhi,boAt Airdopes 141,boAt,,1329.1,88,4,0,none
+2024-05-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1504.03,55,4,0,none
+2024-05-24,Delhi,Samsung Galaxy M14 5G,Samsung,14,,67,7,0,none
+2024-05-24,Delhi,Noise ColorFit Pulse 2,Noise,16,1582.46,50,7,0,none
+2024-05-24,Delhi,JBL Go 3,JBL,16,2228.35,43,6,0,none
+2024-05-25,Mumbai,boAt Airdopes 141,boAt,,1282.21,94,5,0,none
+2024-05-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1462.14,73,3,0,none
+2024-05-25,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14165.45,65,7,0,none
+2024-05-25,Mumbai,Noise ColorFit Pulse 2,Noise,17,1635.78,71,4,0,none
+2024-05-25,Mumbai,JBL Go 3,JBL,21,2153.85,83,7,0,none
+2024-05-25,Bangalore,boAt Airdopes 141,boAt,29,1300.57,125,4,1,none
+2024-05-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1538.26,79,5,0,none
+2024-05-25,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13936.52,34,4,0,none
+2024-05-25,Bangalore,Noise ColorFit Pulse 2,Noise,22,1560.67,58,5,0,none
+2024-05-25,Bangalore,JBL Go 3,JBL,18,2199.99,69,4,1,none
+2024-05-25,Delhi,boAt Airdopes 141,boAt,34,1328.95,168,3,0,none
+2024-05-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1479.44,90,7,1,none
+2024-05-25,Delhi,Samsung Galaxy M14 5G,Samsung,16,13833.52,71,4,0,none
+2024-05-25,Delhi,Noise ColorFit Pulse 2,Noise,21,1583.23,63,3,1,none
+2024-05-25,Delhi,JBL Go 3,JBL,20,2184.35,59,3,0,none
+2024-05-26,Mumbai,boAt Airdopes 141,boAt,33,1277.58,156,4,0,none
+2024-05-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1464.57,74,3,0,none
+2024-05-26,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14197.03,39,4,0,none
+2024-05-26,Mumbai,Noise ColorFit Pulse 2,Noise,21,1604.32,81,4,0,none
+2024-05-26,Mumbai,JBL Go 3,JBL,19,2162.94,92,4,0,none
+2024-05-26,Bangalore,boAt Airdopes 141,boAt,29,1250.46,100,4,0,none
+2024-05-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1469.78,61,5,0,none
+2024-05-26,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13868.14,48,5,0,none
+2024-05-26,Bangalore,Noise ColorFit Pulse 2,Noise,,1628.29,93,3,0,none
+2024-05-26,Bangalore,JBL Go 3,JBL,17,2162.06,44,3,0,none
+2024-05-26,Delhi,boAt Airdopes 141,boAt,33,1309.74,160,6,0,none
+2024-05-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,1545.52,51,6,0,none
+2024-05-26,Delhi,Samsung Galaxy M14 5G,Samsung,14,13959.17,59,4,0,none
+2024-05-26,Delhi,Noise ColorFit Pulse 2,Noise,22,1562.9,61,5,0,none
+2024-05-26,Delhi,JBL Go 3,JBL,20,2170.12,98,5,1,none
+2024-05-27,Mumbai,boAt Airdopes 141,boAt,27,,68,6,0,none
+2024-05-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1507.71,66,3,0,none
+2024-05-27,Mumbai,Samsung Galaxy M14 5G,Samsung,,13937.36,45,6,0,none
+2024-05-27,Mumbai,Noise ColorFit Pulse 2,Noise,16,1625.22,57,5,0,none
+2024-05-27,Mumbai,JBL Go 3,JBL,17,2215.19,57,7,0,none
+2024-05-27,Bangalore,boAt Airdopes 141,boAt,22,1322.01,101,7,0,none
+2024-05-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,,38,5,0,none
+2024-05-27,Bangalore,Samsung Galaxy M14 5G,Samsung,11,13956.06,34,4,0,none
+2024-05-27,Bangalore,Noise ColorFit Pulse 2,Noise,84,1625.6,391,7,0,none
+2024-05-27,Bangalore,JBL Go 3,JBL,12,2241.93,34,5,0,none
+2024-05-27,Delhi,boAt Airdopes 141,boAt,24,1312.29,109,7,0,none
+2024-05-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,12,1485.8,44,6,0,none
+2024-05-27,Delhi,Samsung Galaxy M14 5G,Samsung,,14159.39,38,7,0,none
+2024-05-27,Delhi,Noise ColorFit Pulse 2,Noise,16,1553.34,70,7,0,none
+2024-05-27,Delhi,JBL Go 3,JBL,16,2192.29,73,4,1,none
+2024-05-28,Mumbai,boAt Airdopes 141,boAt,21,1269.56,89,5,0,none
+2024-05-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1514.94,50,4,0,none
+2024-05-28,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14109.88,33,7,0,none
+2024-05-28,Mumbai,Noise ColorFit Pulse 2,Noise,19,1560.3,84,3,0,none
+2024-05-28,Mumbai,JBL Go 3,JBL,60,2154.62,215,7,1,none
+2024-05-28,Bangalore,boAt Airdopes 141,boAt,27,1320.75,108,6,0,none
+2024-05-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1532.07,64,4,0,none
+2024-05-28,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14113.0,46,3,0,none
+2024-05-28,Bangalore,Noise ColorFit Pulse 2,Noise,17,1644.12,56,3,0,none
+2024-05-28,Bangalore,JBL Go 3,JBL,16,2157.51,52,7,1,none
+2024-05-28,Delhi,boAt Airdopes 141,boAt,26,1295.35,75,3,0,none
+2024-05-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1449.41,38,5,0,none
+2024-05-28,Delhi,Samsung Galaxy M14 5G,Samsung,12,14124.45,53,7,0,none
+2024-05-28,Delhi,Noise ColorFit Pulse 2,Noise,16,1569.72,67,4,0,none
+2024-05-28,Delhi,JBL Go 3,JBL,15,2198.58,61,6,1,none
+2024-05-29,Mumbai,boAt Airdopes 141,boAt,25,1261.35,124,5,0,none
+2024-05-29,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,,43,7,0,none
+2024-05-29,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14086.93,40,3,0,none
+2024-05-29,Mumbai,Noise ColorFit Pulse 2,Noise,20,1636.87,83,4,1,none
+2024-05-29,Mumbai,JBL Go 3,JBL,16,2210.65,75,4,0,none
+2024-05-29,Bangalore,boAt Airdopes 141,boAt,31,1293.07,148,4,0,none
+2024-05-29,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1508.51,52,3,0,none
+2024-05-29,Bangalore,Samsung Galaxy M14 5G,Samsung,14,,50,3,0,none
+2024-05-29,Bangalore,Noise ColorFit Pulse 2,Noise,18,1564.13,49,4,0,none
+2024-05-29,Bangalore,JBL Go 3,JBL,17,2204.2,52,4,0,none
+2024-05-29,Delhi,boAt Airdopes 141,boAt,32,1325.67,123,4,0,none
+2024-05-29,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,12,1479.45,35,7,0,none
+2024-05-29,Delhi,Samsung Galaxy M14 5G,Samsung,14,13908.4,58,3,0,none
+2024-05-29,Delhi,Noise ColorFit Pulse 2,Noise,19,1647.44,50,3,0,none
+2024-05-29,Delhi,JBL Go 3,JBL,,2210.37,47,4,0,none
+2024-05-30,Mumbai,boAt Airdopes 141,boAt,24,1348.6,83,6,0,none
+2024-05-30,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1511.41,44,4,0,none
+2024-05-30,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14046.68,50,5,1,none
+2024-05-30,Mumbai,Noise ColorFit Pulse 2,Noise,,1556.84,45,7,0,none
+2024-05-30,Mumbai,JBL Go 3,JBL,15,2248.92,71,5,0,none
+2024-05-30,Bangalore,boAt Airdopes 141,boAt,24,1335.83,105,7,0,none
+2024-05-30,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1531.91,55,7,0,none
+2024-05-30,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13811.13,48,5,0,none
+2024-05-30,Bangalore,Noise ColorFit Pulse 2,Noise,19,1627.05,57,6,0,none
+2024-05-30,Bangalore,JBL Go 3,JBL,13,2171.29,39,4,0,none
+2024-05-30,Delhi,boAt Airdopes 141,boAt,26,1298.63,113,5,0,none
+2024-05-30,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,11,1537.3,48,3,0,none
+2024-05-30,Delhi,Samsung Galaxy M14 5G,Samsung,,13850.7,38,5,0,none
+2024-05-30,Delhi,Noise ColorFit Pulse 2,Noise,17,1613.25,63,6,0,none
+2024-05-30,Delhi,JBL Go 3,JBL,14,2232.52,65,6,0,none
+2024-05-31,Mumbai,boAt Airdopes 141,boAt,25,1262.01,93,6,0,none
+2024-05-31,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,,67,3,0,none
+2024-05-31,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13928.69,58,3,0,none
+2024-05-31,Mumbai,Noise ColorFit Pulse 2,Noise,20,1585.92,83,6,0,none
+2024-05-31,Mumbai,JBL Go 3,JBL,17,2172.16,44,3,0,none
+2024-05-31,Bangalore,boAt Airdopes 141,boAt,23,1264.8,92,5,0,none
+2024-05-31,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1497.52,56,7,0,none
+2024-05-31,Bangalore,Samsung Galaxy M14 5G,Samsung,,13971.85,311,5,0,none
+2024-05-31,Bangalore,Noise ColorFit Pulse 2,Noise,16,1567.44,,4,0,none
+2024-05-31,Bangalore,JBL Go 3,JBL,16,2168.19,66,3,0,none
+2024-05-31,Delhi,boAt Airdopes 141,boAt,,1325.44,89,6,0,none
+2024-05-31,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1483.64,44,4,0,none
+2024-05-31,Delhi,Samsung Galaxy M14 5G,Samsung,14,13804.97,53,5,0,none
+2024-05-31,Delhi,Noise ColorFit Pulse 2,Noise,15,1616.87,48,4,0,none
+2024-05-31,Delhi,JBL Go 3,JBL,16,2243.73,64,5,0,none
+2024-06-01,Mumbai,boAt Airdopes 141,boAt,33,1296.98,119,5,0,none
+2024-06-01,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1517.04,66,7,0,none
+2024-06-01,Mumbai,Samsung Galaxy M14 5G,Samsung,17,14083.29,43,3,0,none
+2024-06-01,Mumbai,Noise ColorFit Pulse 2,Noise,23,1578.54,66,5,0,none
+2024-06-01,Mumbai,JBL Go 3,JBL,19,2165.38,48,7,0,none
+2024-06-01,Bangalore,boAt Airdopes 141,boAt,35,1290.45,101,4,0,none
+2024-06-01,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1486.99,84,4,0,none
+2024-06-01,Bangalore,Samsung Galaxy M14 5G,Samsung,13,14127.1,61,7,0,none
+2024-06-01,Bangalore,Noise ColorFit Pulse 2,Noise,21,1608.66,80,5,1,none
+2024-06-01,Bangalore,JBL Go 3,JBL,,2208.9,63,3,0,none
+2024-06-01,Delhi,boAt Airdopes 141,boAt,28,,126,6,0,none
+2024-06-01,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1480.27,53,5,0,none
+2024-06-01,Delhi,Samsung Galaxy M14 5G,Samsung,18,13815.13,49,4,0,none
+2024-06-01,Delhi,Noise ColorFit Pulse 2,Noise,20,1571.3,65,6,0,none
+2024-06-01,Delhi,JBL Go 3,JBL,18,2188.49,67,5,0,none
+2024-06-02,Mumbai,boAt Airdopes 141,boAt,,1300.37,133,3,0,none
+2024-06-02,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1473.7,60,6,0,none
+2024-06-02,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14005.46,47,5,1,none
+2024-06-02,Mumbai,Noise ColorFit Pulse 2,Noise,21,1640.13,81,7,0,none
+2024-06-02,Mumbai,JBL Go 3,JBL,20,2191.01,92,5,0,none
+2024-06-02,Bangalore,boAt Airdopes 141,boAt,32,1262.21,116,4,0,none
+2024-06-02,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,19,1520.91,65,3,0,none
+2024-06-02,Bangalore,Samsung Galaxy M14 5G,Samsung,19,14139.07,85,3,0,none
+2024-06-02,Bangalore,Noise ColorFit Pulse 2,Noise,144,1601.64,418,6,0,none
+2024-06-02,Bangalore,JBL Go 3,JBL,19,2200.06,81,4,0,none
+2024-06-02,Delhi,boAt Airdopes 141,boAt,30,1336.63,126,6,0,none
+2024-06-02,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1489.47,62,3,0,none
+2024-06-02,Delhi,Samsung Galaxy M14 5G,Samsung,13,14166.14,43,4,0,none
+2024-06-02,Delhi,Noise ColorFit Pulse 2,Noise,21,1632.48,56,6,0,none
+2024-06-02,Delhi,JBL Go 3,JBL,15,2183.68,63,4,1,none
+2024-06-03,Mumbai,boAt Airdopes 141,boAt,24,1252.18,81,6,0,none
+2024-06-03,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1483.23,43,3,0,none
+2024-06-03,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13809.76,79,3,0,none
+2024-06-03,Mumbai,Noise ColorFit Pulse 2,Noise,19,1598.58,78,6,0,none
+2024-06-03,Mumbai,JBL Go 3,JBL,14,2230.37,69,6,0,none
+2024-06-03,Bangalore,boAt Airdopes 141,boAt,25,1254.86,70,7,0,none
+2024-06-03,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1495.31,40,6,0,none
+2024-06-03,Bangalore,Samsung Galaxy M14 5G,Samsung,10,14015.67,47,3,0,none
+2024-06-03,Bangalore,Noise ColorFit Pulse 2,Noise,21,1603.4,58,5,0,none
+2024-06-03,Bangalore,JBL Go 3,JBL,15,2178.25,,6,1,none
+2024-06-03,Delhi,boAt Airdopes 141,boAt,26,1292.48,111,6,0,none
+2024-06-03,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1520.04,40,7,0,none
+2024-06-03,Delhi,Samsung Galaxy M14 5G,Samsung,13,14120.75,62,5,0,none
+2024-06-03,Delhi,Noise ColorFit Pulse 2,Noise,18,1583.79,68,7,0,none
+2024-06-03,Delhi,JBL Go 3,JBL,17,2167.69,49,6,0,none
+2024-06-04,Mumbai,boAt Airdopes 141,boAt,26,1329.79,129,3,0,none
+2024-06-04,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1467.93,71,5,0,none
+2024-06-04,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13816.59,47,3,0,none
+2024-06-04,Mumbai,Noise ColorFit Pulse 2,Noise,20,1577.32,79,5,0,none
+2024-06-04,Mumbai,JBL Go 3,JBL,14,2199.79,37,4,0,none
+2024-06-04,Bangalore,boAt Airdopes 141,boAt,21,1313.31,87,5,0,none
+2024-06-04,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1501.84,64,4,0,none
+2024-06-04,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14184.03,55,5,0,none
+2024-06-04,Bangalore,Noise ColorFit Pulse 2,Noise,16,1574.31,40,7,0,none
+2024-06-04,Bangalore,JBL Go 3,JBL,,2180.17,38,4,0,none
+2024-06-04,Delhi,boAt Airdopes 141,boAt,26,1309.24,130,4,0,none
+2024-06-04,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,,53,7,0,none
+2024-06-04,Delhi,Samsung Galaxy M14 5G,Samsung,12,14017.95,42,6,0,none
+2024-06-04,Delhi,Noise ColorFit Pulse 2,Noise,18,1580.82,77,7,0,none
+2024-06-04,Delhi,JBL Go 3,JBL,15,2238.08,66,7,0,none
+2024-06-05,Mumbai,boAt Airdopes 141,boAt,28,1319.96,71,7,0,none
+2024-06-05,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1523.77,50,5,1,none
+2024-06-05,Mumbai,Samsung Galaxy M14 5G,Samsung,12,13913.45,45,7,0,none
+2024-06-05,Mumbai,Noise ColorFit Pulse 2,Noise,20,1575.39,80,4,0,none
+2024-06-05,Mumbai,JBL Go 3,JBL,14,2223.85,70,4,1,none
+2024-06-05,Bangalore,boAt Airdopes 141,boAt,21,1340.24,65,6,0,none
+2024-06-05,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1521.75,41,3,0,none
+2024-06-05,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13861.8,50,5,0,none
+2024-06-05,Bangalore,Noise ColorFit Pulse 2,Noise,14,1578.79,63,4,0,none
+2024-06-05,Bangalore,JBL Go 3,JBL,17,2219.08,67,6,0,none
+2024-06-05,Delhi,boAt Airdopes 141,boAt,23,1310.09,77,6,0,none
+2024-06-05,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1497.9,67,4,0,none
+2024-06-05,Delhi,Samsung Galaxy M14 5G,Samsung,14,14159.83,36,7,0,none
+2024-06-05,Delhi,Noise ColorFit Pulse 2,Noise,21,1577.3,80,5,0,none
+2024-06-05,Delhi,JBL Go 3,JBL,17,2216.79,47,5,0,none
+2024-06-06,Mumbai,boAt Airdopes 141,boAt,25,1251.58,89,4,0,none
+2024-06-06,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,11,1494.16,51,4,0,none
+2024-06-06,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13873.35,52,5,1,none
+2024-06-06,Mumbai,Noise ColorFit Pulse 2,Noise,18,1564.51,,3,1,none
+2024-06-06,Mumbai,JBL Go 3,JBL,15,2158.18,60,4,1,none
+2024-06-06,Bangalore,boAt Airdopes 141,boAt,26,1291.47,71,7,1,none
+2024-06-06,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,12,1470.7,35,5,0,none
+2024-06-06,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13860.31,48,3,1,none
+2024-06-06,Bangalore,Noise ColorFit Pulse 2,Noise,18,1646.78,50,7,0,none
+2024-06-06,Bangalore,JBL Go 3,JBL,13,2158.11,56,6,0,none
+2024-06-06,Delhi,boAt Airdopes 141,boAt,26,1316.5,100,6,1,none
+2024-06-06,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,52,,244,5,0,none
+2024-06-06,Delhi,Samsung Galaxy M14 5G,Samsung,13,13940.9,45,5,0,none
+2024-06-06,Delhi,Noise ColorFit Pulse 2,Noise,15,1576.8,53,5,0,none
+2024-06-06,Delhi,JBL Go 3,JBL,15,2169.57,68,6,0,none
+2024-06-07,Mumbai,boAt Airdopes 141,boAt,25,1294.42,104,3,0,none
+2024-06-07,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1504.93,58,7,0,none
+2024-06-07,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13898.91,58,3,0,none
+2024-06-07,Mumbai,Noise ColorFit Pulse 2,Noise,17,,76,3,0,none
+2024-06-07,Mumbai,JBL Go 3,JBL,12,2211.05,33,5,0,none
+2024-06-07,Bangalore,boAt Airdopes 141,boAt,29,1268.88,106,7,0,none
+2024-06-07,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1462.76,51,6,0,none
+2024-06-07,Bangalore,Samsung Galaxy M14 5G,Samsung,16,13886.99,43,7,0,none
+2024-06-07,Bangalore,Noise ColorFit Pulse 2,Noise,18,1586.92,84,3,0,none
+2024-06-07,Bangalore,JBL Go 3,JBL,15,2187.74,40,7,0,none
+2024-06-07,Delhi,boAt Airdopes 141,boAt,25,1291.87,,6,0,none
+2024-06-07,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1476.29,41,7,0,none
+2024-06-07,Delhi,Samsung Galaxy M14 5G,Samsung,14,13960.42,62,4,1,none
+2024-06-07,Delhi,Noise ColorFit Pulse 2,Noise,,1648.77,383,6,0,none
+2024-06-07,Delhi,JBL Go 3,JBL,15,2225.3,42,4,0,none
+2024-06-08,Mumbai,boAt Airdopes 141,boAt,30,1329.43,112,5,0,none
+2024-06-08,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1471.27,72,6,0,none
+2024-06-08,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14170.95,59,3,0,none
+2024-06-08,Mumbai,Noise ColorFit Pulse 2,Noise,23,1631.65,92,7,0,none
+2024-06-08,Mumbai,JBL Go 3,JBL,20,2212.66,98,6,0,none
+2024-06-08,Bangalore,boAt Airdopes 141,boAt,30,1293.56,103,5,0,none
+2024-06-08,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1471.34,67,6,0,none
+2024-06-08,Bangalore,Samsung Galaxy M14 5G,Samsung,18,14142.32,52,4,0,none
+2024-06-08,Bangalore,Noise ColorFit Pulse 2,Noise,23,1570.54,63,5,0,none
+2024-06-08,Bangalore,JBL Go 3,JBL,21,,62,4,0,none
+2024-06-08,Delhi,boAt Airdopes 141,boAt,28,1250.51,104,5,0,none
+2024-06-08,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,20,1536.29,78,3,0,none
+2024-06-08,Delhi,Samsung Galaxy M14 5G,Samsung,16,13896.99,41,6,0,none
+2024-06-08,Delhi,Noise ColorFit Pulse 2,Noise,126,1553.18,568,5,0,none
+2024-06-08,Delhi,JBL Go 3,JBL,22,2232.55,59,7,0,none
+2024-06-09,Mumbai,boAt Airdopes 141,boAt,28,1269.33,73,4,0,none
+2024-06-09,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1498.29,69,3,0,none
+2024-06-09,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13916.72,72,7,0,none
+2024-06-09,Mumbai,Noise ColorFit Pulse 2,Noise,28,1606.49,109,5,0,none
+2024-06-09,Mumbai,JBL Go 3,JBL,,2169.26,45,7,0,none
+2024-06-09,Bangalore,boAt Airdopes 141,boAt,30,1296.99,146,6,0,none
+2024-06-09,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1485.83,66,6,0,none
+2024-06-09,Bangalore,Samsung Galaxy M14 5G,Samsung,16,13992.83,76,5,0,none
+2024-06-09,Bangalore,Noise ColorFit Pulse 2,Noise,19,1628.89,86,7,0,none
+2024-06-09,Bangalore,JBL Go 3,JBL,20,2243.71,77,6,1,none
+2024-06-09,Delhi,boAt Airdopes 141,boAt,30,1326.41,127,6,0,none
+2024-06-09,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,18,1473.13,62,5,0,none
+2024-06-09,Delhi,Samsung Galaxy M14 5G,Samsung,17,14072.06,80,6,0,none
+2024-06-09,Delhi,Noise ColorFit Pulse 2,Noise,21,1587.37,61,7,0,none
+2024-06-09,Delhi,JBL Go 3,JBL,20,2197.18,54,6,0,none
+2024-06-10,Mumbai,boAt Airdopes 141,boAt,23,1314.51,90,7,0,none
+2024-06-10,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,,1508.37,43,4,0,none
+2024-06-10,Mumbai,Samsung Galaxy M14 5G,Samsung,11,14111.19,41,3,0,none
+2024-06-10,Mumbai,Noise ColorFit Pulse 2,Noise,95,1591.73,337,3,0,none
+2024-06-10,Mumbai,JBL Go 3,JBL,14,2203.27,50,6,0,none
+2024-06-10,Bangalore,boAt Airdopes 141,boAt,26,1303.85,98,6,0,none
+2024-06-10,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1547.64,45,5,0,none
+2024-06-10,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13879.38,40,3,0,none
+2024-06-10,Bangalore,Noise ColorFit Pulse 2,Noise,14,1603.71,61,7,0,none
+2024-06-10,Bangalore,JBL Go 3,JBL,13,2192.66,60,6,0,none
+2024-06-10,Delhi,boAt Airdopes 141,boAt,22,1277.01,75,4,0,none
+2024-06-10,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1533.51,44,4,0,none
+2024-06-10,Delhi,Samsung Galaxy M14 5G,Samsung,12,13982.25,33,7,0,none
+2024-06-10,Delhi,Noise ColorFit Pulse 2,Noise,17,1601.92,66,4,0,none
+2024-06-10,Delhi,JBL Go 3,JBL,16,2246.35,66,7,1,none
+2024-06-11,Mumbai,boAt Airdopes 141,boAt,,1300.97,64,4,1,none
+2024-06-11,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,11,1520.33,47,3,0,none
+2024-06-11,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13857.72,54,5,0,none
+2024-06-11,Mumbai,Noise ColorFit Pulse 2,Noise,16,1578.48,69,7,0,none
+2024-06-11,Mumbai,JBL Go 3,JBL,13,2161.79,37,7,0,none
+2024-06-11,Bangalore,boAt Airdopes 141,boAt,26,1281.57,98,4,1,none
+2024-06-11,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1459.48,46,4,0,none
+2024-06-11,Bangalore,Samsung Galaxy M14 5G,Samsung,15,14062.81,70,5,0,none
+2024-06-11,Bangalore,Noise ColorFit Pulse 2,Noise,17,1625.09,53,6,0,none
+2024-06-11,Bangalore,JBL Go 3,JBL,14,2203.96,39,5,0,none
+2024-06-11,Delhi,boAt Airdopes 141,boAt,22,1325.58,62,7,1,none
+2024-06-11,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1537.54,36,7,0,none
+2024-06-11,Delhi,Samsung Galaxy M14 5G,Samsung,13,13950.29,43,3,0,none
+2024-06-11,Delhi,Noise ColorFit Pulse 2,Noise,19,1593.7,74,7,0,none
+2024-06-11,Delhi,JBL Go 3,JBL,13,2162.63,37,7,0,none
+2024-06-12,Mumbai,boAt Airdopes 141,boAt,156,1278.05,397,4,0,none
+2024-06-12,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1546.47,50,3,0,none
+2024-06-12,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13910.96,62,7,0,none
+2024-06-12,Mumbai,Noise ColorFit Pulse 2,Noise,20,,62,4,0,none
+2024-06-12,Mumbai,JBL Go 3,JBL,14,2165.59,58,3,0,none
+2024-06-12,Bangalore,boAt Airdopes 141,boAt,24,1297.11,100,4,0,none
+2024-06-12,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,,1512.86,59,4,0,none
+2024-06-12,Bangalore,Samsung Galaxy M14 5G,Samsung,15,14062.41,65,3,0,none
+2024-06-12,Bangalore,Noise ColorFit Pulse 2,Noise,19,1580.38,87,4,0,none
+2024-06-12,Bangalore,JBL Go 3,JBL,13,2170.45,40,7,0,none
+2024-06-12,Delhi,boAt Airdopes 141,boAt,27,1334.27,79,6,0,none
+2024-06-12,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1475.39,36,5,0,none
+2024-06-12,Delhi,Samsung Galaxy M14 5G,Samsung,60,,203,7,0,none
+2024-06-12,Delhi,Noise ColorFit Pulse 2,Noise,18,,57,3,0,none
+2024-06-12,Delhi,JBL Go 3,JBL,16,2165.69,44,5,0,none
+2024-06-13,Mumbai,boAt Airdopes 141,boAt,23,,84,4,0,none
+2024-06-13,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1530.12,44,6,0,none
+2024-06-13,Mumbai,Samsung Galaxy M14 5G,Samsung,17,14072.88,45,5,0,none
+2024-06-13,Mumbai,Noise ColorFit Pulse 2,Noise,17,1575.36,61,4,0,none
+2024-06-13,Mumbai,JBL Go 3,JBL,14,2152.49,46,3,0,none
+2024-06-13,Bangalore,boAt Airdopes 141,boAt,26,1313.47,123,7,0,none
+2024-06-13,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1546.91,55,4,0,none
+2024-06-13,Bangalore,Samsung Galaxy M14 5G,Samsung,12,13902.81,55,7,0,none
+2024-06-13,Bangalore,Noise ColorFit Pulse 2,Noise,19,,78,6,1,none
+2024-06-13,Bangalore,JBL Go 3,JBL,14,2196.02,48,3,0,none
+2024-06-13,Delhi,boAt Airdopes 141,boAt,22,1302.91,71,4,0,none
+2024-06-13,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1461.33,47,3,0,none
+2024-06-13,Delhi,Samsung Galaxy M14 5G,Samsung,13,14137.45,40,6,1,none
+2024-06-13,Delhi,Noise ColorFit Pulse 2,Noise,20,,74,3,1,none
+2024-06-13,Delhi,JBL Go 3,JBL,14,2160.26,52,3,0,none
+2024-06-14,Mumbai,boAt Airdopes 141,boAt,29,1323.55,125,7,0,none
+2024-06-14,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1475.78,57,4,0,none
+2024-06-14,Mumbai,Samsung Galaxy M14 5G,Samsung,14,13966.13,35,6,0,none
+2024-06-14,Mumbai,Noise ColorFit Pulse 2,Noise,17,1617.71,49,5,0,none
+2024-06-14,Mumbai,JBL Go 3,JBL,11,2212.73,29,3,0,none
+2024-06-14,Bangalore,boAt Airdopes 141,boAt,22,1323.86,91,4,0,none
+2024-06-14,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1528.81,41,4,0,none
+2024-06-14,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13846.45,33,7,1,none
+2024-06-14,Bangalore,Noise ColorFit Pulse 2,Noise,16,1573.17,77,6,0,none
+2024-06-14,Bangalore,JBL Go 3,JBL,,2181.67,61,6,0,none
+2024-06-14,Delhi,boAt Airdopes 141,boAt,23,1264.72,87,4,0,none
+2024-06-14,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1464.74,65,4,0,none
+2024-06-14,Delhi,Samsung Galaxy M14 5G,Samsung,14,13950.1,44,7,0,none
+2024-06-14,Delhi,Noise ColorFit Pulse 2,Noise,21,1603.24,71,5,0,none
+2024-06-14,Delhi,JBL Go 3,JBL,13,2176.55,40,6,0,none
+2024-06-15,Mumbai,boAt Airdopes 141,boAt,36,1280.0,107,7,0,none
+2024-06-15,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,17,1531.22,57,6,0,none
+2024-06-15,Mumbai,Samsung Galaxy M14 5G,Samsung,16,13821.86,53,6,0,none
+2024-06-15,Mumbai,Noise ColorFit Pulse 2,Noise,22,1551.64,58,4,0,none
+2024-06-15,Mumbai,JBL Go 3,JBL,16,2196.31,71,3,0,none
+2024-06-15,Bangalore,boAt Airdopes 141,boAt,26,1265.48,129,6,0,none
+2024-06-15,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,17,1515.16,71,5,0,none
+2024-06-15,Bangalore,Samsung Galaxy M14 5G,Samsung,16,13801.41,50,7,0,none
+2024-06-15,Bangalore,Noise ColorFit Pulse 2,Noise,19,1571.01,56,4,0,none
+2024-06-15,Bangalore,JBL Go 3,JBL,16,2159.27,49,6,0,none
+2024-06-15,Delhi,boAt Airdopes 141,boAt,29,1290.03,137,6,0,none
+2024-06-15,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,,,60,4,0,none
+2024-06-15,Delhi,Samsung Galaxy M14 5G,Samsung,14,13827.6,42,5,0,none
+2024-06-15,Delhi,Noise ColorFit Pulse 2,Noise,21,1646.45,61,5,0,none
+2024-06-15,Delhi,JBL Go 3,JBL,16,2244.19,69,3,0,none
+2024-06-16,Mumbai,boAt Airdopes 141,boAt,31,1318.9,131,7,0,none
+2024-06-16,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,18,1479.78,60,7,1,none
+2024-06-16,Mumbai,Samsung Galaxy M14 5G,Samsung,72,13873.6,294,4,0,none
+2024-06-16,Mumbai,Noise ColorFit Pulse 2,Noise,27,1610.42,,4,0,none
+2024-06-16,Mumbai,JBL Go 3,JBL,16,2169.56,64,7,0,none
+2024-06-16,Bangalore,boAt Airdopes 141,boAt,150,1331.95,495,7,0,none
+2024-06-16,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,16,1535.74,69,4,0,none
+2024-06-16,Bangalore,Samsung Galaxy M14 5G,Samsung,16,,58,3,0,none
+2024-06-16,Bangalore,Noise ColorFit Pulse 2,Noise,24,1552.59,66,3,1,none
+2024-06-16,Bangalore,JBL Go 3,JBL,14,2227.73,46,5,0,none
+2024-06-16,Delhi,boAt Airdopes 141,boAt,34,1344.24,142,7,0,none
+2024-06-16,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1533.88,75,7,0,none
+2024-06-16,Delhi,Samsung Galaxy M14 5G,Samsung,14,14088.63,36,7,1,none
+2024-06-16,Delhi,Noise ColorFit Pulse 2,Noise,26,1602.68,114,7,0,none
+2024-06-16,Delhi,JBL Go 3,JBL,18,2213.88,86,3,0,none
+2024-06-17,Mumbai,boAt Airdopes 141,boAt,32,1336.83,86,5,1,Eid al-Adha
+2024-06-17,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1526.89,56,4,1,Eid al-Adha
+2024-06-17,Mumbai,Samsung Galaxy M14 5G,Samsung,21,14158.64,92,5,1,Eid al-Adha
+2024-06-17,Mumbai,Noise ColorFit Pulse 2,Noise,21,1628.29,54,3,1,Eid al-Adha
+2024-06-17,Mumbai,JBL Go 3,JBL,14,2219.12,56,7,1,Eid al-Adha
+2024-06-17,Bangalore,boAt Airdopes 141,boAt,37,1276.47,132,7,1,Eid al-Adha
+2024-06-17,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1521.41,70,3,1,Eid al-Adha
+2024-06-17,Bangalore,Samsung Galaxy M14 5G,Samsung,20,14165.43,94,3,1,Eid al-Adha
+2024-06-17,Bangalore,Noise ColorFit Pulse 2,Noise,22,1590.45,71,7,1,Eid al-Adha
+2024-06-17,Bangalore,JBL Go 3,JBL,16,2191.59,66,7,1,Eid al-Adha
+2024-06-17,Delhi,boAt Airdopes 141,boAt,36,1341.2,143,4,1,Eid al-Adha
+2024-06-17,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,16,1484.65,55,4,1,Eid al-Adha
+2024-06-17,Delhi,Samsung Galaxy M14 5G,Samsung,20,14024.5,88,3,1,Eid al-Adha
+2024-06-17,Delhi,Noise ColorFit Pulse 2,Noise,19,1558.92,80,7,1,Eid al-Adha
+2024-06-17,Delhi,JBL Go 3,JBL,13,2207.98,62,6,1,Eid al-Adha
+2024-06-18,Mumbai,boAt Airdopes 141,boAt,25,1321.59,93,7,0,none
+2024-06-18,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1480.66,49,3,0,none
+2024-06-18,Mumbai,Samsung Galaxy M14 5G,Samsung,13,14178.45,34,5,0,none
+2024-06-18,Mumbai,Noise ColorFit Pulse 2,Noise,19,1581.41,77,6,1,none
+2024-06-18,Mumbai,JBL Go 3,JBL,10,2199.02,38,6,1,none
+2024-06-18,Bangalore,boAt Airdopes 141,boAt,21,1301.97,57,5,0,none
+2024-06-18,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,65,1462.6,170,7,0,none
+2024-06-18,Bangalore,Samsung Galaxy M14 5G,Samsung,15,,40,5,0,none
+2024-06-18,Bangalore,Noise ColorFit Pulse 2,Noise,16,1646.53,74,7,0,none
+2024-06-18,Bangalore,JBL Go 3,JBL,15,2149.72,72,7,0,none
+2024-06-18,Delhi,boAt Airdopes 141,boAt,27,1336.9,113,7,0,none
+2024-06-18,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1486.41,47,7,0,none
+2024-06-18,Delhi,Samsung Galaxy M14 5G,Samsung,,14059.49,64,5,0,none
+2024-06-18,Delhi,Noise ColorFit Pulse 2,Noise,21,1634.41,82,6,0,none
+2024-06-18,Delhi,JBL Go 3,JBL,14,2167.47,37,7,0,none
+2024-06-19,Mumbai,boAt Airdopes 141,boAt,23,1304.56,,3,0,none
+2024-06-19,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,15,1479.89,71,4,0,none
+2024-06-19,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14174.29,57,5,0,none
+2024-06-19,Mumbai,Noise ColorFit Pulse 2,Noise,19,1581.68,,6,0,none
+2024-06-19,Mumbai,JBL Go 3,JBL,14,2213.96,49,5,0,none
+2024-06-19,Bangalore,boAt Airdopes 141,boAt,25,1306.97,121,3,0,none
+2024-06-19,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1510.91,48,5,0,none
+2024-06-19,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14156.83,53,3,0,none
+2024-06-19,Bangalore,Noise ColorFit Pulse 2,Noise,18,1582.02,76,7,0,none
+2024-06-19,Bangalore,JBL Go 3,JBL,12,2181.04,36,3,0,none
+2024-06-19,Delhi,boAt Airdopes 141,boAt,24,1252.59,107,4,0,none
+2024-06-19,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,15,1546.78,69,4,0,none
+2024-06-19,Delhi,Samsung Galaxy M14 5G,Samsung,14,13930.25,65,5,1,none
+2024-06-19,Delhi,Noise ColorFit Pulse 2,Noise,20,1644.72,82,7,0,none
+2024-06-19,Delhi,JBL Go 3,JBL,13,2183.24,60,6,0,none
+2024-06-20,Mumbai,boAt Airdopes 141,boAt,24,1253.54,93,4,1,none
+2024-06-20,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1521.3,40,7,0,none
+2024-06-20,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14072.54,38,3,0,none
+2024-06-20,Mumbai,Noise ColorFit Pulse 2,Noise,18,1602.36,58,4,0,none
+2024-06-20,Mumbai,JBL Go 3,JBL,13,2152.8,34,5,0,none
+2024-06-20,Bangalore,boAt Airdopes 141,boAt,24,,75,6,1,none
+2024-06-20,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1453.7,50,7,0,none
+2024-06-20,Bangalore,Samsung Galaxy M14 5G,Samsung,14,,56,7,0,none
+2024-06-20,Bangalore,Noise ColorFit Pulse 2,Noise,20,1585.65,61,4,0,none
+2024-06-20,Bangalore,JBL Go 3,JBL,14,2154.99,60,7,1,none
+2024-06-20,Delhi,boAt Airdopes 141,boAt,28,1299.63,74,3,0,none
+2024-06-20,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1468.2,40,5,0,none
+2024-06-20,Delhi,Samsung Galaxy M14 5G,Samsung,13,13930.14,56,6,0,none
+2024-06-20,Delhi,Noise ColorFit Pulse 2,Noise,20,1596.22,96,6,1,none
+2024-06-20,Delhi,JBL Go 3,JBL,13,2227.53,53,3,0,none
+2024-06-21,Mumbai,boAt Airdopes 141,boAt,27,1291.0,68,7,0,none
+2024-06-21,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1518.64,66,7,0,none
+2024-06-21,Mumbai,Samsung Galaxy M14 5G,Samsung,11,13872.39,41,6,0,none
+2024-06-21,Mumbai,Noise ColorFit Pulse 2,Noise,17,1616.53,52,5,1,none
+2024-06-21,Mumbai,JBL Go 3,JBL,13,2189.15,39,3,0,none
+2024-06-21,Bangalore,boAt Airdopes 141,boAt,24,1304.19,66,3,0,none
+2024-06-21,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1493.68,47,3,0,none
+2024-06-21,Bangalore,Samsung Galaxy M14 5G,Samsung,14,14044.45,44,7,0,none
+2024-06-21,Bangalore,Noise ColorFit Pulse 2,Noise,19,1638.79,75,7,0,none
+2024-06-21,Bangalore,JBL Go 3,JBL,13,2186.89,45,6,0,none
+2024-06-21,Delhi,boAt Airdopes 141,boAt,26,1264.43,121,6,0,none
+2024-06-21,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,11,1494.12,39,3,1,none
+2024-06-21,Delhi,Samsung Galaxy M14 5G,Samsung,13,14023.79,40,3,0,none
+2024-06-21,Delhi,Noise ColorFit Pulse 2,Noise,21,1615.4,61,7,0,none
+2024-06-21,Delhi,JBL Go 3,JBL,13,2243.73,54,6,0,none
+2024-06-22,Mumbai,boAt Airdopes 141,boAt,28,1346.2,83,6,0,none
+2024-06-22,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,14,1485.9,69,3,0,none
+2024-06-22,Mumbai,Samsung Galaxy M14 5G,Samsung,85,13904.08,359,3,0,none
+2024-06-22,Mumbai,Noise ColorFit Pulse 2,Noise,25,1556.6,77,7,0,none
+2024-06-22,Mumbai,JBL Go 3,JBL,18,2200.24,60,3,0,none
+2024-06-22,Bangalore,boAt Airdopes 141,boAt,26,1316.65,111,5,0,none
+2024-06-22,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,14,1485.32,51,7,0,none
+2024-06-22,Bangalore,Samsung Galaxy M14 5G,Samsung,15,13959.6,57,6,0,none
+2024-06-22,Bangalore,Noise ColorFit Pulse 2,Noise,20,1564.21,58,4,0,none
+2024-06-22,Bangalore,JBL Go 3,JBL,18,2234.49,70,6,0,none
+2024-06-22,Delhi,boAt Airdopes 141,boAt,32,1284.75,135,3,0,none
+2024-06-22,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1486.13,64,4,0,none
+2024-06-22,Delhi,Samsung Galaxy M14 5G,Samsung,16,14068.32,61,3,0,none
+2024-06-22,Delhi,Noise ColorFit Pulse 2,Noise,,1638.07,81,5,1,none
+2024-06-22,Delhi,JBL Go 3,JBL,18,2203.0,51,3,0,none
+2024-06-23,Mumbai,boAt Airdopes 141,boAt,32,1252.18,121,5,0,none
+2024-06-23,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1538.22,69,6,0,none
+2024-06-23,Mumbai,Samsung Galaxy M14 5G,Samsung,16,14134.78,63,6,0,none
+2024-06-23,Mumbai,Noise ColorFit Pulse 2,Noise,22,1630.28,62,7,0,none
+2024-06-23,Mumbai,JBL Go 3,JBL,,2156.31,48,5,0,none
+2024-06-23,Bangalore,boAt Airdopes 141,boAt,28,1322.75,119,5,0,none
+2024-06-23,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,15,1492.75,51,4,0,none
+2024-06-23,Bangalore,Samsung Galaxy M14 5G,Samsung,19,13900.95,68,4,0,none
+2024-06-23,Bangalore,Noise ColorFit Pulse 2,Noise,21,1562.32,86,6,0,none
+2024-06-23,Bangalore,JBL Go 3,JBL,15,2222.97,45,4,0,none
+2024-06-23,Delhi,boAt Airdopes 141,boAt,26,1339.57,70,3,0,none
+2024-06-23,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,14,1526.1,46,4,0,none
+2024-06-23,Delhi,Samsung Galaxy M14 5G,Samsung,18,14182.45,64,7,0,none
+2024-06-23,Delhi,Noise ColorFit Pulse 2,Noise,22,1588.18,58,5,0,none
+2024-06-23,Delhi,JBL Go 3,JBL,17,2202.54,52,6,0,none
+2024-06-24,Mumbai,boAt Airdopes 141,boAt,25,1336.05,106,5,0,none
+2024-06-24,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1449.72,41,7,1,none
+2024-06-24,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14069.8,57,4,0,none
+2024-06-24,Mumbai,Noise ColorFit Pulse 2,Noise,20,1573.19,97,6,1,none
+2024-06-24,Mumbai,JBL Go 3,JBL,12,2243.49,30,6,0,none
+2024-06-24,Bangalore,boAt Airdopes 141,boAt,31,1340.04,78,4,0,none
+2024-06-24,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,11,,37,6,0,none
+2024-06-24,Bangalore,Samsung Galaxy M14 5G,Samsung,14,13815.33,45,6,0,none
+2024-06-24,Bangalore,Noise ColorFit Pulse 2,Noise,18,1582.47,62,7,0,none
+2024-06-24,Bangalore,JBL Go 3,JBL,13,2192.67,51,6,0,none
+2024-06-24,Delhi,boAt Airdopes 141,boAt,26,1262.25,103,6,0,none
+2024-06-24,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1516.61,52,6,0,none
+2024-06-24,Delhi,Samsung Galaxy M14 5G,Samsung,15,14057.63,55,6,0,none
+2024-06-24,Delhi,Noise ColorFit Pulse 2,Noise,,1593.08,56,3,0,none
+2024-06-24,Delhi,JBL Go 3,JBL,11,2177.01,33,6,0,none
+2024-06-25,Mumbai,boAt Airdopes 141,boAt,26,1295.57,,3,0,none
+2024-06-25,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1453.26,61,6,0,none
+2024-06-25,Mumbai,Samsung Galaxy M14 5G,Samsung,14,,68,6,0,none
+2024-06-25,Mumbai,Noise ColorFit Pulse 2,Noise,19,1606.23,,3,0,none
+2024-06-25,Mumbai,JBL Go 3,JBL,13,2167.48,57,4,0,none
+2024-06-25,Bangalore,boAt Airdopes 141,boAt,27,1298.72,122,5,0,none
+2024-06-25,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1453.5,35,5,0,none
+2024-06-25,Bangalore,Samsung Galaxy M14 5G,Samsung,60,14013.08,191,4,0,none
+2024-06-25,Bangalore,Noise ColorFit Pulse 2,Noise,19,1642.31,81,5,0,none
+2024-06-25,Bangalore,JBL Go 3,JBL,13,2190.1,33,6,0,none
+2024-06-25,Delhi,boAt Airdopes 141,boAt,23,1312.71,109,5,1,none
+2024-06-25,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,11,1484.47,41,3,0,none
+2024-06-25,Delhi,Samsung Galaxy M14 5G,Samsung,14,14115.46,45,4,0,none
+2024-06-25,Delhi,Noise ColorFit Pulse 2,Noise,19,1630.63,77,5,1,none
+2024-06-25,Delhi,JBL Go 3,JBL,12,2228.12,43,5,0,none
+2024-06-26,Mumbai,boAt Airdopes 141,boAt,25,1323.65,69,6,0,none
+2024-06-26,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,16,1485.3,44,7,0,none
+2024-06-26,Mumbai,Samsung Galaxy M14 5G,Samsung,15,14134.12,55,3,0,none
+2024-06-26,Mumbai,Noise ColorFit Pulse 2,Noise,20,1622.7,78,3,0,none
+2024-06-26,Mumbai,JBL Go 3,JBL,13,2170.64,38,6,0,none
+2024-06-26,Bangalore,boAt Airdopes 141,boAt,27,1292.39,114,5,0,none
+2024-06-26,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,11,1501.2,48,5,0,none
+2024-06-26,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13934.85,64,6,0,none
+2024-06-26,Bangalore,Noise ColorFit Pulse 2,Noise,20,1595.77,74,3,1,none
+2024-06-26,Bangalore,JBL Go 3,JBL,12,2210.23,33,3,0,none
+2024-06-26,Delhi,boAt Airdopes 141,boAt,26,1252.12,83,3,0,none
+2024-06-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,12,1526.11,47,6,0,none
+2024-06-26,Delhi,Samsung Galaxy M14 5G,Samsung,12,14067.46,41,4,1,none
+2024-06-26,Delhi,Noise ColorFit Pulse 2,Noise,20,1575.18,62,5,0,none
+2024-06-26,Delhi,JBL Go 3,JBL,13,2193.75,61,7,0,none
+2024-06-27,Mumbai,boAt Airdopes 141,boAt,24,1346.32,103,3,0,none
+2024-06-27,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,12,1459.72,32,5,0,none
+2024-06-27,Mumbai,Samsung Galaxy M14 5G,Samsung,13,13972.4,42,6,0,none
+2024-06-27,Mumbai,Noise ColorFit Pulse 2,Noise,18,1578.11,83,5,0,none
+2024-06-27,Mumbai,JBL Go 3,JBL,15,2196.97,,3,0,none
+2024-06-27,Bangalore,boAt Airdopes 141,boAt,29,1316.9,75,3,0,none
+2024-06-27,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1456.77,55,3,0,none
+2024-06-27,Bangalore,Samsung Galaxy M14 5G,Samsung,16,14172.47,67,5,0,none
+2024-06-27,Bangalore,Noise ColorFit Pulse 2,Noise,20,1632.32,61,3,1,none
+2024-06-27,Bangalore,JBL Go 3,JBL,90,2157.24,235,6,0,none
+2024-06-27,Delhi,boAt Airdopes 141,boAt,26,1331.58,72,4,0,none
+2024-06-27,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1474.64,56,7,0,none
+2024-06-27,Delhi,Samsung Galaxy M14 5G,Samsung,14,13972.17,36,7,0,none
+2024-06-27,Delhi,Noise ColorFit Pulse 2,Noise,19,1558.7,54,7,0,none
+2024-06-27,Delhi,JBL Go 3,JBL,52,2162.31,224,3,0,none
+2024-06-28,Mumbai,boAt Airdopes 141,boAt,,1309.61,119,7,0,none
+2024-06-28,Mumbai,Mi Power Bank 3i 20000mAh,Xiaomi,13,1548.42,39,3,1,none
+2024-06-28,Mumbai,Samsung Galaxy M14 5G,Samsung,14,14029.62,,3,0,none
+2024-06-28,Mumbai,Noise ColorFit Pulse 2,Noise,19,1556.18,88,7,0,none
+2024-06-28,Mumbai,JBL Go 3,JBL,12,2171.48,53,3,1,none
+2024-06-28,Bangalore,boAt Airdopes 141,boAt,30,1306.71,130,3,0,none
+2024-06-28,Bangalore,Mi Power Bank 3i 20000mAh,Xiaomi,13,1525.23,40,7,0,none
+2024-06-28,Bangalore,Samsung Galaxy M14 5G,Samsung,13,13862.64,58,4,0,none
+2024-06-28,Bangalore,Noise ColorFit Pulse 2,Noise,19,1630.53,67,5,0,none
+2024-06-28,Bangalore,JBL Go 3,JBL,14,2214.19,67,7,0,none
+2024-06-28,Delhi,boAt Airdopes 141,boAt,28,1308.84,98,3,0,none
+2024-06-28,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,13,1509.29,39,4,0,none
+2024-06-28,Delhi,Samsung Galaxy M14 5G,Samsung,15,13888.86,43,4,0,none
+2024-06-28,Delhi,Noise ColorFit Pulse 2,Noise,72,1648.1,347,7,0,none
+2024-06-28,Delhi,JBL Go 3,JBL,12,2223.63,50,5,0,none
+2024-02-23,Bangalore,Samsung Galaxy M14 5G,Samsung,11,14124.93,34,6,0,none
+2024-04-23,Delhi,Noise ColorFit Pulse 2,Noise,16,1575.06,45,6,0,none
+2024-02-17,Delhi,Samsung Galaxy M14 5G,Samsung,16,14119.67,65,4,0,none
+2024-01-05,Bangalore,Noise ColorFit Pulse 2,Noise,13,1566.47,51,5,0,none
+2024-05-28,Bangalore,Noise ColorFit Pulse 2,Noise,17,1644.12,56,3,0,none
+2024-04-20,Bangalore,Noise ColorFit Pulse 2,Noise,21,1563.05,76,6,0,none
+2024-04-27,Delhi,Noise ColorFit Pulse 2,Noise,20,1633.61,91,3,0,none
+2024-02-26,Delhi,Mi Power Bank 3i 20000mAh,Xiaomi,17,1532.63,46,5,0,none
+2024-05-15,Mumbai,Noise ColorFit Pulse 2,Noise,21,1549.58,,4,0,none
