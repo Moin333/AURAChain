@@ -224,7 +224,7 @@ def register_all_agents() -> None:
                 produces_outputs=["order_plan"],
                 can_run_without_data=True,
                 estimated_duration_ms=3000,
-                dependencies=[]
+                dependencies=["mcts_optimizer"]
             )
         ),
         (
